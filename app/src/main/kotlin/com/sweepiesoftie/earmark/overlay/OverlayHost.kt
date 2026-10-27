@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
 import android.provider.Settings
+import android.view.Choreographer
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -55,6 +56,7 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
     private val wm = context.getSystemService(WindowManager::class.java)
     private val a11y = context.getSystemService(AccessibilityManager::class.java)
     private val handler = Handler(Looper.getMainLooper())
+    private val choreographer = Choreographer.getInstance()
     private val owner = OverlayOwner()
     private val _ui = MutableStateFlow(OverlayUi())
     val ui: StateFlow<OverlayUi> = _ui
@@ -202,6 +204,19 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
         }
         private var attached = false
         private val detach = Runnable { detachNow() }
+        private var settleUntilMillis = 0L
+
+        /**
+         * On a Galaxy A34 (One UI, Android 16), the first frame Compose asks for in a newly attached
+         * window never came while another app was in front, so the card stayed at its first, empty
+         * frame until Earmark itself drew something (ADR 0022). Asking for every frame until the
+         * entrance has run brings that one along.
+         */
+        private val settle = object : Choreographer.FrameCallback {
+            override fun doFrame(frameTimeNanos: Long) {
+                if (attached && SystemClock.uptimeMillis() < settleUntilMillis) choreographer.postFrameCallback(this)
+            }
+        }
 
         /** Returns whether the window is on screen. */
         fun attach(): Boolean {
@@ -216,6 +231,9 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
                 view.dispatchConfigurationChanged(context.resources.configuration)
                 wm.addView(view, params)
                 attached = true
+                settleUntilMillis = SystemClock.uptimeMillis() + SETTLE_MILLIS
+                choreographer.removeFrameCallback(settle)
+                choreographer.postFrameCallback(settle)
             } catch (e: RuntimeException) {
                 log.error("addView($name)", e)
             }
@@ -230,6 +248,7 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
 
         fun detachNow() {
             handler.removeCallbacks(detach)
+            choreographer.removeFrameCallback(settle)
             if (!attached) return
             try {
                 wm.removeViewImmediate(view)
@@ -262,5 +281,8 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
     private companion object {
         const val CHIP_MILLIS = 8_000
         const val EXIT_MILLIS = 320L
+
+        /** The 220 ms entrance plus the slow first frames of a fresh composition, with room to spare. */
+        const val SETTLE_MILLIS = 1_000L
     }
 }
