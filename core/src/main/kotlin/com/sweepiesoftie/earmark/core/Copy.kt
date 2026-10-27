@@ -19,10 +19,15 @@ internal class Copy(private val settings: Settings) {
         val ago = ago(Duration.between(loop.updatedAt, now))
         val (title, subtitle) = when (loop.kind) {
             LoopKind.Reply -> "Here to reply to ${loop.who}${loop.groupName?.let { " in $it" }.orEmpty()}?" to "${loop.detail} · $ago"
+            LoopKind.Payment if loop.bill -> "Here to pay your ${loop.who?.let { "$it " }.orEmpty()}bill?" to "${loop.detail} · $ago"
             LoopKind.Payment -> "Here to pay ${loop.who} back?" to "${loop.detail} · $ago"
             LoopKind.Routine -> "${loop.task}?" to "You usually do on weeknights"
             LoopKind.Flow -> "Here to finish in ${loop.who}?" to "You left before it went through · $ago"
             LoopKind.LeaveBy -> leaveByChip(loop)
+            LoopKind.CallBack -> "Here to call ${loop.who} back?" to "${loop.detail} · $ago"
+            LoopKind.Email -> "Here to reply to ${loop.who}'s email?" to "${loop.detail} · $ago"
+            // The reminder's own words are the guess; one that is already a question keeps a single "?".
+            LoopKind.Reminder -> "${loop.task.trimEnd('?')}?" to "${loop.detail} · $ago"
         }
         return ChipCard(loop.id, loop.kind, title, subtitle, action = null, score = score)
     }
@@ -48,7 +53,8 @@ internal class Copy(private val settings: Settings) {
     }
 
     fun verb(loop: Loop): String = when (loop.kind) {
-        LoopKind.Reply -> "Do it now"
+        // A call back opens the call log rather than dialling, so a stray tap never rings anyone (ADR 0029).
+        LoopKind.Reply, LoopKind.CallBack, LoopKind.Email, LoopKind.Reminder -> "Do it now"
         LoopKind.Payment -> "Pay now"
         LoopKind.Routine -> "Set it"
         LoopKind.Flow -> "Finish"

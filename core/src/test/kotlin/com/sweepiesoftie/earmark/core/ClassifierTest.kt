@@ -177,4 +177,117 @@ class ClassifierTest {
         assertEquals(0.75, open(Fixtures.rahul(now, "هل أنت متاح؟")).due, 1e-9)
         assertEquals(0.75, open(Fixtures.rahul(now, "今日来られる？")).due, 1e-9)
     }
+
+    @Test
+    fun `a missed call opens a call-back loop, not a reply`() {
+        val loop = open(Fixtures.missedCall(now))
+        assertEquals(LoopKind.CallBack, loop.kind)
+        assertEquals("Call Mom back", loop.task)
+        assertEquals("Missed call", loop.detail)
+        assertEquals(0.75, loop.due, 1e-9)
+        assertEquals(Route.Notification("0|com.google.android.dialer|1|MissedCall_content://call_log/calls/1|10142", Fixtures.DIALER), loop.route)
+        assertEquals(now.plusSeconds(12 * 3600), loop.expiresAt)
+    }
+
+    @Test
+    fun `missed calls as other apps word them, without the category`() {
+        assertEquals("Call Rahul back", open(note("com.whatsapp", "Rahul", "Missed voice call")).task)
+        assertEquals("Call Rahul back", open(note("com.samsung.android.dialer", "Missed call", "Rahul")).task)
+        assertEquals("Call Rahul back", open(note("org.telegram.messenger", "Missed call from Rahul", null)).task)
+        assertEquals("Call +91 98765 43210 back", open(note("com.samsung.android.dialer", "+91 98765 43210 (2)", "2 missed calls")).task)
+    }
+
+    @Test
+    fun `someone who called twice is urgent`() {
+        val loop = open(note("com.samsung.android.dialer", "Mom", "2 missed calls"))
+        assertEquals("2 missed calls", loop.detail)
+        assertEquals(1.0, loop.due, 1e-9)
+        assertTrue(loop.urgent)
+    }
+
+    @Test
+    fun `a chat message about a missed call is still a reply`() {
+        assertEquals(LoopKind.Reply, open(Fixtures.rahul(now, "sorry I missed your call, free now?")).kind)
+    }
+
+    @Test
+    fun `an email from a person that asks you something opens an email loop`() {
+        val loop = open(Fixtures.email(now))
+        assertEquals(LoopKind.Email, loop.kind)
+        assertEquals("Reply to Prof. Mehta's email", loop.task)
+        assertEquals("Prof. Mehta", loop.who)
+        assertEquals("“Lab report”", loop.detail)
+        assertEquals(listOf("asks"), loop.why)
+        assertEquals(now.plusSeconds(24 * 3600), loop.expiresAt)
+    }
+
+    @Test
+    fun `an email that asks nothing, or comes from a no-reply sender, is skipped`() {
+        assertEquals("email asks nothing", skipReason(Fixtures.email(now, body = "Notes from today's lecture are attached.")))
+        assertEquals("automated email", skipReason(Fixtures.email(now, from = "GitHub Notifications")))
+        assertEquals("automated email", skipReason(Fixtures.email(now, from = "noreply@moodle.edu")))
+        assertEquals("one-time code", skipReason(Fixtures.email(now, from = "Microsoft account", body = "Your security code is 482913")))
+    }
+
+    @Test
+    fun `an urgent email is a loop even without a question`() {
+        val loop = open(Fixtures.email(now, subject = "Urgent: grades", body = "Come to my office immediately."))
+        assertTrue(loop.urgent)
+        assertEquals(1.0, loop.due, 1e-9)
+    }
+
+    @Test
+    fun `a reminder you set opens a reminder loop that is due now`() {
+        val loop = open(Fixtures.reminder(now))
+        assertEquals(LoopKind.Reminder, loop.kind)
+        assertEquals("Submit lab report", loop.task)
+        assertEquals("Reminder in Keep", loop.detail)
+        assertEquals(1.0, loop.due, 1e-9)
+        assertEquals(null, loop.who)
+    }
+
+    @Test
+    fun `a reminder titled only "Reminder" takes its words from the text`() {
+        assertEquals("Take your meds", open(Fixtures.reminder(now, title = "Reminder", text = "Take your meds")).task)
+    }
+
+    @Test
+    fun `calendar events and reminder apps without a category count too`() {
+        val event = note("com.google.android.calendar", "Physics quiz", "4:00 – 5:00 PM").copy(category = "event")
+        assertEquals("Physics quiz", open(event).task)
+        assertEquals("Water the plants", open(Fixtures.reminder(now, title = "Water the plants", category = null)).task)
+        assertEquals("a reminder app's other notifications aren't reminders", "not a loop", skipReason(Fixtures.reminder(now, title = "Rahul shared a note", category = "social")))
+    }
+
+    @Test
+    fun `a bill a business texts you opens a payment loop`() {
+        val loop = open(Fixtures.airtel(now))
+        assertEquals(LoopKind.Payment, loop.kind)
+        assertTrue(loop.bill)
+        assertEquals("Pay your Airtel postpaid bill ₹499", loop.task)
+        assertEquals("₹499.00 · due 30-Oct", loop.detail)
+        assertEquals(0.75, loop.due, 1e-9)
+    }
+
+    @Test
+    fun `a bill due today or overdue is fully due`() {
+        assertEquals(1.0, open(Fixtures.airtel(now, "Your electricity bill of Rs 1,240 is due today. Pay to avoid disconnection.")).due, 1e-9)
+        assertEquals(1.0, open(Fixtures.airtel(now, "Your bill of Rs 499 is overdue. Ignore if already paid.")).due, 1e-9)
+    }
+
+    @Test
+    fun `without a "your X bill", the biller is the sender ID or the app`() {
+        assertEquals("Pay your AIRTEL bill ₹499", open(Fixtures.airtel(now, "Dear customer, bill of Rs 499 for 98xxxx is due on 30-Oct.")).task)
+        val cred = note("com.dreamplug.androidapp", "Bill due", "Rs 2,150 is due on 05 Nov for card ending 4321").copy(appLabel = "CRED")
+        assertEquals("Pay your CRED bill ₹2,150", open(cred).task)
+    }
+
+    @Test
+    fun `texts from a business are never replies`() {
+        assertEquals("text from a business", skipReason(Fixtures.airtel(now, "Rs 499 debited from your account for your Airtel bill.")))
+        assertEquals("text from a business", skipReason(Fixtures.airtel(now, "Get 2GB extra data! Recharge with Rs 299 now?")))
+        assertEquals("text from a business", skipReason(Fixtures.airtel(now, "Payment of Rs 499 received towards your bill due on 30-Oct. Thank you!")))
+        val shortCode = Fixtures.airtel(now, "Reply YES to confirm?").let { it.copy(title = "56767", messages = listOf(Message("56767", it.text!!, now))) }
+        assertEquals("text from a business", skipReason(shortCode))
+    }
 }

@@ -9,14 +9,31 @@ Something you may owe, opened from a signal on the phone and closed by evidence 
 _Avoid_: task, todo, item, reminder
 
 **Kind**:
-The type of a loop: Reply, Payment, Flow, Routine, Leave-by or Own.
+The type of a loop: Reply, Call back, Email, Reminder, Payment, Flow, Routine, Leave-by or Own.
 _Avoid_: type, category
 
 **Reply**:
 A loop for a person-to-person message that is still unanswered.
 
+**Call back**:
+A loop for a missed call from someone you haven't called back.
+_Avoid_: missed call loop
+
+**Email**:
+A loop for an email from a person that asks you something or is urgent, still unanswered.
+
+**Reminder**:
+A loop for a reminder you set yourself, in a reminder, to-do or calendar app, from when it goes off until you mark it done or dismiss it.
+_Avoid_: alert, task
+
 **Payment**:
-A loop for a request for money that you have not paid yet.
+A loop for a request for money that you have not paid yet, or a bill that is due.
+
+**Bill**:
+A Payment for an amount a business says is due, from a text or an app: "Pay your Airtel bill ₹499".
+
+**Text from a business**:
+A text from a sender ID such as AX-AIRTEL or a short code. It is never a Reply; it can be a bill.
 
 **Flow**:
 A loop for something you started in a ride, food or shopping app and left before it was booked or ordered.

@@ -31,6 +31,12 @@ public object CuratedApps {
     /** Apps where leaving early can leave a ride, order or checkout unfinished. */
     public val flows: Set<String> = rides + food + shopping
 
+    /** Reminder and to-do apps: what they notify about is something you told yourself to do, even without the reminder category. */
+    public val reminders: Set<String> = setOf(
+        "com.google.android.keep", "com.google.android.apps.tasks", "com.samsung.android.app.reminder", "com.microsoft.todos",
+        "com.ticktick.task", "com.todoist", "com.anydo",
+    )
+
     /** Messaging apps are never feeds, even when their Play category says social. */
     public val messaging: Set<String> = setOf(
         "com.whatsapp", "com.whatsapp.w4b", "com.google.android.apps.messaging", "org.telegram.messenger",

@@ -252,5 +252,8 @@ fun kindName(kind: LoopKind): String = stringResource(
         LoopKind.Flow -> R.string.kind_flow
         LoopKind.Routine -> R.string.kind_routine
         LoopKind.LeaveBy -> R.string.kind_leave_by
+        LoopKind.CallBack -> R.string.kind_call_back
+        LoopKind.Reminder -> R.string.kind_reminder
+        LoopKind.Email -> R.string.kind_email
     },
 )

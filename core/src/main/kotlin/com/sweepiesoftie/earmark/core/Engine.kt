@@ -79,6 +79,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
 
     private fun onPosted(signal: Signal, now: Instant): List<Effect> =
         when (val result = Classifier.classify(signal, settings, stats)) {
+            is Classification.Open if isLeaveByAlready(result.loop) -> skip(signal, "its event is already a leave-by")
             is Classification.Open -> {
                 quiet -= signal.key
                 val before = book[result.loop.id]
@@ -93,7 +94,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
                     // The cleared notification won't be removed again, so nothing else would forget its way back.
                     before.loop.notificationKey?.takeIf { it != result.loop.notificationKey }?.let { effects += Effect.Forget(it) }
                 }
-                if (before == null && result.loop.kind in pickedUp) {
+                if (before == null && result.loop.kind.cameIn) {
                     // On today's list as it arrives, so you can see Earmark has it (ADR 0025).
                     effects += Effect.RecordLoop(entry(book[result.loop.id]!!, outcome = null, closedAt = null))
                 }
@@ -117,6 +118,10 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
             }
             is Classification.Skip -> skip(signal, result.reason)
         }
+
+    /** A calendar's own notification for an event Earmark already holds as a Leave-by, which says more: where, and when to leave. */
+    private fun isLeaveByAlready(loop: Loop): Boolean =
+        loop.kind == LoopKind.Reminder && book.all.any { it.loop.leaveBy?.title.equals(loop.task, ignoreCase = true) }
 
     /** Its text and intents go at once, unless an open loop still answers to this notification and the app only reposted it. */
     private fun skip(signal: Signal, reason: String): List<Effect> =
@@ -509,7 +514,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         if (isListed(tracked)) effects += Effect.RecordLoop(entry(tracked, outcome, now))
         val conversation = tracked.loop.conversation
         if (replied && conversation != null) effects += recordReply(conversation, Duration.between(tracked.loop.updatedAt, now))
-        if (tracked.loop.kind == LoopKind.Reply) effects += learnApp(tracked.loop, outcome, now)
+        if (tracked.loop.kind in fromPeople) effects += learnApp(tracked.loop, outcome, now)
         tracked.loop.notificationKey?.let { effects += Effect.Forget(it) }
         if (drift.loopId == id) {
             val back = drift.resume?.takeIf { book[it.loopId] != null }
@@ -586,7 +591,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         listed = isListed(tracked),
     )
 
-    private fun isListed(tracked: Tracked): Boolean = tracked.guessedAt != null || tracked.loop.kind in pickedUp
+    private fun isListed(tracked: Tracked): Boolean = tracked.guessedAt != null || tracked.loop.kind.cameIn
 
     /** Spelled out because R8 renames classes in release builds. */
     private fun routeName(route: Route): String = when (route) {
@@ -599,8 +604,8 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun hideAll(): List<Effect> = Overlay.entries.map { Effect.HideOverlay(it) }
 
     private companion object {
-        /** Loops opened by a message or request that came in: listed from the moment they arrive (ADR 0025). */
-        val pickedUp = setOf(LoopKind.Reply, LoopKind.Payment)
+        /** Loops with a person at the other end: how you deal with them teaches Earmark about their app (ADR 0027). */
+        val fromPeople = setOf(LoopKind.Reply, LoopKind.CallBack, LoopKind.Email)
 
         /** A few foreground polls, which run once a second. */
         val clearWait: Duration = Duration.ofSeconds(3)

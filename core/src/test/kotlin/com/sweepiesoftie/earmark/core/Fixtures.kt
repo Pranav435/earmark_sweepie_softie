@@ -87,4 +87,59 @@ object Fixtures {
         title = "Aisha requested \$12.00",
         text = "Dinner at Nori",
     )
+
+    const val DIALER = "com.google.android.dialer"
+    const val MAIL = "com.microsoft.office.outlook"
+    const val KEEP = "com.google.android.keep"
+    const val SMS = "com.google.android.apps.messaging"
+
+    /** Google's dialer, as the API 36 emulator posts it: a MessagingStyle "Missed call" from the caller, in the missed_call category. */
+    fun missedCall(at: Instant, from: String = "Mom", key: String = "0|com.google.android.dialer|1|MissedCall_content://call_log/calls/1|10142"): Signal = Signal(
+        key = key,
+        packageName = DIALER,
+        appLabel = "Phone",
+        postedAt = at,
+        title = from,
+        text = "Missed call",
+        messages = listOf(Message(from, "Missed call", at)),
+        conversationKey = "hash-call-${from.lowercase()}",
+        category = "missed_call",
+    )
+
+    /** An Outlook email, as the A34 posts it: big text, the sender as the title, and the subject on the text's first line. */
+    fun email(at: Instant, from: String = "Prof. Mehta", subject: String = "Lab report", body: String = "Can you send it to me by Friday?"): Signal = Signal(
+        key = "0|com.microsoft.office.outlook|2|mehta|10298",
+        packageName = MAIL,
+        appLabel = "Outlook",
+        postedAt = at,
+        title = from,
+        text = "$subject\n$body",
+        bigText = "$subject\n$body",
+        conversationKey = "hash-mail-mehta",
+        category = "email",
+    )
+
+    fun reminder(at: Instant, title: String = "Submit lab report", text: String? = null, category: String? = "reminder"): Signal = Signal(
+        key = "0|com.google.android.keep|4|null|10300",
+        packageName = KEEP,
+        appLabel = "Keep",
+        postedAt = at,
+        title = title,
+        text = text,
+        conversationKey = "hash-keep-4",
+        category = category,
+    )
+
+    /** A text from a business, which comes from a sender ID such as AX-AIRTEL rather than a person or a number. */
+    fun airtel(at: Instant, text: String = "Your Airtel postpaid bill of Rs 499 is due on 30-Oct. Pay now at airtel.in/pay"): Signal = Signal(
+        key = "0|com.google.android.apps.messaging|7|airtel|10200",
+        packageName = SMS,
+        appLabel = "Messages",
+        postedAt = at,
+        title = "AX-AIRTEL",
+        text = text,
+        messages = listOf(Message("AX-AIRTEL", text, at)),
+        conversationKey = "hash-airtel",
+        category = "msg",
+    )
 }

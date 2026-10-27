@@ -80,12 +80,15 @@ class NotificationReader(context: Context, private val wayBacks: WayBackRegistry
         }
         val title = n.extras.getCharSequence(Notification.EXTRA_TITLE)?.toString()
         val text = n.extras.getCharSequence(Notification.EXTRA_TEXT)?.toString()
+        val bigText = n.extras.getCharSequence(Notification.EXTRA_BIG_TEXT)?.toString()
         val reply = n.actions?.firstOrNull { action ->
             action.remoteInputs?.any { it.allowFreeFormInput } == true &&
                 (action.semanticAction == Notification.Action.SEMANTIC_ACTION_REPLY || action.semanticAction == Notification.Action.SEMANTIC_ACTION_NONE)
         }
         val lastSender = messages.lastOrNull { !it.fromUser }?.sender
-        val conversation = n.shortcutId ?: style?.conversationTitle?.toString() ?: lastSender ?: sbn.tag ?: sbn.id.toString()
+        // An email or a missed call without a chat style names the person in its title; tags there are per email or per call.
+        val byTitle = title.takeIf { n.category == Notification.CATEGORY_EMAIL || n.category == CATEGORY_MISSED_CALL }
+        val conversation = n.shortcutId ?: style?.conversationTitle?.toString() ?: lastSender ?: byTitle ?: sbn.tag ?: sbn.id.toString()
 
         wayBacks.put(
             sbn.key,
@@ -103,6 +106,7 @@ class NotificationReader(context: Context, private val wayBacks: WayBackRegistry
             postedAt = Instant.ofEpochMilli(sbn.postTime),
             title = title,
             text = text,
+            bigText = bigText,
             messages = messages,
             conversationKey = hash(sbn.packageName + "|" + conversation),
             isGroupConversation = style?.isGroupConversation == true,
@@ -125,6 +129,9 @@ class NotificationReader(context: Context, private val wayBacks: WayBackRegistry
     companion object {
         private const val SALT = "salt"
         private const val MAX_MESSAGES = 10
+
+        /** `Notification.CATEGORY_MISSED_CALL` is API 31, but dialers set the same string on older Android too. */
+        private const val CATEGORY_MISSED_CALL = "missed_call"
 
         fun reasonOf(reason: Int): RemovalReason = when (reason) {
             NotificationListenerService.REASON_CLICK -> RemovalReason.Click

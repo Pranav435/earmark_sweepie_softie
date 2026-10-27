@@ -16,7 +16,7 @@
 
     <!-- Recap -->
     <string name="recap_empty_title">Nothing on today\'s list yet.</string>
-    <string name="recap_empty_line">Messages and requests show up here as soon as Earmark picks them up.</string>
+    <string name="recap_empty_line">Messages, missed calls, reminders, emails and bills show up here as soon as Earmark picks them up.</string>
     <plurals name="recap_open_loops">
         <item quantity="one">Watching %d open loop. It can come back as a chip when you unlock, or as a pill if you drift into a feed app. The Log shows each step.</item>
         <item quantity="other">Watching %d open loops. The likeliest can come back as a chip when you unlock, or as a pill if you drift into a feed app. The Log shows each step.</item>
@@ -54,6 +54,9 @@
     <string name="kind_flow">Unfinished booking or order</string>
     <string name="kind_routine">Alarm routine</string>
     <string name="kind_leave_by">Leave-by</string>
+    <string name="kind_call_back">Missed call</string>
+    <string name="kind_reminder">Reminder</string>
+    <string name="kind_email">Email</string>
 
     <!-- Demo -->
     <string name="demo_title">Demo mode</string>
@@ -115,7 +118,7 @@
     <string name="onboarding_title">Your phone remembers what you picked it up for.</string>
     <string name="onboarding_body">Earmark reads what\'s waiting for you, on this phone only. It never blocks an app and never counts minutes. It needs three permissions to work.</string>
     <string name="onboarding_notifications">Notification access</string>
-    <string name="onboarding_notifications_body">To see who\'s waiting on you and open the exact chat.</string>
+    <string name="onboarding_notifications_body">To see messages, missed calls, reminders, emails and bills, and open the exact one.</string>
     <string name="onboarding_usage">Usage access</string>
     <string name="onboarding_usage_body">To know which app is in front, only while the screen is on.</string>
     <string name="onboarding_overlay">Display over other apps</string>

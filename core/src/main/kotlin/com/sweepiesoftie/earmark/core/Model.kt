@@ -6,7 +6,15 @@ import java.time.LocalTime
 import java.time.ZoneId
 
 /** The kinds of loop v0.1 can open. "Own" waits for the Quick Settings tile in v0.2. */
-public enum class LoopKind { Reply, Payment, Flow, Routine, LeaveBy }
+public enum class LoopKind {
+    Reply, Payment, Flow, Routine, LeaveBy, CallBack, Reminder, Email;
+
+    /**
+     * Opened by something that came in (a message, call, email, reminder, request or bill) rather than by the
+     * clock, the calendar or an app you left: listed as it arrives (ADR 0025), and boosted at your first unlock after it.
+     */
+    internal val cameIn: Boolean get() = this != Flow && this != Routine && this != LeaveBy
+}
 
 @JvmInline
 public value class LoopId(public val value: String)
@@ -54,6 +62,8 @@ public data class Loop(
     val groupName: String? = null,
     /** Set when the user went to the loop's app and left without finishing; the verb becomes "Finish". */
     val started: Boolean = false,
+    /** A Payment for a bill that is due rather than a person asking: "Pay your Airtel bill ₹499" (ADR 0029). */
+    val bill: Boolean = false,
     /** Ride ("Book") or meeting ("Join") for Leave-by loops. */
     val leaveBy: LeaveByDetail? = null,
 )
@@ -68,6 +78,8 @@ public data class Signal(
     val postedAt: Instant,
     val title: String? = null,
     val text: String? = null,
+    /** The expanded text, when the app gives one: an email's subject and the start of its body. */
+    val bigText: String? = null,
     val messages: List<Message> = emptyList(),
     /** Hashed by the adapter before it reaches the core (ADR 0004). */
     val conversationKey: String? = null,

@@ -29,8 +29,8 @@ internal object Ranker {
             LoopKind.Routine, LoopKind.LeaveBy -> 1.0
             else -> exp(-ageMinutes / RECENT_HALF_LIFE_MINUTES)
         }
-        // Your first chance to act on a message or request is the one most likely to be for it.
-        val boosted = unseen && loop.kind in setOf(LoopKind.Reply, LoopKind.Payment)
+        // Your first chance to act on a message, call, reminder or request is the one most likely to be for it.
+        val boosted = unseen && loop.kind.cameIn
         val who = Affinity.who(loop, stats)
         return Score(
             recent = recent,

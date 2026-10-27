@@ -732,6 +732,79 @@ class EngineTest {
     }
 
     @Test
+    fun `a missed call gets a chip at the first unlock after it`() = with(Script()) {
+        at(at(16, 0), Event.ScreenOff)
+        at(at(16, 5), Event.NotificationPosted(Fixtures.missedCall(at(16, 5))))
+        // 0.35*exp(-4/30) + 0.125 + 0.25*0.75 + 0.075 + 0.15 = 0.8438
+        val chip = at(at(16, 9), Event.Unlocked).one<Effect.ShowChip>().chip
+        assertEquals("Here to call Mom back?", chip.title)
+        assertEquals("Missed call · 4 min ago", chip.subtitle)
+    }
+
+    @Test
+    fun `a missed call during use comes back at drift, opens the call log, and closes when the dialer clears it`() = with(Script(tenSeconds)) {
+        at(at(16, 0), Event.Unlocked)
+        at(at(16, 0, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        val listed = at(at(16, 1), Event.NotificationPosted(Fixtures.missedCall(at(16, 1)))).one<Effect.RecordLoop>().entry
+        assertEquals("Call Mom back", listed.label)
+
+        val pill = at(at(16, 1, 11), Event.Tick).one<Effect.ShowPill>().pill
+        assertEquals("Before you forget", pill.label)
+        assertEquals("Call Mom back", pill.task)
+        assertEquals("Do it now", pill.verb)
+
+        val back = at(at(16, 1, 20), Event.PillTapped(pill.loopId))
+        assertEquals(Route.Notification(Fixtures.missedCall(at(16, 1)).key, Fixtures.DIALER), back.one<Effect.OpenWayBack>().route)
+        assertTrue("a call has no reply strip", back.none { it is Effect.SuggestReplies })
+
+        at(at(16, 1, 21), Event.ForegroundChanged(Fixtures.DIALER, "Phone"))
+        val closed = at(at(16, 1, 22), Event.NotificationRemoved(Fixtures.missedCall(at(16, 1)).key, RemovalReason.AppCancel)).one<Effect.RecordLoop>().entry
+        assertEquals(Outcome.Done, closed.outcome)
+        assertTrue(closed.broughtBack)
+    }
+
+    @Test
+    fun `a reminder gets a chip that is the reminder itself`() = with(Script()) {
+        at(at(16, 0), Event.ScreenOff)
+        at(at(16, 30), Event.NotificationPosted(Fixtures.reminder(at(16, 30))))
+        val chip = at(at(16, 30, 20), Event.Unlocked).one<Effect.ShowChip>().chip
+        assertEquals("Submit lab report?", chip.title)
+        assertEquals("Reminder in Keep · just now", chip.subtitle)
+    }
+
+    @Test
+    fun `a calendar notification for an event that is already a leave-by opens nothing more`() = with(Script()) {
+        val quiz = CalendarEvent(2, "Physics quiz", at(17, 0), "Room 101", null)
+        at(at(16, 0), Event.CalendarSoon(listOf(quiz)))
+        val event = Fixtures.reminder(at(16, 30), title = "Physics quiz", text = "5:00 – 6:00 PM", category = "event")
+        assertTrue(at(at(16, 30), Event.NotificationPosted(event)).none { it is Effect.RecordLoop })
+        assertTrue(log.last(), log.last().endsWith("its event is already a leave-by"))
+        assertEquals(1, engine.openLoops)
+    }
+
+    @Test
+    fun `an email that asks you something gets a chip that quotes its subject`() = with(Script()) {
+        at(at(16, 0), Event.ScreenOff)
+        at(at(16, 5), Event.NotificationPosted(Fixtures.email(at(16, 5))))
+        val chip = at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip
+        assertEquals("Here to reply to Prof. Mehta's email?", chip.title)
+        assertEquals("“Lab report” · 5 min ago", chip.subtitle)
+    }
+
+    @Test
+    fun `a bill gets a chip that names the bill, and a pill that says pay`() = with(Script(tenSeconds)) {
+        at(at(16, 0), Event.ScreenOff)
+        at(at(16, 5), Event.NotificationPosted(Fixtures.airtel(at(16, 5))))
+        val chip = at(at(16, 8), Event.Unlocked).one<Effect.ShowChip>().chip
+        assertEquals("Here to pay your Airtel postpaid bill?", chip.title)
+        assertEquals("₹499.00 · due 30-Oct · 3 min ago", chip.subtitle)
+        at(at(16, 8, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        val pill = at(at(16, 8, 16), Event.Tick).one<Effect.ShowPill>().pill
+        assertEquals("Pay your Airtel postpaid bill ₹499", pill.task)
+        assertEquals("Pay now", pill.verb)
+    }
+
+    @Test
     fun `an app reposting a waiting chat with only an ok keeps its loop and way back`() = with(Script()) {
         at(at(16, 0), Event.NotificationPosted(Fixtures.rahul(at(16, 0), "free at 5?")))
         val ok = Fixtures.rahul(at(16, 1)).copy(messages = listOf(Message("Rahul", "ok", at(16, 1))))
