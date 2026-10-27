@@ -136,3 +136,10 @@ Start: Tue Oct 27 11:27:46 IST 2026 (budget 3 h, feature freeze 2:30 → 13:57, 
   - On the A34, v0.1.9 installed over v0.1.8: switches were logged, and "free at 5?" during Instagram got its pill 23 s in, drawn in full.
   - 76 :core tests green; lint 0 errors. dist/earmark-v0.1.9.apk (versionCode 10), signed with the Sweepie Softie key, installs over v0.1.8. No INTERNET permission.
   - My tests had taught the A34 a 3–5 s usual Instagram visit, so it was uninstalled and given a clean install of v0.1.9 with its permissions granted over adb.
+- 18:45 v0.1.10, after the tester reported again: no pill, and nothing in the app.
+  - The phone's own usage log and Earmark's agreed. After the message at 18:27:32 became the guess, no feed app was opened: Earmark's screen was in front for 3 minutes, then Samsung Pay. At 18:32 WhatsApp cleared the notification, because the chat was read on another device, and Earmark closed the loop as done. So no pill was due. The pipeline was checked end to end on the phone: a message during use, then Instagram, then a pill that was shown and drawn.
+  - Asked what should change, the tester kept pills for feed apps only, and asked for the home screen to list picked-up messages.
+  - ADR 0025: each message or request goes on today's list as it arrives, marked as waiting, and gets its outcome when it closes. The engine decides what is listed; a new `listed` column takes Room to version 3. The headline reads "N things today". 79 :core tests green (3 new), each checked by breaking the rule.
+  - scripts/check-pill.sh: an on-device check that posts a test message, opens a feed, and passes only when the pill's window is drawn. It passed on the A34 with v0.1.9 and v0.1.10.
+  - On the A34, installed over v0.1.9: the migration kept existing rows, and a test message showed "Reply to Test · 6:38 pm · waiting" on the home screen before any chip or pill. Lint 0 errors.
+  - dist/earmark-v0.1.10.apk (versionCode 11), signed with the Sweepie Softie key, installs over v0.1.9. No INTERNET permission. The A34 was then given a clean install of v0.1.10, so it starts without my test rows.
