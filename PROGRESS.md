@@ -40,3 +40,18 @@ Start: Tue Oct 27 11:27:46 IST 2026 (budget 3 h, feature freeze 2:30 → 13:57, 
     - "ReplySuggester" vs the glossary's avoided "suggestions": architecture.md names the module ReplySuggester.
     - Exported launcher activity: a launcher entry must be exported; nothing else is.
   Cut: nothing.
+- 13:05 Phase 7 gate (shipped):
+  - dist/earmark-v0.1.apk is a minified release (R8) signed with the debug key, 37 MB. Permissions: PACKAGE_USAGE_STATS, SYSTEM_ALERT_WINDOW, READ_CALENDAR, POST_NOTIFICATIONS and SET_ALARM; no INTERNET.
+  - A fresh install launches into onboarding. The Reply story was re-run on the release APK (screens in dist/screens/final/).
+  - Release-only bugs caught and fixed:
+    - R8 stripped ML Kit's registrars, so the listener crashed at connect. Fixed with keep rules and a lazy, guarded client.
+    - With animations off, the chip faded instantly. The timer now uses real time.
+  - With only notification access, the app runs and logs which adapters are idle.
+  - 42 :core tests green; lint 0 errors. No message text in logcat.
+  - README.md, CLAUDE.md and scripts/setup-phone.sh (smoke-run against the emulator) written.
+  - Known issues:
+    - Tested only on an API 36 emulator.
+    - TalkBack was checked through the node tree; gestures weren't walked by hand.
+    - Ride and Leave-by run only as scenario tests.
+    - The reply strip steps aside for apps that clear their notification when the chat opens.
+  - Cut: nothing.

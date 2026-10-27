@@ -30,6 +30,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.layout.onSizeChanged
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -152,7 +153,10 @@ private fun Chip(
 ) {
     val fade = remember(chip.loopId) { Animatable(1f) }
     LaunchedEffect(chip.loopId) {
-        fade.animateTo(0f, tween(timeoutMillis.toInt(), easing = LinearEasing))
+        // The line is only a picture of the timer. The timer itself is real time, because with
+        // animations turned off Android finishes every animation instantly.
+        launch { fade.animateTo(0f, tween(timeoutMillis.toInt(), easing = LinearEasing)) }
+        delay(timeoutMillis)
         onFaded(chip.loopId)
     }
     val pane = stringResource(R.string.overlay_chip_pane)
