@@ -207,7 +207,7 @@ TOTAL_STAGES=6
 PKG="com.sweepiesoftie.earmark"
 LISTENER="$PKG/$PKG.listener.EarmarkListener"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-APK="${1:-$HERE/../../dist/earmark-v0.1.apk}"
+APK="${1:-$HERE/../dist/earmark-v0.1.apk}"
 
 banner "Earmark v0.1: set up a test phone"
 

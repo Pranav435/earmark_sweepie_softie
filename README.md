@@ -6,7 +6,7 @@ This build is for testers. It runs on Android 10 or later and was tested on an A
 
 ## Install
 
-The APK is `dist/earmark-v0.1.apk` at the project root.
+The APK is `dist/earmark-v0.1.apk` in this repository. On GitHub, open that file and use **Download raw file**.
 
 - **From a computer:** connect the phone with USB debugging on, then run `adb install -r dist/earmark-v0.1.apk`.
 - **On the phone:** copy the file to the phone, open it from Files, and allow installs from that app when Android asks.

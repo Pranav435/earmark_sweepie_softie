@@ -8,6 +8,9 @@ import android.os.Looper
 import android.os.SystemClock
 import android.provider.Settings
 import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
+import android.view.accessibility.AccessibilityEvent
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.view.accessibility.AccessibilityManager
@@ -38,6 +41,8 @@ data class OverlayUi(
     val pill: PillCard? = null,
     val dot: Boolean = false,
     val strip: ReplyStrip? = null,
+    /** TalkBack is reading the chip, so its fade timer waits. */
+    val a11yFocused: Boolean = false,
     val reduceMotion: Boolean = false,
 )
 
@@ -57,7 +62,7 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
     /** Set at unlock so the log can show how long the chip took to appear. */
     var unlockedAtMillis: Long = 0L
 
-    private val top = Window("Earmark", topParams()) {
+    private val top = Window("Earmark", topParams(), onA11yFocus = { focused -> _ui.update { it.copy(a11yFocused = focused) } }) {
         val state by ui.collectAsState()
         TopOverlay(
             state = state,
@@ -85,7 +90,7 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
 
     fun showChip(chip: ChipCard) {
         val timeout = a11y.getRecommendedTimeoutMillis(CHIP_MILLIS, AccessibilityManager.FLAG_CONTENT_TEXT or AccessibilityManager.FLAG_CONTENT_CONTROLS).toLong()
-        _ui.update { it.copy(chip = chip, pill = null, chipTimeoutMillis = timeout, reduceMotion = reduceMotion()) }
+        _ui.update { it.copy(chip = chip, pill = null, chipTimeoutMillis = timeout, reduceMotion = reduceMotion(), a11yFocused = false) }
         if (top.attach() && unlockedAtMillis > 0) {
             log.add("chip attached ${SystemClock.elapsedRealtime() - unlockedAtMillis} ms after unlock")
             unlockedAtMillis = 0
@@ -183,11 +188,17 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
         title = "Earmark replies"
     }
 
-    private inner class Window(private val name: String, private val params: WindowManager.LayoutParams, content: @Composable () -> Unit) {
+    private inner class Window(
+        private val name: String,
+        private val params: WindowManager.LayoutParams,
+        onA11yFocus: ((Boolean) -> Unit)? = null,
+        content: @Composable () -> Unit,
+    ) {
         private val view = ComposeView(context).apply {
             setViewTreeLifecycleOwner(owner)
             setViewTreeSavedStateRegistryOwner(owner)
             setContent { EarmarkTheme { content() } }
+            if (onA11yFocus != null) accessibilityDelegate = A11yFocusWatch(onA11yFocus)
         }
         private var attached = false
         private val detach = Runnable { detachNow() }
@@ -226,6 +237,25 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
                 log.error("removeView($name)", e)
             }
             attached = false
+        }
+    }
+
+    /**
+     * Compose has no "TalkBack is on this node" callback, but its virtual views send their
+     * focus events up through the parent, so the window's root sees them. A count, because
+     * moving between nodes can deliver the new node's FOCUSED before the old one's CLEARED.
+     */
+    private class A11yFocusWatch(private val onChange: (Boolean) -> Unit) : View.AccessibilityDelegate() {
+        private var focused = 0
+
+        override fun onRequestSendAccessibilityEvent(host: ViewGroup, child: View, event: AccessibilityEvent): Boolean {
+            val before = focused > 0
+            when (event.eventType) {
+                AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED -> focused++
+                AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUS_CLEARED -> focused = (focused - 1).coerceAtLeast(0)
+            }
+            if ((focused > 0) != before) onChange(focused > 0)
+            return super.onRequestSendAccessibilityEvent(host, child, event)
         }
     }
 

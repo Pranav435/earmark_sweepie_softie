@@ -10,7 +10,7 @@ export JAVA_HOME=/opt/homebrew/opt/openjdk@21        # JDK 21 is not on PATH
 ./gradlew :core:test :app:assembleRelease lint         # ship gate: tests, minified APK, lint 0 errors
 ```
 
-The release APK lands in `app/build/outputs/apk/release/`. Copy it to `../dist/earmark-v0.1.apk`, then check `aapt2 dump permissions` shows no `INTERNET`.
+The release APK lands in `app/build/outputs/apk/release/`. Copy it to `dist/earmark-v0.1.apk`, which is committed so testers can download it from GitHub, then check `aapt2 dump permissions` shows no `INTERNET`.
 
 ## Where changes go
 

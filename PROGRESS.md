@@ -55,3 +55,15 @@ Start: Tue Oct 27 11:27:46 IST 2026 (budget 3 h, feature freeze 2:30 → 13:57, 
     - Ride and Leave-by run only as scenario tests.
     - The reply strip steps aside for apps that clear their notification when the chat opens.
   - Cut: nothing.
+- 13:15 After ship, at the user's request:
+  - Applied all ten /review-animations findings:
+    - The chip timer pauses while pressed, dragged or TalkBack-focused (verified: a 10 s press past the 8 s timer, then held).
+    - The flick threshold is in dp (110 dp/s); a 220 px flick dismisses on velocity alone (verified).
+    - A flick leaves in the direction it was thrown.
+    - The pill also dismisses with a swipe up (verified).
+    - The chip and pill enter in 220 ms.
+    - Every fade uses the ease-out curve.
+    - On ✓, the chip shrinks toward the top-left dot, and the dot follows 120 ms later.
+    - Reply-strip buttons have press feedback.
+    - The chip only fades when a pill replaces it.
+  - dist/earmark-v0.1.apk is now committed to the repo.

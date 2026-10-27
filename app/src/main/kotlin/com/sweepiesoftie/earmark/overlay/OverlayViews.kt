@@ -1,5 +1,6 @@
 package com.sweepiesoftie.earmark.overlay
 
+import android.os.SystemClock
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
@@ -7,6 +8,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -22,17 +24,9 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.material3.ripple
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.layout.onSizeChanged
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -50,18 +44,26 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.CustomAccessibilityAction
@@ -71,10 +73,10 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.paneTitle
-import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sweepiesoftie.earmark.R
@@ -83,18 +85,32 @@ import com.sweepiesoftie.earmark.core.LoopId
 import com.sweepiesoftie.earmark.core.PillCard
 import com.sweepiesoftie.earmark.ui.theme.Brand
 import com.sweepiesoftie.earmark.ui.theme.InstrumentSans
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.math.abs
+import kotlin.math.sign
 
-/** Ease-out for everything that enters; motion stays inside 200–300 ms. */
+/** Ease-out for everything that enters or leaves, fades included; motion stays inside 200–300 ms. */
 private val EaseOut = CubicBezierEasing(0.23f, 1f, 0.32f, 1f)
 private val Capsule = RoundedCornerShape(28.dp)
 private val PaperDim = Brand.Paper.copy(alpha = 0.72f)
 
+/** The chip shows at many unlocks a day, so its entrance is quick. */
 private fun enter(reduceMotion: Boolean): EnterTransition =
-    if (reduceMotion) fadeIn(tween(200)) else slideInVertically(tween(280, easing = EaseOut)) { -it / 2 } + fadeIn(tween(220))
+    if (reduceMotion) fadeIn(tween(200, easing = EaseOut))
+    else slideInVertically(tween(220, easing = EaseOut)) { -it / 2 } + fadeIn(tween(200, easing = EaseOut))
 
 private fun exit(reduceMotion: Boolean): ExitTransition =
-    if (reduceMotion) fadeOut(tween(200)) else slideOutVertically(tween(220, easing = EaseOut)) { -it / 3 } + fadeOut(tween(200))
+    if (reduceMotion) fadeOut(tween(200, easing = EaseOut))
+    else slideOutVertically(tween(200, easing = EaseOut)) { -it / 3 } + fadeOut(tween(180, easing = EaseOut))
+
+/** ✓ shrinks the chip toward the dot at the top left, so the hold reads as one motion. */
+private fun exitIntoDot(reduceMotion: Boolean): ExitTransition =
+    if (reduceMotion) fadeOut(tween(200, easing = EaseOut))
+    else scaleOut(tween(200, easing = EaseOut), targetScale = 0.9f, transformOrigin = TransformOrigin(0f, 0f)) + fadeOut(tween(180, easing = EaseOut))
+
+/** A pill taking the chip's place: the chip just steps aside, so two capsules never cross. */
+private val makeWayForPill: ExitTransition = fadeOut(tween(120, easing = EaseOut))
 
 @Composable
 fun TopOverlay(
@@ -118,10 +134,16 @@ fun TopOverlay(
         chipShown.targetState = state.chip != null
         pillShown.targetState = state.pill != null
     }
+    // ✓ hides the chip and shows the dot in the same frame; that pair is the only way the dot appears.
+    val chipExit = when {
+        state.pill != null -> makeWayForPill
+        state.chip == null && state.dot -> exitIntoDot(state.reduceMotion)
+        else -> exit(state.reduceMotion)
+    }
     Box(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp)) {
-        AnimatedVisibility(chipShown, enter = enter(state.reduceMotion), exit = exit(state.reduceMotion)) {
+        AnimatedVisibility(chipShown, enter = enter(state.reduceMotion), exit = chipExit) {
             lastChip[0]?.let { chip ->
-                Chip(chip, state.chipTimeoutMillis, state.reduceMotion, onHold, onChipAct, onChipDismiss, onChipFaded)
+                Chip(chip, state.chipTimeoutMillis, state.reduceMotion, state.a11yFocused, onHold, onChipAct, onChipDismiss, onChipFaded)
             }
         }
         AnimatedVisibility(pillShown, enter = enter(state.reduceMotion), exit = exit(state.reduceMotion)) {
@@ -146,17 +168,32 @@ private fun Chip(
     chip: ChipCard,
     timeoutMillis: Long,
     reduceMotion: Boolean,
+    a11yFocused: Boolean,
     onHold: (LoopId) -> Unit,
     onAct: (LoopId) -> Unit,
     onDismiss: (LoopId) -> Unit,
     onFaded: (LoopId) -> Unit,
 ) {
+    val body = remember { MutableInteractionSource() }
+    val check = remember { MutableInteractionSource() }
+    val swipe = remember(chip.loopId) { SwipeAway() }
+    val bodyPressed by body.collectIsPressedAsState()
+    val checkPressed by check.collectIsPressedAsState()
+    // The timer waits while a finger or TalkBack is on the chip, so it never leaves mid-gesture.
+    val paused = bodyPressed || checkPressed || swipe.dragging || a11yFocused
+
     val fade = remember(chip.loopId) { Animatable(1f) }
-    LaunchedEffect(chip.loopId) {
+    var remaining by remember(chip.loopId) { mutableLongStateOf(timeoutMillis) }
+    LaunchedEffect(chip.loopId, paused) {
+        if (paused) return@LaunchedEffect
         // The line is only a picture of the timer. The timer itself is real time, because with
         // animations turned off Android finishes every animation instantly.
-        launch { fade.animateTo(0f, tween(timeoutMillis.toInt(), easing = LinearEasing)) }
-        delay(timeoutMillis)
+        launch { fade.animateTo(0f, tween(remaining.toInt(), easing = LinearEasing)) }
+        while (remaining > 0) {
+            val start = SystemClock.uptimeMillis()
+            delay(minOf(remaining, TIMER_STEP_MILLIS))
+            remaining -= SystemClock.uptimeMillis() - start
+        }
         onFaded(chip.loopId)
     }
     val pane = stringResource(R.string.overlay_chip_pane)
@@ -167,7 +204,7 @@ private fun Chip(
     Column(
         Modifier
             .fillMaxWidth()
-            .swipeAway(chip.loopId) { onDismiss(chip.loopId) }
+            .swipeAway(swipe, upToo = false) { onDismiss(chip.loopId) }
             .clip(Capsule)
             .background(Brand.Ink)
             .semantics(mergeDescendants = false) {
@@ -187,6 +224,8 @@ private fun Chip(
                     .heightIn(min = 48.dp)
                     .clip(Capsule)
                     .combinedClickable(
+                        interactionSource = body,
+                        indication = ripple(),
                         onClickLabel = chip.action ?: open,
                         role = Role.Button,
                         onLongClickLabel = notThis,
@@ -203,16 +242,15 @@ private fun Chip(
             }
             Spacer(Modifier.width(8.dp))
             if (chip.action != null) {
-                VerbButton(chip.action!!) { onAct(chip.loopId) }
+                VerbButton(chip.action!!, source = check) { onAct(chip.loopId) }
             } else {
-                val source = remember { MutableInteractionSource() }
                 Box(
                     Modifier
                         .size(48.dp)
-                        .pressFeedback(source)
+                        .pressFeedback(check)
                         .clip(CircleShape)
                         .background(Brand.Marigold)
-                        .clickable(interactionSource = source, indication = ripple(), role = Role.Button) { onHold(chip.loopId) }
+                        .clickable(interactionSource = check, indication = ripple(), role = Role.Button) { onHold(chip.loopId) }
                         .semantics { contentDescription = keep },
                     contentAlignment = Alignment.Center,
                 ) {
@@ -241,10 +279,12 @@ private fun Pill(pill: PillCard, onAct: (LoopId) -> Unit, onDismiss: (LoopId) ->
     val pane = stringResource(R.string.overlay_pill_pane)
     val label = stringResource(R.string.overlay_pill_label)
     val notNow = stringResource(R.string.overlay_pill_not_now)
+    val swipe = remember(pill.loopId) { SwipeAway() }
     Row(
         Modifier
             .fillMaxWidth()
-            .swipeAway(pill.loopId) { onDismiss(pill.loopId) }
+            // Sideways like a notification, or up the way it leaves.
+            .swipeAway(swipe, upToo = true) { onDismiss(pill.loopId) }
             .combinedClickable(
                 onClickLabel = pill.verb,
                 role = Role.Button,
@@ -277,8 +317,12 @@ private fun Pill(pill: PillCard, onAct: (LoopId) -> Unit, onDismiss: (LoopId) ->
 }
 
 @Composable
-private fun VerbButton(verb: String, description: String = verb, onClick: () -> Unit) {
-    val source = remember { MutableInteractionSource() }
+private fun VerbButton(
+    verb: String,
+    description: String = verb,
+    source: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClick: () -> Unit,
+) {
     Box(
         Modifier
             .sizeIn(minWidth = 64.dp, minHeight = 48.dp)
@@ -300,8 +344,18 @@ fun DotOverlay(visible: Boolean, reduceMotion: Boolean) {
     SideEffect { shown.targetState = visible }
     AnimatedVisibility(
         shown,
-        enter = if (reduceMotion) fadeIn(tween(200)) else scaleIn(tween(240, easing = EaseOut), initialScale = 2.4f) + fadeIn(tween(200)),
-        exit = fadeOut(tween(200)) + if (reduceMotion) ExitTransition.None else scaleOut(tween(200), targetScale = 0.4f),
+        // Starts as the chip finishes shrinking toward it, so the two read as one hand-off.
+        enter = if (reduceMotion) {
+            fadeIn(tween(200, easing = EaseOut))
+        } else {
+            scaleIn(tween(220, delayMillis = DOT_DELAY_MILLIS, easing = EaseOut), initialScale = 0.6f) +
+                fadeIn(tween(200, delayMillis = DOT_DELAY_MILLIS, easing = EaseOut))
+        },
+        exit = if (reduceMotion) {
+            fadeOut(tween(200, easing = EaseOut))
+        } else {
+            scaleOut(tween(200, easing = EaseOut), targetScale = 0.6f) + fadeOut(tween(200, easing = EaseOut))
+        },
     ) {
         // Decorative only: the window is not touchable and TalkBack has nothing to act on here.
         Box(Modifier.padding(4.dp).size(10.dp).clip(CircleShape).background(Brand.Marigold).clearAndSetSemantics { })
@@ -318,8 +372,12 @@ fun ReplyStripOverlay(strip: ReplyStrip?, reduceMotion: Boolean, onReply: (LoopI
     val close = stringResource(R.string.overlay_strip_close)
     AnimatedVisibility(
         shown,
-        enter = if (reduceMotion) fadeIn(tween(200)) else slideInVertically(tween(260, easing = EaseOut)) { it / 2 } + fadeIn(tween(220)),
-        exit = fadeOut(tween(200)),
+        enter = if (reduceMotion) {
+            fadeIn(tween(200, easing = EaseOut))
+        } else {
+            slideInVertically(tween(240, easing = EaseOut)) { it / 2 } + fadeIn(tween(200, easing = EaseOut))
+        },
+        exit = fadeOut(tween(200, easing = EaseOut)),
     ) {
         val current = last[0] ?: return@AnimatedVisibility
         Row(
@@ -332,8 +390,14 @@ fun ReplyStripOverlay(strip: ReplyStrip?, reduceMotion: Boolean, onReply: (LoopI
                 .padding(6.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            val closeSource = remember { MutableInteractionSource() }
             Box(
-                Modifier.size(48.dp).clip(CircleShape).clickable(role = Role.Button, onClick = onClose).semantics { contentDescription = close },
+                Modifier
+                    .size(48.dp)
+                    .pressFeedback(closeSource)
+                    .clip(CircleShape)
+                    .clickable(interactionSource = closeSource, indication = ripple(), role = Role.Button, onClick = onClose)
+                    .semantics { contentDescription = close },
                 contentAlignment = Alignment.Center,
             ) {
                 Glyph(size = 32)
@@ -345,12 +409,14 @@ fun ReplyStripOverlay(strip: ReplyStrip?, reduceMotion: Boolean, onReply: (LoopI
                 current.replies.forEachIndexed { index, reply ->
                     val first = index == 0
                     val sendLabel = stringResource(R.string.overlay_strip_send, reply)
+                    val source = remember(reply) { MutableInteractionSource() }
                     Box(
                         Modifier
                             .heightIn(min = 48.dp)
+                            .pressFeedback(source)
                             .clip(Capsule)
                             .then(if (first) Modifier.background(Brand.Marigold) else Modifier.border(1.5.dp, Brand.Paper.copy(alpha = 0.5f), Capsule))
-                            .clickable(role = Role.Button) { onReply(current.loopId, reply) }
+                            .clickable(interactionSource = source, indication = ripple(), role = Role.Button) { onReply(current.loopId, reply) }
                             .semantics { contentDescription = sendLabel; onClick(label = sendLabel) { onReply(current.loopId, reply); true } }
                             .padding(horizontal = 16.dp, vertical = 12.dp),
                         contentAlignment = Alignment.Center,
@@ -371,35 +437,66 @@ fun ReplyStripOverlay(strip: ReplyStrip?, reduceMotion: Boolean, onReply: (LoopI
     }
 }
 
+/** Drag state for swipe-to-dismiss. The chip reads [dragging] to hold its timer mid-swipe. */
+private class SwipeAway {
+    val x = Animatable(0f)
+    val y = Animatable(0f)
+    var dragging by mutableStateOf(false)
+}
+
 /**
- * Swipe sideways to dismiss: past a third of the width, or a quick flick at any distance.
+ * Swipe sideways (or, with [upToo], upward) to dismiss: past a third of the size, or a flick
+ * faster than ~0.11 px/ms (110 dp/s) at any distance. A flick leaves the way it was thrown.
  * Long-press does the same for anyone who can't drag (WCAG 2.5.7).
  */
 @Composable
-private fun Modifier.swipeAway(key: Any, onDismiss: () -> Unit): Modifier {
-    val offset = remember(key) { Animatable(0f) }
-    var width by remember(key) { mutableIntStateOf(0) }
+private fun Modifier.swipeAway(swipe: SwipeAway, upToo: Boolean, onDismiss: () -> Unit): Modifier {
     val scope = rememberCoroutineScope()
-    val state = rememberDraggableState { delta -> scope.launch { offset.snapTo(offset.value + delta) } }
-    return this
-        .onSizeChanged { width = it.width }
+    val flick = with(LocalDensity.current) { FLICK_DP_PER_SECOND.dp.toPx() }
+    var size by remember { mutableStateOf(IntSize.Zero) }
+    val horizontal = rememberDraggableState { delta -> scope.launch { swipe.x.snapTo(swipe.x.value + delta) } }
+    // Downward drags meet friction instead of a wall; only up dismisses.
+    val vertical = rememberDraggableState { delta ->
+        scope.launch { swipe.y.snapTo(swipe.y.value + if (swipe.y.value + delta > 0) delta * 0.25f else delta) }
+    }
+
+    suspend fun release(axis: Animatable<Float, *>, extent: Int, velocity: Float, upOnly: Boolean) {
+        swipe.dragging = false
+        val flung = abs(velocity) > flick
+        val direction = if (flung) sign(velocity) else sign(axis.value)
+        val far = abs(axis.value) > extent / 3f
+        if ((flung || far) && direction != 0f && (!upOnly || direction < 0f)) {
+            onDismiss()
+            axis.animateTo(direction * extent.coerceAtLeast(1), tween(180, easing = EaseOut))
+        } else {
+            axis.animateTo(0f, tween(200, easing = EaseOut))
+        }
+    }
+
+    val base = this
+        .onSizeChanged { size = it }
         .graphicsLayer {
-            translationX = offset.value
-            alpha = 1f - (abs(offset.value) / size.width.coerceAtLeast(1f)).coerceAtMost(0.8f)
+            translationX = swipe.x.value
+            translationY = swipe.y.value
+            val gone = abs(swipe.x.value) / this.size.width.coerceAtLeast(1f) + abs(swipe.y.value.coerceAtMost(0f)) / this.size.height.coerceAtLeast(1f)
+            alpha = 1f - gone.coerceAtMost(0.8f)
         }
         .draggable(
-            state = state,
+            state = horizontal,
             orientation = Orientation.Horizontal,
-            onDragStopped = { velocity ->
-                val travel = width.coerceAtLeast(1).toFloat()
-                if (abs(offset.value) > travel / 3 || abs(velocity) > FLING_VELOCITY) {
-                    offset.animateTo(if (offset.value + velocity >= 0) travel else -travel, tween(180, easing = EaseOut))
-                    onDismiss()
-                } else {
-                    offset.animateTo(0f, tween(200, easing = EaseOut))
-                }
-            },
+            onDragStarted = { swipe.dragging = true },
+            onDragStopped = { velocity -> release(swipe.x, size.width, velocity, upOnly = false) },
         )
+    return if (!upToo) {
+        base
+    } else {
+        base.draggable(
+            state = vertical,
+            orientation = Orientation.Vertical,
+            onDragStarted = { swipe.dragging = true },
+            onDragStopped = { velocity -> release(swipe.y, size.height, velocity, upOnly = true) },
+        )
+    }
 }
 
 /** Scales to 0.97 while pressed, so a tap visibly lands. */
@@ -413,4 +510,6 @@ private fun Modifier.pressFeedback(source: MutableInteractionSource): Modifier {
     }
 }
 
-private const val FLING_VELOCITY = 1200f
+private const val FLICK_DP_PER_SECOND = 110f
+private const val TIMER_STEP_MILLIS = 100L
+private const val DOT_DELAY_MILLIS = 120
