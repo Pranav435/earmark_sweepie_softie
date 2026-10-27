@@ -60,7 +60,7 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Date
 
-private enum class Screen { Onboarding, Recap, Settings, Log }
+private enum class Screen { Onboarding, Recap, Settings, Advanced, Trigger, Log }
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,8 +114,10 @@ private fun Root() {
     val activity = LocalActivity.current as MainActivity
     val graph = AppGraph
     var permissions by remember { mutableStateOf(readPermissions(activity)) }
+    var screenReading by remember { mutableStateOf(Permissions.screenReading(activity)) }
     LifecycleResumeEffect(Unit) {
         permissions = readPermissions(activity)
+        screenReading = Permissions.screenReading(activity)
         // An open app may always start it, so a start Android refused in the background recovers here.
         if (permissions.notifications) KeepAliveService.start(activity) else KeepAliveService.stop(activity)
         onPauseOrDispose { }
@@ -123,8 +125,15 @@ private fun Root() {
     var screen by rememberSaveable { mutableStateOf(if (readPermissions(activity).required) Screen.Recap else Screen.Onboarding) }
     var setupStart by rememberSaveable { mutableStateOf(SetupStep.Intro) }
     val setup = { setupStart = permissions.firstMissing; screen = Screen.Onboarding }
+    // The trigger being edited, or null for a new one (ADR 0038), and where the Log was opened from.
+    var editing by rememberSaveable { mutableStateOf<String?>(null) }
+    var logFrom by rememberSaveable { mutableStateOf(Screen.Recap) }
+    val openLog = { from: Screen -> logFrom = from; screen = Screen.Log }
     // Setup opened from home or Settings goes back there; on a first run it is where the app starts.
-    BackHandler(screen == Screen.Settings || screen == Screen.Log || (screen == Screen.Onboarding && setupStart != SetupStep.Intro)) { screen = Screen.Recap }
+    BackHandler(screen == Screen.Settings || (screen == Screen.Onboarding && setupStart != SetupStep.Intro)) { screen = Screen.Recap }
+    BackHandler(screen == Screen.Advanced) { screen = Screen.Settings }
+    BackHandler(screen == Screen.Trigger) { screen = Screen.Advanced }
+    BackHandler(screen == Screen.Log) { screen = logFrom }
 
     val user by graph.settings.state.collectAsState()
     val pausedUntil = pausedUntil(user)
@@ -145,6 +154,8 @@ private fun Root() {
             Screen.Onboarding -> R.string.app_name
             Screen.Recap -> R.string.app_name
             Screen.Settings -> R.string.settings_title
+            Screen.Advanced -> R.string.advanced_title
+            Screen.Trigger -> if (editing == null) R.string.form_new else R.string.form_edit
             Screen.Log -> R.string.log_title
         },
     )
@@ -184,7 +195,7 @@ private fun Root() {
                         onOpen = { graph.uiEvents.tryEmit(Event.WaitingOpened(it)) },
                         onDone = { graph.uiEvents.tryEmit(Event.WaitingDone(it)) },
                         onSettings = { screen = Screen.Settings },
-                        onLog = { screen = Screen.Log },
+                        onLog = { openLog(Screen.Recap) },
                         onResume = { graph.settings.pause(null) },
                         onFixPermissions = setup,
                         onNotificationAccess = { activity.openSettings(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS) },
@@ -202,6 +213,7 @@ private fun Root() {
                 }
                 val muted by remember { graph.store.mutedKinds() }.collectAsState(emptyList())
                 val mutedChats by remember { graph.store.mutedChats() }.collectAsState(0)
+                val triggerStats by remember { graph.store.triggerStats() }.collectAsState(emptyMap())
                 SettingsScreen(
                     SettingsState(
                         user = user,
@@ -211,18 +223,12 @@ private fun Root() {
                         mutedChats = mutedChats,
                         pausedUntil = pausedUntil,
                         canAddTile = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU,
+                        mutedTriggers = user.triggers.filter { triggerStats[it.id]?.muted == true },
                     ),
                     SettingsActions(
                         onBack = { screen = Screen.Recap },
                         onPause = graph.settings::pause,
                         onAddTile = activity::requestTile,
-                        onDemo = { on ->
-                            graph.settings.setDemoMode(on)
-                            if (on) graph.appScope.launch {
-                                graph.store.seedAlarmHistory(ZoneId.systemDefault())
-                                graph.uiEvents.emit(Event.StatsLoaded(graph.store.stats()))
-                            }
-                        },
                         onDrift = graph.settings::setDriftSeconds,
                         onDriftTimer = graph.settings::setDriftTimer,
                         onFeed = graph.settings::setFeed,
@@ -230,14 +236,55 @@ private fun Root() {
                         onShowAllApps = { showAll = true },
                         onUnmute = { kind -> graph.uiEvents.tryEmit(Event.KindUnmuted(kind)) },
                         onUnmuteChats = { graph.uiEvents.tryEmit(Event.ChatsUnmuted) },
+                        onUnmuteTrigger = { id -> graph.uiEvents.tryEmit(Event.TriggerUnmuted(id)) },
+                        onAdvanced = { screen = Screen.Advanced },
+                    ),
+                )
+            }
+            Screen.Advanced -> {
+                val triggerStats by remember { graph.store.triggerStats() }.collectAsState(emptyMap())
+                AdvancedScreen(
+                    AdvancedState(user = user, screenReading = screenReading, stats = triggerStats),
+                    AdvancedActions(
+                        onBack = { screen = Screen.Settings },
+                        onAccessibility = { activity.openSettings(Settings.ACTION_ACCESSIBILITY_SETTINGS) },
+                        onAppInfo = { activity.openSettings(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, withPackage = true) },
+                        onAdd = { editing = null; screen = Screen.Trigger },
+                        onEdit = { editing = it.id; screen = Screen.Trigger },
+                        onTriggerOn = graph.settings::setTriggerOn,
+                        onDemo = { on ->
+                            graph.settings.setDemoMode(on)
+                            if (on) graph.appScope.launch {
+                                graph.store.seedAlarmHistory(ZoneId.systemDefault())
+                                graph.uiEvents.emit(Event.StatsLoaded(graph.store.stats()))
+                            }
+                        },
                         onPermissions = setup,
-                        onLog = { screen = Screen.Log },
+                        onLog = { openLog(Screen.Advanced) },
+                    ),
+                )
+            }
+            Screen.Trigger -> {
+                val apps by produceState(emptyList()) { value = withContext(Dispatchers.IO) { graph.apps.launcherApps() } }
+                TriggerFormScreen(
+                    initial = user.triggers.find { it.id == editing },
+                    apps = apps,
+                    screenReading = screenReading,
+                    TriggerFormActions(
+                        onBack = { screen = Screen.Advanced },
+                        onSave = { trigger -> graph.settings.saveTrigger(trigger); screen = Screen.Advanced },
+                        onDelete = { id ->
+                            graph.settings.deleteTrigger(id)
+                            graph.appScope.launch { graph.store.forgetTrigger(id) }
+                            screen = Screen.Advanced
+                        },
+                        onTurnOnScreenReading = { activity.openSettings(Settings.ACTION_ACCESSIBILITY_SETTINGS) },
                     ),
                 )
             }
             Screen.Log -> {
                 val lines by graph.debugLog.lines.collectAsState()
-                LogScreen(lines, onBack = { screen = Screen.Recap }, onCopy = { copyLog(activity, lines) }, onClear = graph.debugLog::clear)
+                LogScreen(lines, onBack = { screen = logFrom }, onCopy = { copyLog(activity, lines) }, onClear = graph.debugLog::clear)
             }
         }
     }

@@ -2,6 +2,7 @@ package com.sweepiesoftie.earmark.listener
 
 import android.Manifest
 import android.app.AppOpsManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
@@ -36,6 +37,13 @@ object Permissions {
     /** Battery optimisation off ("Unrestricted" on Samsung), so the phone doesn't pause Earmark in the background. */
     fun batteryUnrestricted(context: Context): Boolean =
         context.getSystemService(PowerManager::class.java)?.isIgnoringBatteryOptimizations(context.packageName) == true
+
+    /** Screen reading for screen triggers is on in Android's Accessibility settings (ADR 0038). */
+    fun screenReading(context: Context): Boolean {
+        val enabled = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES) ?: return false
+        val reader = ComponentName(context, ScreenTriggerService::class.java)
+        return enabled.split(':').any { ComponentName.unflattenFromString(it) == reader }
+    }
 
     fun postNotifications(context: Context): Boolean =
         Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||

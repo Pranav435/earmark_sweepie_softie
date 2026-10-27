@@ -112,6 +112,20 @@
                 android:value="true" />
         </service>
 
+        <!-- Opt-in, for screen triggers only (ADR 0038). Only the system can bind it. -->
+        <service
+            android:name=".listener.ScreenTriggerService"
+            android:exported="true"
+            android:label="@string/screen_triggers_label"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/screen_triggers" />
+        </service>
+
         <service
             android:name=".listener.KeepAliveService"
             android:exported="false"

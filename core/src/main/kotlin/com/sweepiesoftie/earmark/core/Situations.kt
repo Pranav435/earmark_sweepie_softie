@@ -14,11 +14,11 @@ internal object Situations {
     private const val USUAL_AFTER_NIGHTS = 3
     private val leaveByWindow: Duration = Duration.ofHours(2)
     val flowDwell: Duration = Duration.ofMinutes(2)
-    private val flowLifetime: Duration = Duration.ofHours(2)
+    val flowLifetime: Duration = Duration.ofHours(2)
 
     /** How long back in an earmarked app counts as doing what you earmarked it for, not passing through, and how long one is kept (ADR 0035). */
     val ownDwell: Duration = Duration.ofSeconds(20)
-    private val ownLifetime: Duration = Duration.ofHours(6)
+    val ownLifetime: Duration = Duration.ofHours(6)
     private val airport = Regex("""(?i)\b(flight|airport|terminal)\b""")
 
     /**

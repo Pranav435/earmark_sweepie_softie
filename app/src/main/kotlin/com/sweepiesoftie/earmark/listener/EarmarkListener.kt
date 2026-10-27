@@ -14,7 +14,9 @@ import com.sweepiesoftie.earmark.core.Engine
 import com.sweepiesoftie.earmark.core.Event
 import com.sweepiesoftie.earmark.core.Overlay
 import com.sweepiesoftie.earmark.core.Settings
+import com.sweepiesoftie.earmark.core.Watch
 import com.sweepiesoftie.earmark.overlay.OverlayHost
+import com.sweepiesoftie.earmark.store.UserSettings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExecutorCoroutineDispatcher
@@ -26,6 +28,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.concurrent.Executors
 
 /**
@@ -91,12 +95,15 @@ class EarmarkListener : NotificationListenerService() {
             dispatch(Event.StatsLoaded(graph.store.stats()))
             graph.store.trim(System.currentTimeMillis())
         }
+        seedVisits(s, graph.settings.state.value)
         // Loads the weights off the main thread, before the first message needs them.
         s.scope.launch(s.engineDispatcher) { log.add(if (s.engine.messageModel) "message model loaded" else "message model missing; word lists only") }
         s.scope.launch {
             graph.settings.state.drop(1).collect { user ->
+                val timed = timedApps(s.settings)
                 s.settings = withContext(Dispatchers.IO) { s.withCard(graph.apps.engineSettings(user)) }
                 dispatch(Event.SettingsChanged(s.settings))
+                if (timedApps(s.settings) != timed) seedVisits(s, user)
             }
         }
         s.scope.launch { graph.uiEvents.collect { dispatch(it) } }
@@ -161,6 +168,23 @@ class EarmarkListener : NotificationListenerService() {
 
     override fun onInterruptionFilterChanged(interruptionFilter: Int) {
         dispatch(Event.BlockerChanged(Blocker.DoNotDisturb, interruptionFilter > INTERRUPTION_FILTER_ALL))
+    }
+
+    private fun timedApps(settings: Settings): Set<String> =
+        settings.triggers.filter { it.on && it.watch == Watch.NotOpenedBy }.map { it.packageName }.toSet()
+
+    /**
+     * Time triggers need to know whether you were in their app earlier today, before this listener started, and wait
+     * until they do (ADR 0038). Without usage access the history is empty, and there are no foreground polls either.
+     */
+    private fun seedVisits(s: Session, user: UserSettings) {
+        val apps = user.triggers.filter { it.on && it.watch == Watch.NotOpenedBy }.map { it.packageName }.toSet()
+        if (apps.isEmpty()) return
+        s.scope.launch {
+            val midnight = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+            val visits = withContext(Dispatchers.IO) { s.watcher.longVisits(apps, midnight, System.currentTimeMillis()) }
+            dispatch(Event.AppVisits(apps, visits))
+        }
     }
 
     private fun onUnlock() {
@@ -245,6 +269,7 @@ class EarmarkListener : NotificationListenerService() {
             is Effect.RecordContact -> graph.appScope.launch { graph.store.record(effect.conversation, effect.stat) }
             is Effect.RecordApp -> graph.appScope.launch { graph.store.recordApp(effect.packageName, effect.stat) }
             is Effect.RecordAlarm -> graph.appScope.launch { graph.store.recordAlarm(effect.time, effect.on) }
+            is Effect.RecordTrigger -> graph.appScope.launch { graph.store.recordTrigger(effect.id, effect.stat) }
             is Effect.Log -> log.add(effect.line)
         }
     }

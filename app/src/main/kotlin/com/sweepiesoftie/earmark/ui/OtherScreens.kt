@@ -55,6 +55,7 @@ import com.sweepiesoftie.earmark.DebugLog
 import com.sweepiesoftie.earmark.R
 import com.sweepiesoftie.earmark.core.DriftTimer
 import com.sweepiesoftie.earmark.core.LoopKind
+import com.sweepiesoftie.earmark.core.Trigger
 import com.sweepiesoftie.earmark.listener.FeedCandidate
 import com.sweepiesoftie.earmark.store.UserSettings
 import com.sweepiesoftie.earmark.ui.theme.InstrumentSerif
@@ -75,6 +76,8 @@ data class SettingsState(
     val pausedUntil: Long? = null,
     /** Android 13 and later can offer to add the "Earmark this" tile from here (ADR 0035). */
     val canAddTile: Boolean = false,
+    /** Triggers muted by "not this" three times in a row (ADR 0038). */
+    val mutedTriggers: List<Trigger> = emptyList(),
 )
 
 class SettingsActions(
@@ -82,7 +85,6 @@ class SettingsActions(
     /** Pause until a time in epoch milliseconds, [UserSettings.UNTIL_RESUMED], or null to resume. */
     val onPause: (Long?) -> Unit,
     val onAddTile: () -> Unit,
-    val onDemo: (Boolean) -> Unit,
     val onDrift: (Int) -> Unit,
     val onDriftTimer: (DriftTimer) -> Unit,
     val onFeed: (String, Boolean) -> Unit,
@@ -90,8 +92,8 @@ class SettingsActions(
     val onShowAllApps: () -> Unit,
     val onUnmute: (LoopKind) -> Unit,
     val onUnmuteChats: () -> Unit,
-    val onPermissions: () -> Unit,
-    val onLog: () -> Unit,
+    val onUnmuteTrigger: (String) -> Unit,
+    val onAdvanced: () -> Unit,
 )
 
 @Composable
@@ -156,7 +158,7 @@ fun SettingsScreen(state: SettingsState, actions: SettingsActions) {
                 modifier = Modifier.fillMaxWidth(),
             )
         }
-        if (state.muted.isNotEmpty() || state.mutedChats > 0) {
+        if (state.muted.isNotEmpty() || state.mutedChats > 0 || state.mutedTriggers.isNotEmpty()) {
             item {
                 SectionTitle(stringResource(R.string.settings_muted))
                 Text(stringResource(R.string.settings_muted_body), style = MaterialTheme.typography.bodyMedium, color = Tone.Muted)
@@ -165,18 +167,33 @@ fun SettingsScreen(state: SettingsState, actions: SettingsActions) {
                 item { MutedRow(pluralStringResource(R.plurals.settings_muted_chats, state.mutedChats, state.mutedChats), actions.onUnmuteChats) }
             }
             items(state.muted) { kind -> MutedRow(kindName(kind)) { actions.onUnmute(kind) } }
+            items(state.mutedTriggers, key = { it.id }) { trigger -> MutedRow(triggerSentence(trigger)) { actions.onUnmuteTrigger(trigger.id) } }
         }
         item {
-            // Last, so Demo mode isn't the second thing an everyday user sees.
-            SectionTitle(stringResource(R.string.settings_testers))
-            SwitchRow(stringResource(R.string.settings_demo), stringResource(R.string.settings_demo_body), user.demoMode, actions.onDemo)
-            Spacer(Modifier.heightIn(min = 8.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                SecondaryButton(stringResource(R.string.settings_permissions), onClick = actions.onPermissions)
-                SecondaryButton(stringResource(R.string.settings_log), onClick = actions.onLog)
-            }
+            // Last, so custom triggers and Demo mode aren't what an everyday user sees first (ADR 0038).
+            Spacer(Modifier.heightIn(min = 16.dp))
+            LinkRow(stringResource(R.string.settings_advanced), stringResource(R.string.settings_advanced_body), actions.onAdvanced)
             Spacer(Modifier.heightIn(min = 32.dp))
         }
+    }
+}
+
+/** A row that opens another screen: one TalkBack stop that reads its title and what's there. */
+@Composable
+fun LinkRow(title: String, body: String, onClick: () -> Unit) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .heightIn(min = 56.dp)
+            .clickable(role = Role.Button, onClick = onClick)
+            .padding(vertical = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Text(title, style = MaterialTheme.typography.bodyLarge)
+            Text(body, style = MaterialTheme.typography.bodyMedium, color = Tone.Muted)
+        }
+        Text("›", style = MaterialTheme.typography.headlineSmall, color = Tone.Muted, modifier = Modifier.padding(start = 12.dp).clearAndSetSemantics { })
     }
 }
 
@@ -227,7 +244,7 @@ private fun nextMorning(): Long {
 private val MORNING: LocalTime = LocalTime.of(7, 0)
 
 @Composable
-private fun Choice(label: String, selected: Boolean, enabled: Boolean, onClick: () -> Unit) {
+fun Choice(label: String, selected: Boolean, enabled: Boolean = true, onClick: () -> Unit) {
     Box(
         Modifier
             .heightIn(min = 48.dp)

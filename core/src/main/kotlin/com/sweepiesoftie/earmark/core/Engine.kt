@@ -34,8 +34,20 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     /** Loops marked "Already done" on the home screen, with their latest message then, so a repost doesn't reopen them (ADR 0036). */
     private val doneHere = HashMap<LoopId, Instant>()
 
+    /** What screen reading last saw of each app this visit: which screen triggers' words were showing (ADR 0038). */
+    private val onScreen = HashMap<String, Screen>()
+
+    /** When the last visit of 20 s or more to each app ended, for time triggers (ADR 0038). Package names and times only. */
+    private val longVisits = HashMap<String, Instant>()
+
+    /** Apps whose usage history from before this engine started has arrived; their time triggers wait for it. */
+    private val historyOf = HashSet<String>()
+
     /** [interrupted] is set when a pill showed during the visit, so it isn't learned as a usual visit. */
     private data class Visit(val packageName: String, val appLabel: String, val since: Instant, val interrupted: Boolean = false)
+
+    /** Each showing screen trigger's id with the word it found, and an amount the screen showed, for a Pay. Never the screen's text. */
+    private data class Screen(val at: Instant, val words: Map<String, String>, val amount: Money?)
 
     /** How many loops are open, for the home screen. Read it on the engine's thread, like [handle]. */
     public val openLoops: Int get() = book.all.size
@@ -62,6 +74,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         holding = own()?.loop?.who,
         canHold = holdable()?.appLabel,
         feed = foreground?.takeIf { inUse && it.packageName in settings.feedApps }?.appLabel,
+        ignored = foreground?.takeIf { inUse && ignoresApp(it.packageName) != null }?.appLabel,
     )
 
     /** The message model's weights loaded, so it reads messages beside the word lists (ADR 0031). The first read loads them. */
@@ -90,6 +103,13 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         is Event.ReplySent -> close(event.loopId, Outcome.Done, now, "reply sent", replied = true)
         is Event.KindUnmuted -> setKind(event.kind, KindStat(holds = kindStat(event.kind).holds, ignores = kindStat(event.kind).ignores))
         Event.ChatsUnmuted -> onChatsUnmuted()
+        is Event.TriggerUnmuted -> setTrigger(event.id, triggerStat(event.id).copy(ignoreStreak = 0)) + Effect.Log("trigger ${event.id} unmuted")
+        is Event.ScreenRead -> onScreenRead(event, now)
+        is Event.AppVisits -> {
+            historyOf += event.apps
+            event.lastLongVisit.forEach { (app, at) -> if (longVisits[app]?.isAfter(at) != true) longVisits[app] = at }
+            listOf(Effect.Log("usage history: ${event.lastLongVisit.size} of ${event.apps.size} apps opened for a while today"))
+        }
         is Event.SettingsChanged -> {
             this.settings = event.settings
             copy = Copy(event.settings)
@@ -103,7 +123,8 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
                 Instant.MAX -> "until resumed"
                 else -> "until ${copy.time(until)}"
             }
-            listOf(Effect.Log("settings: drift $drift, demo ${event.settings.demoMode}, paused $paused, ${event.settings.feedApps.size} feed apps, ${event.settings.myNames.size} names for mentions"))
+            val triggers = event.settings.triggers.count { it.on }
+            listOf(Effect.Log("settings: drift $drift, demo ${event.settings.demoMode}, paused $paused, ${event.settings.feedApps.size} feed apps, ${event.settings.myNames.size} names for mentions, $triggers triggers on"))
         }
         is Event.StatsLoaded -> {
             // Counts the engine already holds are newer than any snapshot still being written to Room.
@@ -112,17 +133,37 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
                 contacts = event.stats.contacts + stats.contacts,
                 weeknightAlarms = event.stats.weeknightAlarms,
                 apps = event.stats.apps + stats.apps,
+                triggers = event.stats.triggers + stats.triggers,
             )
             emptyList()
         }
         Event.Tick -> {
             inUse = true
-            expire(now) + closeCleared(now) + stepDrift(DriftInput.Tick, now)
+            expire(now) + closeCleared(now) + openTimed(now, arrive = true) + stepDrift(DriftInput.Tick, now)
         }
     }
 
-    private fun onPosted(signal: Signal, now: Instant): List<Effect> =
-        when (val result = Classifier.classify(signal, settings, stats)) {
+    /**
+     * Custom triggers read a notification as well as Earmark (ADR 0038). An Ignore beats everything. An earmark trigger
+     * marks a loop Earmark opens anyway as owed, and makes its own loop from one Earmark would skip. A reply you sent,
+     * a booking or a payment shows something was dealt with, so it stays evidence and is never a trigger's loop.
+     */
+    private fun onPosted(signal: Signal, now: Instant): List<Effect> {
+        val hits = Triggers.hits(signal, settings.triggers)
+        hits.firstOrNull { it.trigger.ignore }?.let { return seen(it.trigger, now) + skip(signal, "ignored by trigger ${it.trigger.id}") }
+        val result = Classifier.classify(signal, settings, stats)
+        val hit = hits.firstOrNull() ?: return onClassified(signal, result, now)
+        val marked = when (result) {
+            is Classification.Open ->
+                Classification.Open(result.loop.copy(trigger = TriggerRef(hit.trigger.id, hit.trigger.watch, made = false), why = result.loop.why + "trigger"))
+            is Classification.Skip, is Classification.Quiet -> Classification.Open(Triggers.fromNotification(hit.trigger, signal, hit.word))
+            else -> result
+        }
+        return seen(hit.trigger, now) + onClassified(signal, marked, now)
+    }
+
+    private fun onClassified(signal: Signal, result: Classification, now: Instant): List<Effect> =
+        when (result) {
             is Classification.Open if isLeaveByAlready(result.loop) -> skip(signal, "its event is already a leave-by")
             is Classification.Open if isDoneHere(result.loop) -> skip(signal, "marked done on the home screen, nothing new since")
             is Classification.Open -> {
@@ -139,7 +180,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
                     // The cleared notification won't be removed again, so nothing else would forget its way back.
                     before.loop.notificationKey?.takeIf { it != result.loop.notificationKey }?.let { effects += Effect.Forget(it) }
                 }
-                if (before == null && result.loop.kind.cameIn) {
+                if (before == null && arrives(result.loop)) {
                     // On today's list as it arrives, so you can see Earmark has it (ADR 0025).
                     effects += Effect.RecordLoop(entry(book[result.loop.id]!!, outcome = null, closedAt = null))
                 }
@@ -291,6 +332,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         effects += expire(now)
         book.all.toList().forEach { book.update(it.loop.id) { t -> t.copy(ignored = false) } }
         effects += openSituations(now)
+        effects += openTimed(now, arrive = false)
         if (settings.paused(now)) return effects + Effect.Log("unlock: Earmark is paused")
 
         val carry = book.all.filter { it.carryOver }.maxByOrNull { it.loop.updatedAt }
@@ -339,7 +381,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         // Before closing anything, so nothing is lined up next for a phone that was just put down.
         inUse = false
         val left = closeWhere(now, "screen off after the chat app cleared it") { it.chatOpen || it.clearedAt != null }
-        val learned = foreground?.let { learnVisit(it, now) + leftOwn(it, now) }.orEmpty()
+        val learned = foreground?.let { leftApp(it, now, flows = false) }.orEmpty()
         drift = DriftMachine.end(drift)
         foreground = null
         return left + learned + hideAll()
@@ -350,7 +392,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val effects = mutableListOf<Effect>()
         val previous = foreground
         foreground = Visit(event.packageName, event.appLabel, now)
-        if (previous != null && previous.packageName != event.packageName) effects += leftApp(previous, now) + learnVisit(previous, now) + leftOwn(previous, now)
+        if (previous != null && previous.packageName != event.packageName) effects += leftApp(previous, now)
 
         val guess = book[drift.loopId]
         if (guess != null && drift.phase == Phase.HandedBack && event.packageName != guess.loop.packageName &&
@@ -371,13 +413,24 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         return effects + stepDrift(DriftInput.Foreground(event.packageName), now)
     }
 
+    /**
+     * Everything leaving an app means, for another app or a locked phone. Putting the phone down isn't leaving a flow:
+     * you may be waiting for the app to finish.
+     */
+    private fun leftApp(visit: Visit, now: Instant, flows: Boolean = true): List<Effect> {
+        val effects = (if (flows) leftFlow(visit, now) else emptyList()) + learnVisit(visit, now) + leftOwn(visit, now) + leftScreen(visit, now) + leftTimed(visit, now)
+        if (Duration.between(visit.since, now) >= Triggers.visit) longVisits[visit.packageName] = now
+        return effects
+    }
+
     /** Leaving a ride, food or shopping app within 2 minutes, with nothing booked, leaves a flow unfinished. */
-    private fun leftApp(visit: Visit, now: Instant): List<Effect> {
+    private fun leftFlow(visit: Visit, now: Instant): List<Effect> {
         val flowApps = CuratedApps.flows + listOfNotNull(settings.rideApp)
         if (visit.packageName !in flowApps) return emptyList()
         if (Duration.between(visit.since, now) >= Situations.flowDwell) return emptyList()
         val booked = bookedAt[visit.packageName]
         if (booked != null && !booked.isBefore(visit.since)) return emptyList()
+        ignoredBy(visit.packageName, screenOf(visit))?.let { return listOf(Effect.Log("left ${visit.packageName} early; trigger ${it.id} ignores it, so no flow")) }
 
         val guess = book[drift.loopId]
         if (guess != null && guess.loop.packageName == visit.packageName) {
@@ -406,6 +459,114 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         if (stayed < Situations.ownDwell) return emptyList()
         return close(tracked.loop.id, Outcome.Done, now, "back in ${visit.packageName} for ${stayed.seconds} s, then left")
     }
+
+    /**
+     * What a screen trigger's app shows now (ADR 0038). The text is matched and dropped: only which triggers' words
+     * were showing is kept, until you leave the app. A trigger that fires as soon as its words show does so here.
+     */
+    private fun onScreenRead(event: Event.ScreenRead, now: Instant): List<Effect> {
+        val triggers = settings.triggers.filter { it.on && it.watch == Watch.ScreenWords && it.packageName == event.packageName }
+        if (triggers.isEmpty()) return emptyList()
+        val words = triggers.mapNotNull { trigger -> Triggers.match(trigger.words, event.text)?.let { trigger.id to it } }.toMap()
+        val before = onScreen[event.packageName]?.words.orEmpty()
+        val screen = Screen(now, words, MoneyParser.find(event.text).takeIf { words.isNotEmpty() })
+        onScreen[event.packageName] = screen
+        val showing = triggers.filter { it.id in words && it.id !in before }
+        if (showing.isEmpty()) return emptyList()
+        val effects = showing.flatMap { seen(it, now) }.toMutableList()
+        effects += Effect.Log("screen of ${event.packageName}: words of ${showing.joinToString { "trigger ${it.id}" }} showing")
+        ignoredBy(event.packageName, screen)?.let { return effects + Effect.Log("trigger ${it.id} ignores it, so nothing opens") }
+        showing.filter { !it.ignore && it.timing == ScreenTiming.AsSoonAsShown }
+            .forEach { effects += openMade(Triggers.fromScreen(it, words.getValue(it.id), now, screen.amount), now, arrive = true) }
+        return effects
+    }
+
+    /** What screen reading saw of [visit]'s app during it, allowing for a foreground poll that saw the switch late. */
+    private fun screenOf(visit: Visit): Screen? = onScreen[visit.packageName]?.takeIf { !it.at.isBefore(visit.since.minus(lateSwitch)) }
+
+    /**
+     * Leaving an app with screen triggers (ADR 0038): a loop whose words are gone was dealt with, and a trigger whose
+     * words still show fires now, unless an Ignore's words show too. A visit screen reading didn't see changes nothing.
+     */
+    private fun leftScreen(visit: Visit, now: Instant): List<Effect> {
+        val screen = screenOf(visit)
+        onScreen -= visit.packageName
+        if (screen == null) return emptyList()
+        val effects = mutableListOf<Effect>()
+        book.all.filter { tracked ->
+            val trigger = tracked.loop.trigger
+            trigger != null && trigger.made && trigger.watch == Watch.ScreenWords && tracked.loop.packageName == visit.packageName && trigger.id !in screen.words
+        }.map { it.loop.id }.forEach { effects += close(it, Outcome.Done, now, "left ${visit.packageName} without its words on screen") }
+        ignoredBy(visit.packageName, screen)?.let { return effects }
+        settings.triggers
+            .filter { it.on && !it.ignore && it.watch == Watch.ScreenWords && it.timing == ScreenTiming.OnLeaving && it.packageName == visit.packageName && it.id in screen.words }
+            .forEach { effects += openMade(Triggers.fromScreen(it, screen.words.getValue(it.id), now, screen.amount), now, arrive = true) }
+        return effects
+    }
+
+    /**
+     * Time triggers (ADR 0038): at its time, on one of its days, an app you haven't been in for 20 s or more today opens
+     * a loop that waits until midnight. Checked at unlock and with every foreground poll, like the clock's other loops,
+     * once the app's usage history from before this engine started has arrived.
+     */
+    private fun openTimed(now: Instant, arrive: Boolean): List<Effect> {
+        val today = now.atZone(settings.zone).toLocalDate()
+        val midnight = today.atStartOfDay(settings.zone).toInstant()
+        return settings.triggers
+            .filter { it.on && !it.ignore && it.watch == Watch.NotOpenedBy && it.by != null && today.dayOfWeek in it.days && it.packageName in historyOf }
+            .flatMap { trigger ->
+                val loop = Triggers.fromTime(trigger, today, settings.zone)
+                when {
+                    now.isBefore(loop.openedAt) || loop.id in closedSituations || book[loop.id] != null -> emptyList()
+                    ignoresApp(trigger.packageName) != null || openedSince(trigger.packageName, midnight, now) -> emptyList()
+                    else -> seen(trigger, now) + openMade(loop, now, arrive)
+                }
+            }
+    }
+
+    /** You were in [packageName] for 20 s or more since [since]: a visit that ended, or the one going on now. */
+    private fun openedSince(packageName: String, since: Instant, now: Instant): Boolean {
+        if (longVisits[packageName]?.isAfter(since) == true) return true
+        val visit = foreground?.takeIf { inUse && it.packageName == packageName } ?: return false
+        return Duration.between(maxOf(visit.since, since), now) >= Triggers.visit
+    }
+
+    /** A time trigger's loop closes once you've been in its app for 20 s or more and leave (ADR 0038). */
+    private fun leftTimed(visit: Visit, now: Instant): List<Effect> {
+        val stayed = Duration.between(visit.since, now)
+        if (stayed < Triggers.visit) return emptyList()
+        return book.all.filter { it.loop.trigger?.watch == Watch.NotOpenedBy && it.loop.packageName == visit.packageName }.map { it.loop.id }
+            .flatMap { close(it, Outcome.Done, now, "in ${visit.packageName} for ${stayed.seconds} s, then left") }
+    }
+
+    /**
+     * A loop a screen or time trigger made (ADR 0038): listed as it opens and, while you use the phone, it can become
+     * the guess the way a message arriving does, so a pill brings it back from a feed. One already open stays as it is.
+     */
+    private fun openMade(loop: Loop, now: Instant, arrive: Boolean): List<Effect> {
+        if (book[loop.id] != null) return listOf(Effect.Log("${loop.id.value} is still open"))
+        val tracked = book.open(loop)
+        val effects = listOf(
+            Effect.Log("opened ${loop.id.value} (${loop.kind}) from trigger ${loop.trigger?.id}"),
+            Effect.RecordLoop(entry(tracked, outcome = null, closedAt = null)),
+        )
+        return if (arrive) effects + onArrival(loop, before = null, now) else effects
+    }
+
+    /** When a trigger last matched, for its row in Advanced (ADR 0038). */
+    private fun seen(trigger: Trigger, now: Instant): List<Effect> {
+        val stat = triggerStat(trigger.id)
+        if (stat.lastMatched != null && Duration.between(stat.lastMatched, now) < matchedEvery) return emptyList()
+        return setTrigger(trigger.id, stat.copy(lastMatched = now))
+    }
+
+    /** An Ignore for everything from the app (ADR 0038): no loops from it, no flows, and the tile won't hold it. */
+    private fun ignoresApp(packageName: String): Trigger? =
+        settings.triggers.firstOrNull { it.on && it.ignore && it.watch == Watch.AnyNotification && it.packageName == packageName }
+
+    /** The Ignore that holds back what leaving this app would make: one for everything from it, or one whose words were on its screen. */
+    private fun ignoredBy(packageName: String, screen: Screen?): Trigger? = ignoresApp(packageName)
+        ?: settings.triggers.firstOrNull { it.on && it.ignore && it.watch == Watch.ScreenWords && it.packageName == packageName && screen?.words?.containsKey(it.id) == true }
 
     /**
      * Your usual visit to each feed app sets the smart drift timer. Demo visits and paused time aren't you,
@@ -505,8 +666,8 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
 
     private fun onChipDismissed(id: LoopId, now: Instant): List<Effect> {
         val before = book[id] ?: return emptyList()
-        // You made it, so "not this" lets it go and teaches nothing (ADR 0035).
-        if (before.loop.kind == LoopKind.Own) {
+        // You made it, so "not this" lets it go and teaches nothing (ADR 0035). A trigger's loop counts against the trigger.
+        if (before.loop.kind == LoopKind.Own && before.loop.trigger == null) {
             return listOf(Effect.HideOverlay(Overlay.Chip), Effect.HideOverlay(Overlay.Dot)) + close(id, Outcome.Dismissed, now, "let go from its chip")
         }
         val tracked = book.update(id) { it.copy(ignored = true, guessedAt = null) }!!
@@ -522,9 +683,15 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
 
     /**
      * Its kind's history learns every "not this". Three in a row mute the chat when a person is behind it, so one
-     * chat you keep waving off doesn't silence every message, and the kind otherwise (ADR 0033).
+     * chat you keep waving off doesn't silence every message, and the kind otherwise (ADR 0033). A loop a trigger made
+     * counts against that trigger alone (ADR 0038).
      */
     private fun learnNotThis(loop: Loop): List<Effect> {
+        loop.trigger?.takeIf { it.made }?.let { trigger ->
+            val next = triggerStat(trigger.id).let { it.copy(ignoreStreak = it.ignoreStreak + 1) }
+            val muted = if (next.muted) "; trigger ${trigger.id} muted after ${next.ignoreStreak} in a row" else ""
+            return setTrigger(trigger.id, next) + Effect.Log("chip dismissed: ${loop.id.value}$muted")
+        }
         val kind = kindStat(loop.kind)
         val conversation = loop.conversation?.takeIf { loop.kind.withPeople }
         if (conversation == null) {
@@ -541,6 +708,10 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
 
     /** The chip's one button is how you say "yes, this one" (ADR 0032), and it starts the chat's count of "not this" again. */
     private fun confirm(loop: Loop): List<Effect> {
+        loop.trigger?.takeIf { it.made }?.let { trigger ->
+            val stat = triggerStat(trigger.id)
+            return if (stat.ignoreStreak > 0) setTrigger(trigger.id, stat.copy(ignoreStreak = 0)) else emptyList()
+        }
         val kind = kindStat(loop.kind)
         val effects = setKind(loop.kind, kind.copy(holds = kind.holds + 1, ignoreStreak = 0)).toMutableList()
         val conversation = loop.conversation?.takeIf { loop.kind.withPeople }
@@ -590,11 +761,13 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
             resumeForeground(now)
     }
 
-    private fun own(): Tracked? = book.all.firstOrNull { it.loop.kind == LoopKind.Own }
+    /** The tile's Own loop. A trigger's "Get back to" loops are its own (ADR 0038). */
+    private fun own(): Tracked? = book.all.firstOrNull { it.loop.kind == LoopKind.Own && it.loop.trigger == null }
 
-    /** The app in front, unless it's the home screen, a feed or Earmark itself. Nothing is in front of a locked phone. */
+    /** The app in front, unless it's the home screen, a feed, Earmark itself or an app a trigger ignores. Nothing is in front of a locked phone. */
     private fun holdable(): Visit? = foreground?.takeIf {
-        inUse && it.packageName != settings.ownPackage && it.packageName !in settings.feedApps && it.packageName !in settings.homeApps
+        inUse && it.packageName != settings.ownPackage && it.packageName !in settings.feedApps && it.packageName !in settings.homeApps &&
+            ignoresApp(it.packageName) == null
     }
 
     private fun onChatsUnmuted(): List<Effect> {
@@ -665,7 +838,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
      */
     private fun close(id: LoopId, outcome: Outcome, now: Instant, why: String, replied: Boolean = false, next: Boolean = true): List<Effect> {
         val tracked = book.remove(id) ?: return emptyList()
-        if (tracked.loop.kind == LoopKind.Routine || tracked.loop.kind == LoopKind.LeaveBy) closedSituations += id
+        if (tracked.loop.kind == LoopKind.Routine || tracked.loop.kind == LoopKind.LeaveBy || tracked.loop.trigger?.watch == Watch.NotOpenedBy) closedSituations += id
         val effects = mutableListOf<Effect>(Effect.Log("closed ${id.value}: $outcome, $why"))
         if (isListed(tracked)) effects += Effect.RecordLoop(entry(tracked, outcome, now))
         val conversation = tracked.loop.conversation
@@ -727,8 +900,12 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
 
     private fun kindStat(kind: LoopKind): KindStat = stats.kinds[kind] ?: KindStat()
 
-    /** A chat you waved off three times in a row, or a kind with nobody behind it; never something you earmarked (ADR 0033). */
+    /**
+     * A chat you waved off three times in a row, or a kind with nobody behind it; never something you earmarked
+     * (ADR 0033). A trigger's loops go by the trigger (ADR 0038).
+     */
     private fun muted(loop: Loop): Boolean = when {
+        loop.trigger?.made == true -> triggerStat(loop.trigger.id).muted
         loop.kind == LoopKind.Own -> false
         loop.kind.withPeople -> loop.conversation?.let { stats.contacts[it]?.muted } == true
         else -> kindStat(loop.kind).muted
@@ -737,6 +914,13 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun setContact(conversation: String, stat: ContactStat): List<Effect> {
         stats = stats.copy(contacts = stats.contacts + (conversation to stat))
         return listOf(Effect.RecordContact(conversation, stat))
+    }
+
+    private fun triggerStat(id: String): TriggerStat = stats.triggers[id] ?: TriggerStat()
+
+    private fun setTrigger(id: String, stat: TriggerStat): List<Effect> {
+        stats = stats.copy(triggers = stats.triggers + (id to stat))
+        return listOf(Effect.RecordTrigger(id, stat))
     }
 
     private fun setKind(kind: LoopKind, stat: KindStat): List<Effect> {
@@ -756,7 +940,10 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         listed = isListed(tracked),
     )
 
-    private fun isListed(tracked: Tracked): Boolean = tracked.guessedAt != null || tracked.loop.kind.cameIn
+    private fun isListed(tracked: Tracked): Boolean = tracked.guessedAt != null || arrives(tracked.loop)
+
+    /** Came in, or a trigger made it: on today's list as it opens (ADR 0025, 0038). */
+    private fun arrives(loop: Loop): Boolean = loop.kind.cameIn || loop.trigger?.made == true
 
     /** Spelled out because R8 renames classes in release builds. */
     private fun routeName(route: Route): String = when (route) {
@@ -774,6 +961,12 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
 
         /** A few foreground polls, which run once a second. */
         val clearWait: Duration = Duration.ofSeconds(3)
+
+        /** How late the foreground poll can see a switch that screen reading saw at once (ADR 0024, 0038). */
+        val lateSwitch: Duration = Duration.ofSeconds(3)
+
+        /** A trigger's last match is written at most this often: a screen or an app can say the same thing many times. */
+        val matchedEvery: Duration = Duration.ofMinutes(1)
 
         /** A message older than this when it's posted was delivered late, or replayed when the listener reconnected. */
         val arrivalWindow: Duration = Duration.ofMinutes(2)

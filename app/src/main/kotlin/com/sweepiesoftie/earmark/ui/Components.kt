@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchColors
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -161,18 +162,16 @@ fun SwitchRow(title: String, body: String?, checked: Boolean, onChange: (Boolean
             if (body != null) Text(body, style = MaterialTheme.typography.bodyMedium, color = Tone.Muted)
         }
         Spacer(Modifier.width(12.dp))
-        Switch(
-            checked = checked,
-            onCheckedChange = null,
-            colors = SwitchDefaults.colors(
-                // A marigold thumb on a paper track is too faint, so dark mode fills the track instead.
-                checkedTrackColor = if (Tone.Dark) Brand.Marigold else Brand.Ink,
-                checkedThumbColor = if (Tone.Dark) Brand.Ink else Brand.Marigold,
-                uncheckedTrackColor = Tone.Card,
-                uncheckedBorderColor = Tone.Ink.copy(alpha = 0.4f),
-                uncheckedThumbColor = Tone.Ink.copy(alpha = 0.55f),
-            ),
-            modifier = Modifier.clearAndSetSemantics { },
-        )
+        Switch(checked = checked, onCheckedChange = null, colors = switchColors(), modifier = Modifier.clearAndSetSemantics { })
     }
 }
+
+/** Earmark's switch: a marigold thumb on a paper track is too faint, so dark mode fills the track instead. */
+@Composable
+fun switchColors(): SwitchColors = SwitchDefaults.colors(
+    checkedTrackColor = if (Tone.Dark) Brand.Marigold else Brand.Ink,
+    checkedThumbColor = if (Tone.Dark) Brand.Ink else Brand.Marigold,
+    uncheckedTrackColor = Tone.Card,
+    uncheckedBorderColor = Tone.Ink.copy(alpha = 0.4f),
+    uncheckedThumbColor = Tone.Ink.copy(alpha = 0.55f),
+)

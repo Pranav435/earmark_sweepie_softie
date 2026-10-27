@@ -1,0 +1,28 @@
+# Custom triggers, and reading the screen
+
+Partly reverses ADR 0001. Earmark only guesses what its own rules pick up, and Pranav wanted to tell it, from Settings, to watch an app for certain things. In a grill he chose: custom triggers under an Advanced screen, not the main settings; watching for words in an app's notifications, any notification from it, words on its screen, or not opening it by a time; earmarking it as a kind you pick, or ignoring it; and an accessibility service, off until you turn it on, so triggers can read the screen. It's called screen reading, never a screen reader, which is what TalkBack is.
+
+**Where it lives.** Settings ends with Muted guesses, then one Advanced row. Advanced has Read the screen, then Custom triggers, then For testers (Demo mode, Permissions and the Log, moved out of Settings). A trigger is added in one form read top to bottom: App, Watch for, the words or the time and days, When (screen triggers only), Then (Reminder, Pay, Reply, Call back, Finish, Get back to it, or Ignore), and an optional Label. Fields that don't apply are hidden. Each row reads as a sentence, "IRCTC: screen says “Proceed to pay”, on leaving › Finish", with a switch and "Last matched 2 h ago", "Not matched yet", "Waiting for screen reading", "Off" or "Muted". Triggers are settings, kept as JSON in Earmark's private preferences. Their words are what you typed, not anything Earmark read.
+
+**Words.** A comma list; any one matches, ignoring case, as a whole word or phrase, so "due" doesn't match "overdue", and a phrase's spaces match any gap. A notification trigger reads the title, the text, the expanded text and the newest message.
+
+**What a trigger makes.** A loop of the kind you picked, fully due and owed (ADR 0031), so it waits about six hours rather than fading in half an hour. It quotes what it saw, or your label: a notification's gist, or the trigger's own word for a screen ("“Proceed to pay”"), never the screen's text. A time trigger's note says "You wanted to open it by 9:00 PM". A Reply or Call back from a notification comes from the sender, and otherwise the note comes from the app, with its icon. A notification trigger makes one loop per notification, with its tap as the way back; a screen or time trigger makes one at a time and opens its app. Loops made during use can become the guess the way an arriving message does ("Before you forget").
+
+**When Earmark would open a loop anyway.** Its own loop stays, with its own verb and reply strip, and the trigger only marks it owed. A notification that a reply, booking or payment went through stays evidence and is never a trigger's loop. Ongoing notifications, group summaries and one-time codes are never watched.
+
+**Ignore.** An Ignore beats everything, Earmark's own loops and earmark triggers included. With words, matching notifications are skipped. On the whole app, nothing comes from it: no notifications, no unfinished flows, and the "Earmark this" tile is greyed out with "A trigger ignores Zomato". With screen words, leaving the app while they show makes nothing, flow or trigger.
+
+**Closing.** A notification trigger's loop closes like Earmark's own: when its notification is tapped or cleared, or on its kind's evidence (a payment, a booking, a sent reply). A screen trigger's loop closes as done when you leave the app and its words aren't on the screen; a visit screen reading didn't see changes nothing. A time trigger's loop closes once you've been in the app for 20 seconds and leave, the bar the tile uses (ADR 0035), and it expires at midnight. A visit of 20 seconds since midnight also stops it opening. The engine keeps those visits in memory, and after a restart reads today's from usage history.
+
+**Screen triggers.** Each one fires as you leave the app with its words still showing, or as soon as they show, whichever you pick. Screen reading is `ScreenTriggerService`, an `AccessibilityService` switched on in Android's Accessibility settings, which Android 13 restricts for sideloaded apps like notification access. It can see every app, as Pranav chose, but reads only apps with a screen trigger on, at most every 400 ms while their window changes, collecting visible text and labels within a budget of 1,500 nodes. The text goes to the engine, which keeps only which triggers' words were showing, and an amount for a Pay. It's never stored or logged (ADR 0004), and Earmark still has no internet permission (ADR 0002). It's marked as not an accessibility tool, so Android warns when it's switched on.
+
+**Muting.** "Not this" three times in a row on a trigger's loops mutes that trigger, not its kind, like a chat (ADR 0033). It's listed under Settings › Muted guesses with Unmute. A muted trigger's loops are still listed as waiting. Room v6 adds `trigger_stats`: a trigger's id, when it last matched, and that streak. The last match is written at most once a minute.
+
+Rejected:
+
+- **Notifications and app switches only:** keeps ADR 0001 whole, but can't see a payment page left unpaid. Pranav chose screen reading as an opt-in.
+- **Reading only the apps with a screen trigger, by Android's package filter:** narrower, but a new screen trigger would need the service reconfigured; reading is limited in code instead.
+- **A new kind just for triggers:** simpler, but Reply, Pay and Call back already have the right verb, way back and closing evidence.
+- **Muting the whole kind:** three swipes on a trigger's Reminder would have silenced every reminder.
+- **Ignore for notifications only:** an app you ignore would still make flows and be held by the tile.
+- **A sentence with blanks or a step-by-step form:** blanks inside a sentence are awkward with TalkBack, and steps make one change take many taps.

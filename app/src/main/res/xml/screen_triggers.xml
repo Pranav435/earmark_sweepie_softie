@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Screen reading for screen triggers (ADR 0038). It reads only apps with a screen trigger on. -->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagIncludeNotImportantViews"
+    android:canRetrieveWindowContent="true"
+    android:description="@string/screen_triggers_description"
+    android:isAccessibilityTool="false"
+    android:notificationTimeout="200"
+    tools:ignore="UnusedAttribute" />

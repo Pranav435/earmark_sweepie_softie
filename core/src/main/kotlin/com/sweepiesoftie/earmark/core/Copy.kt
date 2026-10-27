@@ -17,7 +17,8 @@ internal class Copy(private val settings: Settings) {
 
     fun chip(loop: Loop, score: Double, now: Instant): ChipCard {
         // The clock and the calendar are their own evidence; anything that came in says how long ago.
-        val ago = ago(Duration.between(loop.updatedAt, now)).takeUnless { loop.kind == LoopKind.Routine || loop.kind == LoopKind.LeaveBy }
+        val clocked = loop.kind == LoopKind.Routine || loop.kind == LoopKind.LeaveBy || loop.trigger?.watch == Watch.NotOpenedBy
+        val ago = ago(Duration.between(loop.updatedAt, now)).takeUnless { clocked }
         val note = note(loop).let { it.copy(words = listOfNotNull(it.words, ago).joinToString(" · ").ifEmpty { null }) }
         return ChipCard(loop.id, loop.kind, note, why = "Here to ${aim(loop)}?", task = loop.task, score = score)
     }
@@ -40,6 +41,7 @@ internal class Copy(private val settings: Settings) {
 
     /** Who it's from and their own words, the way a friend would pass it on (ADR 0032). */
     fun note(loop: Loop): Note {
+        if (loop.trigger?.made == true) return triggered(loop)
         val person = loop.kind in people || (loop.kind == LoopKind.Payment && !loop.bill)
         val (who, words) = when (loop.kind) {
             LoopKind.Reply -> "${loop.who}${loop.groupName?.let { " in $it" }.orEmpty()}" to loop.detail
@@ -53,6 +55,16 @@ internal class Copy(private val settings: Settings) {
             LoopKind.Own -> (loop.who ?: loop.task) to "You earmarked it"
         }
         return Note(who, words, verb(loop), person, loop.packageName, faceKey = loop.notificationKey.takeIf { person })
+    }
+
+    /**
+     * A custom trigger's loop: your label, or what it saw, from the person who wrote for a Reply or a Call back, and
+     * otherwise from its app. A time trigger says when you wanted to open the app, which is when its loop opened (ADR 0038).
+     */
+    private fun triggered(loop: Loop): Note {
+        val person = loop.kind.withPeople && loop.notificationKey != null
+        val words = loop.detail ?: "You wanted to open it by ${time(loop.openedAt)}"
+        return Note(loop.who ?: loop.task, words, verb(loop), person, loop.packageName, faceKey = loop.notificationKey.takeIf { person })
     }
 
     /** What you came to do, as it follows "You came here to": "reply", "settle up". */

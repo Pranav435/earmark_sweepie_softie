@@ -446,7 +446,7 @@ internal object Classifier {
 
     fun hasTimeWord(text: String): Boolean = timeWords.containsMatchIn(text)
 
-    private fun isOneTimeCode(text: String): Boolean = oneTimeCode.containsMatchIn(text) && codeDigits.containsMatchIn(text)
+    fun isOneTimeCode(text: String): Boolean = oneTimeCode.containsMatchIn(text) && codeDigits.containsMatchIn(text)
 
     /** Latin, Arabic and full-width question marks. */
     private const val QUESTION_MARKS = "?؟？"

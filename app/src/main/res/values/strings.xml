@@ -101,6 +101,7 @@
     <string name="tile_nothing">Open an app first</string>
     <string name="tile_feed">%1$s is a feed app</string>
     <string name="tile_off">Earmark isn\'t connected</string>
+    <string name="tile_ignored">A trigger ignores %1$s</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
@@ -140,9 +141,94 @@
         <item quantity="other">%d chats</item>
     </plurals>
     <string name="settings_unmute">Unmute</string>
+    <string name="settings_advanced">Advanced</string>
+    <string name="settings_advanced_body">Custom triggers, reading the screen, and tools for testers.</string>
     <string name="settings_testers">For testers</string>
     <string name="settings_permissions">Permissions</string>
     <string name="settings_log">Decision log</string>
+
+    <!-- Advanced: custom triggers and screen reading (ADR 0038) -->
+    <string name="advanced_title">Advanced</string>
+    <string name="advanced_screen">Read the screen</string>
+    <string name="advanced_screen_body">Lets a screen trigger see what an app shows, such as “Proceed to pay”. Android lets Earmark read every app; it reads only the apps you made a screen trigger for, checks their words in memory, and never stores or logs what it reads.</string>
+    <string name="advanced_screen_on">Screen reading is on.</string>
+    <string name="advanced_screen_off">Screen reading is off.</string>
+    <string name="advanced_screen_open">Open Accessibility settings</string>
+    <string name="advanced_screen_how">In Accessibility, find Earmark under Downloaded apps or Installed apps and turn it on. If it\'s greyed out, open App info, tap the three-dot menu, choose Allow restricted settings, then try again.</string>
+    <string name="advanced_triggers">Custom triggers</string>
+    <string name="advanced_triggers_body">Tell Earmark to watch an app for words in its notifications, anything it notifies, words on its screen, or not opening it by a time. Then earmark it, or ignore it. An ignore beats everything, Earmark\'s own guesses included.</string>
+    <string name="advanced_triggers_none">No triggers yet.</string>
+    <string name="advanced_add">Add a trigger</string>
+    <string name="advanced_edit">Edit</string>
+    <string name="trigger_switch">%1$s trigger</string>
+
+    <!-- A trigger as one sentence: what it watches, then what it does -->
+    <string name="trigger_sentence">%1$s › %2$s</string>
+    <string name="trigger_watch_words">%1$s: notifications with “%2$s”</string>
+    <string name="trigger_watch_any">%1$s: any notification</string>
+    <string name="trigger_watch_everything">%1$s: everything</string>
+    <string name="trigger_watch_screen_leaving">%1$s: screen says “%2$s”, on leaving</string>
+    <string name="trigger_watch_screen_shown">%1$s: screen says “%2$s”, as soon as it shows</string>
+    <string name="trigger_watch_time">%1$s: not opened by %2$s, %3$s</string>
+    <string name="trigger_days_every">every day</string>
+    <string name="trigger_days_weekdays">weekdays</string>
+    <string name="trigger_days_weekends">weekends</string>
+    <string name="trigger_do_reminder">Reminder</string>
+    <string name="trigger_do_pay">Pay</string>
+    <string name="trigger_do_reply">Reply</string>
+    <string name="trigger_do_call_back">Call back</string>
+    <string name="trigger_do_finish">Finish</string>
+    <string name="trigger_do_own">Get back to it</string>
+    <string name="trigger_do_ignore">Ignore</string>
+    <string name="trigger_status_off">Off</string>
+    <string name="trigger_status_muted">Muted: you said “not this” three times in a row. Unmute it in Settings.</string>
+    <string name="trigger_status_waiting">Waiting for screen reading</string>
+    <string name="trigger_status_matched">Last matched %1$s</string>
+    <string name="trigger_status_just_now">Last matched just now</string>
+    <string name="trigger_status_never">Not matched yet</string>
+
+    <!-- The trigger form -->
+    <string name="form_new">New trigger</string>
+    <string name="form_edit">Edit trigger</string>
+    <string name="form_app">App</string>
+    <string name="form_app_choose">Choose an app</string>
+    <string name="form_app_change">App: %1$s. Change</string>
+    <string name="form_app_search">Search apps</string>
+    <string name="form_watch">Watch for</string>
+    <string name="form_watch_words">Words in its notifications</string>
+    <string name="form_watch_any">Any notification</string>
+    <string name="form_watch_everything">Everything from the app</string>
+    <string name="form_watch_screen">Words on its screen</string>
+    <string name="form_watch_time">Not opened by a time</string>
+    <string name="form_words">Words</string>
+    <string name="form_words_body">Any one of them, in any case, as a whole word or phrase. Separate them with commas.</string>
+    <string name="form_words_label">Words or phrases</string>
+    <string name="form_words_hint">KYC, due, proceed to pay</string>
+    <string name="form_time">By</string>
+    <string name="form_time_body">If you haven\'t been in the app for 20 seconds or more today by this time, Earmark holds it until midnight.</string>
+    <string name="form_time_pick">Pick a time</string>
+    <string name="form_time_change">%1$s. Change</string>
+    <string name="form_days">Days</string>
+    <string name="form_when">When</string>
+    <string name="form_when_leaving">When I leave with the words showing</string>
+    <string name="form_when_shown">As soon as they show</string>
+    <string name="form_needs_screen">Needs screen reading, which is off.</string>
+    <string name="form_turn_on">Turn on</string>
+    <string name="form_then">Then</string>
+    <string name="form_then_body">Earmark it as one of these, or ignore it.</string>
+    <string name="form_label">Label</string>
+    <string name="form_label_body">Optional. What the note says instead of what Earmark saw.</string>
+    <string name="form_label_field">Label</string>
+    <string name="form_label_hint">Pay for the train ticket</string>
+    <string name="form_save">Save</string>
+    <string name="form_delete">Delete trigger</string>
+    <string name="form_missing_app">Choose an app to save.</string>
+    <string name="form_missing_words">Type at least one word to save.</string>
+    <string name="form_missing_time">Pick a time and at least one day to save.</string>
+
+    <!-- Screen reading in Android\'s Accessibility settings (ADR 0038) -->
+    <string name="screen_triggers_label">Earmark screen triggers</string>
+    <string name="screen_triggers_description">Lets Earmark\'s screen triggers check an app\'s screen for the words you set, such as “Proceed to pay”. It reads only the apps you made a screen trigger for. What it reads stays in memory and is never stored, logged or sent anywhere. Earmark has no internet permission.</string>
 
     <!-- Debug log -->
     <string name="log_title">Decision log</string>

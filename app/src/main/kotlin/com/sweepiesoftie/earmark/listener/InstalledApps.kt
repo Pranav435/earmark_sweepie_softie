@@ -87,6 +87,7 @@ class InstalledApps(private val context: Context) {
             // The listener adds the names on your contact card.
             myNames = user.typedNames,
             homeApps = homeApps(),
+            triggers = user.triggers,
         )
     }
 

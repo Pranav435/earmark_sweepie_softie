@@ -38,12 +38,14 @@ class EarmarkTile : TileService() {
         val holding = listener.tile.holding
         val canHold = listener.tile.canHold
         val feed = listener.tile.feed
+        val ignored = listener.tile.ignored
         val (state, subtitle) = when {
             !listener.connected -> Tile.STATE_UNAVAILABLE to getString(R.string.tile_off)
             holding != null -> Tile.STATE_ACTIVE to holding
             canHold != null -> Tile.STATE_INACTIVE to canHold
             // Greyed out, so say why: it won't hold a feed (ADR 0037).
             feed != null -> Tile.STATE_UNAVAILABLE to getString(R.string.tile_feed, feed)
+            ignored != null -> Tile.STATE_UNAVAILABLE to getString(R.string.tile_ignored, ignored)
             else -> Tile.STATE_UNAVAILABLE to getString(R.string.tile_nothing)
         }
         tile.state = state

@@ -49,8 +49,12 @@ internal object Ranker {
         )
     }
 
-    /** A missed call, a request for money, a bill, a reminder, something you earmarked, or a message or email that asks or is urgent. Not chatter, and not a calendar event, which is over once its time has passed. */
-    fun owes(loop: Loop): Boolean = (loop.kind in owedKinds && "event" !in loop.why) || loop.urgent || "asks" in loop.why
+    /**
+     * A missed call, a request for money, a bill, a reminder, something you earmarked, a message or email that asks or
+     * is urgent, or anything a custom trigger made or marked (ADR 0038). Not chatter, and not a calendar event, which
+     * is over once its time has passed.
+     */
+    fun owes(loop: Loop): Boolean = (loop.kind in owedKinds && "event" !in loop.why) || loop.urgent || "asks" in loop.why || loop.trigger != null
 
     /** At an unlock, an urgent loop that clears the bar comes before one that isn't urgent (ADR 0027), then the higher score. */
     val unlockOrder: Comparator<Pair<Loop, Score>> =

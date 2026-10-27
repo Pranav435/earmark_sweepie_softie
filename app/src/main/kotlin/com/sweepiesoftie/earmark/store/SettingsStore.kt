@@ -2,9 +2,18 @@ package com.sweepiesoftie.earmark.store
 
 import android.content.Context
 import com.sweepiesoftie.earmark.core.DriftTimer
+import com.sweepiesoftie.earmark.core.LoopKind
+import com.sweepiesoftie.earmark.core.ScreenTiming
+import com.sweepiesoftie.earmark.core.Trigger
+import com.sweepiesoftie.earmark.core.Watch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
+import java.time.DayOfWeek
+import java.time.LocalTime
 
 /** What the user chose in Settings. Feed toggles are stored as overrides of the computed default set. */
 data class UserSettings(
@@ -18,6 +27,8 @@ data class UserSettings(
     val feedsOff: Set<String> = emptySet(),
     /** Names you go by, as typed in Settings, for mentions in groups; your contact card adds its own (ADR 0028). */
     val names: String = "",
+    /** Custom triggers from Advanced, in the order they were added (ADR 0038). */
+    val triggers: List<Trigger> = emptyList(),
 ) {
     val typedNames: List<String> get() = names.split(',', '\n').map { it.trim() }.filter { it.isNotEmpty() }
 
@@ -45,6 +56,15 @@ class SettingsStore(context: Context) {
 
     fun setNames(names: String): Unit = edit { it.copy(names = names) }
 
+    /** Adds [trigger], or replaces the one with its id (ADR 0038). */
+    fun saveTrigger(trigger: Trigger): Unit = edit { s ->
+        s.copy(triggers = if (s.triggers.any { it.id == trigger.id }) s.triggers.map { if (it.id == trigger.id) trigger else it } else s.triggers + trigger)
+    }
+
+    fun deleteTrigger(id: String): Unit = edit { s -> s.copy(triggers = s.triggers.filterNot { it.id == id }) }
+
+    fun setTriggerOn(id: String, on: Boolean): Unit = edit { s -> s.copy(triggers = s.triggers.map { if (it.id == id) it.copy(on = on) else it }) }
+
     fun setFeed(packageName: String, on: Boolean): Unit = edit {
         if (on) it.copy(feedsOn = it.feedsOn + packageName, feedsOff = it.feedsOff - packageName)
         else it.copy(feedsOn = it.feedsOn - packageName, feedsOff = it.feedsOff + packageName)
@@ -62,6 +82,7 @@ class SettingsStore(context: Context) {
             .putStringSet(FEEDS_ON, s.feedsOn)
             .putStringSet(FEEDS_OFF, s.feedsOff)
             .putString(NAMES, s.names)
+            .putString(TRIGGERS, encode(s.triggers))
             .apply()
     }
 
@@ -74,7 +95,58 @@ class SettingsStore(context: Context) {
         feedsOn = prefs.getStringSet(FEEDS_ON, emptySet()).orEmpty().toSet(),
         feedsOff = prefs.getStringSet(FEEDS_OFF, emptySet()).orEmpty().toSet(),
         names = prefs.getString(NAMES, "").orEmpty(),
+        triggers = decode(prefs.getString(TRIGGERS, null)),
     )
+
+    /** Triggers are what you typed in Advanced, kept on the phone as JSON. Their words are yours, not anything Earmark read. */
+    private fun encode(triggers: List<Trigger>): String = JSONArray(
+        triggers.map { t ->
+            JSONObject()
+                .put("id", t.id)
+                .put("package", t.packageName)
+                .put("app", t.appLabel)
+                .put("watch", t.watch.name)
+                .put("words", JSONArray(t.words))
+                .put("timing", t.timing.name)
+                .put("by", t.by?.toString())
+                .put("days", JSONArray(t.days.map { it.name }))
+                .put("kind", t.kind.name)
+                .put("ignore", t.ignore)
+                .put("label", t.label)
+                .put("on", t.on)
+        },
+    ).toString()
+
+    /** A trigger a later version can't read is dropped rather than guessed at. */
+    private fun decode(json: String?): List<Trigger> {
+        if (json.isNullOrEmpty()) return emptyList()
+        val array = try {
+            JSONArray(json)
+        } catch (_: JSONException) {
+            return emptyList()
+        }
+        return (0 until array.length()).mapNotNull { i ->
+            val o = array.optJSONObject(i) ?: return@mapNotNull null
+            val watch = Watch.entries.find { it.name == o.optString("watch") } ?: return@mapNotNull null
+            val kind = LoopKind.entries.find { it.name == o.optString("kind") } ?: return@mapNotNull null
+            val words = o.optJSONArray("words")?.let { a -> (0 until a.length()).map { a.optString(it) } }.orEmpty()
+            val days = o.optJSONArray("days")?.let { a -> (0 until a.length()).mapNotNull { d -> DayOfWeek.entries.find { it.name == a.optString(d) } } }
+            Trigger(
+                id = o.optString("id").ifEmpty { return@mapNotNull null },
+                packageName = o.optString("package").ifEmpty { return@mapNotNull null },
+                appLabel = o.optString("app"),
+                watch = watch,
+                words = words,
+                timing = ScreenTiming.entries.find { it.name == o.optString("timing") } ?: ScreenTiming.OnLeaving,
+                by = o.optString("by").takeIf { it.isNotEmpty() && o.has("by") }?.let { runCatching { LocalTime.parse(it) }.getOrNull() },
+                days = days?.toSet() ?: DayOfWeek.entries.toSet(),
+                kind = kind,
+                ignore = o.optBoolean("ignore"),
+                label = o.optString("label").takeIf { o.has("label") && it.isNotBlank() },
+                on = o.optBoolean("on", true),
+            )
+        }
+    }
 
     private companion object {
         const val DEMO = "demo_mode"
@@ -86,5 +158,6 @@ class SettingsStore(context: Context) {
         const val FEEDS_ON = "feeds_on"
         const val FEEDS_OFF = "feeds_off"
         const val NAMES = "names"
+        const val TRIGGERS = "triggers"
     }
 }

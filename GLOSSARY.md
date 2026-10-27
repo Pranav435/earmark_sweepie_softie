@@ -122,10 +122,10 @@ _Avoid_: banner, toast, popup
 A chip running out its timer without a tap. The loop is still watched, and the dot shows while it stays the guess.
 
 **Ignore**:
-Swiping a chip away, "not this". Three in a row mute that chat, or the kind when nobody is behind it.
+Swiping a chip away, "not this". For telling Earmark to leave something alone, see Ignore trigger. Three in a row mute that chat, or the kind when nobody is behind it.
 
 **Mute**:
-The state of a chat, or of a kind with nobody behind it, that Earmark no longer guesses because you said "not this" to it three times in a row. A muted chat is still listed as waiting.
+The state of a chat, a trigger, or a kind with nobody behind it, that Earmark no longer guesses because you said "not this" to it three times in a row. A muted chat or trigger is still listed as waiting.
 
 **Dot**:
 The small marigold mark under the status bar that shows Earmark is holding a guess whose chip faded.
@@ -168,6 +168,19 @@ A loop that closed as done after a hand-back.
 **Reply strip**:
 Up to three one-tap replies that Earmark shows above the chat's input area, labelled with who they go to.
 _Avoid_: quick replies bar, suggestions
+
+## Custom triggers
+
+**Trigger**:
+A rule you set in Settings › Advanced that watches one app for words in its notifications, any notification, words on its screen, or not opening it by a time. It earmarks what it finds as a kind you pick, or it's an ignore trigger. In the app: "Custom triggers".
+_Avoid_: rule, filter, automation
+
+**Ignore trigger**:
+A trigger that tells Earmark to leave something alone. It beats every loop, Earmark's own included. On a whole app it also stops flows and the "Earmark this" tile. Not the same as ignoring a chip.
+
+**Screen reading**:
+Earmark reading what an app shows, for screen triggers, through an accessibility service you switch on in Android's settings. It reads only apps with a screen trigger, and keeps nothing it reads.
+_Avoid_: screen reader (that's TalkBack), scraping
 
 ## Recap
 

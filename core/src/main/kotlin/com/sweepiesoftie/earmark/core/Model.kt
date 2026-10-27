@@ -74,6 +74,8 @@ public data class Loop(
     val amount: Money? = null,
     /** Ride ("Book") or meeting ("Join") for Leave-by loops. */
     val leaveBy: LeaveByDetail? = null,
+    /** The custom trigger that made it, or that marked Earmark's own loop as owed (ADR 0038). */
+    val trigger: TriggerRef? = null,
 )
 
 public data class LeaveByDetail(val title: String, val place: String?, val startsAt: Instant, val leaveAt: Instant, val isMeeting: Boolean)
@@ -161,6 +163,8 @@ public data class Settings(
     val myNames: List<String> = emptyList(),
     /** Launchers: the home screen is no app to earmark (ADR 0035). */
     val homeApps: Set<String> = emptySet(),
+    /** Custom triggers from Advanced, on or off (ADR 0038). */
+    val triggers: List<Trigger> = emptyList(),
 ) {
     public fun paused(now: Instant): Boolean = pausedUntil?.isAfter(now) == true
 }
@@ -220,6 +224,8 @@ public data class Stats(
     /** Alarm times seen on recent weeknights, newest first. */
     val weeknightAlarms: List<LocalTime> = emptyList(),
     val apps: Map<String, AppStat> = emptyMap(),
+    /** By trigger id (ADR 0038). */
+    val triggers: Map<String, TriggerStat> = emptyMap(),
 )
 
 /**
@@ -251,9 +257,9 @@ public data class Waiting(val loopId: LoopId, val kind: LoopKind, val note: Note
 /**
  * What the "Earmark this" tile says (ADR 0035): the app an Own loop holds, and the app in front that a tap would
  * hold, or null for the home screen, a feed, Earmark itself or a locked phone. [feed] names a feed app in front,
- * so the tile can say why it won't hold it (ADR 0037).
+ * so the tile can say why it won't hold it (ADR 0037), and [ignored] an app a trigger ignores (ADR 0038).
  */
-public data class TileState(val holding: String? = null, val canHold: String? = null, val feed: String? = null)
+public data class TileState(val holding: String? = null, val canHold: String? = null, val feed: String? = null, val ignored: String? = null)
 
 /** One row of the recap, upserted by loop id. Labels are trimmed to kind and time after 24 h by the store. */
 public data class LoopEntry(
@@ -299,6 +305,18 @@ public sealed interface Event {
     public data class KindUnmuted(val kind: LoopKind) : Event
     /** Every chat muted by "not this" can be guessed again (ADR 0033). */
     public data object ChatsUnmuted : Event
+    /** A trigger muted by "not this" can be guessed again (ADR 0038). */
+    public data class TriggerUnmuted(val id: String) : Event
+    /**
+     * [packageName]'s window, read for screen triggers (ADR 0038). Only apps with a screen trigger are read; the text is
+     * matched against their words and dropped, never kept or logged.
+     */
+    public data class ScreenRead(val packageName: String, val text: String) : Event
+    /**
+     * Today's usage history for [apps]: when the last visit of 20 s or more to each ended. A time trigger waits for its
+     * app's history, so a restart doesn't open a loop for an app you already opened today (ADR 0038).
+     */
+    public data class AppVisits(val apps: Set<String>, val lastLongVisit: Map<String, Instant>) : Event
     public data class SettingsChanged(val settings: Settings) : Event
     public data class StatsLoaded(val stats: Stats) : Event
     public data object Tick : Event
@@ -320,6 +338,7 @@ public sealed interface Effect {
     public data class RecordContact(val conversation: String, val stat: ContactStat) : Effect
     public data class RecordApp(val packageName: String, val stat: AppStat) : Effect
     public data class RecordAlarm(val time: LocalTime, val on: java.time.LocalDate) : Effect
+    public data class RecordTrigger(val id: String, val stat: TriggerStat) : Effect
     /** One decision line for DebugLog. Never carries message text. */
     public data class Log(val line: String) : Effect
 }

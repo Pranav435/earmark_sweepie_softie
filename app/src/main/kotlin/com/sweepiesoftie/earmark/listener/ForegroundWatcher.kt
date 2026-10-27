@@ -13,6 +13,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import java.time.Instant
 
 /**
  * Polls `ACTIVITY_RESUMED` once a second, only between unlock and screen-off: no wakelocks,
@@ -70,6 +71,43 @@ class ForegroundWatcher(
         job = null
     }
 
+    /**
+     * When the last visit of 20 s or more to each of [packages] ended between [from] and [to], from usage history, so
+     * time triggers know about visits before the listener started (ADR 0038). A visit runs from an app coming to the
+     * front until another app does or the screen goes off; one still going on isn't counted here.
+     */
+    fun longVisits(packages: Set<String>, from: Long, to: Long): Map<String, Instant> {
+        if (packages.isEmpty() || !Permissions.usageAccess(context)) return emptyMap()
+        val found = HashMap<String, Instant>()
+        try {
+            val events = usage.queryEvents(from, to)
+            val event = UsageEvents.Event()
+            var front: String? = null
+            var since = 0L
+            fun end(at: Long) {
+                val app = front ?: return
+                if (app in packages && at - since >= LONG_VISIT_MILLIS) found[app] = Instant.ofEpochMilli(at)
+            }
+            while (events.hasNextEvent()) {
+                events.getNextEvent(event)
+                when (event.eventType) {
+                    UsageEvents.Event.ACTIVITY_RESUMED -> if (event.packageName != front) {
+                        end(event.timeStamp)
+                        front = event.packageName
+                        since = event.timeStamp
+                    }
+                    UsageEvents.Event.SCREEN_NON_INTERACTIVE -> {
+                        end(event.timeStamp)
+                        front = null
+                    }
+                }
+            }
+        } catch (e: RuntimeException) {
+            log.error("queryEvents for visits", e)
+        }
+        return found
+    }
+
     /** The package and time of the newest switch in the window. Events come in time order. */
     private fun latestResumed(from: Long, to: Long): Pair<String, Long>? = try {
         val events = usage.queryEvents(from, to)
@@ -95,6 +133,9 @@ class ForegroundWatcher(
 
     private companion object {
         const val POLL_MILLIS = 1_000L
+
+        /** The engine's bar for a visit that counts as opening an app (Triggers.visit). */
+        const val LONG_VISIT_MILLIS = 20_000L
         const val FIRST_LOOKBACK_MILLIS = 3_600_000L
 
         /** Covers the system's 2-second clock tolerance and a slow recording, many times over. */

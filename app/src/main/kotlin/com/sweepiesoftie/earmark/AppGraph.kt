@@ -50,7 +50,10 @@ object AppGraph {
     /** Written by the listener, read by the home screen. */
     val listener: MutableStateFlow<ListenerState> = MutableStateFlow(ListenerState())
 
-    /** Events raised by screens, the running notification and the tile (unmute, open a waiting row, earmark) for the listener to feed the engine. */
+    /**
+     * Events raised by screens, the running notification, the tile and screen reading (unmute, open a waiting row,
+     * earmark, a screen read) for the listener to feed the engine.
+     */
     val uiEvents: MutableSharedFlow<Event> = MutableSharedFlow(extraBufferCapacity = 16)
 
     /** For writes that must outlive a screen or a listener rebind. */

@@ -20,11 +20,13 @@ import com.sweepiesoftie.earmark.core.LoopEntry
 import com.sweepiesoftie.earmark.core.LoopKind
 import com.sweepiesoftie.earmark.core.Outcome
 import com.sweepiesoftie.earmark.core.Stats
+import com.sweepiesoftie.earmark.core.TriggerStat
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.security.MessageDigest
+import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
@@ -78,6 +80,10 @@ data class AppRow(
     @ColumnInfo(defaultValue = "0") val medianDoneMinutes: Double,
 )
 
+/** A custom trigger's id and two numbers: when it last matched, and "not this" in a row on its loops (ADR 0038). Never its words. */
+@Entity(tableName = "trigger_stats")
+data class TriggerRow(@PrimaryKey val id: String, val lastMatched: Long?, val ignoreStreak: Int)
+
 @Dao
 interface EarmarkDao {
     @Upsert suspend fun upsertLoop(row: LoopRow)
@@ -110,16 +116,24 @@ interface EarmarkDao {
     @Query("SELECT * FROM alarm_seen ORDER BY date DESC LIMIT 10") suspend fun recentAlarms(): List<AlarmRow>
 
     @Query("SELECT * FROM app_stats") suspend fun apps(): List<AppRow>
+
+    @Upsert suspend fun upsertTrigger(row: TriggerRow)
+
+    @Query("SELECT * FROM trigger_stats") suspend fun triggers(): List<TriggerRow>
+
+    @Query("SELECT * FROM trigger_stats") fun triggersFlow(): Flow<List<TriggerRow>>
+
+    @Query("DELETE FROM trigger_stats WHERE id = :id") suspend fun deleteTrigger(id: String)
 }
 
-@Database(entities = [LoopRow::class, ContactRow::class, KindRow::class, AlarmRow::class, AppRow::class], version = 5, exportSchema = false)
+@Database(entities = [LoopRow::class, ContactRow::class, KindRow::class, AlarmRow::class, AppRow::class, TriggerRow::class], version = 6, exportSchema = false)
 abstract class EarmarkDatabase : RoomDatabase() {
     abstract fun dao(): EarmarkDao
 }
 
 /** Room behind a small interface. Every call is wrapped here so a database failure is logged and skipped, never thrown. */
 class Store(context: Context, private val log: DebugLog) {
-    private val dao = Room.databaseBuilder(context, EarmarkDatabase::class.java, "earmark.db").addMigrations(ADD_APP_STATS, LIST_PICKED_UP, LEARN_OPENS_AND_APPS, MUTE_CHATS).build().dao()
+    private val dao = Room.databaseBuilder(context, EarmarkDatabase::class.java, "earmark.db").addMigrations(ADD_APP_STATS, LIST_PICKED_UP, LEARN_OPENS_AND_APPS, MUTE_CHATS, ADD_TRIGGERS).build().dao()
 
     fun things(since: Long): Flow<List<LoopRow>> = dao.things(since).catch { log.error("Store.things", it); emit(emptyList()) }
 
@@ -130,6 +144,17 @@ class Store(context: Context, private val log: DebugLog) {
 
     /** How many chats are muted. Only hashes are stored, so Settings can't say who. */
     fun mutedChats(): Flow<Int> = dao.mutedChats(KindStat.MUTE_AFTER_IGNORES).catch { log.error("Store.mutedChats", it); emit(0) }
+
+    /** Each trigger's last match and mute, for Advanced and Settings › Muted (ADR 0038). */
+    fun triggerStats(): Flow<Map<String, TriggerStat>> = dao.triggersFlow()
+        .map { rows -> rows.associate { it.id to stat(it) } }
+        .catch { log.error("Store.triggerStats", it); emit(emptyMap()) }
+
+    suspend fun recordTrigger(id: String, stat: TriggerStat): Unit? = guard("record trigger") {
+        dao.upsertTrigger(TriggerRow(id, stat.lastMatched?.toEpochMilli(), stat.ignoreStreak))
+    }
+
+    suspend fun forgetTrigger(id: String): Unit? = guard("forget trigger") { dao.deleteTrigger(id) }
 
     suspend fun record(entry: LoopEntry): Unit? = guard("record loop") {
         dao.upsertLoop(
@@ -177,6 +202,7 @@ class Store(context: Context, private val log: DebugLog) {
             contacts = dao.contacts().associate { it.conversation to ContactStat(it.replies, it.medianReplyMinutes, it.opened, it.swiped, it.ignoreStreak) },
             weeknightAlarms = dao.recentAlarms().map { LocalTime.of(it.minuteOfDay / 60, it.minuteOfDay % 60) },
             apps = dao.apps().associate { it.packageName to AppStat(it.visits, it.medianVisitSeconds, it.done, it.left, it.medianDoneMinutes) },
+            triggers = dao.triggers().associate { it.id to stat(it) },
         )
     } ?: Stats()
 
@@ -230,6 +256,15 @@ class Store(context: Context, private val log: DebugLog) {
                 db.execSQL("ALTER TABLE `app_stats` ADD COLUMN `medianDoneMinutes` REAL NOT NULL DEFAULT 0")
             }
         }
+
+        /** v0.1.19 adds custom triggers' last match and mute (ADR 0038). The triggers themselves are settings. */
+        val ADD_TRIGGERS: Migration = object : Migration(5, 6) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("CREATE TABLE IF NOT EXISTS `trigger_stats` (`id` TEXT NOT NULL, `lastMatched` INTEGER, `ignoreStreak` INTEGER NOT NULL, PRIMARY KEY(`id`))")
+            }
+        }
+
+        private fun stat(row: TriggerRow) = TriggerStat(row.lastMatched?.let(Instant::ofEpochMilli), row.ignoreStreak)
 
         /** v0.1.17 mutes a chat rather than a whole kind; every chat starts unmuted. */
         val MUTE_CHATS: Migration = object : Migration(4, 5) {
