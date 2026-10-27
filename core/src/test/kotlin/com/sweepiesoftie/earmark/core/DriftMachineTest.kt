@@ -8,7 +8,7 @@ import org.junit.Test
 import java.time.Duration
 
 class DriftMachineTest {
-    private val rules = DriftRules(feedApps = setOf(Fixtures.FEED, "com.reddit.frontpage"), driftAfter = Duration.ofSeconds(90), pillAllowed = true)
+    private val rules = DriftRules(feedApps = setOf(Fixtures.FEED, "com.reddit.frontpage"), driftAfter = Duration.ofSeconds(90))
     private val guessed = DriftMachine.guess(Drift(), LoopId("reply:hash-rahul"), Fixtures.CHATS)
 
     private fun drifting(playback: Playback = Playback.Playing): Drift {
@@ -49,13 +49,15 @@ class DriftMachineTest {
     }
 
     @Test
-    fun `one pill per loop and ten minutes between pills`() {
-        val once = DriftMachine.step(drifting(), DriftInput.Media(Playback.Paused), at(16, 14), rules.copy(pillAllowed = false))
+    fun `the engine can hold the pill, and there are ten minutes between pills`() {
+        val once = DriftMachine.step(drifting(), DriftInput.Media(Playback.Paused), at(16, 14), rules.copy(pillHeld = "its pill already showed for this message"))
         assertFalse(once.showPill)
-        assertEquals("media Paused, held: one pill per loop", once.reason)
+        assertEquals("media Paused, held: its pill already showed for this message", once.reason)
 
         val recent = drifting().copy(lastPillAt = at(16, 5))
-        assertFalse(DriftMachine.step(recent, DriftInput.Media(Playback.Paused), at(16, 14), rules).showPill)
+        val cooling = DriftMachine.step(recent, DriftInput.Media(Playback.Paused), at(16, 14), rules)
+        assertFalse(cooling.showPill)
+        assertEquals("media Paused, held: 10 min between pills, 60 s left", cooling.reason)
         assertTrue(DriftMachine.step(recent, DriftInput.Media(Playback.Paused), at(16, 15, 1), rules).showPill)
     }
 }

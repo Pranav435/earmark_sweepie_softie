@@ -233,6 +233,22 @@ class EngineTest {
     }
 
     @Test
+    fun `a new message from someone whose pill already showed gets a pill of its own`() = with(Script()) {
+        at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+        val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
+        at(at(16, 12, 3), Event.ChipHeld(chip.loopId))
+        at(at(16, 12, 10), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        assertTrue(at(at(16, 13, 41), Event.Tick).any { it is Effect.ShowPill })
+        // You leave the pill and put the phone down without replying.
+        at(at(16, 15), Event.ScreenOff)
+
+        at(at(16, 40), Event.NotificationPosted(Fixtures.rahul(at(16, 40), "you there?")))
+        at(at(16, 41), Event.Unlocked).one<Effect.ShowChip>()
+        at(at(16, 41, 10), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        assertEquals("Reply to Rahul", at(at(16, 42, 41), Event.Tick).one<Effect.ShowPill>().pill.task)
+    }
+
+    @Test
     fun `a chat opened from its notification is a detour, and the guess you held comes back after it`() =
         with(Script(Fixtures.settings.copy(driftAfter = java.time.Duration.ofSeconds(10)))) {
             at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))

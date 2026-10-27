@@ -84,6 +84,10 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
                     // The cleared notification won't be removed again, so nothing else would forget its way back.
                     before.loop.notificationKey?.takeIf { it != result.loop.notificationKey }?.let { effects += Effect.Forget(it) }
                 }
+                if (before != null && before.pillShown && result.loop.updatedAt.isAfter(before.loop.updatedAt)) {
+                    // One pill per message, not per conversation: someone writing again is a new chance (ADR 0021).
+                    book.update(result.loop.id) { it.copy(pillShown = false) }
+                }
                 effects + onArrival(result.loop, before, now)
             }
             is Classification.Replied ->
@@ -290,7 +294,14 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val rules = DriftRules(
             feedApps = settings.feedApps,
             driftAfter = settings.driftAfter,
-            pillAllowed = guess != null && !guess.pillShown && !guess.ignored && guess.clearedAt == null && !settings.paused,
+            pillHeld = when {
+                guess == null -> "no guess"
+                settings.paused -> "Earmark is paused"
+                guess.pillShown -> "its pill already showed for this message"
+                guess.ignored -> "its chip was swiped"
+                guess.clearedAt != null -> "its app cleared the notification"
+                else -> null
+            },
             cooldown = settings.pillCooldown,
         )
         val step = DriftMachine.step(drift, input, now, rules)

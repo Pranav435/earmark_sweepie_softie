@@ -2,12 +2,15 @@ package com.sweepiesoftie.earmark.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
@@ -34,6 +37,7 @@ import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.sweepiesoftie.earmark.AppGraph
+import com.sweepiesoftie.earmark.DebugLog
 import com.sweepiesoftie.earmark.R
 import com.sweepiesoftie.earmark.core.Event
 import com.sweepiesoftie.earmark.demo.DemoNotifier
@@ -186,7 +190,7 @@ private fun Root() {
             }
             Screen.Log -> {
                 val lines by graph.debugLog.lines.collectAsState()
-                LogScreen(lines, onBack = { screen = Screen.Recap }, onClear = graph.debugLog::clear)
+                LogScreen(lines, onBack = { screen = Screen.Recap }, onCopy = { copyLog(activity, lines) }, onClear = graph.debugLog::clear)
             }
         }
     }
@@ -227,6 +231,23 @@ private fun recapRows() = run {
             }
         }
     }
+}
+
+/** The log never carries message text (ADR 0004), so a tester can paste it into a bug report as it is. */
+private fun copyLog(activity: MainActivity, lines: List<DebugLog.Line>) {
+    val format = java.text.DateFormat.getTimeInstance(java.text.DateFormat.MEDIUM)
+    val version = try {
+        activity.packageManager.getPackageInfo(activity.packageName, 0).versionName
+    } catch (e: android.content.pm.PackageManager.NameNotFoundException) {
+        null
+    }
+    val text = buildString {
+        appendLine("Earmark $version on ${Build.MANUFACTURER} ${Build.MODEL}, Android ${Build.VERSION.RELEASE}")
+        lines.forEach { appendLine("${format.format(Date(it.atMillis))} ${it.text}") }
+    }
+    activity.getSystemService(ClipboardManager::class.java).setPrimaryClip(ClipData.newPlainText(activity.getString(R.string.log_title), text))
+    // Android 13 and later confirm a copy themselves.
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) Toast.makeText(activity, R.string.log_copied, Toast.LENGTH_SHORT).show()
 }
 
 private fun requestPostNotifications(launch: (String) -> Unit) {

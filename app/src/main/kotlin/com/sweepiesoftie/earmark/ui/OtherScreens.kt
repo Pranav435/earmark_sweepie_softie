@@ -137,13 +137,16 @@ private fun Choice(label: String, selected: Boolean, enabled: Boolean, onClick: 
 }
 
 @Composable
-fun LogScreen(lines: List<DebugLog.Line>, onBack: () -> Unit, onClear: () -> Unit) {
+fun LogScreen(lines: List<DebugLog.Line>, onBack: () -> Unit, onCopy: () -> Unit, onClear: () -> Unit) {
     val format = DateFormat.getTimeInstance(DateFormat.MEDIUM)
     LazyColumn(Modifier.fillMaxSize().safeDrawingPadding().padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
         item {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.weight(1f)) { ScreenHeader(stringResource(R.string.log_title), onBack) }
-                if (lines.isNotEmpty()) TextAction(stringResource(R.string.log_clear), onClear)
+                if (lines.isNotEmpty()) {
+                    TextAction(stringResource(R.string.log_copy), onCopy)
+                    TextAction(stringResource(R.string.log_clear), onClear)
+                }
             }
             Text(stringResource(R.string.log_body), style = MaterialTheme.typography.bodyMedium, color = Tone.Muted, modifier = Modifier.padding(bottom = 12.dp))
         }

@@ -54,7 +54,7 @@ ADR 0017 changed `due` and the boost after the first real-phone test, where a pl
 
 ## Drift state machine
 
-`Idle → Guessed → InFeed → Drifting → PillShown → HandedBack | Dismissed`. The pill appears at the first **pause** after drift starts. Blockers hold it back: a call (`AudioManager` mode), active navigation, Do Not Disturb, or media still playing. Limits: one pill per loop ever, a 10-minute cooldown between pills, and swiping a pill away keeps Earmark quiet until the next unlock, when the loop comes back as a carry-over chip.
+`Idle → Guessed → InFeed → Drifting → PillShown → HandedBack | Dismissed`. The pill appears at the first **pause** after drift starts. Blockers hold it back: a call (`AudioManager` mode), active navigation, Do Not Disturb, or media still playing. Limits: one pill per message (ADR 0021), a 10-minute cooldown between pills, and swiping a pill away keeps Earmark quiet until the next unlock, when the loop comes back as a carry-over chip.
 
 ## Hand-back and close
 

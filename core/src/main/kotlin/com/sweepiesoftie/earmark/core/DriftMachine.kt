@@ -28,11 +28,12 @@ internal sealed interface DriftInput {
     data object Tick : DriftInput
 }
 
-/** What the engine knows that the machine needs: which apps are feeds, how long is drift, may this loop get a pill. */
+/** What the engine knows that the machine needs: which apps are feeds, how long is drift, why this loop may not get a pill. */
 internal data class DriftRules(
     val feedApps: Set<String>,
     val driftAfter: Duration,
-    val pillAllowed: Boolean,
+    /** Why the guess can't have a pill now, for DebugLog, or null when it can. */
+    val pillHeld: String? = null,
     val cooldown: Duration = Duration.ofMinutes(10),
 )
 
@@ -108,8 +109,9 @@ internal object DriftMachine {
         val held = when {
             d.blockers.isNotEmpty() -> "held: ${d.blockers.joinToString()}"
             !pause && d.playback == Playback.Playing -> "held: media playing"
-            !rules.pillAllowed -> "held: one pill per loop"
-            d.lastPillAt != null && Duration.between(d.lastPillAt, now) < rules.cooldown -> "held: cooldown"
+            rules.pillHeld != null -> "held: ${rules.pillHeld}"
+            d.lastPillAt != null && Duration.between(d.lastPillAt, now) < rules.cooldown ->
+                "held: ${rules.cooldown.toMinutes()} min between pills, ${rules.cooldown.minus(Duration.between(d.lastPillAt, now)).seconds} s left"
             else -> null
         }
         if (held != null) return DriftStep(d, reason = if (quiet) null else "$why, $held")
