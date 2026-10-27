@@ -63,6 +63,8 @@ class InstalledApps(private val context: Context) {
             ownPackage = context.packageName,
             feedApps = (defaults + user.feedsOn) - user.feedsOff,
             driftAfter = Duration.ofSeconds(user.effectiveDriftSeconds.toLong()),
+            // Demo mode keeps its 10 seconds, so every story runs the same on any phone.
+            smartDrift = user.driftSmart && !user.demoMode,
             pillCooldown = if (user.demoMode) Duration.ZERO else Duration.ofMinutes(10),
             demoMode = user.demoMode,
             paused = user.paused,

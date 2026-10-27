@@ -154,6 +154,68 @@ class EngineTest {
         }
 
     @Test
+    fun `with the smart timer, an urgent message comes back after half of the usual 45 seconds`() =
+        with(Script(Fixtures.settings.copy(smartDrift = true))) {
+            at(at(16, 0), Event.Unlocked)
+            at(at(16, 0, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+            at(at(16, 1), Event.NotificationPosted(Fixtures.rahul(at(16, 1))))
+            assertTrue(log.last(), "pill after 23 s (usual visit 45 s, still learning · urgent ×0.5)" in log.last())
+
+            assertTrue(at(at(16, 1, 22), Event.Tick).none { it is Effect.ShowPill })
+            assertEquals("Reply to Rahul", at(at(16, 1, 23), Event.Tick).one<Effect.ShowPill>().pill.task)
+        }
+
+    @Test
+    fun `with the smart timer, a plain message waits for your usual visit to that feed`() =
+        with(Script(Fixtures.settings.copy(smartDrift = true), Stats(apps = mapOf(Fixtures.FEED to AppStat(visits = 6, medianVisitSeconds = 60.0))))) {
+            at(at(16, 0), Event.Unlocked)
+            at(at(16, 0, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+            at(at(16, 1), Event.NotificationPosted(Fixtures.priya(at(16, 1))))
+
+            assertTrue(at(at(16, 1, 59), Event.Tick).none { it is Effect.ShowPill })
+            assertEquals("Reply to Priya", at(at(16, 2), Event.Tick).one<Effect.ShowPill>().pill.task)
+        }
+
+    @Test
+    fun `holding the chip makes the smart timer a quarter shorter`() = with(Script(Fixtures.settings.copy(smartDrift = true))) {
+        at(at(16, 0), Event.NotificationPosted(Fixtures.priya(at(16, 0))))
+        val chip = at(at(16, 2), Event.Unlocked).one<Effect.ShowChip>().chip
+        at(at(16, 2, 3), Event.ChipHeld(chip.loopId))
+        at(at(16, 2, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+
+        assertTrue(at(at(16, 2, 38), Event.Tick).none { it is Effect.ShowPill })
+        assertEquals("Reply to Priya", at(at(16, 2, 39), Event.Tick).one<Effect.ShowPill>().pill.task)
+    }
+
+    @Test
+    fun `time in a feed app is learned, but not a visit a pill cut short`() = with(Script(Fixtures.settings.copy(smartDrift = true))) {
+        at(at(16, 0), Event.Unlocked)
+        at(at(16, 0, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        val learned = at(at(16, 0, 45), Event.ForegroundChanged(Fixtures.CHATS, "Chats")).one<Effect.RecordApp>()
+        assertEquals(Effect.RecordApp(Fixtures.FEED, AppStat(visits = 1, medianVisitSeconds = 40.0)), learned)
+
+        // Passing through for a moment isn't a visit.
+        at(at(16, 1), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        assertTrue(at(at(16, 1, 2), Event.ForegroundChanged(Fixtures.CHATS, "Chats")).none { it is Effect.RecordApp })
+
+        at(at(16, 2), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        at(at(16, 2, 10), Event.NotificationPosted(Fixtures.rahul(at(16, 2, 10))))
+        at(at(16, 2, 33), Event.Tick).one<Effect.ShowPill>()
+        assertTrue(at(at(16, 2, 40), Event.ForegroundChanged(Fixtures.CHATS, "Chats")).none { it is Effect.RecordApp })
+
+        // Putting the phone down ends a visit too.
+        at(at(16, 3), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        assertEquals(AppStat(visits = 2, medianVisitSeconds = 50.0), at(at(16, 4), Event.ScreenOff).one<Effect.RecordApp>().stat)
+    }
+
+    @Test
+    fun `demo mode doesn't learn from feed visits`() = with(Script(Fixtures.settings.copy(demoMode = true))) {
+        at(at(16, 0), Event.Unlocked)
+        at(at(16, 0, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        assertTrue(at(at(16, 0, 45), Event.ForegroundChanged(Fixtures.CHATS, "Chats")).none { it is Effect.RecordApp })
+    }
+
+    @Test
     fun `a message that came in while you used the phone doesn't come back as a chip at the next unlock`() = with(Script()) {
         at(at(16, 0), Event.Unlocked)
         at(at(16, 1), Event.NotificationPosted(Fixtures.rahul(at(16, 1), "hey")))

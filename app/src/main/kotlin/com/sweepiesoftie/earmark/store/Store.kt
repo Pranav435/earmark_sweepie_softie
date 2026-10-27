@@ -9,6 +9,9 @@ import androidx.room.Query
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.Upsert
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.sweepiesoftie.earmark.core.AppStat
 import com.sweepiesoftie.earmark.DebugLog
 import com.sweepiesoftie.earmark.core.ContactStat
 import com.sweepiesoftie.earmark.core.KindStat
@@ -48,6 +51,10 @@ data class KindRow(@PrimaryKey val kind: String, val holds: Int, val ignores: In
 @Entity(tableName = "alarm_seen")
 data class AlarmRow(@PrimaryKey val date: String, val minuteOfDay: Int)
 
+/** Your usual visit to a feed app, for the smart drift timer (ADR 0023). A package name and two numbers, nothing else. */
+@Entity(tableName = "app_stats")
+data class AppRow(@PrimaryKey val packageName: String, val visits: Int, val medianVisitSeconds: Double)
+
 @Dao
 interface EarmarkDao {
     @Upsert suspend fun upsertLoop(row: LoopRow)
@@ -67,6 +74,8 @@ interface EarmarkDao {
 
     @Upsert suspend fun upsertAlarm(row: AlarmRow)
 
+    @Upsert suspend fun upsertApp(row: AppRow)
+
     @Query("SELECT * FROM contact_stats") suspend fun contacts(): List<ContactRow>
 
     @Query("SELECT * FROM kind_stats") suspend fun kinds(): List<KindRow>
@@ -74,16 +83,18 @@ interface EarmarkDao {
     @Query("SELECT * FROM kind_stats") fun kindsFlow(): Flow<List<KindRow>>
 
     @Query("SELECT * FROM alarm_seen ORDER BY date DESC LIMIT 10") suspend fun recentAlarms(): List<AlarmRow>
+
+    @Query("SELECT * FROM app_stats") suspend fun apps(): List<AppRow>
 }
 
-@Database(entities = [LoopRow::class, ContactRow::class, KindRow::class, AlarmRow::class], version = 1, exportSchema = false)
+@Database(entities = [LoopRow::class, ContactRow::class, KindRow::class, AlarmRow::class, AppRow::class], version = 2, exportSchema = false)
 abstract class EarmarkDatabase : RoomDatabase() {
     abstract fun dao(): EarmarkDao
 }
 
 /** Room behind a small interface. Every call is wrapped here so a database failure is logged and skipped, never thrown. */
 class Store(context: Context, private val log: DebugLog) {
-    private val dao = Room.databaseBuilder(context, EarmarkDatabase::class.java, "earmark.db").build().dao()
+    private val dao = Room.databaseBuilder(context, EarmarkDatabase::class.java, "earmark.db").addMigrations(ADD_APP_STATS).build().dao()
 
     fun things(since: Long): Flow<List<LoopRow>> = dao.things(since).catch { log.error("Store.things", it); emit(emptyList()) }
 
@@ -116,6 +127,10 @@ class Store(context: Context, private val log: DebugLog) {
         dao.upsertContact(ContactRow(conversation, stat.replies, stat.medianReplyMinutes))
     }
 
+    suspend fun recordApp(packageName: String, stat: AppStat): Unit? = guard("record app") {
+        dao.upsertApp(AppRow(packageName, stat.visits, stat.medianVisitSeconds))
+    }
+
     suspend fun recordAlarm(time: LocalTime, on: LocalDate): Unit? = guard("record alarm") {
         dao.upsertAlarm(AlarmRow(on.toString(), time.hour * 60 + time.minute))
     }
@@ -131,6 +146,7 @@ class Store(context: Context, private val log: DebugLog) {
             kinds = dao.kinds().mapNotNull { row -> kindOf(row.kind)?.let { it to KindStat(row.holds, row.ignores, row.ignoreStreak) } }.toMap(),
             contacts = dao.contacts().associate { it.conversation to ContactStat(it.replies, it.medianReplyMinutes) },
             weeknightAlarms = dao.recentAlarms().map { LocalTime.of(it.minuteOfDay / 60, it.minuteOfDay % 60) },
+            apps = dao.apps().associate { it.packageName to AppStat(it.visits, it.medianVisitSeconds) },
         )
     } ?: Stats()
 
@@ -158,6 +174,13 @@ class Store(context: Context, private val log: DebugLog) {
 
     companion object {
         const val DAY_MILLIS: Long = 24 * 60 * 60 * 1000L
+
+        /** v0.1.8 adds the usual feed visits; everything already stored stays. */
+        val ADD_APP_STATS: Migration = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("CREATE TABLE IF NOT EXISTS `app_stats` (`packageName` TEXT NOT NULL, `visits` INTEGER NOT NULL, `medianVisitSeconds` REAL NOT NULL, PRIMARY KEY(`packageName`))")
+            }
+        }
 
         fun hashId(id: String): String =
             MessageDigest.getInstance("SHA-256").digest(id.toByteArray()).joinToString("") { "%02x".format(it) }.take(24)

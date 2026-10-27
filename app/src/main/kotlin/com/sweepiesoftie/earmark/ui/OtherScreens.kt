@@ -60,6 +60,7 @@ class SettingsActions(
     val onPaused: (Boolean) -> Unit,
     val onDemo: (Boolean) -> Unit,
     val onDrift: (Int) -> Unit,
+    val onDriftSmart: () -> Unit,
     val onFeed: (String, Boolean) -> Unit,
     val onShowAllApps: () -> Unit,
     val onUnmute: (LoopKind) -> Unit,
@@ -81,9 +82,10 @@ fun SettingsScreen(state: SettingsState, actions: SettingsActions) {
             Text(stringResource(R.string.settings_drift_body), style = MaterialTheme.typography.bodyMedium, color = Tone.Muted)
             Spacer(Modifier.heightIn(min = 12.dp))
             Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Choice(stringResource(R.string.settings_drift_smart), selected = user.driftSmart, enabled = !user.demoMode, onClick = actions.onDriftSmart)
                 UserSettings.driftChoices.forEach { seconds ->
                     val label = if (seconds < 60 || seconds % 60 != 0) stringResource(R.string.settings_seconds, seconds) else stringResource(R.string.settings_minutes, seconds / 60)
-                    Choice(label, selected = user.driftSeconds == seconds, enabled = !user.demoMode) { actions.onDrift(seconds) }
+                    Choice(label, selected = !user.driftSmart && user.driftSeconds == seconds, enabled = !user.demoMode) { actions.onDrift(seconds) }
                 }
             }
             if (user.demoMode) Text(stringResource(R.string.settings_drift_demo), style = MaterialTheme.typography.bodyMedium, color = Tone.Muted, modifier = Modifier.padding(top = 8.dp))

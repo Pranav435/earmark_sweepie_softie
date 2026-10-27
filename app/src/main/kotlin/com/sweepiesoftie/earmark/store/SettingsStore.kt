@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.update
 data class UserSettings(
     val demoMode: Boolean = false,
     val paused: Boolean = false,
+    /** Smart works the timer out per guess (ADR 0023); off, [driftSeconds] is used. */
+    val driftSmart: Boolean = true,
     val driftSeconds: Int = 90,
     val feedsOn: Set<String> = emptySet(),
     val feedsOff: Set<String> = emptySet(),
@@ -31,7 +33,9 @@ class SettingsStore(context: Context) {
 
     fun setPaused(on: Boolean): Unit = edit { it.copy(paused = on) }
 
-    fun setDriftSeconds(seconds: Int): Unit = edit { it.copy(driftSeconds = seconds) }
+    fun setDriftSeconds(seconds: Int): Unit = edit { it.copy(driftSmart = false, driftSeconds = seconds) }
+
+    fun setDriftSmart(): Unit = edit { it.copy(driftSmart = true) }
 
     fun setFeed(packageName: String, on: Boolean): Unit = edit {
         if (on) it.copy(feedsOn = it.feedsOn + packageName, feedsOff = it.feedsOff - packageName)
@@ -44,6 +48,7 @@ class SettingsStore(context: Context) {
         prefs.edit()
             .putBoolean(DEMO, s.demoMode)
             .putBoolean(PAUSED, s.paused)
+            .putBoolean(DRIFT_SMART, s.driftSmart)
             .putInt(DRIFT, s.driftSeconds)
             .putStringSet(FEEDS_ON, s.feedsOn)
             .putStringSet(FEEDS_OFF, s.feedsOff)
@@ -53,6 +58,7 @@ class SettingsStore(context: Context) {
     private fun read() = UserSettings(
         demoMode = prefs.getBoolean(DEMO, false),
         paused = prefs.getBoolean(PAUSED, false),
+        driftSmart = prefs.getBoolean(DRIFT_SMART, true),
         driftSeconds = prefs.getInt(DRIFT, 90),
         feedsOn = prefs.getStringSet(FEEDS_ON, emptySet()).orEmpty().toSet(),
         feedsOff = prefs.getStringSet(FEEDS_OFF, emptySet()).orEmpty().toSet(),
@@ -62,6 +68,7 @@ class SettingsStore(context: Context) {
         const val DEMO = "demo_mode"
         const val PAUSED = "paused"
         const val DRIFT = "drift_seconds"
+        const val DRIFT_SMART = "drift_smart"
         const val FEEDS_ON = "feeds_on"
         const val FEEDS_OFF = "feeds_off"
     }

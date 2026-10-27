@@ -223,6 +223,7 @@ class EarmarkListener : NotificationListenerService() {
             is Effect.RecordLoop -> graph.appScope.launch { graph.store.record(effect.entry) }
             is Effect.RecordKind -> graph.appScope.launch { graph.store.record(effect.kind, effect.stat) }
             is Effect.RecordContact -> graph.appScope.launch { graph.store.record(effect.conversation, effect.stat) }
+            is Effect.RecordApp -> graph.appScope.launch { graph.store.recordApp(effect.packageName, effect.stat) }
             is Effect.RecordAlarm -> graph.appScope.launch { graph.store.recordAlarm(effect.time, effect.on) }
             is Effect.Log -> log.add(effect.line)
         }

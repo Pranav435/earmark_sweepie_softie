@@ -85,7 +85,8 @@
     <string name="settings_demo">Demo mode</string>
     <string name="settings_demo_body">Sample notifications and a 10-second drift timer, so every story runs on any phone.</string>
     <string name="settings_drift">Drift timer</string>
-    <string name="settings_drift_body">How long a feed app can be in front before Earmark offers to hand the loop back.</string>
+    <string name="settings_drift_body">How long a feed app can be in front before Earmark offers to hand the loop back. Smart goes by how long you usually stay in each feed app, and comes back sooner for something urgent or a chip you said yes to.</string>
+    <string name="settings_drift_smart">Smart</string>
     <string name="settings_drift_demo">Demo mode uses 10 seconds.</string>
     <string name="settings_seconds">%1$d s</string>
     <string name="settings_minutes">%1$d min</string>

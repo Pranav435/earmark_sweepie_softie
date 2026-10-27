@@ -97,6 +97,8 @@ public data class Settings(
     val ownPackage: String,
     val feedApps: Set<String> = CuratedApps.feeds,
     val driftAfter: Duration = Duration.ofSeconds(90),
+    /** Work the timer out for each guess from your usual visit to the feed and how urgent the loop is (ADR 0023), instead of [driftAfter]. */
+    val smartDrift: Boolean = false,
     /** Minimum time between any two pills. Demo mode sets it to zero so stories can run back to back. */
     val pillCooldown: Duration = Duration.ofMinutes(10),
     val demoMode: Boolean = false,
@@ -119,12 +121,16 @@ public data class KindStat(val holds: Int = 0, val ignores: Int = 0, val ignoreS
 
 public data class ContactStat(val replies: Int = 0, val medianReplyMinutes: Double = 0.0)
 
+/** How long you usually stay in a feed app, for the smart drift timer. Keyed by package; nothing about what you did there. */
+public data class AppStat(val visits: Int = 0, val medianVisitSeconds: Double = 0.0)
+
 /** What the store hands the engine at start-up. */
 public data class Stats(
     val kinds: Map<LoopKind, KindStat> = emptyMap(),
     val contacts: Map<String, ContactStat> = emptyMap(),
     /** Alarm times seen on recent weeknights, newest first. */
     val weeknightAlarms: List<LocalTime> = emptyList(),
+    val apps: Map<String, AppStat> = emptyMap(),
 )
 
 public data class ChipCard(
@@ -190,6 +196,7 @@ public sealed interface Effect {
     public data class RecordLoop(val entry: LoopEntry) : Effect
     public data class RecordKind(val kind: LoopKind, val stat: KindStat) : Effect
     public data class RecordContact(val conversation: String, val stat: ContactStat) : Effect
+    public data class RecordApp(val packageName: String, val stat: AppStat) : Effect
     public data class RecordAlarm(val time: LocalTime, val on: java.time.LocalDate) : Effect
     /** One decision line for DebugLog. Never carries message text. */
     public data class Log(val line: String) : Effect

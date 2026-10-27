@@ -36,7 +36,7 @@ Effects out  ShowChip(card) · ShowDot · ShowPill(card) · HideOverlay(which) �
 | Loop | Something you may owe: `Reply`, `Payment`, `Flow` (unfinished ride, order or checkout), `Routine` (alarm), `LeaveBy`, `Own`. Fields: id, kind, label, package, conversation key, openedAt, expiresAt, state |
 | WayBack | The exact route back: the notification's `contentIntent`, its reply `Action` (`RemoteInput`), or a launch or `ACTION_SET_ALARM` intent. Lives in adapter memory only, keyed by loop id |
 | Chip | Unlock-time guess ("Here to reply to Rahul?"). ✓ holds it; ignoring it lets it fade |
-| Drift | A feed app has been in front for 90 s (10 s in demo mode) while the guessed loop is open and the loop's own app is not in front |
+| Drift | A feed app has been in front longer than the drift timer while the guessed loop is open and the loop's own app is not in front. Smart by default: your usual visit to that app, sooner for urgent loops or a held chip, 15 s to 2 min (ADR 0023); 10 s in demo mode |
 | Pause | Media paused or stopped, the audio player changing (a reel boundary), or an app switch |
 | Pill | The drift prompt: "You came here to · Reply to Rahul · **Do it now**", or "Before you forget · …" for a message that arrived while the phone was in use |
 

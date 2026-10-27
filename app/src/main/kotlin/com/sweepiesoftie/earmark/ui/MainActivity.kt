@@ -180,6 +180,7 @@ private fun Root() {
                             }
                         },
                         onDrift = graph.settings::setDriftSeconds,
+                        onDriftSmart = graph.settings::setDriftSmart,
                         onFeed = graph.settings::setFeed,
                         onShowAllApps = { showAll = true },
                         onUnmute = { kind -> graph.uiEvents.tryEmit(Event.KindUnmuted(kind)) },

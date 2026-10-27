@@ -2,6 +2,7 @@ package com.sweepiesoftie.earmark.core
 
 import java.time.Duration
 import java.time.Instant
+import kotlin.math.roundToLong
 
 /**
  * The functional core: one event in, a list of effects out. Not thread-safe by design:
@@ -27,7 +28,8 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     /** Routine and Leave-by loops are rebuilt from the clock and calendar, so remember which already closed. */
     private val closedSituations = HashSet<LoopId>()
 
-    private data class Visit(val packageName: String, val appLabel: String, val since: Instant)
+    /** [interrupted] is set when a pill showed during the visit, so it isn't learned as a usual visit. */
+    private data class Visit(val packageName: String, val appLabel: String, val since: Instant, val interrupted: Boolean = false)
 
     /** How many loops are open, for the home screen. Read it on the engine's thread, like [handle]. */
     public val openLoops: Int get() = book.all.size
@@ -53,7 +55,8 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         is Event.SettingsChanged -> {
             this.settings = event.settings
             copy = Copy(event.settings)
-            listOf(Effect.Log("settings: drift after ${event.settings.driftAfter.seconds}s, demo ${event.settings.demoMode}, paused ${event.settings.paused}, ${event.settings.feedApps.size} feed apps"))
+            val drift = if (event.settings.smartDrift) "smart" else "after ${event.settings.driftAfter.seconds}s"
+            listOf(Effect.Log("settings: drift $drift, demo ${event.settings.demoMode}, paused ${event.settings.paused}, ${event.settings.feedApps.size} feed apps"))
         }
         is Event.StatsLoaded -> {
             // Counts the engine already holds are newer than any snapshot still being written to Room.
@@ -61,6 +64,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
                 kinds = event.stats.kinds + stats.kinds,
                 contacts = event.stats.contacts + stats.contacts,
                 weeknightAlarms = event.stats.weeknightAlarms,
+                apps = event.stats.apps + stats.apps,
             )
             emptyList()
         }
@@ -231,12 +235,13 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
 
     private fun onScreenOff(now: Instant): List<Effect> {
         val left = closeWhere(now, "screen off after the chat app cleared it") { it.chatOpen || it.clearedAt != null }
+        val learned = foreground?.let { learnVisit(it, now) }.orEmpty()
         drift = DriftMachine.end(drift)
         foreground = null
         // A screen that only lit up for a notification on the lock screen wasn't in use.
         if (inUse) putDownAt = now
         inUse = false
-        return left + hideAll()
+        return left + learned + hideAll()
     }
 
     private fun onForeground(event: Event.ForegroundChanged, now: Instant): List<Effect> {
@@ -244,7 +249,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val effects = mutableListOf<Effect>()
         val previous = foreground
         foreground = Visit(event.packageName, event.appLabel, now)
-        if (previous != null && previous.packageName != event.packageName) effects += leftApp(previous, now)
+        if (previous != null && previous.packageName != event.packageName) effects += leftApp(previous, now) + learnVisit(previous, now)
 
         val guess = book[drift.loopId]
         if (guess != null && drift.phase == Phase.HandedBack && event.packageName != guess.loop.packageName &&
@@ -289,11 +294,36 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         return listOf(Effect.Log("opened ${tracked.loop.id.value} (Flow) and made it the guess"))
     }
 
+    /**
+     * Your usual visit to each feed app sets the smart drift timer. Demo visits and paused time aren't you,
+     * and a visit a pill cut short would teach the timer to be shorter still.
+     */
+    private fun learnVisit(visit: Visit, now: Instant): List<Effect> {
+        if (visit.packageName !in settings.feedApps || visit.interrupted || settings.demoMode || settings.paused) return emptyList()
+        val length = Duration.between(visit.since, now)
+        if (length < SmartDrift.shortestVisit) return emptyList()
+        val stat = SmartDrift.learn(stats.apps[visit.packageName], length)
+        stats = stats.copy(apps = stats.apps + (visit.packageName to stat))
+        return listOf(
+            Effect.RecordApp(visit.packageName, stat),
+            Effect.Log("usual visit to ${visit.packageName}: %d s after %d visits (this one %d s)".format(stat.medianVisitSeconds.roundToLong(), stat.visits, length.seconds)),
+        )
+    }
+
+    private fun driftTimer(guess: Tracked?): SmartDrift.Timer =
+        if (settings.smartDrift && guess != null) {
+            SmartDrift.timer(guess.loop, guess.held, foreground?.let { stats.apps[it.packageName] })
+        } else {
+            SmartDrift.Timer(settings.driftAfter, "fixed timer")
+        }
+
     private fun stepDrift(input: DriftInput, now: Instant): List<Effect> {
         val guess = book[drift.loopId]
+        val timer = driftTimer(guess)
+        val before = drift.phase
         val rules = DriftRules(
             feedApps = settings.feedApps,
-            driftAfter = settings.driftAfter,
+            driftAfter = timer.after,
             pillHeld = when {
                 guess == null -> "no guess"
                 settings.paused -> "Earmark is paused"
@@ -307,8 +337,12 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val step = DriftMachine.step(drift, input, now, rules)
         drift = step.drift
         val effects = mutableListOf<Effect>()
+        if (guess != null && before != Phase.InFeed && drift.phase == Phase.InFeed) {
+            effects += Effect.Log("drift ${guess.loop.id.value}: in ${foreground?.packageName}, pill after ${timer.after.seconds} s (${timer.why})")
+        }
         step.reason?.let { effects += Effect.Log("drift ${guess?.loop?.id?.value}: $it") }
         if (step.showPill && guess != null) {
+            foreground = foreground?.copy(interrupted = true)
             val shown = book.update(guess.loop.id) { it.copy(pillShown = true, guessedAt = it.guessedAt ?: now) }!!
             effects += Effect.HideOverlay(Overlay.Chip)
             effects += Effect.ShowPill(copy.pill(guess.loop, drift.arrived))
@@ -348,7 +382,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     }
 
     private fun onChipHeld(id: LoopId): List<Effect> {
-        val tracked = book[id] ?: return emptyList()
+        val tracked = book.update(id) { it.copy(held = true) } ?: return emptyList()
         val stat = kindStat(tracked.loop.kind)
         return listOf(Effect.HideOverlay(Overlay.Chip), Effect.ShowDot, Effect.Log("chip held: ${id.value}")) +
             setKind(tracked.loop.kind, stat.copy(holds = stat.holds + 1, ignoreStreak = 0))
