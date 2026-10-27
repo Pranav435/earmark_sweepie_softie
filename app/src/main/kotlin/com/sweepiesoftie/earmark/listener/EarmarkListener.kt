@@ -1,6 +1,194 @@
 package com.sweepiesoftie.earmark.listener
 
+import android.app.KeyguardManager
+import android.content.ComponentName
+import android.os.PowerManager
+import android.os.SystemClock
 import android.service.notification.NotificationListenerService
+import android.service.notification.StatusBarNotification
+import com.sweepiesoftie.earmark.AppGraph
+import com.sweepiesoftie.earmark.core.Blocker
+import com.sweepiesoftie.earmark.core.Effect
+import com.sweepiesoftie.earmark.core.Engine
+import com.sweepiesoftie.earmark.core.Event
+import com.sweepiesoftie.earmark.core.Overlay
+import com.sweepiesoftie.earmark.overlay.OverlayHost
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExecutorCoroutineDispatcher
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.time.Instant
+import java.util.concurrent.Executors
 
-/** The one long-lived component (ADR 0001). Adapters hang off it as they are built. */
-class EarmarkListener : NotificationListenerService()
+/**
+ * The one long-lived component (ADR 0001). While notification access is on, the system keeps
+ * it bound, so it hosts the engine, owns the overlay windows and registers the runtime-only
+ * broadcasts. Every event goes through [dispatch] onto a single engine thread.
+ */
+class EarmarkListener : NotificationListenerService() {
+    private val graph = AppGraph
+    private val log get() = graph.debugLog
+    private var session: Session? = null
+
+    /** Everything that lives between connect and disconnect. */
+    private inner class Session {
+        val engineDispatcher: ExecutorCoroutineDispatcher =
+            Executors.newSingleThreadExecutor { Thread(it, "earmark-engine") }.asCoroutineDispatcher()
+        val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+        val engine = Engine(graph.apps.engineSettings(graph.settings.state.value))
+        val reader = NotificationReader(this@EarmarkListener, graph.wayBacks, log)
+        val overlay = OverlayHost(this@EarmarkListener, log, ::dispatch)
+        val handBack = HandBack(this@EarmarkListener, graph.wayBacks, log)
+        val suggester = ReplySuggester(graph.wayBacks, log)
+        val watcher = ForegroundWatcher(this@EarmarkListener, scope, graph.apps, log, ::dispatch)
+        val pause = PauseSensor(this@EarmarkListener, ComponentName(this@EarmarkListener, EarmarkListener::class.java), log, ::dispatch)
+        val calendar = CalendarReader(this@EarmarkListener, log)
+        val receivers = SystemReceivers(this@EarmarkListener, log, ::onUnlock, ::onScreenOff, ::dispatch)
+        var navigating = false
+        var lastUnlockMillis = 0L
+
+        fun close() {
+            watcher.stop()
+            pause.stop()
+            receivers.stop()
+            overlay.destroy()
+            suggester.close()
+            scope.cancel()
+            engineDispatcher.close()
+        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        graph.init(this)
+    }
+
+    override fun onListenerConnected() {
+        session?.close()
+        val s = Session()
+        session = s
+        log.add("listener connected")
+        s.receivers.start()
+        s.pause.start()
+        s.scope.launch {
+            dispatch(Event.StatsLoaded(graph.store.stats()))
+            graph.store.trim(System.currentTimeMillis())
+        }
+        s.scope.launch {
+            graph.settings.state.drop(1).collect { user ->
+                val settings = withContext(Dispatchers.IO) { graph.apps.engineSettings(user) }
+                dispatch(Event.SettingsChanged(settings))
+            }
+        }
+        s.scope.launch { graph.uiEvents.collect { dispatch(it) } }
+
+        // After a restart the loops are rebuilt from what is still waiting, with fresh intents.
+        try {
+            activeNotifications?.forEach { onNotificationPosted(it) }
+        } catch (e: SecurityException) {
+            log.error("getActiveNotifications", e)
+        }
+        dispatch(s.receivers.nextAlarm())
+        dispatch(Event.BlockerChanged(Blocker.DoNotDisturb, currentInterruptionFilter > INTERRUPTION_FILTER_ALL))
+        val power = getSystemService(PowerManager::class.java)
+        val keyguard = getSystemService(KeyguardManager::class.java)
+        if (power.isInteractive && !keyguard.isKeyguardLocked) s.watcher.start()
+    }
+
+    override fun onListenerDisconnected() {
+        log.add("listener disconnected; asking to rebind")
+        session?.close()
+        session = null
+        requestRebind(ComponentName(this, EarmarkListener::class.java))
+    }
+
+    override fun onDestroy() {
+        session?.close()
+        session = null
+        super.onDestroy()
+    }
+
+    override fun onNotificationPosted(sbn: StatusBarNotification) {
+        val s = session ?: return
+        if (s.reader.isNavigation(sbn) && !s.navigating) {
+            s.navigating = true
+            dispatch(Event.BlockerChanged(Blocker.Navigation, true))
+        }
+        val signal = s.reader.read(sbn) ?: return
+        dispatch(Event.NotificationPosted(signal.copy(appLabel = graph.apps.label(sbn.packageName))))
+    }
+
+    override fun onNotificationRemoved(sbn: StatusBarNotification, rankingMap: RankingMap, reason: Int) {
+        val s = session ?: return
+        if (s.reader.isNavigation(sbn) && s.navigating) {
+            s.navigating = false
+            dispatch(Event.BlockerChanged(Blocker.Navigation, false))
+        }
+        dispatch(Event.NotificationRemoved(sbn.key, NotificationReader.reasonOf(reason)))
+        s.reader.forget(sbn.key)
+    }
+
+    override fun onInterruptionFilterChanged(interruptionFilter: Int) {
+        dispatch(Event.BlockerChanged(Blocker.DoNotDisturb, interruptionFilter > INTERRUPTION_FILTER_ALL))
+    }
+
+    private fun onUnlock() {
+        val s = session ?: return
+        // SCREEN_ON and USER_PRESENT can both arrive for one unlock on phones without a lock screen.
+        val now = SystemClock.elapsedRealtime()
+        if (now - s.lastUnlockMillis < UNLOCK_DEBOUNCE_MILLIS) return
+        s.lastUnlockMillis = now
+        s.overlay.unlockedAtMillis = now
+        log.add("unlock")
+        s.watcher.start()
+        s.scope.launch {
+            val events = withContext(Dispatchers.IO) { s.calendar.soon() }
+            if (events != null) dispatch(Event.CalendarSoon(events))
+            dispatch(Event.Unlocked)
+        }
+    }
+
+    private fun onScreenOff() {
+        val s = session ?: return
+        log.add("screen off")
+        s.watcher.stop()
+        dispatch(Event.ScreenOff)
+    }
+
+    /** Runs [event] through the engine on its own thread, then carries out the effects in order on the main thread. */
+    fun dispatch(event: Event) {
+        val s = session ?: return
+        s.scope.launch(s.engineDispatcher) {
+            val effects = s.engine.handle(event, Instant.now())
+            if (effects.isNotEmpty()) withContext(Dispatchers.Main) { effects.forEach { run(s, it) } }
+        }
+    }
+
+    private fun run(s: Session, effect: Effect) {
+        when (effect) {
+            is Effect.ShowChip -> s.overlay.showChip(effect.chip)
+            Effect.ShowDot -> s.overlay.showDot()
+            is Effect.ShowPill -> s.overlay.showPill(effect.pill)
+            is Effect.HideOverlay -> s.overlay.hide(effect.overlay)
+            // Runs before the HideOverlay that follows it, so the window is still attached (Android 15 rule).
+            is Effect.OpenWayBack -> s.handBack.open(effect.route)
+            is Effect.SuggestReplies -> s.suggester.suggest(effect.notificationKey) { replies -> s.overlay.showStrip(effect.loopId, replies) }
+            is Effect.SendReply ->
+                if (s.handBack.reply(effect.notificationKey, effect.text)) dispatch(Event.ReplySent(effect.loopId)) else s.overlay.hide(Overlay.ReplyStrip)
+            is Effect.RecordLoop -> graph.appScope.launch { graph.store.record(effect.entry) }
+            is Effect.RecordKind -> graph.appScope.launch { graph.store.record(effect.kind, effect.stat) }
+            is Effect.RecordContact -> graph.appScope.launch { graph.store.record(effect.conversation, effect.stat) }
+            is Effect.RecordAlarm -> graph.appScope.launch { graph.store.recordAlarm(effect.time, effect.on) }
+            is Effect.Log -> log.add(effect.line)
+        }
+    }
+
+    private companion object {
+        const val UNLOCK_DEBOUNCE_MILLIS = 2_000L
+    }
+}

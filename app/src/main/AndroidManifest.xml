@@ -9,10 +9,15 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <!-- Only demo mode posts notifications (ADR 0006). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Needed for the alarm routine's way back, ACTION_SET_ALARM. Granted at install. -->
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <!-- Nothing leaves the phone (ADR 0002): strip what libraries merge in. -->
     <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove" />
+    <!-- AndroidX core adds this for ContextCompat.registerReceiver; Earmark registers system broadcasts directly. -->
+    <permission android:name="${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" tools:node="remove" />
+    <uses-permission android:name="${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" tools:node="remove" />
 
     <queries>
         <intent>
@@ -25,6 +30,7 @@
     </queries>
 
     <application
+        android:name=".EarmarkApp"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -42,6 +48,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".demo.DemoActivity"
+            android:exported="false"
+            android:label="@string/demo_chat_label"
+            android:taskAffinity="com.sweepiesoftie.earmark.demo"
+            android:windowSoftInputMode="adjustResize" />
+
+        <receiver
+            android:name=".demo.DemoReplyReceiver"
+            android:exported="false" />
 
         <service
             android:name=".listener.EarmarkListener"

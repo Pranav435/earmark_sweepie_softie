@@ -1,0 +1,233 @@
+package com.sweepiesoftie.earmark.overlay
+
+import android.content.Context
+import android.graphics.PixelFormat
+import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import android.os.SystemClock
+import android.provider.Settings
+import android.view.Gravity
+import android.view.WindowInsets
+import android.view.WindowManager
+import android.view.accessibility.AccessibilityManager
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.ComposeView
+import androidx.lifecycle.setViewTreeLifecycleOwner
+import androidx.savedstate.setViewTreeSavedStateRegistryOwner
+import com.sweepiesoftie.earmark.DebugLog
+import com.sweepiesoftie.earmark.core.ChipCard
+import com.sweepiesoftie.earmark.core.Event
+import com.sweepiesoftie.earmark.core.LoopId
+import com.sweepiesoftie.earmark.core.Overlay
+import com.sweepiesoftie.earmark.core.PillCard
+import com.sweepiesoftie.earmark.listener.Permissions
+import com.sweepiesoftie.earmark.ui.theme.EarmarkTheme
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
+
+data class ReplyStrip(val loopId: LoopId, val replies: List<String>)
+
+/** Everything the overlay windows draw. Each window is a stateless function of this. */
+data class OverlayUi(
+    val chip: ChipCard? = null,
+    val chipTimeoutMillis: Long = 8_000,
+    val pill: PillCard? = null,
+    val dot: Boolean = false,
+    val strip: ReplyStrip? = null,
+    val reduceMotion: Boolean = false,
+)
+
+/**
+ * Owns the overlay windows. Each window is created once and reused: it is attached while it has
+ * something to show and detached after its exit animation, so Android's "displaying over other
+ * apps" notice only appears while Earmark is actually on screen. Main thread only.
+ */
+class OverlayHost(private val context: Context, private val log: DebugLog, private val dispatch: (Event) -> Unit) {
+    private val wm = context.getSystemService(WindowManager::class.java)
+    private val a11y = context.getSystemService(AccessibilityManager::class.java)
+    private val handler = Handler(Looper.getMainLooper())
+    private val owner = OverlayOwner()
+    private val _ui = MutableStateFlow(OverlayUi())
+    val ui: StateFlow<OverlayUi> = _ui
+
+    /** Set at unlock so the log can show how long the chip took to appear. */
+    var unlockedAtMillis: Long = 0L
+
+    private val top = Window("Earmark", topParams()) {
+        val state by ui.collectAsState()
+        TopOverlay(
+            state = state,
+            onHold = { dispatch(Event.ChipHeld(it)) },
+            onChipAct = { dispatch(Event.ChipActed(it)) },
+            onChipDismiss = { dispatch(Event.ChipDismissed(it)) },
+            onChipFaded = ::fadeChip,
+            onPillAct = { dispatch(Event.PillTapped(it)) },
+            onPillDismiss = { dispatch(Event.PillDismissed(it)) },
+        )
+    }
+    private val dot = Window("Earmark dot", dotParams()) {
+        val state by ui.collectAsState()
+        DotOverlay(visible = state.dot, reduceMotion = state.reduceMotion)
+    }
+    private val strip = Window("Earmark replies", stripParams()) {
+        val state by ui.collectAsState()
+        ReplyStripOverlay(
+            strip = state.strip,
+            reduceMotion = state.reduceMotion,
+            onReply = { id, text -> dispatch(Event.ReplyChosen(id, text)) },
+            onClose = { hide(Overlay.ReplyStrip) },
+        )
+    }
+
+    fun showChip(chip: ChipCard) {
+        val timeout = a11y.getRecommendedTimeoutMillis(CHIP_MILLIS, AccessibilityManager.FLAG_CONTENT_TEXT or AccessibilityManager.FLAG_CONTENT_CONTROLS).toLong()
+        _ui.update { it.copy(chip = chip, pill = null, chipTimeoutMillis = timeout, reduceMotion = reduceMotion()) }
+        top.attach()
+        if (unlockedAtMillis > 0) {
+            log.add("chip attached ${SystemClock.elapsedRealtime() - unlockedAtMillis} ms after unlock")
+            unlockedAtMillis = 0
+        }
+    }
+
+    fun showPill(pill: PillCard) {
+        _ui.update { it.copy(pill = pill, chip = null, reduceMotion = reduceMotion()) }
+        top.attach()
+    }
+
+    fun showDot() {
+        _ui.update { it.copy(dot = true) }
+        dot.attach()
+    }
+
+    fun showStrip(loopId: LoopId, replies: List<String>) {
+        if (replies.isEmpty()) return
+        _ui.update { it.copy(strip = ReplyStrip(loopId, replies), reduceMotion = reduceMotion()) }
+        strip.attach()
+    }
+
+    fun hide(overlay: Overlay) {
+        _ui.update {
+            when (overlay) {
+                Overlay.Chip -> it.copy(chip = null)
+                Overlay.Pill -> it.copy(pill = null)
+                Overlay.Dot -> it.copy(dot = false)
+                Overlay.ReplyStrip -> it.copy(strip = null)
+            }
+        }
+        val state = _ui.value
+        if (state.chip == null && state.pill == null) top.detachLater()
+        if (!state.dot) dot.detachLater()
+        if (state.strip == null) strip.detachLater()
+    }
+
+    /** A faded chip only leaves the screen; the engine keeps watching its loop (ADR 0007). */
+    private fun fadeChip(id: LoopId) {
+        if (_ui.value.chip?.loopId == id) {
+            log.add("chip faded: ${id.value}")
+            hide(Overlay.Chip)
+        }
+    }
+
+    fun destroy() {
+        listOf(top, dot, strip).forEach { it.detachNow() }
+        owner.destroy()
+    }
+
+    private fun reduceMotion(): Boolean =
+        Settings.Global.getFloat(context.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
+
+    private fun statusBarHeight(): Int =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            wm.currentWindowMetrics.windowInsets.getInsets(WindowInsets.Type.statusBars()).top
+        } else {
+            (24 * context.resources.displayMetrics.density).toInt()
+        }
+
+    private fun navigationBarHeight(): Int =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            wm.currentWindowMetrics.windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom
+        } else {
+            (48 * context.resources.displayMetrics.density).toInt()
+        }
+
+    private fun baseParams(width: Int, flags: Int) = WindowManager.LayoutParams(
+        width,
+        WindowManager.LayoutParams.WRAP_CONTENT,
+        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or flags,
+        PixelFormat.TRANSLUCENT,
+    )
+
+    private fun topParams() = baseParams(WindowManager.LayoutParams.MATCH_PARENT, 0).apply {
+        gravity = Gravity.TOP
+        y = statusBarHeight()
+        title = "Earmark"
+    }
+
+    /** Non-touchable at alpha 0.8, the most Android 12+ allows for touches to pass through (ADR 0003). */
+    private fun dotParams() = baseParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE).apply {
+        gravity = Gravity.TOP or Gravity.START
+        x = (20 * context.resources.displayMetrics.density).toInt()
+        y = statusBarHeight() + (4 * context.resources.displayMetrics.density).toInt()
+        alpha = 0.8f
+        title = "Earmark dot"
+    }
+
+    /** Sits just above a chat's input row. */
+    private fun stripParams() = baseParams(WindowManager.LayoutParams.MATCH_PARENT, 0).apply {
+        gravity = Gravity.BOTTOM
+        y = navigationBarHeight() + (72 * context.resources.displayMetrics.density).toInt()
+        title = "Earmark replies"
+    }
+
+    private inner class Window(private val name: String, private val params: WindowManager.LayoutParams, content: @Composable () -> Unit) {
+        private val view = ComposeView(context).apply {
+            setViewTreeLifecycleOwner(owner)
+            setViewTreeSavedStateRegistryOwner(owner)
+            setContent { EarmarkTheme { content() } }
+        }
+        private var attached = false
+        private val detach = Runnable { detachNow() }
+
+        fun attach() {
+            handler.removeCallbacks(detach)
+            if (attached) return
+            if (!Permissions.overlay(context)) {
+                log.add("OverlayHost: no overlay permission, $name not shown")
+                return
+            }
+            try {
+                wm.addView(view, params)
+                attached = true
+            } catch (e: RuntimeException) {
+                log.error("addView($name)", e)
+            }
+        }
+
+        fun detachLater() {
+            if (!attached) return
+            handler.removeCallbacks(detach)
+            handler.postDelayed(detach, EXIT_MILLIS)
+        }
+
+        fun detachNow() {
+            handler.removeCallbacks(detach)
+            if (!attached) return
+            try {
+                wm.removeViewImmediate(view)
+            } catch (e: RuntimeException) {
+                log.error("removeView($name)", e)
+            }
+            attached = false
+        }
+    }
+
+    private companion object {
+        const val CHIP_MILLIS = 8_000
+        const val EXIT_MILLIS = 320L
+    }
+}
