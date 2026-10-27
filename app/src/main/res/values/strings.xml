@@ -15,11 +15,11 @@
     <string name="overlay_strip_send">Send to %1$s: %2$s</string>
 
     <!-- Recap -->
-    <string name="recap_empty_title">Nothing guessed yet today.</string>
-    <string name="recap_empty_line">When something you owe stands out at unlock, it shows up here.</string>
+    <string name="recap_empty_title">Nothing on today\'s list yet.</string>
+    <string name="recap_empty_line">Things join this list when Earmark shows you their chip or pill.</string>
     <plurals name="recap_open_loops">
-        <item quantity="one">Watching %d open loop. Earmark shows it at your next unlock if it stands out. The Log says why or why not.</item>
-        <item quantity="other">Watching %d open loops. Earmark shows the likeliest one at your next unlock if it stands out. The Log says why or why not.</item>
+        <item quantity="one">Watching %d open loop. It can come back as a chip when you unlock, or as a pill if you drift into a feed app. The Log shows each step.</item>
+        <item quantity="other">Watching %d open loops. The likeliest can come back as a chip when you unlock, or as a pill if you drift into a feed app. The Log shows each step.</item>
     </plurals>
     <plurals name="recap_title">
         <item quantity="one">You came for %d thing.</item>
