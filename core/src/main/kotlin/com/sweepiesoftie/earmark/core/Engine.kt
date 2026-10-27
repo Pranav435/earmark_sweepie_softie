@@ -264,7 +264,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
 
     private fun handBack(tracked: Tracked, from: String): List<Effect> {
         val loop = tracked.loop
-        val effects = mutableListOf<Effect>(Effect.OpenWayBack(loop.id, loop.route), Effect.Log("hand-back from $from: ${loop.id.value} via ${loop.route::class.simpleName}"))
+        val effects = mutableListOf<Effect>(Effect.OpenWayBack(loop.id, loop.route), Effect.Log("hand-back from $from: ${loop.id.value} via ${routeName(loop.route)}"))
         if (loop.canReply && loop.notificationKey != null) effects += Effect.SuggestReplies(loop.id, loop.notificationKey)
         return effects
     }
@@ -333,6 +333,14 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         outcome = outcome,
         broughtBack = outcome == Outcome.Done && tracked.handedBack,
     )
+
+    /** Spelled out because R8 renames classes in release builds. */
+    private fun routeName(route: Route): String = when (route) {
+        is Route.Notification -> "the notification's tap action"
+        is Route.LaunchApp -> "the app's launch intent"
+        is Route.SetAlarm -> "set alarm"
+        is Route.OpenUri -> "a link"
+    }
 
     private fun hideAll(): List<Effect> = Overlay.entries.map { Effect.HideOverlay(it) }
 

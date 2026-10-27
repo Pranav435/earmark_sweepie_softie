@@ -86,8 +86,7 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
     fun showChip(chip: ChipCard) {
         val timeout = a11y.getRecommendedTimeoutMillis(CHIP_MILLIS, AccessibilityManager.FLAG_CONTENT_TEXT or AccessibilityManager.FLAG_CONTENT_CONTROLS).toLong()
         _ui.update { it.copy(chip = chip, pill = null, chipTimeoutMillis = timeout, reduceMotion = reduceMotion()) }
-        top.attach()
-        if (unlockedAtMillis > 0) {
+        if (top.attach() && unlockedAtMillis > 0) {
             log.add("chip attached ${SystemClock.elapsedRealtime() - unlockedAtMillis} ms after unlock")
             unlockedAtMillis = 0
         }
@@ -193,12 +192,13 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
         private var attached = false
         private val detach = Runnable { detachNow() }
 
-        fun attach() {
+        /** Returns whether the window is on screen. */
+        fun attach(): Boolean {
             handler.removeCallbacks(detach)
-            if (attached) return
+            if (attached) return true
             if (!Permissions.overlay(context)) {
                 log.add("OverlayHost: no overlay permission, $name not shown")
-                return
+                return false
             }
             try {
                 // A detached view misses configuration changes such as a new font scale.
@@ -208,6 +208,7 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
             } catch (e: RuntimeException) {
                 log.error("addView($name)", e)
             }
+            return attached
         }
 
         fun detachLater() {

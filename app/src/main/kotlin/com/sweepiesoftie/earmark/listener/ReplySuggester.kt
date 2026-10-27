@@ -1,15 +1,27 @@
 package com.sweepiesoftie.earmark.listener
 
 import com.google.mlkit.nl.smartreply.SmartReply
+import com.google.mlkit.nl.smartreply.SmartReplyGenerator
 import com.google.mlkit.nl.smartreply.SmartReplySuggestionResult
 import com.google.mlkit.nl.smartreply.TextMessage
 import com.sweepiesoftie.earmark.DebugLog
 
 /** ML Kit Smart Reply with the bundled model: on-device, English, up to 3 replies from the last ≤ 10 messages. */
 class ReplySuggester(private val wayBacks: WayBackRegistry, private val log: DebugLog) {
-    private val client = SmartReply.getClient()
+    /** Built on first use and guarded, so an ML Kit failure only hides the reply strip. */
+    private val client: SmartReplyGenerator? by lazy {
+        try {
+            SmartReply.getClient()
+        } catch (e: RuntimeException) {
+            log.error("smart reply client", e)
+            null
+        }
+    }
+    private var started = false
 
     fun suggest(notificationKey: String, onResult: (List<String>) -> Unit) {
+        started = true
+        val client = client ?: return onResult(emptyList())
         val messages = wayBacks[notificationKey]?.messages.orEmpty().takeLast(10)
         if (messages.isEmpty() || messages.last().fromUser) return onResult(emptyList())
         val conversation = messages.map {
@@ -33,5 +45,7 @@ class ReplySuggester(private val wayBacks: WayBackRegistry, private val log: Deb
         }
     }
 
-    fun close(): Unit = client.close()
+    fun close() {
+        if (started) client?.close()
+    }
 }
