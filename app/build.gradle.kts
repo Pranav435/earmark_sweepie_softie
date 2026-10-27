@@ -1,8 +1,13 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
 }
+
+val releaseKey: Properties? = rootProject.file("keystore.properties").takeIf { it.exists() }
+    ?.let { file -> Properties().apply { file.inputStream().use { load(it) } } }
 
 android {
     namespace = "com.sweepiesoftie.earmark"
@@ -17,12 +22,26 @@ android {
     }
 
     signingConfigs {
-        // v0.1 is sideloaded to testers only, so release is signed with the debug key (ADR 0010).
-        create("sideload") {
-            storeFile = file(System.getProperty("user.home") + "/.android/debug.keystore")
-            storePassword = "android"
-            keyAlias = "androiddebugkey"
-            keyPassword = "android"
+        // Release builds are signed with the Sweepie Softie release key named in keystore.properties,
+        // which is never committed (ADR 0016). Without it the build still works, signed with the
+        // debug key, but that APK can't update an installed Earmark and phones may block it.
+        create("release") {
+            if (releaseKey != null) {
+                storeFile = file(releaseKey.getProperty("storeFile"))
+                storePassword = releaseKey.getProperty("storePassword")
+                keyAlias = releaseKey.getProperty("keyAlias")
+                keyPassword = releaseKey.getProperty("keyPassword")
+            } else {
+                logger.warn("keystore.properties not found: signing the release APK with the debug key")
+                storeFile = file(System.getProperty("user.home") + "/.android/debug.keystore")
+                storePassword = "android"
+                keyAlias = "androiddebugkey"
+                keyPassword = "android"
+            }
+            // Every scheme, so older installers and scanners that only read v1 still verify it.
+            enableV1Signing = true
+            enableV2Signing = true
+            enableV3Signing = true
         }
     }
 
@@ -31,7 +50,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("sideload")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 

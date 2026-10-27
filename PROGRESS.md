@@ -67,3 +67,7 @@ Start: Tue Oct 27 11:27:46 IST 2026 (budget 3 h, feature freeze 2:30 → 13:57, 
     - Reply-strip buttons have press feedback.
     - The chip only fades when a pill replaces it.
   - dist/earmark-v0.1.apk is now committed to the repo.
+- 13:24 Real-phone install was blocked, so release builds are now signed with a dedicated Sweepie Softie RSA 4096 key, using signature schemes v1, v2 and v3 (ADR 0016 supersedes 0010).
+  - The keystore is ~/.android/earmark-release.jks; keystore.properties is git-ignored.
+  - Verified with apksigner. Reinstalled on the emulator with setup-phone.sh, and the chip still shows (21 ms after unlock).
+  - The README now covers the debug-key conflict, Play Protect, and the sensitive-permission block on browser and file-manager installs.

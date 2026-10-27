@@ -20,6 +20,8 @@ The release APK lands in `app/build/outputs/apk/release/`. Copy it to `dist/earm
 
 ## Gotchas found building v0.1
 
+- **Signing:** release builds use the Sweepie Softie key named in the git-ignored `keystore.properties` (the keystore is `~/.android/earmark-release.jks` on Pranav's Mac; see ADR 0016). If that file is missing, Gradle falls back to the debug key with a warning. Don't ship that APK: it can't update an installed Earmark.
+
 - **Release-only crashes:** R8 strips ML Kit's reflectively loaded registrars. The keep rules are in `app/proguard-rules.pro`. Always smoke-test the release APK, because a debug build hides this.
 - **Unlock:** the Android 16 emulator doesn't deliver `USER_PRESENT` to runtime receivers. `SystemReceivers` watches the keyguard after `SCREEN_ON` instead (ADR 0013). On the emulator, run `adb shell locksettings set-disabled false` so there is a lock screen to dismiss.
 - **compileSdk 37, targetSdk 36:** Compose 1.12 requires compileSdk 37; the test emulator is API 36.

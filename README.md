@@ -13,6 +13,14 @@ The APK is `dist/earmark-v0.1.apk` in this repository. On GitHub, open that file
 
 `scripts/setup-phone.sh` installs the APK and grants every permission that adb can grant, in one go.
 
+### If the install is blocked
+
+- **"App not installed" or "conflicts with an existing package":** an older Earmark signed with a different key is on the phone. Builds from before 27 October 2026 were signed with a debug key. Uninstall Earmark, then install again.
+- **Play Protect says the app is unsafe or unrecognised:** tap **More details › Install anyway**. Earmark isn't from the Play Store, and it asks for notification access, which Play Protect treats as sensitive.
+- **Blocked with a message about sensitive permissions, and no way past it:** in some countries Google blocks apps that ask for notification access when they're installed from a browser, a messaging app or a file manager. Install over USB with `adb install -r dist/earmark-v0.1.apk` or `scripts/setup-phone.sh`, which that check doesn't cover.
+
+The APK is signed with the Sweepie Softie release key. To check it, run `apksigner verify --print-certs dist/earmark-v0.1.apk`; it should show `CN=Sweepie Softie, OU=Earmark, O=Sweepie Softie`.
+
 ## Allow restricted settings (Android 13 and later)
 
 Android blocks notification access for apps installed from a file until you allow it:
@@ -111,7 +119,6 @@ The Ride story needs a ride app (Uber, Ola, Lyft, Bolt, Rapido or Grab) and the 
 - Smart Reply is English only. Chip and pill copy is English only.
 - Messaging apps that clear their notification when the chat opens close the loop at that point, so Earmark's reply strip doesn't appear for them.
 - On some Android 16 builds the system never tells apps about an unlock (`USER_PRESENT`), so Earmark watches the lock screen briefly after the screen turns on instead (ADR 0013).
-- The release APK is signed with a debug key. A future store build will need a fresh install.
 
 ## For developers
 
