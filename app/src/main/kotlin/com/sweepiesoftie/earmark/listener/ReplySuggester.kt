@@ -23,7 +23,8 @@ class ReplySuggester(private val wayBacks: WayBackRegistry, private val log: Deb
         started = true
         val client = client ?: return onResult(emptyList())
         val messages = wayBacks[notificationKey]?.messages.orEmpty().takeLast(10)
-        if (messages.isEmpty() || messages.last().fromUser) return onResult(emptyList())
+        if (messages.isEmpty()) return onResult(emptyList()).also { log.add("smart reply: no strip, the notification has no messages") }
+        if (messages.last().fromUser) return onResult(emptyList()).also { log.add("smart reply: no strip, the last message is yours") }
         val conversation = messages.map {
             if (it.fromUser) TextMessage.createForLocalUser(it.text, it.atMillis)
             else TextMessage.createForRemoteUser(it.text, it.atMillis, it.senderKey)
@@ -32,7 +33,7 @@ class ReplySuggester(private val wayBacks: WayBackRegistry, private val log: Deb
             client.suggestReplies(conversation)
                 .addOnSuccessListener { result ->
                     val replies = if (result.status == SmartReplySuggestionResult.STATUS_SUCCESS) result.suggestions.map { it.text }.take(3) else emptyList()
-                    log.add("smart reply: ${replies.size} suggestions (status ${result.status})")
+                    log.add("smart reply: ${replies.size} suggestions (${statusName(result.status)})")
                     onResult(replies)
                 }
                 .addOnFailureListener { e ->
@@ -47,5 +48,13 @@ class ReplySuggester(private val wayBacks: WayBackRegistry, private val log: Deb
 
     fun close() {
         if (started) client?.close()
+    }
+
+    /** ML Kit only answers in English, and stays quiet when it isn't confident or the topic is sensitive. */
+    private fun statusName(status: Int): String = when (status) {
+        SmartReplySuggestionResult.STATUS_SUCCESS -> "ok"
+        SmartReplySuggestionResult.STATUS_NOT_SUPPORTED_LANGUAGE -> "not English"
+        SmartReplySuggestionResult.STATUS_NO_REPLY -> "no confident reply"
+        else -> "status $status"
     }
 }

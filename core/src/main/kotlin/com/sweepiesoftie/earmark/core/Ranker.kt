@@ -12,29 +12,31 @@ internal data class Score(val recent: Double, val who: Double, val due: Double, 
         "%.2f (recent %.2f · who %.2f · due %.2f · history %.2f · boost %.2f)".format(total, recent, who, due, history, boost)
 }
 
-/** Scores open loops at unlock with the starting weights from architecture.md. */
+/** Scores open loops at unlock, and messages as they come in during use, with the starting weights from architecture.md. */
 internal object Ranker {
     const val CHIP_THRESHOLD: Double = 0.70
     private const val UNLOCK_BOOST = 0.15
     private const val RECENT_HALF_LIFE_MINUTES = 30.0
 
-    /** [lastUnlock] is the unlock before this one, or null when the engine hasn't seen one since it started. */
-    fun score(loop: Loop, unlockedAt: Instant, stats: Stats, lastUnlock: Instant? = null): Score {
-        val ageMinutes = Duration.between(loop.updatedAt, unlockedAt).toMillis().coerceAtLeast(0) / 60_000.0
+    /**
+     * [unseen] is true when this is your first chance to act on the loop's latest message or request: it came in
+     * while the phone was put down and this is the first unlock since, however long after, or it is arriving now.
+     */
+    fun score(loop: Loop, now: Instant, stats: Stats, unseen: Boolean = true): Score {
+        val ageMinutes = Duration.between(loop.updatedAt, now).toMillis().coerceAtLeast(0) / 60_000.0
         // Alarms and events are about now, not about when Earmark noticed them.
         val recent = when (loop.kind) {
             LoopKind.Routine, LoopKind.LeaveBy -> 1.0
             else -> exp(-ageMinutes / RECENT_HALF_LIFE_MINUTES)
         }
-        // The first unlock after a message or request arrives is the one most likely to be for it, however long after.
-        val firstUnlockSince = (lastUnlock == null || loop.updatedAt.isAfter(lastUnlock)) &&
-            loop.kind in setOf(LoopKind.Reply, LoopKind.Payment)
+        // Your first chance to act on a message or request is the one most likely to be for it.
+        val boosted = unseen && loop.kind in setOf(LoopKind.Reply, LoopKind.Payment)
         return Score(
             recent = recent,
             who = who(loop, stats),
             due = loop.due,
             history = history(stats.kinds[loop.kind]),
-            boost = if (firstUnlockSince) UNLOCK_BOOST else 0.0,
+            boost = if (boosted) UNLOCK_BOOST else 0.0,
         )
     }
 

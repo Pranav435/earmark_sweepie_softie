@@ -8,7 +8,6 @@
     <string name="overlay_chip_not_this">Not this</string>
     <string name="overlay_open">Open it now</string>
     <string name="overlay_pill_pane">Earmark pill</string>
-    <string name="overlay_pill_label">You came here to</string>
     <string name="overlay_pill_not_now">Not now</string>
     <string name="overlay_strip_pane">Replies to %1$s</string>
     <string name="overlay_strip_to">To %1$s</string>

@@ -32,5 +32,6 @@ The release APK lands in `app/build/outputs/apk/release/`. Copy it to `dist/earm
 - **Dark mode:** screens take colours from `Tone` (Components.kt), which follows the system theme; `Brand` is for the overlays and marigold fills, which look the same in both themes. Check both with `adb shell cmd uimode night yes|no`.
 - **Overlays:** uiautomator can't see them, so tap by coordinates. The chip ✓ sits at about (960, 379) and the pill button at about (893, 376) on the 1080×2400 emulator. Injected touches bypass TalkBack, so check accessibility through the node tree (`uiautomator dump`).
 - **Shell quoting:** the YouTube launcher activity has a `$` in its name: `adb shell "am start -n 'com.google.android.youtube/.app.honeycomb.Shell\$HomeActivity'"`.
+- **Real chat notifications on the emulator:** `adb emu sms send 5551234 "free at 5?"` makes Google Messages post a MessagingStyle notification with a reply action that clears itself when the chat opens, like WhatsApp. Use it to test arrivals, taps and the reply strip without demo mode.
 - **Device setup:** `scripts/setup-phone.sh` installs the APK and grants every permission adb can grant, on a phone or the emulator.
 - **Some project-folder files are iCloud placeholders** (`ls -lO` shows `dataless`), and reading one hangs.

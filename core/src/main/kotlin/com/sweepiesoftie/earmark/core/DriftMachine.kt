@@ -10,11 +10,15 @@ internal data class Drift(
     val phase: Phase = Phase.Idle,
     val loopId: LoopId? = null,
     val loopPackage: String? = null,
+    /** The guess came in while the phone was in use, rather than being what you unlocked it for. */
+    val arrived: Boolean = false,
     val feedSince: Instant? = null,
     val playback: Playback = Playback.None,
     val blockers: Set<Blocker> = emptySet(),
     /** Survives sessions: the 10-minute cooldown is between any two pills. */
     val lastPillAt: Instant? = null,
+    /** The guess this one took over for a detour, such as a chat opened from its own notification. It comes back after. */
+    val resume: Drift? = null,
 )
 
 internal sealed interface DriftInput {
@@ -40,10 +44,20 @@ internal data class DriftStep(val drift: Drift, val showPill: Boolean = false, v
  * The engine moves HandedBack to Left when you leave the loop's app with its chat not open.
  */
 internal object DriftMachine {
-    fun guess(drift: Drift, loopId: LoopId, loopPackage: String?): Drift =
-        drift.copy(phase = Phase.Guessed, loopId = loopId, loopPackage = loopPackage, feedSince = null)
+    fun guess(drift: Drift, loopId: LoopId, loopPackage: String?, arrived: Boolean = false): Drift =
+        drift.copy(phase = Phase.Guessed, loopId = loopId, loopPackage = loopPackage, arrived = arrived, feedSince = null, resume = null)
 
     fun end(drift: Drift): Drift = Drift(playback = drift.playback, blockers = drift.blockers, lastPillAt = drift.lastPillAt)
+
+    /** Back to [previous] after a detour. Drift starts over, but a pill already shown or swiped away stays that way. */
+    fun resume(drift: Drift, previous: Drift): Drift = previous.copy(
+        phase = if (previous.phase in setOf(Phase.InFeed, Phase.Drifting, Phase.PillShown)) Phase.Guessed else previous.phase,
+        feedSince = null,
+        playback = drift.playback,
+        blockers = drift.blockers,
+        lastPillAt = drift.lastPillAt,
+        resume = null,
+    )
 
     fun step(drift: Drift, input: DriftInput, now: Instant, rules: DriftRules): DriftStep {
         val d = when (input) {

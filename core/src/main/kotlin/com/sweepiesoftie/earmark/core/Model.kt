@@ -137,7 +137,8 @@ public data class ChipCard(
     val score: Double,
 )
 
-public data class PillCard(val loopId: LoopId, val kind: LoopKind, val task: String, val verb: String)
+/** [label] says why the task is back: "You came here to", or "Before you forget" for something that came in while you were using the phone. */
+public data class PillCard(val loopId: LoopId, val kind: LoopKind, val label: String, val task: String, val verb: String)
 
 /** One row of the recap, upserted by loop id. Labels are trimmed to kind and time after 24 h by the store. */
 public data class LoopEntry(

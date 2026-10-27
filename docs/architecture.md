@@ -38,19 +38,19 @@ Effects out  ShowChip(card) · ShowDot · ShowPill(card) · HideOverlay(which) �
 | Chip | Unlock-time guess ("Here to reply to Rahul?"). ✓ holds it; ignoring it lets it fade |
 | Drift | A feed app has been in front for 90 s (10 s in demo mode) while the guessed loop is open and the loop's own app is not in front |
 | Pause | Media paused or stopped, the audio player changing (a reel boundary), or an app switch |
-| Pill | The drift prompt: "You came here to · Reply to Rahul · **Do it now**" |
+| Pill | The drift prompt: "You came here to · Reply to Rahul · **Do it now**", or "Before you forget · …" for a message that arrived while the phone was in use |
 
 ## The guess (at every unlock)
 
 ```
-score = 0.35·recent + 0.25·who + 0.25·due + 0.15·history  (+0.15 at the first unlock after the message or request)
+score = 0.35·recent + 0.25·who + 0.25·due + 0.15·history  (+0.15 for a message or request that came in while the phone was put down)
 recent = exp(-age / 30 min)   who = reply affinity for this contact (default 0.5)
 due = 0.5 for a message to you, +0.25 for "?", +0.25 for a time word; event start; request age
 history = confirm rate for this kind (default 0.5)
 chip only if score > 0.70 · 3 ignores in a row mute that kind
 ```
 
-ADR 0017 changed `due` and the boost after the first real-phone test, where a plain "hey" could never clear the bar.
+ADR 0017 changed `due` and the boost after the first real-phone test, where a plain "hey" could never clear the bar. ADR 0020 gives the boost only to messages that came in while the phone was put down. A message that arrives while the phone is in use gets no chip; it is scored the same way as it arrives and, above the bar, quietly becomes the guess.
 
 ## Drift state machine
 

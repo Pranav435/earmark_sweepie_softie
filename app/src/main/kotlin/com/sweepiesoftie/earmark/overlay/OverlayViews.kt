@@ -285,7 +285,6 @@ private fun Chip(
 @Composable
 private fun Pill(pill: PillCard, onAct: (LoopId) -> Unit, onDismiss: (LoopId) -> Unit) {
     val pane = stringResource(R.string.overlay_pill_pane)
-    val label = stringResource(R.string.overlay_pill_label)
     val notNow = stringResource(R.string.overlay_pill_not_now)
     val swipe = remember(pill.loopId) { SwipeAway() }
     Row(
@@ -316,7 +315,7 @@ private fun Pill(pill: PillCard, onAct: (LoopId) -> Unit, onDismiss: (LoopId) ->
                 .weight(1f)
                 .semantics(mergeDescendants = true) { },
         ) {
-            Text(label, color = PaperDim, fontFamily = InstrumentSans, fontSize = 12.sp, lineHeight = 16.sp, maxLines = 2)
+            Text(pill.label, color = PaperDim, fontFamily = InstrumentSans, fontSize = 12.sp, lineHeight = 16.sp, maxLines = 2)
             Text(pill.task, color = Brand.Paper, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, maxLines = 3, overflow = TextOverflow.Ellipsis)
         }
         Spacer(Modifier.width(8.dp))

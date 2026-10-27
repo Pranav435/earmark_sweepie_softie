@@ -130,10 +130,149 @@ class EngineTest {
     }
 
     @Test
-    fun `tapping the notification closes the loop but is not counted as a reply`() = with(Script()) {
+    fun `tapping the notification and leaving the chat closes the loop, but is not counted as a reply`() = with(Script()) {
         at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
-        val effects = at(at(16, 12), Event.NotificationRemoved(Fixtures.rahul(at(16, 11)).key, RemovalReason.Click))
+        val effects = at(at(16, 12), Event.NotificationRemoved(Fixtures.rahul(at(16, 11)).key, RemovalReason.Click)) +
+            at(at(16, 12, 1), Event.ForegroundChanged(Fixtures.CHATS, "Chats")) +
+            at(at(16, 13), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
         assertTrue(effects.none { it is Effect.RecordContact })
+        assertEquals(0, engine.openLoops)
+    }
+
+    @Test
+    fun `a message that comes in while you use the phone gets no chip, and drift brings it back`() =
+        with(Script(Fixtures.settings.copy(driftAfter = java.time.Duration.ofSeconds(10)))) {
+            assertTrue(at(at(16, 0), Event.Unlocked).none { it is Effect.ShowChip })
+            at(at(16, 0, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+
+            // Its heads-up already showed, so a chip on top would only repeat it.
+            assertTrue(at(at(16, 1), Event.NotificationPosted(Fixtures.rahul(at(16, 1), "hey"))).none { it is Effect.ShowChip })
+            val pill = at(at(16, 1, 11), Event.Tick).one<Effect.ShowPill>().pill
+            assertEquals("Before you forget", pill.label)
+            assertEquals("Reply to Rahul", pill.task)
+            assertEquals("Do it now", pill.verb)
+        }
+
+    @Test
+    fun `a message that came in while you used the phone doesn't come back as a chip at the next unlock`() = with(Script()) {
+        at(at(16, 0), Event.Unlocked)
+        at(at(16, 1), Event.NotificationPosted(Fixtures.rahul(at(16, 1), "hey")))
+        at(at(16, 2), Event.ScreenOff)
+        // 0.35*exp(-3/30) + 0.125 + 0.125 + 0.075 = 0.6417: you saw its heads-up, so no boost
+        assertTrue(at(at(16, 4), Event.Unlocked).none { it is Effect.ShowChip })
+        assertTrue(log.last(), "boost 0.00" in log.last())
+
+        // One that came in while the phone was down still gets the first unlock after it.
+        at(at(16, 5), Event.ScreenOff)
+        at(at(16, 6), Event.NotificationPosted(Fixtures.priya(at(16, 6))))
+        assertEquals("Here to reply to Priya?", at(at(16, 8), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+    }
+
+    @Test
+    fun `a message during use doesn't take over a guess you came for`() =
+        with(Script(Fixtures.settings.copy(driftAfter = java.time.Duration.ofSeconds(10)))) {
+            at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+            val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
+            at(at(16, 12, 3), Event.ChipHeld(chip.loopId))
+            at(at(16, 12, 10), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+
+            at(at(16, 12, 15), Event.NotificationPosted(Fixtures.priya(at(16, 12, 15))))
+            val pill = at(at(16, 12, 21), Event.Tick).one<Effect.ShowPill>().pill
+            assertEquals("You came here to", pill.label)
+            assertEquals("Reply to Rahul", pill.task)
+        }
+
+    @Test
+    fun `a newer message during use takes over from an earlier one`() =
+        with(Script(Fixtures.settings.copy(driftAfter = java.time.Duration.ofSeconds(10)))) {
+            at(at(16, 0), Event.Unlocked)
+            at(at(16, 0, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+            at(at(16, 1), Event.NotificationPosted(Fixtures.rahul(at(16, 1), "hey")))
+            at(at(16, 1, 5), Event.NotificationPosted(Fixtures.priya(at(16, 1, 5))))
+            assertTrue("drift starts again from the newer message", at(at(16, 1, 11), Event.Tick).none { it is Effect.ShowPill })
+            assertEquals("Reply to Priya", at(at(16, 1, 16), Event.Tick).one<Effect.ShowPill>().pill.task)
+        }
+
+    @Test
+    fun `after the listener reconnects mid-session, the foreground poll's ticks say the phone is in use`() =
+        with(Script(Fixtures.settings.copy(driftAfter = java.time.Duration.ofSeconds(10)))) {
+            // No unlock and no app switch since the engine started: an update was installed while you were on the phone.
+            at(at(16, 0), Event.Tick)
+            at(at(16, 1), Event.NotificationPosted(Fixtures.rahul(at(16, 1), "hey")))
+            at(at(16, 1, 1), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+            assertEquals("Before you forget", at(at(16, 1, 12), Event.Tick).one<Effect.ShowPill>().pill.label)
+        }
+
+    @Test
+    fun `an old message delivered late during use doesn't become the guess`() =
+        with(Script(Fixtures.settings.copy(driftAfter = java.time.Duration.ofSeconds(10)))) {
+            at(at(16, 0), Event.Unlocked)
+            at(at(16, 0, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+            // Sent at 15:56 while the phone was offline, or replayed when the listener reconnects.
+            // 0.35*exp(-5/30) + 0.125 + 0.125 + 0.075 + 0.15 = 0.7713 would clear the bar, but it isn't new.
+            at(at(16, 1), Event.NotificationPosted(Fixtures.rahul(at(15, 56), "hey")))
+            assertTrue(at(at(16, 2), Event.Tick).none { it is Effect.ShowPill })
+        }
+
+    @Test
+    fun `tapping any reply notification opens its chat with the reply strip, not only the guessed one`() = with(Script()) {
+        val rahul = Fixtures.rahul(at(16, 0), "hey")
+        at(at(16, 0), Event.NotificationPosted(rahul))
+        at(at(16, 11, 30), Event.NotificationPosted(Fixtures.priya(at(16, 11, 30))))
+        assertEquals("Here to reply to Priya?", at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+
+        // You pull down the shade and tap Rahul's message instead.
+        val tapped = at(at(16, 12, 20), Event.NotificationRemoved(rahul.key, RemovalReason.Click))
+        assertEquals(Effect.SuggestReplies(LoopId("reply:hash-rahul"), rahul.key, "Rahul"), tapped.one<Effect.SuggestReplies>())
+        assertTrue(Effect.HideOverlay(Overlay.Chip) in tapped)
+        assertTrue(tapped.none { it is Effect.RecordLoop || it is Effect.Forget })
+
+        at(at(16, 12, 21), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))
+        assertEquals(rahul.key, at(at(16, 12, 30), Event.ReplyChosen(LoopId("reply:hash-rahul"), "Yes, 5 works!")).one<Effect.SendReply>().notificationKey)
+        assertTrue(Effect.Forget(rahul.key) in at(at(16, 12, 31), Event.ReplySent(LoopId("reply:hash-rahul"))))
+    }
+
+    @Test
+    fun `a chat opened from its notification is a detour, and the guess you held comes back after it`() =
+        with(Script(Fixtures.settings.copy(driftAfter = java.time.Duration.ofSeconds(10)))) {
+            at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+            val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
+            at(at(16, 12, 3), Event.ChipHeld(chip.loopId))
+
+            val priya = Fixtures.priya(at(16, 12, 30))
+            at(at(16, 12, 30), Event.NotificationPosted(priya))
+            val tapped = at(at(16, 12, 40), Event.NotificationRemoved(priya.key, RemovalReason.Click))
+            assertEquals(LoopId("reply:hash-priya"), tapped.one<Effect.SuggestReplies>().loopId)
+            assertTrue("the dot still keeps Rahul", Effect.HideOverlay(Overlay.Dot) !in tapped)
+
+            at(at(16, 12, 41), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))
+            at(at(16, 13), Event.ReplyChosen(LoopId("reply:hash-priya"), "Sure"))
+            val sent = at(at(16, 13, 1), Event.ReplySent(LoopId("reply:hash-priya")))
+            assertTrue(Effect.HideOverlay(Overlay.ReplyStrip) in sent)
+            assertTrue(Effect.HideOverlay(Overlay.Dot) !in sent)
+
+            at(at(16, 13, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+            val pill = at(at(16, 13, 16), Event.Tick).one<Effect.ShowPill>().pill
+            assertEquals("You came here to", pill.label)
+            assertEquals("Reply to Rahul", pill.task)
+        }
+
+    @Test
+    fun `tapping another chat's notification while a chat is open moves the strip to it`() = with(Script()) {
+        val rahul = Fixtures.rahul(at(16, 0), "hey")
+        val priya = Fixtures.priya(at(16, 11, 30))
+        at(at(16, 0), Event.NotificationPosted(rahul))
+        at(at(16, 11, 30), Event.NotificationPosted(priya))
+        at(at(16, 12), Event.Unlocked)
+        at(at(16, 12, 10), Event.NotificationRemoved(priya.key, RemovalReason.Click))
+        at(at(16, 12, 11), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))
+
+        // Rahul's heads-up comes down over Priya's chat, and you tap it.
+        val moved = at(at(16, 12, 40), Event.NotificationRemoved(rahul.key, RemovalReason.Click))
+        assertEquals(LoopId("reply:hash-rahul"), moved.one<Effect.SuggestReplies>().loopId)
+        assertEquals("Priya's chat was read", Outcome.Done, moved.one<Effect.RecordLoop>().entry.outcome)
+        assertTrue(Effect.Forget(priya.key) in moved)
+        assertEquals(1, engine.openLoops)
     }
 
     @Test

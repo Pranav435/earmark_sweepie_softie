@@ -36,6 +36,19 @@ object Fixtures {
         category = "msg",
     )
 
+    fun priya(at: Instant, text: String = "hey", key: String = "0|com.whatsapp|2|priya|10123"): Signal = Signal(
+        key = key,
+        packageName = CHATS,
+        appLabel = "Chats",
+        postedAt = at,
+        title = "Priya",
+        text = text,
+        messages = listOf(Message("Priya", text, at)),
+        conversationKey = "hash-priya",
+        hasReplyAction = true,
+        category = "msg",
+    )
+
     fun aisha(at: Instant, key: String = "0|com.google.android.apps.nbu.paisa.user|7|null|10200"): Signal = Signal(
         key = key,
         packageName = PAY,

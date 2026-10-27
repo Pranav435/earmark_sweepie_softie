@@ -54,6 +54,10 @@ _Avoid_: prediction, suggestion
 **Score**:
 How strongly a loop is guessed, from 0 to about 1.15; a chip appears only above 0.70.
 
+**Arrival**:
+A message or request that comes in while you are using the phone. Its heads-up already showed, so it gets no chip, but it can quietly become the guess.
+_Avoid_: mid-session message
+
 **Chip**:
 The small card that shows the guess right after unlock.
 _Avoid_: banner, toast, popup
@@ -90,7 +94,7 @@ A natural break in the feed: media paused or stopped, the next reel starting, or
 Something that holds the pill back: a call, active navigation, Do Not Disturb or media still playing.
 
 **Pill**:
-The prompt shown at a pause during drift: "You came here to · Reply to Rahul · Do it now".
+The prompt shown at a pause during drift: "You came here to · Reply to Rahul · Do it now". For an arrival it reads "Before you forget · Reply to Priya · Do it now".
 _Avoid_: nudge, interruption, alert
 
 **Hand-back**:

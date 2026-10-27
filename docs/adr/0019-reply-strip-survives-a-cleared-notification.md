@@ -1,5 +1,7 @@
 # The reply strip stays when a chat app clears its notification
 
+**Extended by ADR 0020:** a tap on any message's notification now opens its chat with the strip, not only the guessed one.
+
 WhatsApp and Google Messages clear a chat's notification the moment the chat opens. Earmark treated that as evidence that the Reply loop was done. It closed the loop, hid the reply strip and dropped the notification's reply action and message text. So after a hand-back into WhatsApp, the suggested replies never appeared.
 
 Now, when the guessed Reply loop's notification is removed because you opened its chat, the loop stays open in a "chat open" state. The removal counts as opening the chat in three cases:

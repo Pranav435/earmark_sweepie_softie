@@ -39,7 +39,9 @@ class ForegroundWatcher(
         }
         current = null
         job = scope.launch(Dispatchers.IO) {
-            var since = System.currentTimeMillis() - LOOKBACK_MILLIS
+            // Far enough back to find the app in front even if it opened before the watcher started,
+            // as when the listener reconnects mid-session after an update.
+            var since = System.currentTimeMillis() - FIRST_LOOKBACK_MILLIS
             while (isActive) {
                 val now = System.currentTimeMillis()
                 latestResumed(since, now)?.let { pkg ->
@@ -85,6 +87,6 @@ class ForegroundWatcher(
 
     private companion object {
         const val POLL_MILLIS = 1_000L
-        const val LOOKBACK_MILLIS = 10_000L
+        const val FIRST_LOOKBACK_MILLIS = 3_600_000L
     }
 }

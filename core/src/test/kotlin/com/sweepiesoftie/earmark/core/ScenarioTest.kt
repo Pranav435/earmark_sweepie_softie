@@ -28,6 +28,7 @@ class ScenarioTest {
         assertEquals("no pill while a reel plays", emptyList<Effect>(), at(at(16, 14), Event.Tick))
 
         val pill = at(at(16, 15, 30), Event.PlaybackChanged(Playback.TrackChanged)).one<Effect.ShowPill>().pill
+        assertEquals("You came here to", pill.label)
         assertEquals("Reply to Rahul", pill.task)
         assertEquals("Do it now", pill.verb)
 

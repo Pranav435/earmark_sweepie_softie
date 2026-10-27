@@ -1,5 +1,7 @@
 # A message to you is half due, and the first unlock after it gets the boost
 
+**Amended by ADR 0020:** the boost now goes to messages that came in while the phone was put down. One that came in while you were using the phone doesn't get it at the next unlock.
+
 Changes the starting weights from architecture.md. On the first real-phone test (a Samsung Galaxy A34), a tester sent the phone a WhatsApp message and no chip appeared. With the v0.1 weights, a message with no question mark and no time word, such as "hey", had `due` 0, so its best possible score was 0.35 + 0.125 + 0 + 0.075 + 0.15 = 0.70. The chip needs more than 0.70, so a message like that could never show one. A question only cleared the bar if the phone was unlocked within 60 seconds, or within about 10 minutes if it also had a time word. People usually pick up a phone some minutes after it buzzes, so most real messages fell below the bar.
 
 Two changes:

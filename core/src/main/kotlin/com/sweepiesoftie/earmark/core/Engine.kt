@@ -16,7 +16,12 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private var nextAlarm: Instant? = null
     private var calendar: List<CalendarEvent> = emptyList()
     private var foreground: Visit? = null
-    private var lastUnlock: Instant? = null
+
+    /** Unlocked and in use: from an unlock, or anything from the foreground poll (it only runs while unlocked), until screen off. */
+    private var inUse = false
+
+    /** When the phone was last put down after use. A loop updated since is unseen, so the next unlock boosts it. */
+    private var putDownAt: Instant? = null
     private val bookedAt = HashMap<String, Instant>()
 
     /** Routine and Leave-by loops are rebuilt from the clock and calendar, so remember which already closed. */
@@ -59,7 +64,10 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
             )
             emptyList()
         }
-        Event.Tick -> expire(now) + closeCleared(now) + stepDrift(DriftInput.Tick, now)
+        Event.Tick -> {
+            inUse = true
+            expire(now) + closeCleared(now) + stepDrift(DriftInput.Tick, now)
+        }
     }
 
     private fun onPosted(signal: Signal, now: Instant): List<Effect> =
@@ -76,7 +84,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
                     // The cleared notification won't be removed again, so nothing else would forget its way back.
                     before.loop.notificationKey?.takeIf { it != result.loop.notificationKey }?.let { effects += Effect.Forget(it) }
                 }
-                effects
+                effects + onArrival(result.loop, before, now)
             }
             is Classification.Replied ->
                 book.byConversation(result.conversation)?.let { close(it.loop.id, Outcome.Done, now, "you replied in ${signal.packageName}", replied = true) }
@@ -89,10 +97,35 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
             is Classification.Skip -> listOf(Effect.Log("skip ${signal.packageName}: ${result.reason}"), Effect.Forget(signal.key))
         }
 
+    /**
+     * A message or request that comes in while you use the phone has had its heads-up, so it gets no chip (ADR 0020).
+     * It quietly becomes the guess, so drift can still bring it back, unless the guess is something you came for.
+     */
+    private fun onArrival(loop: Loop, before: Tracked?, now: Instant): List<Effect> {
+        if (!inUse || settings.paused) return emptyList()
+        // Only a new message counts: not an app posting the same one again, or one delivered late.
+        if (before != null && !loop.updatedAt.isAfter(before.loop.updatedAt)) return emptyList()
+        if (Duration.between(loop.updatedAt, now) > arrivalWindow) return emptyList()
+        if (drift.loopId == loop.id && drift.phase != Phase.Left) return emptyList()
+
+        val id = loop.id.value
+        val replaceable = drift.phase == Phase.Idle || drift.phase == Phase.Left ||
+            (drift.arrived && drift.phase in setOf(Phase.Guessed, Phase.InFeed, Phase.Drifting))
+        if (!replaceable) return listOf(Effect.Log("$id came in during use; ${drift.loopId?.value} stays the guess (${drift.phase})"))
+        if (book[loop.id]?.ignored == true) return listOf(Effect.Log("$id came in during use; its chip was swiped this session"))
+        if (kindStat(loop.kind).muted) return listOf(Effect.Log("$id came in during use; ${loop.kind} is muted"))
+        val score = Ranker.score(loop, now, stats, unseen = true)
+        if (score.total <= Ranker.CHIP_THRESHOLD) {
+            return listOf(Effect.Log("$id came in during use; scored $score, needs > ${Ranker.CHIP_THRESHOLD}"))
+        }
+        drift = DriftMachine.guess(drift, loop.id, loop.packageName, arrived = true)
+        return listOf(Effect.Log("$id came in during use and is now the guess, score $score")) + resumeForeground(now)
+    }
+
     private fun onRemoved(event: Event.NotificationRemoved, now: Instant): List<Effect> {
         val tracked = book.byNotificationKey(event.key) ?: return listOf(Effect.Forget(event.key))
         val loop = tracked.loop
-        if (opensChat(tracked, event.reason)) return openChat(loop, event.reason)
+        if (opensChat(tracked, event.reason)) return openChat(loop, event.reason, now)
         if (event.reason == RemovalReason.AppCancel && isGuessedReply(tracked)) {
             // Chat apps clear it the moment they open, which can be before the foreground poll sees them.
             book.update(loop.id) { it.copy(clearedAt = now) }
@@ -101,29 +134,39 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         return close(loop.id, CloseRules.onRemoved(event.reason), now, "notification removed (${event.reason})")
     }
 
-    /** The guessed reply, with its chat not open yet: its notification going may mean you are opening the chat. */
-    private fun isGuessedReply(tracked: Tracked): Boolean =
-        tracked.loop.kind == LoopKind.Reply && tracked.loop.canReply && !tracked.chatOpen && drift.loopId == tracked.loop.id
+    /** A reply loop with its chat not open yet: its notification going may mean you are opening the chat. */
+    private fun canOpenChat(tracked: Tracked): Boolean =
+        tracked.loop.kind == LoopKind.Reply && tracked.loop.canReply && !tracked.chatOpen
 
-    /** The guessed reply's notification went because you opened its chat: through Earmark, from the notification, or in its app. */
-    private fun opensChat(tracked: Tracked, reason: RemovalReason): Boolean {
-        if (!isGuessedReply(tracked)) return false
-        return when (reason) {
-            RemovalReason.Click -> true
-            RemovalReason.AppCancel -> drift.phase == Phase.HandedBack || foreground?.packageName == tracked.loop.packageName
-            RemovalReason.UserDismiss, RemovalReason.Other -> false
-        }
+    private fun isGuessedReply(tracked: Tracked): Boolean = canOpenChat(tracked) && drift.loopId == tracked.loop.id
+
+    /** The notification went because you opened its chat: through Earmark, from the notification, or in its app. */
+    private fun opensChat(tracked: Tracked, reason: RemovalReason): Boolean = when (reason) {
+        // A tap names the chat, so any reply loop opens; a clear could be the app opening anywhere, so only the guess does.
+        RemovalReason.Click -> canOpenChat(tracked)
+        RemovalReason.AppCancel ->
+            isGuessedReply(tracked) && (drift.phase == Phase.HandedBack || foreground?.packageName == tracked.loop.packageName)
+        RemovalReason.UserDismiss, RemovalReason.Other -> false
     }
 
     /**
      * Chat apps clear the notification as the chat opens. Keep the loop, its reply action and its
      * message text, so the reply strip can show and send; it closes when you reply or leave.
+     * A chat you open from its notification becomes the guess, whatever the guess was.
      */
-    private fun openChat(loop: Loop, reason: RemovalReason): List<Effect> {
-        val handedBack = drift.phase == Phase.HandedBack
+    private fun openChat(loop: Loop, reason: RemovalReason, now: Instant): List<Effect> {
+        val effects = mutableListOf<Effect>()
+        val handedBack = drift.loopId == loop.id && drift.phase == Phase.HandedBack
+        if (drift.loopId != loop.id) {
+            // Moving on from an open chat means it was read, and its strip would send to the wrong person.
+            drift.loopId?.takeIf { book[it]?.chatOpen == true }?.let { effects += close(it, Outcome.Done, now, "moved to another chat") }
+            // A detour: once this chat closes, the guess it took over from comes back.
+            val previous = drift.takeIf { it.loopId != null }
+            drift = DriftMachine.guess(drift, loop.id, loop.packageName).copy(resume = previous)
+        }
         book.update(loop.id) { it.copy(chatOpen = true, clearedAt = null) }
         drift = drift.copy(phase = Phase.HandedBack)
-        val effects = mutableListOf<Effect>(Effect.Log("${loop.id.value}: chat opened and ${loop.packageName} cleared its notification ($reason); closes when you reply or leave"))
+        effects += Effect.Log("${loop.id.value}: chat opened and ${loop.packageName} cleared its notification ($reason); closes when you reply or leave")
         if (!handedBack) {
             // You opened it yourself, so a chip or pill may still be showing over the chat.
             effects += Effect.HideOverlay(Overlay.Chip)
@@ -134,8 +177,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     }
 
     private fun onUnlocked(now: Instant): List<Effect> {
-        val previousUnlock = lastUnlock
-        lastUnlock = now
+        inUse = true
         val effects = mutableListOf<Effect>()
         effects += hideAll()
         drift = DriftMachine.end(drift)
@@ -147,7 +189,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val carry = book.all.filter { it.carryOver }.maxByOrNull { it.loop.updatedAt }
         if (carry != null) {
             book.update(carry.loop.id) { it.copy(carryOver = false, guessedAt = now) }
-            val score = Ranker.score(carry.loop, now, stats, previousUnlock)
+            val score = Ranker.score(carry.loop, now, stats, unseen(carry.loop))
             drift = DriftMachine.guess(drift, carry.loop.id, carry.loop.packageName)
             effects += Effect.Log("unlock: carry-over chip for ${carry.loop.id.value}, score $score")
             effects += Effect.ShowChip(copy.carryOverChip(carry.loop, score.total))
@@ -156,7 +198,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
 
         val candidates = book.all.filter { !kindStat(it.loop.kind).muted }
         val muted = book.all.size - candidates.size
-        val best = candidates.map { it to Ranker.score(it.loop, now, stats, previousUnlock) }.maxByOrNull { it.second.total }
+        val best = candidates.map { it to Ranker.score(it.loop, now, stats, unseen(it.loop)) }.maxByOrNull { it.second.total }
         if (best == null) {
             return effects + Effect.Log("unlock: no chip, no open loops" + if (muted > 0) " ($muted muted)" else "")
         }
@@ -173,6 +215,12 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         return effects + resumeForeground(now)
     }
 
+    /**
+     * Updated since the phone was last put down, so this unlock is your first chance to see it. Before Earmark
+     * has seen the phone put down, everything counts: it doesn't know what you saw.
+     */
+    private fun unseen(loop: Loop): Boolean = putDownAt?.let { loop.updatedAt.isAfter(it) } ?: true
+
     /** The app in front may have been reported before the unlock: replay it so a feed left open still counts. */
     private fun resumeForeground(now: Instant): List<Effect> =
         foreground?.let { stepDrift(DriftInput.Foreground(it.packageName), now) }.orEmpty()
@@ -181,10 +229,14 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val left = closeWhere(now, "screen off after the chat app cleared it") { it.chatOpen || it.clearedAt != null }
         drift = DriftMachine.end(drift)
         foreground = null
+        // A screen that only lit up for a notification on the lock screen wasn't in use.
+        if (inUse) putDownAt = now
+        inUse = false
         return left + hideAll()
     }
 
     private fun onForeground(event: Event.ForegroundChanged, now: Instant): List<Effect> {
+        inUse = true
         val effects = mutableListOf<Effect>()
         val previous = foreground
         foreground = Visit(event.packageName, event.appLabel, now)
@@ -202,7 +254,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
                 effects += Effect.HideOverlay(Overlay.ReplyStrip)
             }
         }
-        if (guess?.clearedAt != null && event.packageName == guess.loop.packageName) effects += openChat(guess.loop, RemovalReason.AppCancel)
+        if (guess?.clearedAt != null && event.packageName == guess.loop.packageName) effects += openChat(guess.loop, RemovalReason.AppCancel, now)
         if (guess?.loop?.kind == LoopKind.LeaveBy && guess.loop.leaveBy?.isMeeting == true && event.packageName in meetingApps) {
             effects += close(guess.loop.id, Outcome.Done, now, "meeting app opened")
         }
@@ -248,7 +300,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         if (step.showPill && guess != null) {
             val shown = book.update(guess.loop.id) { it.copy(pillShown = true, guessedAt = it.guessedAt ?: now) }!!
             effects += Effect.HideOverlay(Overlay.Chip)
-            effects += Effect.ShowPill(copy.pill(guess.loop))
+            effects += Effect.ShowPill(copy.pill(guess.loop, drift.arrived))
             if (guess.guessedAt == null) effects += Effect.RecordLoop(entry(shown, outcome = null, closedAt = null))
         }
         return effects
@@ -327,7 +379,11 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun handBack(tracked: Tracked, from: String): List<Effect> {
         val loop = tracked.loop
         val effects = mutableListOf<Effect>(Effect.OpenWayBack(loop.id, loop.route), Effect.Log("hand-back from $from: ${loop.id.value} via ${routeName(loop.route)}"))
-        if (loop.canReply && loop.notificationKey != null) effects += suggestReplies(loop, loop.notificationKey)
+        if (loop.canReply && loop.notificationKey != null) {
+            effects += suggestReplies(loop, loop.notificationKey)
+        } else if (loop.kind == LoopKind.Reply) {
+            effects += Effect.Log("${loop.id.value}: its notification has no reply action, so no reply strip")
+        }
         return effects
     }
 
@@ -365,8 +421,11 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         if (replied && conversation != null) effects += recordReply(conversation, Duration.between(tracked.loop.updatedAt, now))
         tracked.loop.notificationKey?.let { effects += Effect.Forget(it) }
         if (drift.loopId == id) {
-            drift = DriftMachine.end(drift)
-            effects += Overlay.entries.map { Effect.HideOverlay(it) }
+            val back = drift.resume?.takeIf { book[it.loopId] != null }
+            drift = if (back != null) DriftMachine.resume(drift, back) else DriftMachine.end(drift)
+            // The dot stays while it keeps the guess you go back to.
+            effects += Overlay.entries.filter { back == null || it != Overlay.Dot }.map { Effect.HideOverlay(it) }
+            back?.let { effects += Effect.Log("back to ${it.loopId?.value} as the guess") }
         }
         return effects
     }
@@ -416,6 +475,9 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private companion object {
         /** A few foreground polls, which run once a second. */
         val clearWait: Duration = Duration.ofSeconds(3)
+
+        /** A message older than this when it's posted was delivered late, or replayed when the listener reconnected. */
+        val arrivalWindow: Duration = Duration.ofMinutes(2)
         val meetingApps = setOf("us.zoom.videomeetings", "com.google.android.apps.tachyon", "com.google.android.apps.meetings", "com.microsoft.teams", "com.cisco.webex.meetings")
     }
 }

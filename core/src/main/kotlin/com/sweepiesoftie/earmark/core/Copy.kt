@@ -37,7 +37,9 @@ internal class Copy(private val settings: Settings) {
         score = score,
     )
 
-    fun pill(loop: Loop): PillCard = PillCard(loop.id, loop.kind, loop.task, verb(loop))
+    /** [arrived] is true when the loop came in while you were using the phone, so you didn't come here for it. */
+    fun pill(loop: Loop, arrived: Boolean): PillCard =
+        PillCard(loop.id, loop.kind, if (arrived) "Before you forget" else "You came here to", loop.task, verb(loop))
 
     fun verb(loop: Loop): String = when (loop.kind) {
         LoopKind.Reply -> "Do it now"
