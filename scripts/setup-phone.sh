@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Earmark v0.1.18 phone setup: installs the APK and grants every permission adb can grant.
-# Run from the android/ folder or anywhere: ./scripts/setup-phone.sh [path/to/earmark-v0.1.18.apk]
+# Earmark v0.1.19 phone setup: installs the APK and grants every permission adb can grant.
+# Run from the android/ folder or anywhere: ./scripts/setup-phone.sh [path/to/earmark-v0.1.19.apk]
 #
 #
 # A wizard walks a human through a manual procedure, step by step.
@@ -207,13 +207,13 @@ TOTAL_STAGES=6
 PKG="com.sweepiesoftie.earmark"
 LISTENER="$PKG/$PKG.listener.EarmarkListener"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-APK="${1:-$HERE/../dist/earmark-v0.1.18.apk}"
+APK="${1:-$HERE/../dist/earmark-v0.1.19.apk}"
 
-banner "Earmark v0.1.18: set up a test phone"
+banner "Earmark v0.1.19: set up a test phone"
 
 stage "Connect the phone"
 command -v adb >/dev/null 2>&1 || { warn "adb isn't on PATH. Install Android platform-tools, then re-run."; exit 1; }
-[[ -f "$APK" ]] || { warn "No APK at $APK. Pass its path: ./scripts/setup-phone.sh path/to/earmark-v0.1.18.apk"; exit 1; }
+[[ -f "$APK" ]] || { warn "No APK at $APK. Pass its path: ./scripts/setup-phone.sh path/to/earmark-v0.1.19.apk"; exit 1; }
 say "Earmark installs over USB, so the phone needs USB debugging on."
 step "On the phone: Settings › About phone › tap Build number 7 times."
 step "Then Settings › System › Developer options › turn on USB debugging."

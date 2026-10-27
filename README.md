@@ -1,4 +1,4 @@
-# Earmark v0.1.18
+# Earmark v0.1.19
 
 Earmark guesses the one thing you unlocked your phone to do. If you drift into a feed, it hands that exact task back in one tap. It never blocks an app and never counts minutes. Everything runs on the phone: the APK has no internet permission.
 
@@ -6,9 +6,9 @@ This build is for testers. It runs on Android 10 or later and was tested on an A
 
 ## Install
 
-The APK is `dist/earmark-v0.1.18.apk` in this repository. On GitHub, open that file and use **Download raw file**.
+The APK is `dist/earmark-v0.1.19.apk` in this repository. On GitHub, open that file and use **Download raw file**.
 
-- **From a computer:** connect the phone with USB debugging on, then run `adb install -r dist/earmark-v0.1.18.apk`.
+- **From a computer:** connect the phone with USB debugging on, then run `adb install -r dist/earmark-v0.1.19.apk`.
 - **On the phone:** copy the file to the phone, open it from Files, and allow installs from that app when Android asks.
 
 `scripts/setup-phone.sh` installs the APK and grants every permission that adb can grant, in one go. Then `scripts/check-pill.sh`, with the phone unlocked, checks the whole path on the phone in about 30 seconds: it posts a test message, opens Instagram or YouTube, and checks that the pill is shown and actually drawn. It leaves a "Reply to Test" row on today's list.
@@ -17,9 +17,9 @@ The APK is `dist/earmark-v0.1.18.apk` in this repository. On GitHub, open that f
 
 - **"App not installed" or "conflicts with an existing package":** an older Earmark signed with a different key is on the phone. Builds from before 27 October 2026 were signed with a debug key. Uninstall Earmark, then install again.
 - **Play Protect says the app is unsafe or unrecognised:** tap **More details › Install anyway**. Earmark isn't from the Play Store, and it asks for notification access, which Play Protect treats as sensitive.
-- **Blocked with a message about sensitive permissions, and no way past it:** in some countries Google blocks apps that ask for notification access when they're installed from a browser, a messaging app or a file manager. Install over USB with `adb install -r dist/earmark-v0.1.18.apk` or `scripts/setup-phone.sh`, which that check doesn't cover.
+- **Blocked with a message about sensitive permissions, and no way past it:** in some countries Google blocks apps that ask for notification access when they're installed from a browser, a messaging app or a file manager. Install over USB with `adb install -r dist/earmark-v0.1.19.apk` or `scripts/setup-phone.sh`, which that check doesn't cover.
 
-The APK is signed with the Sweepie Softie release key. To check it, run `apksigner verify --print-certs dist/earmark-v0.1.18.apk`; it should show `CN=Sweepie Softie, OU=Earmark, O=Sweepie Softie`.
+The APK is signed with the Sweepie Softie release key. To check it, run `apksigner verify --print-certs dist/earmark-v0.1.19.apk`; it should show `CN=Sweepie Softie, OU=Earmark, O=Sweepie Softie`.
 
 ## Allow restricted settings (Android 13 and later)
 
@@ -44,6 +44,7 @@ Earmark's first screen lists each permission with a button. It checks them again
 | Your name (optional) | Reads only your own contact card, so a group message that says your name counts. Your other contacts are never read | Allow | `adb shell pm grant com.sweepiesoftie.earmark android.permission.READ_CONTACTS` |
 | Battery: unrestricted | So the phone doesn't pause Earmark while other apps are in front. Samsung phones need it | Allow | `adb shell dumpsys deviceidle whitelist +com.sweepiesoftie.earmark` |
 | Notifications (optional) | Shows the "Earmark is on" notification, and lets demo mode post its sample messages | Allow | `adb shell pm grant com.sweepiesoftie.earmark android.permission.POST_NOTIFICATIONS` |
+| Screen reading (optional) | Only for custom triggers that watch an app's screen. Not part of setup: turn it on from Settings › Advanced | Accessibility › Downloaded apps › Earmark screen triggers › On | `adb shell settings put secure enabled_accessibility_services com.sweepiesoftie.earmark/com.sweepiesoftie.earmark.listener.ScreenTriggerService`. This replaces every other service, TalkBack included, so on a phone that uses TalkBack, turn it on by hand |
 
 If a permission is missing, Earmark keeps running and does less. The Log screen (top right of the home screen) says which part is idle and why. Its **Copy** button copies the whole log, which never contains message text, so you can paste it into a bug report.
 
@@ -56,6 +57,7 @@ If a permission is missing, Earmark keeps running and does less. The Log screen 
 - **"Earmark is on":** a silent notification, with a small icon in the status bar, while Earmark runs. It keeps the phone from pausing Earmark in the background, which Samsung phones otherwise do. While Earmark holds a guess, the same notification names it, "Holding: Rahul · “free at 5?”", with its verb, so you can act on it from the shade and TalkBack can read what the dot means. The lock screen still shows only "Earmark is on". While Earmark is paused, it says until when, with **Resume**.
 - **Earmark this:** a Quick Settings tile (Settings › Earmark this › **Add the tile** on Android 13 and later). Tap it in any app and Earmark holds that app for you: if you drift into a feed, the pill reads "Chrome · You earmarked it · *You came here to get back to it*" with **Open**. It closes once you've gone back to the app for 20 seconds and left, or when you tap the tile again. TalkBack reads the tile as a switch, with the app it holds or would hold. It's greyed out on the home screen and in feed apps, and says so: "Instagram is a feed app".
 - **Pause:** Settings › Pause Earmark, for an hour, until 7:00 AM, or until you resume.
+- **Custom triggers:** Settings › Advanced › **Add a trigger** tells Earmark to watch one app for words in its notifications ("KYC, due"), any notification, words on its screen ("Proceed to pay"), or not opening it by a time ("Duolingo by 9 PM"). Then it earmarks what it finds as a Reminder, Pay, Reply, Call back, Finish or Get back to it, or ignores it. An ignore beats everything, Earmark's own guesses included, and on a whole app it also stops unfinished-booking guesses and the tile. Each trigger's row says when it last matched. A trigger's note shows your label if you gave one, otherwise what it saw. Screen triggers need **Read the screen**, an accessibility service you turn on from the same screen. Advanced also has Demo mode, Permissions and the Log.
 - **Home screen:** who's waiting, for example "Rahul and 2 others are waiting.", and under it "Brought you back 3 times today." Each message or request Earmark picks up is listed the moment it arrives, in the order Earmark would guess them. Tap one to go straight to that chat, the call log or the bill. Press and hold one (or pick **Already done** from TalkBack's actions) when you dealt with it somewhere Earmark can't see, such as on a laptop. Everything else from today, and how it ended, is folded under **Earlier today**.
 
 **Which message wins.** When several messages are waiting, from any apps, Earmark picks the one that asks most of you: "call me asap" beats "that was fun", and a question beats a plain message. "ok", "thanks", 👍 and reactions don't count as waiting at all. Between people you've never answered through Earmark, the app you usually deal with sooner wins, once Earmark has seen five of that app's messages close. When you've dealt with the guess, the strongest message still waiting becomes **next up**, with no chip: if you then drift into a feed, its pill's small line reads "Next up". An urgent message that arrives while you're on the phone takes over even a guess you came for, which comes back after it. An Instagram DM is watched while you scroll Instagram itself, until you open the chat.
@@ -129,6 +131,14 @@ The tile has no demo version, and needs Android 13 or later to add from Earmark 
 3. Close the shade, read for a bit, then open YouTube. A few seconds in, the pill reads "Chrome · You earmarked it · You came here to get back to it · Open".
 4. Tap **Open**. Chrome comes back. Stay at least 20 seconds, then leave: under **Earlier today**, "Get back to Chrome" has a green check and "brought back".
 
+### 6. Custom triggers
+
+1. Open Settings › Advanced › **Add a trigger**. Choose **Messages** as the app, **Words in its notifications**, type `parcel`, keep **Reminder**, and save. The row reads "Messages: notifications with “parcel” › Reminder · Not matched yet".
+2. Get a text from a business that says "parcel" (on the emulator: `adb emu sms send AX-BLUDRT "Your parcel is at the front desk"`). Earmark skips business texts on its own, so the trigger makes the loop: the home screen lists Messages, "“Your parcel is at the front desk”", with **Open**, and the trigger's row says "Last matched just now". A text from a person that says "parcel" stays a **Reply**, and the trigger only keeps it waiting for hours instead of fading.
+3. Edit the trigger, choose **Ignore**, and save. Texts that say "parcel" are no longer listed, from a person or a business.
+4. For a time trigger, add one for any app with **Not opened by a time** set a minute or two ahead. Keep out of the app until then, lock the phone, and unlock it after that time: the chip reads "*app* · You wanted to open it by *time* · *Here to get this done?*".
+5. For a screen trigger, turn on **Read the screen** first. Add a trigger for Chrome with **Words on its screen** set to `example domain` and **Finish**. Open https://example.com in Chrome, then go home: "Finish in Chrome" is listed. Open Chrome, go to another page, and go home again: it's done.
+
 ## If no chip shows up
 
 1. Open Earmark. If it says Android hasn't connected it, turn Earmark's notification access off and on again in the settings page it opens.
@@ -152,8 +162,10 @@ The Log is kept in memory, so it starts empty after Earmark restarts.
 - The Log screen shows why each chip or pill was or wasn't shown. It never shows message text.
 - While a guess is held, its few quoted words also show in Earmark's own notification in the shade, never on the lock screen, and go when the guess does. They're the words the sender's app already shows in its notification.
 - A muted chat is counted under its salted hash, so Settings can only say how many chats are muted, not whose.
+- Custom triggers and the words you give them stay in Earmark's private storage on the phone. The database keeps, per trigger, only when it last matched and how many "not this" in a row its loops got. The Log names triggers by an id, never their words.
+- Screen reading is off until you turn it on. Android then lets Earmark see every app, but it reads only the apps you made a screen trigger for. What it reads is checked against your words in memory and dropped: never stored, logged or sent. A screen trigger's note quotes your word, not the screen.
 
-## Known limits in v0.1.18
+## Known limits in v0.1.19
 
 - Earmark can't see inside other apps, so unfinished bookings are inferred from how long you spent in a ride, food or shopping app.
 - Reel boundaries are best-effort and depend on whether the feed app publishes media sessions. A feed with nothing playing gets the pill as soon as drift starts.
@@ -170,6 +182,9 @@ The Log is kept in memory, so it starts empty after Earmark restarts.
 - Missed calls and texted bills were run end to end on the emulator, and a real Outlook email was picked up on the A34. Reminders and email chips are checked in tests only, because the adb shell can't post a notification with a category.
 - A row marked **Already done** comes back if Earmark restarts (after an update or a reboot) while its notification is still in the shade.
 - The Earmark this tile holds an app, not a page in it: **Open** brings the app back where Android left it. The visit you tapped the tile in never counts as doing it.
+- A screen trigger sees only the text an app exposes to accessibility services. Text drawn into an image or a canvas, as some games and video apps do, can't be matched. Leaving within half a second of the words appearing can miss them.
+- A time trigger counts a visit of 20 seconds or more. Visits from before Earmark started today are read from usage history, which needs usage access.
+- A notification that a reply, booking or payment went through is never a trigger's loop, even with **Any notification**, because it shows something was dealt with.
 - On some Android 16 builds the system never tells apps about an unlock (`USER_PRESENT`), so Earmark watches the lock screen briefly after the screen turns on instead (ADR 0013).
 
 ## For developers
