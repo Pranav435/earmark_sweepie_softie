@@ -60,7 +60,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onSizeChanged
@@ -83,8 +86,12 @@ import androidx.compose.ui.unit.sp
 import com.sweepiesoftie.earmark.R
 import com.sweepiesoftie.earmark.core.ChipCard
 import com.sweepiesoftie.earmark.core.LoopId
+import com.sweepiesoftie.earmark.core.Note
 import com.sweepiesoftie.earmark.core.PillCard
+import com.sweepiesoftie.earmark.ui.NoteCard
+import com.sweepiesoftie.earmark.ui.NoteFill
 import com.sweepiesoftie.earmark.ui.Tone
+import com.sweepiesoftie.earmark.ui.pressFeedback
 import com.sweepiesoftie.earmark.ui.theme.Brand
 import com.sweepiesoftie.earmark.ui.theme.InstrumentSans
 import kotlinx.coroutines.delay
@@ -94,13 +101,6 @@ import kotlin.math.sign
 
 /** Ease-out for everything that enters or leaves, fades included; motion stays inside 200–300 ms. */
 private val EaseOut = CubicBezierEasing(0.23f, 1f, 0.32f, 1f)
-private val Capsule = RoundedCornerShape(28.dp)
-private val PaperDim = Brand.Paper.copy(alpha = 0.72f)
-
-/** The capsules stay ink in both themes; in dark mode a hairline keeps them apart from a dark app behind. */
-@Composable
-private fun Modifier.darkEdge(): Modifier =
-    if (Tone.Dark) border(1.dp, Brand.Paper.copy(alpha = 0.16f), Capsule) else this
 
 /** The chip shows at many unlocks a day, so its entrance is quick. */
 private fun enter(reduceMotion: Boolean): EnterTransition =
@@ -111,18 +111,17 @@ private fun exit(reduceMotion: Boolean): ExitTransition =
     if (reduceMotion) fadeOut(tween(200, easing = EaseOut))
     else slideOutVertically(tween(200, easing = EaseOut)) { -it / 3 } + fadeOut(tween(180, easing = EaseOut))
 
-/** ✓ shrinks the chip toward the dot at the top left, so the hold reads as one motion. */
+/** A faded chip shrinks toward the dot at the top left, so Earmark holding it reads as one motion. */
 private fun exitIntoDot(reduceMotion: Boolean): ExitTransition =
     if (reduceMotion) fadeOut(tween(200, easing = EaseOut))
     else scaleOut(tween(200, easing = EaseOut), targetScale = 0.9f, transformOrigin = TransformOrigin(0f, 0f)) + fadeOut(tween(180, easing = EaseOut))
 
-/** A pill taking the chip's place: the chip just steps aside, so two capsules never cross. */
+/** A pill taking the chip's place: the chip just steps aside, so two notes never cross. */
 private val makeWayForPill: ExitTransition = fadeOut(tween(120, easing = EaseOut))
 
 @Composable
 fun TopOverlay(
     state: OverlayUi,
-    onHold: (LoopId) -> Unit,
     onChipAct: (LoopId) -> Unit,
     onChipDismiss: (LoopId) -> Unit,
     onChipFaded: (LoopId) -> Unit,
@@ -141,16 +140,17 @@ fun TopOverlay(
         chipShown.targetState = state.chip != null
         pillShown.targetState = state.pill != null
     }
-    // ✓ hides the chip and shows the dot in the same frame; that pair is the only way the dot appears.
+    // A fade hides the chip and shows the dot in the same frame; that pair is the only way the dot appears.
     val chipExit = when {
         state.pill != null -> makeWayForPill
         state.chip == null && state.dot -> exitIntoDot(state.reduceMotion)
         else -> exit(state.reduceMotion)
     }
-    Box(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp)) {
+    // Room below the note for its shadow.
+    Box(Modifier.fillMaxWidth().padding(start = 12.dp, end = 12.dp, top = 8.dp, bottom = 16.dp)) {
         AnimatedVisibility(chipShown, enter = enter(state.reduceMotion), exit = chipExit) {
             lastChip[0]?.let { chip ->
-                Chip(chip, state.chipTimeoutMillis, state.reduceMotion, state.a11yFocused, onHold, onChipAct, onChipDismiss, onChipFaded)
+                Chip(chip, state.chipTimeoutMillis, state.reduceMotion, state.a11yFocused, onChipAct, onChipDismiss, onChipFaded)
             }
         }
         AnimatedVisibility(pillShown, enter = enter(state.reduceMotion), exit = exit(state.reduceMotion)) {
@@ -159,16 +159,10 @@ fun TopOverlay(
     }
 }
 
-/** The marigold disc with the ↶ glyph that opens every Earmark surface. */
+/** What TalkBack says as a note appears: "Earmark: Rahul. “free at 5?” · 1 min ago. Here to reply?" */
 @Composable
-private fun Glyph(size: Int = 40) {
-    Box(
-        Modifier.size(size.dp).clip(CircleShape).background(Brand.Marigold),
-        contentAlignment = Alignment.Center,
-    ) {
-        Image(painterResource(R.drawable.ic_glyph), contentDescription = null, modifier = Modifier.size((size * 0.6).dp))
-    }
-}
+private fun spoken(note: Note, why: String): String =
+    stringResource(R.string.overlay_pane, listOfNotNull(note.who, note.words, why).joinToString(". "))
 
 @Composable
 private fun Chip(
@@ -176,18 +170,17 @@ private fun Chip(
     timeoutMillis: Long,
     reduceMotion: Boolean,
     a11yFocused: Boolean,
-    onHold: (LoopId) -> Unit,
     onAct: (LoopId) -> Unit,
     onDismiss: (LoopId) -> Unit,
     onFaded: (LoopId) -> Unit,
 ) {
     val body = remember { MutableInteractionSource() }
-    val check = remember { MutableInteractionSource() }
+    val verb = remember { MutableInteractionSource() }
     val swipe = remember(chip.loopId) { SwipeAway() }
     val bodyPressed by body.collectIsPressedAsState()
-    val checkPressed by check.collectIsPressedAsState()
+    val verbPressed by verb.collectIsPressedAsState()
     // The timer waits while a finger or TalkBack is on the chip, so it never leaves mid-gesture.
-    val paused = bodyPressed || checkPressed || swipe.dragging || a11yFocused
+    val paused = bodyPressed || verbPressed || swipe.dragging || a11yFocused
 
     val fade = remember(chip.loopId) { Animatable(1f) }
     var remaining by remember(chip.loopId) { mutableLongStateOf(timeoutMillis) }
@@ -203,78 +196,43 @@ private fun Chip(
         }
         onFaded(chip.loopId)
     }
-    val pane = stringResource(R.string.overlay_chip_pane)
-    val keep = stringResource(R.string.overlay_chip_keep)
+    val pane = spoken(chip.note, chip.why)
     val notThis = stringResource(R.string.overlay_chip_not_this)
-    val open = stringResource(R.string.overlay_open)
+    val haptics = LocalHapticFeedback.current
+    val line = Tone.Line
 
-    Column(
-        Modifier
-            .fillMaxWidth()
-            .swipeAway(swipe, upToo = false) { onDismiss(chip.loopId) }
-            .clip(Capsule)
-            .background(Brand.Ink)
-            .darkEdge()
-            .semantics(mergeDescendants = false) {
-                paneTitle = pane
-                customActions = listOf(
-                    CustomAccessibilityAction(notThis) { onDismiss(chip.loopId); true },
-                )
-            },
-    ) {
-        Row(
-            Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 6.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Row(
-                Modifier
-                    .weight(1f)
-                    .heightIn(min = 48.dp)
-                    .clip(Capsule)
-                    .combinedClickable(
-                        interactionSource = body,
-                        indication = ripple(),
-                        onClickLabel = chip.action ?: open,
-                        role = Role.Button,
-                        onLongClickLabel = notThis,
-                        onLongClick = { onDismiss(chip.loopId) },
-                    ) { onAct(chip.loopId) },
-                verticalAlignment = Alignment.CenterVertically,
+    NoteCard(
+        note = chip.note,
+        why = chip.why,
+        modifier = Modifier.fillMaxWidth().swipeAway(swipe, upToo = false) { onDismiss(chip.loopId) },
+        inner = Modifier
+            .combinedClickable(
+                interactionSource = body,
+                indication = ripple(),
+                onClickLabel = chip.task,
+                role = Role.Button,
+                onLongClickLabel = notThis,
+                onLongClick = { onDismiss(chip.loopId) },
             ) {
-                Glyph()
-                Spacer(Modifier.width(12.dp))
-                Column(Modifier.weight(1f).padding(vertical = 4.dp)) {
-                    Text(chip.title, color = Brand.Paper, style = MaterialTheme.typography.titleMedium, maxLines = 3, overflow = TextOverflow.Ellipsis)
-                    Text(chip.subtitle, color = PaperDim, style = MaterialTheme.typography.bodyMedium, maxLines = 3, overflow = TextOverflow.Ellipsis)
-                }
+                haptics.performHapticFeedback(HapticFeedbackType.Confirm)
+                onAct(chip.loopId)
             }
-            Spacer(Modifier.width(8.dp))
-            if (chip.action != null) {
-                VerbButton(chip.action!!, source = check) { onAct(chip.loopId) }
-            } else {
-                Box(
-                    Modifier
-                        .size(48.dp)
-                        .pressFeedback(check)
-                        .clip(CircleShape)
-                        .background(Brand.Marigold)
-                        .clickable(interactionSource = check, indication = ripple(), role = Role.Button) { onHold(chip.loopId) }
-                        .semantics { contentDescription = keep },
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Image(painterResource(R.drawable.ic_check), contentDescription = null, modifier = Modifier.size(26.dp))
-                }
-            }
-        }
-        // The fade timer: a thin line that drains as the chip's time runs out.
+            .semantics {
+                paneTitle = pane
+                customActions = listOf(CustomAccessibilityAction(notThis) { onDismiss(chip.loopId); true })
+            },
+        verbSource = verb,
+        onVerb = { onAct(chip.loopId) },
+    ) {
+        // The fade timer: a thin line under the words that drains as the chip's time runs out.
         Box(
             Modifier
-                .padding(start = 60.dp, end = 64.dp, bottom = 10.dp)
+                .padding(start = 68.dp, end = 20.dp, bottom = 10.dp)
                 .fillMaxWidth()
                 .height(2.dp)
                 .clearAndSetSemantics { }
                 .drawBehind {
-                    drawLine(Brand.Paper.copy(alpha = 0.18f), Offset(0f, size.height / 2), Offset(size.width, size.height / 2), size.height, StrokeCap.Round)
+                    drawLine(line, Offset(0f, size.height / 2), Offset(size.width, size.height / 2), size.height, StrokeCap.Round)
                     val progress = if (reduceMotion) 1f else fade.value
                     drawLine(Brand.Marigold, Offset(0f, size.height / 2), Offset(size.width * progress, size.height / 2), size.height, StrokeCap.Round)
                 },
@@ -284,65 +242,31 @@ private fun Chip(
 
 @Composable
 private fun Pill(pill: PillCard, onAct: (LoopId) -> Unit, onDismiss: (LoopId) -> Unit) {
-    val pane = stringResource(R.string.overlay_pill_pane)
+    val pane = spoken(pill.note, pill.why)
     val notNow = stringResource(R.string.overlay_pill_not_now)
     val swipe = remember(pill.loopId) { SwipeAway() }
-    Row(
-        Modifier
-            .fillMaxWidth()
-            // Sideways like a notification, or up the way it leaves.
-            .swipeAway(swipe, upToo = true) { onDismiss(pill.loopId) }
+    val haptics = LocalHapticFeedback.current
+    NoteCard(
+        note = pill.note,
+        why = pill.why,
+        // Sideways like a notification, or up the way it leaves.
+        modifier = Modifier.fillMaxWidth().swipeAway(swipe, upToo = true) { onDismiss(pill.loopId) },
+        inner = Modifier
             .combinedClickable(
-                onClickLabel = pill.verb,
+                onClickLabel = pill.task,
                 role = Role.Button,
                 onLongClickLabel = notNow,
                 onLongClick = { onDismiss(pill.loopId) },
-            ) { onAct(pill.loopId) }
-            .clip(Capsule)
-            .background(Brand.Ink)
-            .border(1.dp, Brand.Marigold.copy(alpha = 0.35f), Capsule)
+            ) {
+                haptics.performHapticFeedback(HapticFeedbackType.Confirm)
+                onAct(pill.loopId)
+            }
             .semantics {
                 paneTitle = pane
                 customActions = listOf(CustomAccessibilityAction(notNow) { onDismiss(pill.loopId); true })
-            }
-            .padding(8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Glyph()
-        Spacer(Modifier.width(12.dp))
-        Column(
-            Modifier
-                .weight(1f)
-                .semantics(mergeDescendants = true) { },
-        ) {
-            Text(pill.label, color = PaperDim, fontFamily = InstrumentSans, fontSize = 12.sp, lineHeight = 16.sp, maxLines = 2)
-            Text(pill.task, color = Brand.Paper, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, maxLines = 3, overflow = TextOverflow.Ellipsis)
-        }
-        Spacer(Modifier.width(8.dp))
-        VerbButton(pill.verb, description = "${pill.verb}: ${pill.task}") { onAct(pill.loopId) }
-    }
-}
-
-@Composable
-private fun VerbButton(
-    verb: String,
-    description: String = verb,
-    source: MutableInteractionSource = remember { MutableInteractionSource() },
-    onClick: () -> Unit,
-) {
-    Box(
-        Modifier
-            .sizeIn(minWidth = 64.dp, minHeight = 48.dp)
-            .pressFeedback(source)
-            .clip(Capsule)
-            .background(Brand.Marigold)
-            .clickable(interactionSource = source, indication = ripple(), role = Role.Button, onClick = onClick)
-            .semantics { contentDescription = description }
-            .padding(horizontal = 18.dp, vertical = 12.dp),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(verb, color = Brand.Ink, style = MaterialTheme.typography.labelLarge, maxLines = 2, modifier = Modifier.clearAndSetSemantics { })
-    }
+            },
+        onVerb = { onAct(pill.loopId) },
+    )
 }
 
 @Composable
@@ -387,13 +311,15 @@ fun ReplyStripOverlay(strip: ReplyStrip?, reduceMotion: Boolean, onReply: (LoopI
     ) {
         val current = last[0] ?: return@AnimatedVisibility
         val pane = stringResource(R.string.overlay_strip_pane, current.to)
+        val haptics = LocalHapticFeedback.current
+        // The same note as the chip and pill, so the replies read as Earmark's, not the chat app's.
         Row(
             Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 12.dp)
                 .clip(Capsule)
-                .background(Brand.Ink.copy(alpha = 0.94f))
-                .darkEdge()
+                .background(NoteFill)
+                .border(1.dp, Tone.Line, Capsule)
                 .semantics { paneTitle = pane }
                 .padding(6.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -408,12 +334,12 @@ fun ReplyStripOverlay(strip: ReplyStrip?, reduceMotion: Boolean, onReply: (LoopI
                     .semantics { contentDescription = close },
                 contentAlignment = Alignment.Center,
             ) {
-                Glyph(size = 32)
+                CloseMark(Tone.Muted)
             }
             // The strip stays while you move between chats in the app, so it says who a reply goes to.
             Text(
                 stringResource(R.string.overlay_strip_to, current.to),
-                color = PaperDim,
+                color = Tone.Muted,
                 fontFamily = InstrumentSans,
                 fontSize = 13.sp,
                 maxLines = 1,
@@ -429,20 +355,24 @@ fun ReplyStripOverlay(strip: ReplyStrip?, reduceMotion: Boolean, onReply: (LoopI
                     val first = index == 0
                     val sendLabel = stringResource(R.string.overlay_strip_send, current.to, reply)
                     val source = remember(reply) { MutableInteractionSource() }
+                    val send = {
+                        haptics.performHapticFeedback(HapticFeedbackType.Confirm)
+                        onReply(current.loopId, reply)
+                    }
                     Box(
                         Modifier
                             .heightIn(min = 48.dp)
                             .pressFeedback(source)
                             .clip(Capsule)
-                            .then(if (first) Modifier.background(Brand.Marigold) else Modifier.border(1.5.dp, Brand.Paper.copy(alpha = 0.5f), Capsule))
-                            .clickable(interactionSource = source, indication = ripple(), role = Role.Button) { onReply(current.loopId, reply) }
-                            .semantics { contentDescription = sendLabel; onClick(label = sendLabel) { onReply(current.loopId, reply); true } }
+                            .then(if (first) Modifier.background(Brand.Marigold) else Modifier.border(1.dp, Tone.Ink.copy(alpha = 0.3f), Capsule))
+                            .clickable(interactionSource = source, indication = ripple(), role = Role.Button, onClick = send)
+                            .semantics { contentDescription = sendLabel; onClick(label = sendLabel) { send(); true } }
                             .padding(horizontal = 16.dp, vertical = 12.dp),
                         contentAlignment = Alignment.Center,
                     ) {
                         Text(
                             reply,
-                            color = if (first) Brand.Ink else Brand.Paper,
+                            color = if (first) Brand.Ink else Tone.Ink,
                             fontFamily = InstrumentSans,
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 15.sp,
@@ -456,11 +386,28 @@ fun ReplyStripOverlay(strip: ReplyStrip?, reduceMotion: Boolean, onReply: (LoopI
     }
 }
 
+private val Capsule = RoundedCornerShape(28.dp)
+
+/** A small ×, drawn so it takes the theme's colour. */
+@Composable
+private fun CloseMark(color: Color) {
+    Box(
+        Modifier.size(14.dp).drawBehind {
+            val stroke = 2.dp.toPx()
+            drawLine(color, Offset(0f, 0f), Offset(size.width, size.height), stroke, StrokeCap.Round)
+            drawLine(color, Offset(size.width, 0f), Offset(0f, size.height), stroke, StrokeCap.Round)
+        },
+    )
+}
+
 /** Drag state for swipe-to-dismiss. The chip reads [dragging] to hold its timer mid-swipe. */
 private class SwipeAway {
     val x = Animatable(0f)
     val y = Animatable(0f)
     var dragging by mutableStateOf(false)
+
+    /** Past the point where letting go dismisses; a light tick marks each crossing. */
+    var past = false
 }
 
 /**
@@ -471,16 +418,33 @@ private class SwipeAway {
 @Composable
 private fun Modifier.swipeAway(swipe: SwipeAway, upToo: Boolean, onDismiss: () -> Unit): Modifier {
     val scope = rememberCoroutineScope()
+    val haptics = LocalHapticFeedback.current
     val flick = with(LocalDensity.current) { FLICK_DP_PER_SECOND.dp.toPx() }
     var size by remember { mutableStateOf(IntSize.Zero) }
-    val horizontal = rememberDraggableState { delta -> scope.launch { swipe.x.snapTo(swipe.x.value + delta) } }
+
+    fun mark(far: Boolean) {
+        if (far != swipe.past) {
+            swipe.past = far
+            haptics.performHapticFeedback(HapticFeedbackType.SegmentTick)
+        }
+    }
+    val horizontal = rememberDraggableState { delta ->
+        scope.launch {
+            swipe.x.snapTo(swipe.x.value + delta)
+            mark(abs(swipe.x.value) > size.width / 3f)
+        }
+    }
     // Downward drags meet friction instead of a wall; only up dismisses.
     val vertical = rememberDraggableState { delta ->
-        scope.launch { swipe.y.snapTo(swipe.y.value + if (swipe.y.value + delta > 0) delta * 0.25f else delta) }
+        scope.launch {
+            swipe.y.snapTo(swipe.y.value + if (swipe.y.value + delta > 0) delta * 0.25f else delta)
+            mark(-swipe.y.value > size.height / 3f)
+        }
     }
 
     suspend fun release(axis: Animatable<Float, *>, extent: Int, velocity: Float, upOnly: Boolean) {
         swipe.dragging = false
+        swipe.past = false
         val flung = abs(velocity) > flick
         val direction = if (flung) sign(velocity) else sign(axis.value)
         val far = abs(axis.value) > extent / 3f
@@ -515,17 +479,6 @@ private fun Modifier.swipeAway(swipe: SwipeAway, upToo: Boolean, onDismiss: () -
             onDragStarted = { swipe.dragging = true },
             onDragStopped = { velocity -> release(swipe.y, size.height, velocity, upOnly = true) },
         )
-    }
-}
-
-/** Scales to 0.97 while pressed, so a tap visibly lands. */
-@Composable
-private fun Modifier.pressFeedback(source: MutableInteractionSource): Modifier {
-    val pressed by source.collectIsPressedAsState()
-    val scale by animateFloatAsState(if (pressed) 0.97f else 1f, tween(120, easing = EaseOut), label = "press")
-    return graphicsLayer {
-        scaleX = scale
-        scaleY = scale
     }
 }
 

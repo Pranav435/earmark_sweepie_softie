@@ -3,31 +3,37 @@
     <string name="listener_label">Earmark</string>
 
     <!-- Overlays (TalkBack labels; chip and pill copy comes from the core, ADR 0011) -->
-    <string name="overlay_chip_pane">Earmark guess</string>
-    <string name="overlay_chip_keep">Yes, keep this one</string>
+    <string name="overlay_pane">Earmark: %1$s</string>
     <string name="overlay_chip_not_this">Not this</string>
-    <string name="overlay_open">Open it now</string>
-    <string name="overlay_pill_pane">Earmark pill</string>
     <string name="overlay_pill_not_now">Not now</string>
     <string name="overlay_strip_pane">Replies to %1$s</string>
     <string name="overlay_strip_to">To %1$s</string>
     <string name="overlay_strip_close">Close the reply strip</string>
     <string name="overlay_strip_send">Send to %1$s: %2$s</string>
 
+    <!-- Home: who's waiting (ADR 0032) -->
+    <string name="home_nobody">Nobody\'s waiting on you.</string>
+    <string name="home_one">%1$s is waiting.</string>
+    <string name="home_two">%1$s and %2$s are waiting.</string>
+    <plurals name="home_many">
+        <item quantity="one">%1$s and %2$d other are waiting.</item>
+        <item quantity="other">%1$s and %2$d others are waiting.</item>
+    </plurals>
+    <string name="home_a_reminder">A reminder</string>
+    <string name="home_a_reminder_lower">a reminder</string>
+    <string name="home_tap_hint">Tap one to go straight there.</string>
+    <string name="home_earlier">Earlier today · %1$d</string>
+    <string name="home_show">Show</string>
+    <string name="home_hide">Hide</string>
+    <string name="home_shown">shown</string>
+    <string name="home_hidden">hidden</string>
+
     <!-- Recap -->
-    <string name="recap_empty_title">Nothing on today\'s list yet.</string>
     <string name="recap_empty_line">Messages, missed calls, reminders, emails and bills show up here as soon as Earmark picks them up.</string>
     <plurals name="recap_open_loops">
         <item quantity="one">Watching %d open loop. It can come back as a chip when you unlock, or as a pill if you drift into a feed app. The Log shows each step.</item>
         <item quantity="other">Watching %d open loops. The likeliest can come back as a chip when you unlock, or as a pill if you drift into a feed app. The Log shows each step.</item>
     </plurals>
-    <plurals name="recap_title">
-        <item quantity="one">%d thing today.</item>
-        <item quantity="other">%d things today.</item>
-    </plurals>
-    <string name="recap_all_done_one">Done.</string>
-    <string name="recap_all_done">All %1$d done.</string>
-    <string name="recap_some_done">%1$d of %2$d done.</string>
     <plurals name="recap_brought_back">
         <item quantity="one">Brought you back once today.</item>
         <item quantity="other">Brought you back %d times today.</item>
@@ -35,9 +41,9 @@
     <string name="recap_never">Never blocked an app. Never counted a minute.</string>
     <string name="recap_tag_brought_back">brought back</string>
     <string name="recap_state_done">done</string>
-    <string name="recap_state_open">waiting</string>
     <string name="recap_state_dismissed">dismissed</string>
     <string name="recap_state_expired">expired</string>
+    <string name="recap_state_lost">no longer watched</string>
     <string name="recap_paused">Earmark is paused. It won\'t show chips or pills until you resume.</string>
     <string name="recap_resume">Resume</string>
     <string name="recap_missing">Earmark is missing a permission, so it can\'t guess yet.</string>
@@ -87,8 +93,8 @@
     <string name="settings_pause_body">No chips and no pills until you turn this off.</string>
     <string name="settings_demo">Demo mode</string>
     <string name="settings_demo_body">Sample notifications, and the pill comes right away, so every story runs on any phone.</string>
-    <string name="settings_drift">Drift timer</string>
-    <string name="settings_drift_body">How long a feed app can be in front before Earmark offers to hand the loop back. Right away offers it a few seconds after you open the feed. Smart goes by how long you usually stay in each feed app, and comes back sooner for something urgent or a chip you said yes to.</string>
+    <string name="settings_drift">When the pill comes</string>
+    <string name="settings_drift_body">How long a feed app can be in front before Earmark offers to hand the loop back. Right away offers it a few seconds after you open the feed. Smart goes by how long you usually stay in each feed app, and comes back sooner for something urgent.</string>
     <string name="settings_drift_right_away">Right away</string>
     <string name="settings_drift_smart">Smart</string>
     <string name="settings_drift_demo">Demo mode uses Right away.</string>
@@ -104,6 +110,7 @@
     <string name="settings_muted">Muted guesses</string>
     <string name="settings_muted_body">You ignored these three times in a row, so Earmark stopped guessing them.</string>
     <string name="settings_unmute">Unmute</string>
+    <string name="settings_testers">For testers</string>
     <string name="settings_permissions">Permissions</string>
     <string name="settings_log">Decision log</string>
 
@@ -115,30 +122,44 @@
     <string name="log_copy">Copy</string>
     <string name="log_copied">Log copied</string>
 
-    <!-- Onboarding -->
+    <!-- Onboarding: one step at a time (ADR 0032) -->
     <string name="onboarding_title">Your phone remembers what you picked it up for.</string>
-    <string name="onboarding_body">Earmark reads what\'s waiting for you, on this phone only. It never blocks an app and never counts minutes. It needs three permissions to work.</string>
+    <string name="onboarding_intro_body">When you unlock, Earmark guesses the one thing you came to do. If you drift into a feed, it hands it back as a note like this one. It never blocks an app and never counts minutes.</string>
+    <string name="onboarding_sample">Example note: %1$s</string>
+    <string name="onboarding_sample_who">Rahul</string>
+    <string name="onboarding_sample_words">“free at 5?”</string>
+    <string name="onboarding_sample_why">You came here to reply</string>
+    <string name="onboarding_sample_verb">Reply</string>
+    <string name="onboarding_start">Set it up</string>
+    <string name="onboarding_step">Step %1$d of %2$d · %3$s</string>
     <string name="onboarding_notifications">Notification access</string>
-    <string name="onboarding_notifications_body">To see messages, missed calls, reminders, emails and bills, and open the exact one.</string>
+    <string name="onboarding_notifications_title">See what\'s waiting for you.</string>
+    <string name="onboarding_notifications_body">Earmark reads messages, missed calls, reminders, emails and bills as they arrive, so it can open the exact one. It all stays on this phone.</string>
     <string name="onboarding_usage">Usage access</string>
-    <string name="onboarding_usage_body">To know which app is in front, only while the screen is on.</string>
+    <string name="onboarding_usage_title">Notice when you drift.</string>
+    <string name="onboarding_usage_body">Earmark checks which app is in front, only while the screen is on. Nothing about what you do inside it.</string>
     <string name="onboarding_overlay">Display over other apps</string>
-    <string name="onboarding_overlay_body">To show the chip and the pill on top of any app.</string>
-    <string name="onboarding_calendar">Calendar (optional)</string>
-    <string name="onboarding_calendar_body">For Leave-by loops: when to set off for an event or join a call.</string>
-    <string name="onboarding_contacts">Your name (optional)</string>
-    <string name="onboarding_contacts_body">Reads only your own contact card, so Earmark can tell when a group message says your name. Your other contacts are never read. You can also type your names in Settings.</string>
+    <string name="onboarding_overlay_title">Show the note on top.</string>
+    <string name="onboarding_overlay_body">So the note can appear over any app: after you unlock, and when you drift into a feed.</string>
     <string name="onboarding_battery">Battery: unrestricted</string>
-    <string name="onboarding_battery_body">So the phone doesn\'t pause Earmark while you\'re in other apps. Samsung phones need this.</string>
-    <string name="onboarding_post">Notifications (optional)</string>
+    <string name="onboarding_battery_title">Keep running in the background.</string>
+    <string name="onboarding_battery_body">So your phone doesn\'t pause Earmark while you\'re in other apps. Samsung phones need this.</string>
+    <string name="onboarding_extras_title">A few extras.</string>
+    <string name="onboarding_extras_body">All optional. Earmark works without them.</string>
+    <string name="onboarding_calendar">Calendar</string>
+    <string name="onboarding_calendar_body">For Leave-by loops: when to set off for an event or join a call.</string>
+    <string name="onboarding_contacts">Your name</string>
+    <string name="onboarding_contacts_body">Reads only your own contact card, so Earmark can tell when a group message says your name. Your other contacts are never read. You can also type your names in Settings.</string>
+    <string name="onboarding_post">Notifications</string>
     <string name="onboarding_post_body">Shows that Earmark is running, and lets demo mode post sample messages.</string>
     <string name="onboarding_allow">Allow</string>
     <string name="onboarding_open_settings">Open settings</string>
     <string name="onboarding_granted">Allowed</string>
+    <string name="onboarding_continue">Continue</string>
+    <string name="onboarding_not_now">Not now</string>
+    <string name="onboarding_done">Done</string>
     <string name="onboarding_restricted_title">Notification access greyed out?</string>
     <string name="onboarding_restricted_body">Android 13 and later restrict this setting for apps installed from a file. Open App info, tap the three-dot menu, choose Allow restricted settings, confirm, then come back and try again.</string>
     <string name="onboarding_app_info">Open App info</string>
-    <string name="onboarding_done">Continue</string>
-    <string name="onboarding_later">Look around first</string>
     <string name="onboarding_privacy">No account, no servers, and no internet permission. Message text stays in memory until the loop closes.</string>
 </resources>

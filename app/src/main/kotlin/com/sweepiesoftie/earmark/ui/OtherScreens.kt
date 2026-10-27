@@ -83,10 +83,7 @@ fun SettingsScreen(state: SettingsState, actions: SettingsActions) {
     val user = state.user
     LazyColumn(Modifier.fillMaxSize().safeDrawingPadding().padding(horizontal = 20.dp)) {
         item { ScreenHeader(stringResource(R.string.settings_title), actions.onBack) }
-        item {
-            SwitchRow(stringResource(R.string.settings_pause), stringResource(R.string.settings_pause_body), user.paused, actions.onPaused)
-            SwitchRow(stringResource(R.string.settings_demo), stringResource(R.string.settings_demo_body), user.demoMode, actions.onDemo)
-        }
+        item { SwitchRow(stringResource(R.string.settings_pause), stringResource(R.string.settings_pause_body), user.paused, actions.onPaused) }
         item {
             SectionTitle(stringResource(R.string.settings_drift))
             Text(stringResource(R.string.settings_drift_body), style = MaterialTheme.typography.bodyMedium, color = Tone.Muted)
@@ -101,6 +98,15 @@ fun SettingsScreen(state: SettingsState, actions: SettingsActions) {
             }
             if (user.demoMode) Text(stringResource(R.string.settings_drift_demo), style = MaterialTheme.typography.bodyMedium, color = Tone.Muted, modifier = Modifier.padding(top = 8.dp))
         }
+        item {
+            SectionTitle(stringResource(R.string.settings_feeds))
+            Text(stringResource(R.string.settings_feeds_body), style = MaterialTheme.typography.bodyMedium, color = Tone.Muted)
+        }
+        items(state.feeds, key = { it.packageName }) { app ->
+            val on = (app.onByDefault || app.packageName in user.feedsOn) && app.packageName !in user.feedsOff
+            SwitchRow(app.label, null, on) { actions.onFeed(app.packageName, it) }
+        }
+        if (!state.showAllApps) item { TextAction(stringResource(R.string.settings_feeds_more), actions.onShowAllApps) }
         item {
             SectionTitle(stringResource(R.string.settings_names))
             Text(stringResource(R.string.settings_names_body), style = MaterialTheme.typography.bodyMedium, color = Tone.Muted)
@@ -137,16 +143,10 @@ fun SettingsScreen(state: SettingsState, actions: SettingsActions) {
             }
         }
         item {
-            SectionTitle(stringResource(R.string.settings_feeds))
-            Text(stringResource(R.string.settings_feeds_body), style = MaterialTheme.typography.bodyMedium, color = Tone.Muted)
-        }
-        items(state.feeds, key = { it.packageName }) { app ->
-            val on = (app.onByDefault || app.packageName in user.feedsOn) && app.packageName !in user.feedsOff
-            SwitchRow(app.label, null, on) { actions.onFeed(app.packageName, it) }
-        }
-        if (!state.showAllApps) item { TextAction(stringResource(R.string.settings_feeds_more), actions.onShowAllApps) }
-        item {
-            SectionTitle(stringResource(R.string.app_name))
+            // Last, so Demo mode isn't the second thing an everyday user sees.
+            SectionTitle(stringResource(R.string.settings_testers))
+            SwitchRow(stringResource(R.string.settings_demo), stringResource(R.string.settings_demo_body), user.demoMode, actions.onDemo)
+            Spacer(Modifier.heightIn(min = 8.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 SecondaryButton(stringResource(R.string.settings_permissions), onClick = actions.onPermissions)
                 SecondaryButton(stringResource(R.string.settings_log), onClick = actions.onLog)
@@ -191,121 +191,6 @@ fun LogScreen(lines: List<DebugLog.Line>, onBack: () -> Unit, onCopy: () -> Unit
             Column(Modifier.fillMaxWidth().semantics(mergeDescendants = true) { }.padding(vertical = 4.dp)) {
                 Text(format.format(Date(line.atMillis)), style = MaterialTheme.typography.labelSmall, color = Tone.Muted)
                 Text(line.text, style = MaterialTheme.typography.bodyMedium)
-            }
-        }
-    }
-}
-
-data class PermissionState(
-    val notifications: Boolean = false,
-    val usage: Boolean = false,
-    val overlay: Boolean = false,
-    val calendar: Boolean = false,
-    val contacts: Boolean = false,
-    val postNotifications: Boolean = false,
-    val battery: Boolean = false,
-) {
-    val required: Boolean get() = notifications && usage && overlay
-}
-
-class OnboardingActions(
-    val onNotificationAccess: () -> Unit,
-    val onUsageAccess: () -> Unit,
-    val onOverlay: () -> Unit,
-    val onBattery: () -> Unit,
-    val onCalendar: () -> Unit,
-    val onContacts: () -> Unit,
-    val onPostNotifications: () -> Unit,
-    val onAppInfo: () -> Unit,
-    val onDone: () -> Unit,
-)
-
-@Composable
-fun OnboardingScreen(state: PermissionState, actions: OnboardingActions) {
-    LazyColumn(Modifier.fillMaxSize().safeDrawingPadding().padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        item { Masthead() }
-        item {
-            Text(
-                stringResource(R.string.onboarding_title),
-                fontFamily = InstrumentSerif,
-                fontSize = 36.sp,
-                lineHeight = 40.sp,
-                modifier = Modifier.padding(top = 20.dp).semantics { heading() },
-            )
-            Text(stringResource(R.string.onboarding_body), style = MaterialTheme.typography.bodyLarge, color = Tone.Muted, modifier = Modifier.padding(top = 12.dp))
-        }
-        item { PermissionRow(1, stringResource(R.string.onboarding_notifications), stringResource(R.string.onboarding_notifications_body), state.notifications, stringResource(R.string.onboarding_open_settings), actions.onNotificationAccess) }
-        item { PermissionRow(2, stringResource(R.string.onboarding_usage), stringResource(R.string.onboarding_usage_body), state.usage, stringResource(R.string.onboarding_open_settings), actions.onUsageAccess) }
-        item { PermissionRow(3, stringResource(R.string.onboarding_overlay), stringResource(R.string.onboarding_overlay_body), state.overlay, stringResource(R.string.onboarding_open_settings), actions.onOverlay) }
-        item { PermissionRow(4, stringResource(R.string.onboarding_battery), stringResource(R.string.onboarding_battery_body), state.battery, stringResource(R.string.onboarding_allow), actions.onBattery) }
-        item { PermissionRow(5, stringResource(R.string.onboarding_calendar), stringResource(R.string.onboarding_calendar_body), state.calendar, stringResource(R.string.onboarding_allow), actions.onCalendar) }
-        item { PermissionRow(6, stringResource(R.string.onboarding_contacts), stringResource(R.string.onboarding_contacts_body), state.contacts, stringResource(R.string.onboarding_allow), actions.onContacts) }
-        item { PermissionRow(7, stringResource(R.string.onboarding_post), stringResource(R.string.onboarding_post_body), state.postNotifications, stringResource(R.string.onboarding_allow), actions.onPostNotifications) }
-        if (!state.notifications && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            item {
-                Column(
-                    Modifier.fillMaxWidth().clip(RoundedCornerShape(16.dp)).background(Tone.MarigoldWash).padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    Text(stringResource(R.string.onboarding_restricted_title), style = MaterialTheme.typography.titleMedium, modifier = Modifier.semantics { heading() })
-                    Text(stringResource(R.string.onboarding_restricted_body), style = MaterialTheme.typography.bodyMedium)
-                    SecondaryButton(stringResource(R.string.onboarding_app_info), onClick = actions.onAppInfo)
-                }
-            }
-        }
-        item {
-            Text(stringResource(R.string.onboarding_privacy), style = MaterialTheme.typography.bodyMedium, color = Tone.Muted, modifier = Modifier.padding(top = 8.dp))
-            Spacer(Modifier.heightIn(min = 16.dp))
-            PrimaryButton(
-                stringResource(if (state.required) R.string.onboarding_done else R.string.onboarding_later),
-                modifier = Modifier.fillMaxWidth(),
-                onClick = actions.onDone,
-            )
-            Spacer(Modifier.heightIn(min = 24.dp))
-        }
-    }
-}
-
-@Composable
-private fun PermissionRow(step: Int, title: String, body: String, granted: Boolean, action: String, onAction: () -> Unit) {
-    val allowed = stringResource(R.string.onboarding_granted)
-    Row(
-        Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
-            .background(Tone.Card)
-            .border(1.dp, Tone.Line, RoundedCornerShape(16.dp))
-            .padding(14.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Box(
-            Modifier.size(32.dp).clip(CircleShape).background(if (granted) Tone.Done else Tone.MarigoldWash).clearAndSetSemantics { },
-            contentAlignment = Alignment.Center,
-        ) {
-            if (granted) {
-                Image(painterResource(R.drawable.ic_check), contentDescription = null, colorFilter = ColorFilter.tint(Tone.Paper), modifier = Modifier.size(20.dp))
-            } else {
-                Text(step.toString(), style = MaterialTheme.typography.labelLarge, color = Tone.Ink, maxLines = 1)
-            }
-        }
-        Spacer(Modifier.width(14.dp))
-        Column(Modifier.weight(1f).semantics(mergeDescendants = true) { }) {
-            Text(title, style = MaterialTheme.typography.titleMedium)
-            Text(body, style = MaterialTheme.typography.bodyMedium, color = Tone.Muted)
-            if (granted) Text(allowed, style = MaterialTheme.typography.labelSmall, color = Tone.Done, modifier = Modifier.padding(top = 4.dp))
-        }
-        if (!granted) {
-            Spacer(Modifier.width(8.dp))
-            Box(
-                Modifier
-                    .heightIn(min = 48.dp)
-                    .clip(RoundedCornerShape(24.dp))
-                    .background(Tone.Ink)
-                    .clickable(role = Role.Button, onClickLabel = "$action: $title", onClick = onAction)
-                    .padding(horizontal = 14.dp, vertical = 12.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(action, color = Tone.Paper, style = MaterialTheme.typography.labelLarge)
             }
         }
     }

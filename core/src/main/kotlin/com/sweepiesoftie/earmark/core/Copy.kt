@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 /**
- * Every word a chip or pill says. It lives in the core, not in strings.xml, so the
+ * Every word a chip, pill or waiting row says. It lives in the core, not in strings.xml, so the
  * scenario tests can hold it to the demo copy. v0.1 is English only, like Smart Reply.
  */
 internal class Copy(private val settings: Settings) {
@@ -16,46 +16,66 @@ internal class Copy(private val settings: Settings) {
     private val alarmClock: DateTimeFormatter = DateTimeFormatter.ofPattern(if (settings.use24Hour) "H:mm" else "h:mm", Locale.US)
 
     fun chip(loop: Loop, score: Double, now: Instant): ChipCard {
-        val ago = ago(Duration.between(loop.updatedAt, now))
-        val (title, subtitle) = when (loop.kind) {
-            LoopKind.Reply -> "Here to reply to ${loop.who}${loop.groupName?.let { " in $it" }.orEmpty()}?" to "${loop.detail} · $ago"
-            LoopKind.Payment if loop.bill -> "Here to pay your ${loop.who?.let { "$it " }.orEmpty()}bill?" to "${loop.detail} · $ago"
-            LoopKind.Payment -> "Here to pay ${loop.who} back?" to "${loop.detail} · $ago"
-            LoopKind.Routine -> "${loop.task}?" to "You usually do on weeknights"
-            LoopKind.Flow -> "Here to finish in ${loop.who}?" to "You left before it went through · $ago"
-            LoopKind.LeaveBy -> leaveByChip(loop)
-            LoopKind.CallBack -> "Here to call ${loop.who} back?" to "${loop.detail} · $ago"
-            LoopKind.Email -> "Here to reply to ${loop.who}'s email?" to "${loop.detail} · $ago"
-            // The reminder's own words are the guess; one that is already a question keeps a single "?".
-            LoopKind.Reminder -> "${loop.task.trimEnd('?')}?" to "${loop.detail} · $ago"
-        }
-        return ChipCard(loop.id, loop.kind, title, subtitle, action = null, score = score)
+        // The clock and the calendar are their own evidence; anything that came in says how long ago.
+        val ago = ago(Duration.between(loop.updatedAt, now)).takeUnless { loop.kind == LoopKind.Routine || loop.kind == LoopKind.LeaveBy }
+        val note = note(loop).let { it.copy(words = listOfNotNull(it.words, ago).joinToString(" · ").ifEmpty { null }) }
+        return ChipCard(loop.id, loop.kind, note, why = "Here to ${aim(loop)}?", task = loop.task, score = score)
     }
 
-    /** The chip for a loop whose pill was swiped away: the task itself, with a verb instead of ✓. */
-    fun carryOverChip(loop: Loop, score: Double): ChipCard = ChipCard(
-        loopId = loop.id,
-        kind = loop.kind,
-        title = "${loop.task}?",
-        subtitle = "Still on your list from ${time(loop.openedAt)}",
-        action = verb(loop),
-        score = score,
-    )
+    /** The chip for a loop whose pill was swiped away, saying how long it has waited. */
+    fun carryOverChip(loop: Loop, score: Double): ChipCard =
+        ChipCard(loop.id, loop.kind, note(loop), why = "Still on your list from ${time(loop.openedAt)}", task = loop.task, score = score)
 
-    /** The label says why the task is back: you came for it, it came in while you were on the phone, or it was waiting after another. */
+    /** The small line says why the task is back: you came for it, it came in while you were on the phone, or it was waiting after another. */
     fun pill(loop: Loop, origin: Origin): PillCard {
-        val label = when (origin) {
-            Origin.Unlock -> "You came here to"
+        val why = when (origin) {
+            Origin.Unlock -> "You came here to ${aim(loop)}"
             Origin.Arrival -> "Before you forget"
             Origin.NextUp -> "Next up"
         }
-        return PillCard(loop.id, loop.kind, label, loop.task, verb(loop))
+        return PillCard(loop.id, loop.kind, note(loop), why, loop.task)
+    }
+
+    fun waiting(loop: Loop): Waiting = Waiting(loop.id, loop.kind, note(loop), loop.task, loop.updatedAt)
+
+    /** Who it's from and their own words, the way a friend would pass it on (ADR 0032). */
+    fun note(loop: Loop): Note {
+        val person = loop.kind in people || (loop.kind == LoopKind.Payment && !loop.bill)
+        val (who, words) = when (loop.kind) {
+            LoopKind.Reply -> "${loop.who}${loop.groupName?.let { " in $it" }.orEmpty()}" to loop.detail
+            LoopKind.Payment if loop.bill -> "${loop.who ?: "Your"} bill" to loop.detail
+            LoopKind.Routine -> ((loop.route as? Route.SetAlarm)?.let { "${alarmTime(it.time)} alarm" } ?: loop.task) to "You usually set one on weeknights"
+            LoopKind.Flow -> (loop.who ?: loop.task) to "You left before it went through"
+            LoopKind.LeaveBy -> leaveBy(loop)
+            // The reminder's own words are the note.
+            LoopKind.Reminder -> loop.task.trimEnd('?', '.') to loop.detail
+            LoopKind.Payment, LoopKind.CallBack, LoopKind.Email -> (loop.who ?: loop.task) to loop.detail
+        }
+        return Note(who, words, verb(loop), person, loop.packageName, faceKey = loop.notificationKey.takeIf { person })
+    }
+
+    /** What you came to do, as it follows "You came here to": "reply", "settle up". */
+    private fun aim(loop: Loop): String = when (loop.kind) {
+        LoopKind.Reply -> "reply"
+        LoopKind.Email -> "reply to this email"
+        LoopKind.CallBack -> "call back"
+        LoopKind.Payment -> if (loop.bill) "pay this bill" else "settle up"
+        LoopKind.Routine -> "set your alarm"
+        LoopKind.Flow -> "finish"
+        LoopKind.Reminder -> "get this done"
+        LoopKind.LeaveBy -> when {
+            loop.leaveBy?.isMeeting == true -> "join"
+            loop.route is Route.LaunchApp -> "book your ride"
+            else -> "leave"
+        }
     }
 
     fun verb(loop: Loop): String = when (loop.kind) {
+        LoopKind.Reply, LoopKind.Email -> "Reply"
         // A call back opens the call log rather than dialling, so a stray tap never rings anyone (ADR 0029).
-        LoopKind.Reply, LoopKind.CallBack, LoopKind.Email, LoopKind.Reminder -> "Do it now"
-        LoopKind.Payment -> "Pay now"
+        LoopKind.CallBack -> "Call back"
+        LoopKind.Reminder -> "Open"
+        LoopKind.Payment -> "Pay"
         LoopKind.Routine -> "Set it"
         LoopKind.Flow -> "Finish"
         LoopKind.LeaveBy -> when {
@@ -70,23 +90,21 @@ internal class Copy(private val settings: Settings) {
 
     fun alarmTime(time: LocalTime): String = alarmClock.format(time)
 
-    private fun leaveByChip(loop: Loop): Pair<String, String> {
-        val detail = loop.leaveBy ?: return "${loop.task}?" to ""
-        val title = when {
-            detail.isMeeting -> "Here to join ${detail.title}?"
-            loop.route is Route.LaunchApp -> "Here to book your ride?"
-            else -> "Time to leave for ${detail.title}?"
-        }
+    private fun leaveBy(loop: Loop): Pair<String, String?> {
+        val detail = loop.leaveBy ?: return loop.task to null
         val start = time(detail.startsAt)
-        val subtitle = if (detail.isMeeting) {
+        val words = if (detail.isMeeting) {
             "Starts at $start"
         } else {
             listOfNotNull(detail.place?.substringBefore(" · ")?.substringBefore(","), start, "leave by ${time(detail.leaveAt)}").joinToString(" · ")
         }
-        return title to subtitle
+        return detail.title to words
     }
 
     companion object {
+        /** Kinds that are always someone you know; a Payment is too, unless it's a bill. */
+        private val people = setOf(LoopKind.Reply, LoopKind.CallBack, LoopKind.Email)
+
         fun ago(elapsed: Duration): String {
             val minutes = elapsed.toMinutes()
             return when {

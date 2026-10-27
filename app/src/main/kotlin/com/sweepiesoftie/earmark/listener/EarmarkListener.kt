@@ -203,9 +203,11 @@ class EarmarkListener : NotificationListenerService() {
         val s = session ?: return
         val removedKey = (event as? Event.NotificationRemoved)?.key
         s.scope.launch(s.engineDispatcher) {
-            val effects = s.engine.handle(event, Instant.now())
+            val now = Instant.now()
+            val effects = s.engine.handle(event, now)
             val open = s.engine.openLoops
-            graph.listener.update { if (session === s) it.copy(openLoops = open) else it }
+            val waiting = s.engine.waiting(now)
+            graph.listener.update { if (session === s) it.copy(openLoops = open, waiting = waiting) else it }
             if (effects.isNotEmpty()) {
                 withContext(Dispatchers.Main) {
                     effects.forEach { effect ->

@@ -21,6 +21,8 @@
         tools:ignore="BatteryLife" />
     <!-- Needed for the alarm routine's way back, ACTION_SET_ALARM. Granted at install. -->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <!-- The pill's soft double tap as it arrives (ADR 0032). -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- Nothing leaves the phone (ADR 0002): strip what libraries merge in. -->
     <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />

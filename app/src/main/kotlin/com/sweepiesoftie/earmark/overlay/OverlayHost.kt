@@ -58,6 +58,7 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
     private val handler = Handler(Looper.getMainLooper())
     private val choreographer = Choreographer.getInstance()
     private val owner = OverlayOwner()
+    private val shoulderTap = ShoulderTap(context, log)
     private val _ui = MutableStateFlow(OverlayUi())
     val ui: StateFlow<OverlayUi> = _ui
 
@@ -92,7 +93,6 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
         val state by ui.collectAsState()
         TopOverlay(
             state = state,
-            onHold = { dispatch(Event.ChipHeld(it)) },
             onChipAct = { dispatch(Event.ChipActed(it)) },
             onChipDismiss = { dispatch(Event.ChipDismissed(it)) },
             onChipFaded = ::fadeChip,
@@ -125,8 +125,9 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
     }
 
     fun showPill(pill: PillCard) {
+        val arriving = _ui.value.pill?.loopId != pill.loopId
         _ui.update { it.copy(pill = pill, chip = null, reduceMotion = reduceMotion()) }
-        top.attach()
+        if (top.attach() && arriving) shoulderTap.tap()
         keepFramesComing()
     }
 
@@ -159,12 +160,9 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
         keepFramesComing()
     }
 
-    /** A faded chip only leaves the screen; the engine keeps watching its loop (ADR 0007). */
+    /** A faded chip only leaves the screen; the engine keeps watching its loop and shows the dot (ADR 0007, 0032). */
     private fun fadeChip(id: LoopId) {
-        if (_ui.value.chip?.loopId == id) {
-            log.add("chip faded: ${id.value}")
-            hide(Overlay.Chip)
-        }
+        if (_ui.value.chip?.loopId == id) dispatch(Event.ChipFaded(id))
     }
 
     fun destroy() {
@@ -199,9 +197,11 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
         PixelFormat.TRANSLUCENT,
     )
 
+    /** Just under the status bar, where a message's heads-up shows (ADR 0032). */
     private fun topParams() = baseParams(WindowManager.LayoutParams.MATCH_PARENT, 0).apply {
         gravity = Gravity.TOP
         y = statusBarHeight()
+        ignoreSystemBars()
         title = "Earmark"
     }
 
@@ -210,8 +210,18 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
         gravity = Gravity.TOP or Gravity.START
         x = (20 * context.resources.displayMetrics.density).toInt()
         y = statusBarHeight() + (4 * context.resources.displayMetrics.density).toInt()
+        ignoreSystemBars()
         alpha = 0.8f
         title = "Earmark dot"
+    }
+
+    /**
+     * Android lays an overlay out below the status bar already, so [statusBarHeight] in y counted it twice and the
+     * chip sat a bar's height lower than meant. Measured from the top of the screen, it lands the same on every phone.
+     */
+    private fun WindowManager.LayoutParams.ignoreSystemBars() {
+        flags = flags or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) fitInsetsTypes = 0
     }
 
     /** Sits just above a chat's input row. */

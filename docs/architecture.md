@@ -35,10 +35,10 @@ Effects out  ShowChip(card) · ShowDot · ShowPill(card) · HideOverlay(which) �
 |---|---|
 | Loop | Something you may owe: `Reply`, `CallBack` (missed call), `Email`, `Reminder` (one you set), `Payment` (a request or a bill), `Flow` (unfinished ride, order or checkout), `Routine` (alarm), `LeaveBy`, `Own`. Fields: id, kind, label, package, conversation key, openedAt, expiresAt, state |
 | WayBack | The exact route back: the notification's `contentIntent`, its reply `Action` (`RemoteInput`), or a launch or `ACTION_SET_ALARM` intent. Lives in adapter memory only, keyed by loop id |
-| Chip | Unlock-time guess ("Here to reply to Rahul?"). ✓ holds it; ignoring it lets it fade |
-| Drift | A feed app has been in front longer than the drift timer while the guessed loop is open and the loop's own app is not in front. Smart by default: your usual visit to that app, sooner for urgent loops or a held chip, 15 s to 2 min (ADR 0023); 10 s in demo mode |
+| Chip | Unlock-time guess, as a note: who, their words, "Here to reply?", one verb (ADR 0032). Its button hands the loop back; ignoring it lets it fade, and the dot shows while it stays the guess |
+| Drift | A feed app has been in front longer than the drift timer while the guessed loop is open and the loop's own app is not in front. Smart by default: your usual visit to that app, sooner for urgent or due-soon loops, 15 s to 2 min (ADR 0023); Right away, 3 s, is the default (ADR 0030); 10 s in demo mode |
 | Pause | Media paused or stopped, the audio player changing (a reel boundary), or an app switch |
-| Pill | The drift prompt: "You came here to · Reply to Rahul · **Do it now**", "Before you forget · …" for a message that arrived while the phone was in use, or "Next up · …" for the loop waiting after one you dealt with |
+| Pill | The drift prompt, as a note: "Rahul · “free at 5?” · You came here to reply · **Reply**", with "Before you forget" for a message that arrived while the phone was in use, or "Next up" for the loop waiting after one you dealt with (ADR 0032) |
 
 ## The guess (at every unlock)
 
@@ -63,7 +63,7 @@ ADR 0017 changed `due` and the boost after the first real-phone test, where a pl
 
 ## Hand-back and close
 
-- **Do it now** calls `wayBack.send()` with `ActivityOptions` that allow the background start (`MODE_BACKGROUND_ACTIVITY_START_ALLOW_ALWAYS` on API 36, `..._ALLOWED` on 34–35). It must run while the pill window is still attached: since Android 15, an overlay app may only start activities from the background while one of its overlays is visible. If the intent was cancelled or is missing, Earmark opens the app's launch intent instead.
+- **The pill's verb** (Reply, Pay, Set it…) calls `wayBack.send()` with `ActivityOptions` that allow the background start (`MODE_BACKGROUND_ACTIVITY_START_ALLOW_ALWAYS` on API 36, `..._ALLOWED` on 34–35). It must run while the pill window is still attached: since Android 15, an overlay app may only start activities from the background while one of its overlays is visible. If the intent was cancelled or is missing, Earmark opens the app's launch intent instead.
 - **Reply strip:** Smart Reply reads the last ≤ 10 `MessagingStyle` messages and offers up to 3 replies. A tap sends through `RemoteInput.addResultsToIntent` + `action.actionIntent.send(...)`. If the chat app clears its notification as the chat opens, the loop stays open until you reply, leave the app or turn the screen off, so the strip can still send (ADR 0019).
 - **Loops close on evidence:** the app clears or updates the conversation with a message from you, the dialer clears a missed call, the reminder is marked done, `NEXT_ALARM_CLOCK_CHANGED` fires, a "booked/ordered" notification arrives, or the payment request is removed. Each outcome is logged as done, dismissed or expired.
 

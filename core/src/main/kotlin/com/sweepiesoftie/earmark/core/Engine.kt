@@ -37,6 +37,16 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     /** How many loops are open, for the home screen. Read it on the engine's thread, like [handle]. */
     public val openLoops: Int get() = book.all.size
 
+    /**
+     * The open loops on today's list, in the order an unlock would guess them, for the home screen's "who's
+     * waiting" (ADR 0032). Read it on the engine's thread, like [handle].
+     */
+    public fun waiting(now: Instant): List<Waiting> = book.all
+        .filter(::isListed)
+        .map { it.loop to Ranker.score(it.loop, now, stats, unseen(it.loop)) }
+        .sortedWith(Ranker.unlockOrder.reversed())
+        .map { copy.waiting(it.first) }
+
     /** The message model's weights loaded, so it reads messages beside the word lists (ADR 0031). The first read loads them. */
     public val messageModel: Boolean get() = MessageModel.loaded
 
@@ -50,9 +60,10 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         is Event.BlockerChanged -> stepDrift(DriftInput.Block(event.blocker, event.active), now)
         is Event.AlarmChanged -> onAlarm(event.nextAlarm, now)
         is Event.CalendarSoon -> onCalendar(event.events, now)
-        is Event.ChipHeld -> onChipHeld(event.loopId)
         is Event.ChipDismissed -> onChipDismissed(event.loopId)
+        is Event.ChipFaded -> onChipFaded(event.loopId)
         is Event.ChipActed -> onChipActed(event.loopId)
+        is Event.WaitingOpened -> onWaitingOpened(event.loopId)
         is Event.PillTapped -> onPillTapped(event.loopId)
         is Event.PillDismissed -> onPillDismissed(event.loopId)
         is Event.ReplyChosen -> onReplyChosen(event)
@@ -369,7 +380,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         // Right away still lets you pass through a feed app on the way somewhere else.
         settings.driftTimer == DriftTimer.RightAway -> SmartDrift.Timer(SmartDrift.shortestVisit, "right away")
         settings.driftTimer == DriftTimer.Smart && guess != null ->
-            SmartDrift.timer(guess.loop, guess.held, foreground?.let { stats.apps[it.packageName] })
+            SmartDrift.timer(guess.loop, foreground?.let { stats.apps[it.packageName] })
         else -> SmartDrift.Timer(settings.driftAfter, "fixed timer")
     }
 
@@ -400,6 +411,8 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
             foreground = foreground?.copy(interrupted = true)
             val shown = book.update(guess.loop.id) { it.copy(pillShown = true, guessedAt = it.guessedAt ?: now) }!!
             effects += Effect.HideOverlay(Overlay.Chip)
+            // The pill says what the dot was holding, and the dot would peek out from under its corner.
+            effects += Effect.HideOverlay(Overlay.Dot)
             effects += Effect.ShowPill(copy.pill(guess.loop, drift.origin))
             if (guess.guessedAt == null) effects += Effect.RecordLoop(entry(shown, outcome = null, closedAt = null))
         }
@@ -436,11 +449,11 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         }
     }
 
-    private fun onChipHeld(id: LoopId): List<Effect> {
-        val tracked = book.update(id) { it.copy(held = true) } ?: return emptyList()
-        val stat = kindStat(tracked.loop.kind)
-        return listOf(Effect.HideOverlay(Overlay.Chip), Effect.ShowDot, Effect.Log("chip held: ${id.value}")) +
-            setKind(tracked.loop.kind, stat.copy(holds = stat.holds + 1, ignoreStreak = 0))
+    /** A faded chip only leaves the screen. While its loop is still the guess, the dot says Earmark is holding it (ADR 0007, 0032). */
+    private fun onChipFaded(id: LoopId): List<Effect> {
+        if (drift.loopId != id || book[id] == null) return listOf(Effect.Log("chip faded: ${id.value}, no longer the guess"))
+        val holding = drift.phase != Phase.HandedBack
+        return listOfNotNull(Effect.HideOverlay(Overlay.Chip), Effect.ShowDot.takeIf { holding }, Effect.Log("chip faded: ${id.value}" + if (holding) "; dot shows" else ""))
     }
 
     private fun onChipDismissed(id: LoopId): List<Effect> {
@@ -465,9 +478,24 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         book.update(id) { it.copy(handedBack = it.handedBack || carried) }
         drift = drift.copy(phase = Phase.HandedBack)
         val stat = kindStat(tracked.loop.kind)
-        // Acting on a chip says "yes, this one" as clearly as ✓ does.
+        // The chip's one button is how you say "yes, this one" (ADR 0032).
         return handBack(tracked, "chip") + Effect.HideOverlay(Overlay.Chip) +
             setKind(tracked.loop.kind, stat.copy(holds = stat.holds + 1, ignoreStreak = 0))
+    }
+
+    /**
+     * A waiting row tapped on the home screen: you picked it, so it becomes the guess, handed back now. A detour, like
+     * a chat opened from its notification: the guess it took over from comes back once it closes. It isn't a guess
+     * you confirmed, so nothing is learned about its kind.
+     */
+    private fun onWaitingOpened(id: LoopId): List<Effect> {
+        val tracked = book[id] ?: return listOf(Effect.Log("waiting row ${id.value}: already closed"))
+        if (drift.loopId != id) {
+            val previous = drift.takeIf { it.loopId != null }
+            drift = DriftMachine.guess(drift, id, home(tracked.loop)).copy(resume = previous)
+        }
+        drift = drift.copy(phase = Phase.HandedBack)
+        return handBack(tracked, "home screen") + listOf(Overlay.Chip, Overlay.Pill, Overlay.Dot).map { Effect.HideOverlay(it) }
     }
 
     private fun onPillTapped(id: LoopId): List<Effect> {

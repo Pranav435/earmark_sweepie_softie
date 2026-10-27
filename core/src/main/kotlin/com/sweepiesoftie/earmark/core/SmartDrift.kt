@@ -6,7 +6,7 @@ import kotlin.math.roundToLong
 
 /**
  * The drift timer when it is Smart (ADR 0023): staying in a feed longer than you usually do is
- * drift, and it comes back sooner when the loop is urgent or you said ✓ to it.
+ * drift, and it comes back sooner when the loop is urgent or due soon.
  */
 internal object SmartDrift {
     val shortest: Duration = Duration.ofSeconds(15)
@@ -23,7 +23,7 @@ internal object SmartDrift {
 
     data class Timer(val after: Duration, val why: String)
 
-    fun timer(loop: Loop, held: Boolean, app: AppStat?): Timer {
+    fun timer(loop: Loop, app: AppStat?): Timer {
         val learned = app != null && app.visits >= LEARN_AFTER_VISITS
         val usual = if (learned) app!!.medianVisitSeconds else START_SECONDS
         val why = mutableListOf("usual visit ${usual.roundToLong()} s" + if (learned) "" else ", still learning")
@@ -32,7 +32,6 @@ internal object SmartDrift {
             loop.due >= 1.0 -> { seconds *= 0.5; why += "urgent ×0.5" }
             loop.due >= 0.75 -> { seconds *= 0.75; why += "due soon ×0.75" }
         }
-        if (held) { seconds *= 0.75; why += "held ×0.75" }
         val after = Duration.ofSeconds(seconds.roundToLong())
         return when {
             after < shortest -> Timer(shortest, (why + "at least ${shortest.seconds} s").joinToString(" · "))

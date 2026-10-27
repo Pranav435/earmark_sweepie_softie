@@ -20,7 +20,7 @@ import java.time.Instant
  * intents in the [WayBackRegistry]. Conversation keys are salted and hashed here, before
  * anything can reach Room (ADR 0004).
  */
-class NotificationReader(context: Context, private val wayBacks: WayBackRegistry, private val log: DebugLog) {
+class NotificationReader(private val context: Context, private val wayBacks: WayBackRegistry, private val log: DebugLog) {
     private val ownPackage = context.packageName
     private val salt: String = run {
         val prefs = context.getSharedPreferences("install", Context.MODE_PRIVATE)
@@ -86,6 +86,10 @@ class NotificationReader(context: Context, private val wayBacks: WayBackRegistry
                 (action.semanticAction == Notification.Action.SEMANTIC_ACTION_REPLY || action.semanticAction == Notification.Action.SEMANTIC_ACTION_NONE)
         }
         val lastSender = messages.lastOrNull { !it.fromUser }?.sender
+        // The sender's own picture when the app gives each person one, else the notification's large icon,
+        // which chat, dialer and mail apps set to the person (a group's picture in a group).
+        val face = style?.messages.orEmpty().lastOrNull { it.person?.name?.toString() == lastSender && it.person?.icon != null }
+            ?.person?.icon?.toIcon(context) ?: n.getLargeIcon()
         // An email or a missed call without a chat style names the person in its title; tags there are per email or per call.
         val byTitle = title.takeIf { n.category == Notification.CATEGORY_EMAIL || n.category == CATEGORY_MISSED_CALL }
         val conversation = n.shortcutId ?: style?.conversationTitle?.toString() ?: lastSender ?: byTitle ?: sbn.tag ?: sbn.id.toString()
@@ -97,6 +101,7 @@ class NotificationReader(context: Context, private val wayBacks: WayBackRegistry
                 contentIntent = n.contentIntent,
                 reply = reply,
                 messages = messages.map { RecentMessage(it.text, it.at.toEpochMilli(), it.fromUser, it.sender ?: "them") },
+                face = face,
             ),
         )
         return Signal(

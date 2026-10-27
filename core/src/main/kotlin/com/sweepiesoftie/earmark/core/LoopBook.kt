@@ -12,8 +12,6 @@ internal data class Tracked(
     val carryOver: Boolean = false,
     /** A pill or carry-over chip handed it back, so closing it counts as "brought back". */
     val handedBack: Boolean = false,
-    /** ✓ was tapped on its chip: you said this is what you came for, so the smart drift timer is shorter. */
-    val held: Boolean = false,
     /** The chip was swiped this session: don't track drift for it until the next unlock. */
     val ignored: Boolean = false,
     /** Its app cleared the notification because you opened the chat; it closes when you reply or leave. */

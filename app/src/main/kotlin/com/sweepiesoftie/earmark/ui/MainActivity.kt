@@ -98,7 +98,10 @@ private fun Root() {
         onPauseOrDispose { }
     }
     var screen by rememberSaveable { mutableStateOf(if (readPermissions(activity).required) Screen.Recap else Screen.Onboarding) }
-    BackHandler(screen == Screen.Settings || screen == Screen.Log) { screen = Screen.Recap }
+    var setupStart by rememberSaveable { mutableStateOf(SetupStep.Intro) }
+    val setup = { setupStart = permissions.firstMissing; screen = Screen.Onboarding }
+    // Setup opened from home or Settings goes back there; on a first run it is where the app starts.
+    BackHandler(screen == Screen.Settings || screen == Screen.Log || (screen == Screen.Onboarding && setupStart != SetupStep.Intro)) { screen = Screen.Recap }
 
     val user by graph.settings.state.collectAsState()
     val listener by graph.listener.collectAsState()
@@ -125,6 +128,7 @@ private fun Root() {
         when (screen) {
             Screen.Onboarding -> OnboardingScreen(
                 permissions,
+                setupStart,
                 OnboardingActions(
                     onNotificationAccess = { activity.openSettings(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS) },
                     onUsageAccess = { activity.openSettings(Settings.ACTION_USAGE_ACCESS_SETTINGS) },
@@ -139,9 +143,11 @@ private fun Root() {
             )
             Screen.Recap -> {
                 val rows by recapRows()
+                val waiting = listener.waiting
                 RecapScreen(
                     RecapState(
-                        rows = rows,
+                        waiting = waiting,
+                        rows = rows.filter { row -> waiting.none { it.loopId.value == row.id } },
                         paused = user.paused,
                         missingPermission = !permissions.required,
                         notListening = permissions.notifications && !listener.connected && bindWaitOver,
@@ -151,10 +157,11 @@ private fun Root() {
                         canPostNotifications = permissions.postNotifications,
                     ),
                     RecapActions(
+                        onOpen = { graph.uiEvents.tryEmit(Event.WaitingOpened(it)) },
                         onSettings = { screen = Screen.Settings },
                         onLog = { screen = Screen.Log },
                         onResume = { graph.settings.setPaused(false) },
-                        onFixPermissions = { screen = Screen.Onboarding },
+                        onFixPermissions = setup,
                         onNotificationAccess = { activity.openSettings(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS) },
                         onBattery = activity::askBatteryUnrestricted,
                         onDemoRahul = { DemoNotifier.postRahul(activity) },
@@ -187,7 +194,7 @@ private fun Root() {
                         onNames = graph.settings::setNames,
                         onShowAllApps = { showAll = true },
                         onUnmute = { kind -> graph.uiEvents.tryEmit(Event.KindUnmuted(kind)) },
-                        onPermissions = { screen = Screen.Onboarding },
+                        onPermissions = setup,
                         onLog = { screen = Screen.Log },
                     ),
                 )

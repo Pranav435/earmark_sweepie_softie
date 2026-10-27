@@ -102,16 +102,20 @@ Group messages that aren't for you. They open no loop; only a tap or swipe on th
 **Mention**:
 Your name, first name or a nickname from your own contact card in a group message, in Latin letters or an Indian script ("प्रणव"), or the app's @name for you.
 
+**Note**:
+How the chip, the pill and a waiting row look: a paper card, as from a friend, with who it's from (their photo or initial, or an app's icon), their own words, why it's here, and one verb such as Reply or Pay.
+_Avoid_: card, bubble
+
+**Gist**:
+The few words of a message a note quotes: all of a short one, or from a long one the sentence that is urgent or asks.
+_Avoid_: summary, preview
+
 **Chip**:
-The small card that shows the guess right after unlock.
+The note that shows the guess right after unlock: "Rahul · “free at 5?” · Here to reply? · Reply". Its one button hands the loop back and says "yes, this one".
 _Avoid_: banner, toast, popup
 
-**Hold**:
-Tapping ✓ on a chip to say "yes, this one"; the chip shrinks into the dot.
-_Avoid_: confirm, accept
-
 **Fade**:
-A chip running out its timer without a tap. The loop is still watched.
+A chip running out its timer without a tap. The loop is still watched, and the dot shows while it stays the guess.
 
 **Ignore**:
 Swiping a chip away. Three ignores in a row mute that kind.
@@ -120,7 +124,7 @@ Swiping a chip away. Three ignores in a row mute that kind.
 The state of a kind that Earmark no longer guesses because you ignored it three times in a row.
 
 **Dot**:
-The small marigold mark under the status bar that shows a held loop is being kept.
+The small marigold mark under the status bar that shows Earmark is holding a guess whose chip faded.
 
 ## Drift and hand-back
 
@@ -132,7 +136,7 @@ Being in a feed app for longer than the drift timer while the guessed loop is st
 _Avoid_: distraction, doomscroll, relapse
 
 **Drift timer**:
-How long a feed app can be in front before it counts as drift. Right away by default: 3 seconds, long enough to tell you're not just passing through. Smart, in Settings, is your usual visit to that feed app, sooner when the loop is urgent or you held its chip, between 15 seconds and 2 minutes. A fixed time can be picked in Settings too.
+How long a feed app can be in front before it counts as drift. Right away by default: 3 seconds, long enough to tell you're not just passing through. Smart, in Settings, is your usual visit to that feed app, sooner when the loop is urgent or due soon, between 15 seconds and 2 minutes. A fixed time can be picked in Settings too.
 
 **Usual visit**:
 How long you usually stay in a feed app, learned on the phone from your visits, for the Smart drift timer. A visit a pill cut short doesn't count.
@@ -144,7 +148,7 @@ A natural break in the feed: media paused or stopped, the next reel starting, or
 Something that holds the pill back: a call, active navigation, Do Not Disturb or media still playing.
 
 **Pill**:
-The prompt shown at a pause during drift: "You came here to · Reply to Rahul · Do it now". For an arrival it reads "Before you forget · Reply to Priya · Do it now", and for a next up "Next up · Reply to Zoya · Do it now".
+The note shown at a pause during drift: "Rahul · “free at 5?” · You came here to reply · Reply". For an arrival its small line reads "Before you forget", and for a next up "Next up".
 _Avoid_: nudge, interruption, alert
 
 **Hand-back**:
@@ -160,8 +164,11 @@ _Avoid_: quick replies bar, suggestions
 
 ## Recap
 
+**Waiting**:
+An open loop on the home screen, in the order Earmark would guess it. Tapping it opens its way back.
+
 **Recap**:
-Today's list of things and how each one ended.
+Today's list of things and how each one ended. The home screen leads with who's waiting and folds the rest into "Earlier today".
 _Avoid_: report, stats, dashboard
 
 **Thing**:

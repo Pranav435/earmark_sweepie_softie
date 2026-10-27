@@ -22,37 +22,31 @@ class SmartDriftTest {
         due = due,
     )
 
-    private fun seconds(loop: Loop, held: Boolean = false, app: AppStat? = null): Long = SmartDrift.timer(loop, held, app).after.seconds
+    private fun seconds(loop: Loop, app: AppStat? = null): Long = SmartDrift.timer(loop, app).after.seconds
 
     @Test
     fun `a plain message waits 45 s while the feed app is still being learned`() {
         assertEquals(45, seconds(reply(0.5)))
-        assertEquals("usual visit 45 s, still learning", SmartDrift.timer(reply(0.5), held = false, app = AppStat(visits = 4, medianVisitSeconds = 200.0)).why)
+        assertEquals("usual visit 45 s, still learning", SmartDrift.timer(reply(0.5), app = AppStat(visits = 4, medianVisitSeconds = 200.0)).why)
     }
 
     @Test
     fun `something urgent comes back in half the time, and something due soon in three quarters`() {
         assertEquals(23, seconds(reply(1.0)))
         assertEquals(34, seconds(reply(0.75)))
-        assertEquals("usual visit 45 s, still learning · urgent ×0.5", SmartDrift.timer(reply(1.0), held = false, app = null).why)
-    }
-
-    @Test
-    fun `saying yes to the chip brings it back a quarter sooner`() {
-        assertEquals(34, seconds(reply(0.5), held = true))
-        assertEquals(17, seconds(reply(1.0), held = true))
+        assertEquals("usual visit 45 s, still learning · urgent ×0.5", SmartDrift.timer(reply(1.0), app = null).why)
     }
 
     @Test
     fun `after five visits it goes by your usual visit to that app`() {
         val instagram = AppStat(visits = 5, medianVisitSeconds = 80.0)
         assertEquals(80, seconds(reply(0.5), app = instagram))
-        assertEquals("usual visit 80 s · urgent ×0.5", SmartDrift.timer(reply(1.0), held = false, app = instagram).why)
+        assertEquals("usual visit 80 s · urgent ×0.5", SmartDrift.timer(reply(1.0), app = instagram).why)
     }
 
     @Test
     fun `it stays between 15 seconds and 2 minutes`() {
-        assertEquals(15, seconds(reply(1.0), held = true, app = AppStat(visits = 9, medianVisitSeconds = 10.0)))
+        assertEquals(15, seconds(reply(1.0), app = AppStat(visits = 9, medianVisitSeconds = 10.0)))
         assertEquals(120, seconds(reply(0.5), app = AppStat(visits = 9, medianVisitSeconds = 600.0)))
     }
 

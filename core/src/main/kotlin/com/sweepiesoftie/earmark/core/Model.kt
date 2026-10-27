@@ -130,7 +130,7 @@ public enum class DriftTimer {
     /** As soon as you're in the feed, not just passing through it (ADR 0030). */
     RightAway,
 
-    /** Your usual visit to the feed app, sooner when the loop is urgent or held (ADR 0023). */
+    /** Your usual visit to the feed app, sooner when the loop is urgent (ADR 0023). */
     Smart,
 
     /** [Settings.driftAfter]. */
@@ -202,18 +202,31 @@ public data class Stats(
     val apps: Map<String, AppStat> = emptyMap(),
 )
 
-public data class ChipCard(
-    val loopId: LoopId,
-    val kind: LoopKind,
-    val title: String,
-    val subtitle: String,
-    /** A verb button replaces ✓ on carry-over chips ("Pay now"). */
-    val action: String?,
-    val score: Double,
+/**
+ * What Earmark says about a loop, in the order a note from a friend reads (ADR 0032): who it's from, their own
+ * words, and one verb. [person] is true for someone you know, so the overlay shows their photo from the
+ * notification [faceKey], or their initial; otherwise it shows [packageName]'s icon.
+ */
+public data class Note(
+    val who: String,
+    val words: String?,
+    val verb: String,
+    val person: Boolean,
+    val packageName: String?,
+    val faceKey: String? = null,
 )
 
-/** [label] says why the task is back: "You came here to", or "Before you forget" for something that came in while you were using the phone. */
-public data class PillCard(val loopId: LoopId, val kind: LoopKind, val label: String, val task: String, val verb: String)
+/** [why] is the small line under the note: "Here to reply?", or "Still on your list from 1:18 PM" for a carry-over. [task] is for TalkBack. */
+public data class ChipCard(val loopId: LoopId, val kind: LoopKind, val note: Note, val why: String, val task: String, val score: Double)
+
+/**
+ * [why] says why the task is back: "You came here to reply", "Before you forget" for something that came in while
+ * you were using the phone, or "Next up". [task] is for TalkBack: "Reply to Rahul".
+ */
+public data class PillCard(val loopId: LoopId, val kind: LoopKind, val note: Note, val why: String, val task: String)
+
+/** An open loop on the home screen, in the order Earmark would guess them (ADR 0032). [at] is when it last came in. */
+public data class Waiting(val loopId: LoopId, val kind: LoopKind, val note: Note, val task: String, val at: Instant)
 
 /** One row of the recap, upserted by loop id. Labels are trimmed to kind and time after 24 h by the store. */
 public data class LoopEntry(
@@ -239,12 +252,15 @@ public sealed interface Event {
     public data class BlockerChanged(val blocker: Blocker, val active: Boolean) : Event
     public data class AlarmChanged(val nextAlarm: Instant?) : Event
     public data class CalendarSoon(val events: List<CalendarEvent>) : Event
-    public data class ChipHeld(val loopId: LoopId) : Event
     public data class ChipDismissed(val loopId: LoopId) : Event
-    /** The chip body or its verb button was tapped: hand the loop back now. */
+    /** The chip ran out its timer untouched: Earmark keeps watching its loop, and the dot says so (ADR 0007). */
+    public data class ChipFaded(val loopId: LoopId) : Event
+    /** The chip or its verb button was tapped: hand the loop back now. It's the "yes, this one" Earmark learns from. */
     public data class ChipActed(val loopId: LoopId) : Event
     public data class PillTapped(val loopId: LoopId) : Event
     public data class PillDismissed(val loopId: LoopId) : Event
+    /** A waiting row on the home screen was tapped: open its way back, as a chip tap would. */
+    public data class WaitingOpened(val loopId: LoopId) : Event
     public data class ReplyChosen(val loopId: LoopId, val text: String) : Event
     public data class ReplySent(val loopId: LoopId) : Event
     public data class KindUnmuted(val kind: LoopKind) : Event

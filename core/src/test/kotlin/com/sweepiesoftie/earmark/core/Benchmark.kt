@@ -163,7 +163,7 @@ private class Bench(private val data: File, private val out: File) {
             val best = expected.str("chip")!!
             val fine = listOf(best) + expected.get("alsoFine")?.takeIf { it.isJsonArray }?.asJsonArray?.map { it.asString }.orEmpty()
             val decision = effects.filterIsInstance<Effect.Log>().lastOrNull { it.line.startsWith("unlock:") }?.line.orEmpty()
-            Guess(case, best, fine, got, chip?.title, decision)
+            Guess(case, best, fine, got, chip?.task, decision)
         }
         val shows = Binary().apply { rows.forEach { add(it.best != "none", "none" !in it.got) } }
         val shown = rows.filter { it.best != "none" && "none" !in it.got }

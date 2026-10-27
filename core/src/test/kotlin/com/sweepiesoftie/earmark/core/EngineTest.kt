@@ -2,6 +2,7 @@ package com.sweepiesoftie.earmark.core
 
 import com.sweepiesoftie.earmark.core.Fixtures.at
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -22,8 +23,8 @@ class EngineTest {
         at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5), "hey")))
         // 0.35*exp(-5/30) + 0.125 + 0.25*0.5 + 0.075 + 0.15 = 0.7713
         val chip = at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip
-        assertEquals("Here to reply to Rahul?", chip.title)
-        assertEquals("“hey” · 5 min ago", chip.subtitle)
+        assertEquals("Rahul", chip.note.who)
+        assertEquals("“hey” · 5 min ago", chip.note.words)
     }
 
     @Test
@@ -99,7 +100,7 @@ class EngineTest {
         at(at(19, 1), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
         val pill = at(at(19, 1, 11), Event.Tick).one<Effect.ShowPill>().pill
         assertEquals("Finish in Uber", pill.task)
-        assertEquals("Finish", pill.verb)
+        assertEquals("Finish", pill.note.verb)
     }
 
     @Test
@@ -112,12 +113,11 @@ class EngineTest {
     }
 
     @Test
-    fun `a long message is clamped so the chip always shows its age`() = with(Script()) {
+    fun `a long message is cut down so the chip always shows its age`() = with(Script()) {
         val long = "can you send me the slides from yesterday's offsite, the budget sheet, and the notes Priya took, before the 4:30 sync?"
         at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11), long)))
-        val subtitle = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip.subtitle
-        assertTrue(subtitle, subtitle.endsWith("…” · 1 min ago"))
-        assertTrue(subtitle, subtitle.length <= 100)
+        val words = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip.note.words!!
+        assertEquals("“can you send me the slides from yesterday's offsite, the budget sheet…” · 1 min ago", words)
     }
 
     @Test
@@ -159,16 +159,16 @@ class EngineTest {
             // Its heads-up already showed, so a chip on top would only repeat it.
             assertTrue(at(at(16, 1), Event.NotificationPosted(Fixtures.rahul(at(16, 1), "hey"))).none { it is Effect.ShowChip })
             val pill = at(at(16, 1, 11), Event.Tick).one<Effect.ShowPill>().pill
-            assertEquals("Before you forget", pill.label)
+            assertEquals("Before you forget", pill.why)
             assertEquals("Reply to Rahul", pill.task)
-            assertEquals("Do it now", pill.verb)
+            assertEquals("Reply", pill.note.verb)
         }
 
     @Test
     fun `tapping a group of chats opens only the guessed one, once its app is in front`() = with(Script()) {
         at(at(16, 0), Event.NotificationPosted(Fixtures.rahul(at(16, 0))))
         at(at(16, 0), Event.NotificationPosted(Fixtures.priya(at(16, 0))))
-        assertEquals("Here to reply to Rahul?", at(at(16, 2), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+        assertEquals("Rahul", at(at(16, 2), Event.Unlocked).one<Effect.ShowChip>().chip.note.who)
 
         // A tap on the group: GroupRemovals reports each chat as cleared by its app (ADR 0026).
         val rahulGone = at(at(16, 2, 5), Event.NotificationRemoved("0|com.whatsapp|1|rahul|10123", RemovalReason.AppCancel))
@@ -239,14 +239,49 @@ class EngineTest {
         }
 
     @Test
-    fun `holding the chip makes the smart timer a quarter shorter`() = with(Script(Fixtures.settings.copy(driftTimer = DriftTimer.Smart))) {
+    fun `a chip left to fade keeps the smart timer at your usual visit`() = with(Script(Fixtures.settings.copy(driftTimer = DriftTimer.Smart))) {
         at(at(16, 0), Event.NotificationPosted(Fixtures.priya(at(16, 0))))
         val chip = at(at(16, 2), Event.Unlocked).one<Effect.ShowChip>().chip
-        at(at(16, 2, 3), Event.ChipHeld(chip.loopId))
+        at(at(16, 2, 3), Event.ChipFaded(chip.loopId))
         at(at(16, 2, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
 
-        assertTrue(at(at(16, 2, 38), Event.Tick).none { it is Effect.ShowPill })
-        assertEquals("Reply to Priya", at(at(16, 2, 39), Event.Tick).one<Effect.ShowPill>().pill.task)
+        assertTrue(at(at(16, 2, 49), Event.Tick).none { it is Effect.ShowPill })
+        assertEquals("Reply to Priya", at(at(16, 2, 50), Event.Tick).one<Effect.ShowPill>().pill.task)
+    }
+
+    @Test
+    fun `a faded chip shows the dot only while its loop is still the guess`() = with(Script()) {
+        at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+        val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
+        assertTrue(Effect.ShowDot in at(at(16, 12, 8), Event.ChipFaded(chip.loopId)))
+
+        val again = at(at(16, 20), Event.Unlocked).one<Effect.ShowChip>().chip
+        at(at(16, 20, 2), Event.ChipDismissed(again.loopId))
+        assertTrue(Effect.ShowDot !in at(at(16, 20, 8), Event.ChipFaded(again.loopId)))
+    }
+
+    @Test
+    fun `the home screen lists who's waiting in the order an unlock would guess them`() = with(Script()) {
+        at(at(16, 0), Event.NotificationPosted(Fixtures.priya(at(16, 0))))
+        at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5))))
+        val waiting = engine.waiting(at(16, 6))
+        val chip = at(at(16, 6), Event.Unlocked).one<Effect.ShowChip>().chip
+        assertEquals(2, waiting.size)
+        assertEquals(chip.loopId, waiting.first().loopId)
+        assertEquals("“free at 5?”", waiting.single { it.note.who == "Rahul" }.note.words)
+    }
+
+    @Test
+    fun `a waiting row opens its way back, as a detour from the guess, and teaches nothing about its kind`() = with(Script()) {
+        at(at(16, 0), Event.NotificationPosted(Fixtures.priya(at(16, 0))))
+        at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5))))
+        val chip = at(at(16, 6), Event.Unlocked).one<Effect.ShowChip>().chip
+        val other = engine.waiting(at(16, 6, 5)).first { it.loopId != chip.loopId }
+
+        val opened = at(at(16, 6, 5), Event.WaitingOpened(other.loopId))
+        assertEquals(other.loopId, opened.one<Effect.OpenWayBack>().loopId)
+        assertTrue(Effect.HideOverlay(Overlay.Chip) in opened)
+        assertTrue(opened.none { it is Effect.RecordKind })
     }
 
     @Test
@@ -314,7 +349,7 @@ class EngineTest {
         // One that came in while the phone was down still gets the first unlock after it.
         at(at(16, 5), Event.ScreenOff)
         at(at(16, 6), Event.NotificationPosted(Fixtures.priya(at(16, 6))))
-        assertEquals("Here to reply to Priya?", at(at(16, 8), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+        assertEquals("Priya", at(at(16, 8), Event.Unlocked).one<Effect.ShowChip>().chip.note.who)
     }
 
     @Test
@@ -322,12 +357,12 @@ class EngineTest {
         with(Script(Fixtures.settings.copy(driftAfter = java.time.Duration.ofSeconds(10)))) {
             at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
             val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
-            at(at(16, 12, 3), Event.ChipHeld(chip.loopId))
+            at(at(16, 12, 3), Event.ChipFaded(chip.loopId))
             at(at(16, 12, 10), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
 
             at(at(16, 12, 15), Event.NotificationPosted(Fixtures.priya(at(16, 12, 15))))
             val pill = at(at(16, 12, 21), Event.Tick).one<Effect.ShowPill>().pill
-            assertEquals("You came here to", pill.label)
+            assertEquals("You came here to reply", pill.why)
             assertEquals("Reply to Rahul", pill.task)
         }
 
@@ -349,7 +384,7 @@ class EngineTest {
             at(at(16, 0), Event.Tick)
             at(at(16, 1), Event.NotificationPosted(Fixtures.rahul(at(16, 1), "hey")))
             at(at(16, 1, 1), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
-            assertEquals("Before you forget", at(at(16, 1, 12), Event.Tick).one<Effect.ShowPill>().pill.label)
+            assertEquals("Before you forget", at(at(16, 1, 12), Event.Tick).one<Effect.ShowPill>().pill.why)
         }
 
     @Test
@@ -368,7 +403,7 @@ class EngineTest {
         val rahul = Fixtures.rahul(at(16, 0), "hey")
         at(at(16, 0), Event.NotificationPosted(rahul))
         at(at(16, 11, 30), Event.NotificationPosted(Fixtures.priya(at(16, 11, 30))))
-        assertEquals("Here to reply to Priya?", at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+        assertEquals("Priya", at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip.note.who)
 
         // You pull down the shade and tap Rahul's message instead.
         val tapped = at(at(16, 12, 20), Event.NotificationRemoved(rahul.key, RemovalReason.Click))
@@ -385,7 +420,7 @@ class EngineTest {
     fun `a new message from someone whose pill already showed gets a pill of its own`() = with(Script()) {
         at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
         val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
-        at(at(16, 12, 3), Event.ChipHeld(chip.loopId))
+        at(at(16, 12, 3), Event.ChipFaded(chip.loopId))
         at(at(16, 12, 10), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
         assertTrue(at(at(16, 13, 41), Event.Tick).any { it is Effect.ShowPill })
         // You leave the pill and put the phone down without replying.
@@ -402,7 +437,7 @@ class EngineTest {
         with(Script(Fixtures.settings.copy(driftAfter = java.time.Duration.ofSeconds(10)))) {
             at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
             val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
-            at(at(16, 12, 3), Event.ChipHeld(chip.loopId))
+            at(at(16, 12, 3), Event.ChipFaded(chip.loopId))
 
             val priya = Fixtures.priya(at(16, 12, 30))
             at(at(16, 12, 30), Event.NotificationPosted(priya))
@@ -418,7 +453,7 @@ class EngineTest {
 
             at(at(16, 13, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
             val pill = at(at(16, 13, 16), Event.Tick).one<Effect.ShowPill>().pill
-            assertEquals("You came here to", pill.label)
+            assertEquals("You came here to reply", pill.why)
             assertEquals("Reply to Rahul", pill.task)
         }
 
@@ -463,7 +498,7 @@ class EngineTest {
         val key = Fixtures.rahul(at(16, 11)).key
         at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
         val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
-        at(at(16, 12, 3), Event.ChipHeld(chip.loopId))
+        at(at(16, 12, 3), Event.ChipFaded(chip.loopId))
 
         val tapped = at(at(16, 12, 20), Event.NotificationRemoved(key, RemovalReason.Click))
         assertEquals(Effect.SuggestReplies(chip.loopId, key, "Rahul"), tapped.one<Effect.SuggestReplies>())
@@ -621,7 +656,7 @@ class EngineTest {
         at(at(16, 5), Event.NotificationPosted(Fixtures.zoya(at(16, 5), "call me asap")))
         at(at(16, 8), Event.NotificationPosted(Fixtures.rahul(at(16, 8), "that was fun")))
         // Zoya: 0.35*exp(-5/30) + 0.125 + 0.25*1.0 + 0.075 + 0.15 = 0.8963; Rahul, newer but plain: 0.8024
-        assertEquals("Here to reply to Zoya?", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+        assertEquals("Zoya", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.note.who)
     }
 
     @Test
@@ -630,7 +665,7 @@ class EngineTest {
         at(at(12, 30), Event.NotificationPosted(Fixtures.zoya(at(12, 30), "did you book the tickets for saturday")))
         at(at(15, 0), Event.NotificationPosted(Fixtures.rahul(at(15, 0), "that was fun")))
         // Zoya: 0.35*exp(-220/360) + 0.125 + 0.25*0.75 + 0.075 + 0.15 = 0.7273; Rahul's chatter fades in half an hour: 0.4807
-        assertEquals("Here to reply to Zoya?", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+        assertEquals("Zoya", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.note.who)
     }
 
     @Test
@@ -639,7 +674,7 @@ class EngineTest {
         at(at(16, 1), Event.NotificationPosted(Fixtures.zoya(at(16, 1), "ज़रूरी बात है")))
         at(at(16, 9), Event.NotificationPosted(Fixtures.rahul(at(16, 9), "free at 5?")))
         // Both are fully due and owed; Rahul's scores a little higher for being newer, but Zoya's is urgent.
-        assertEquals("Here to reply to Zoya?", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+        assertEquals("Zoya", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.note.who)
     }
 
     @Test
@@ -653,14 +688,14 @@ class EngineTest {
             at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5), "hey")))
             at(at(16, 6), Event.NotificationPosted(Fixtures.zoya(at(16, 6), "hey")))
             // Rahul: who 0.66 from WhatsApp, 0.811 in all; Zoya is newer, but who 0.34 from Instagram makes 0.742.
-            assertEquals("Here to reply to Rahul?", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+            assertEquals("Rahul", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.note.who)
             assertTrue(log.last(), "who 0.66 from app" in log.last())
         }
         with(Script()) {
             at(at(16, 0), Event.ScreenOff)
             at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5), "hey")))
             at(at(16, 6), Event.NotificationPosted(Fixtures.zoya(at(16, 6), "hey")))
-            assertEquals("before Earmark has learned either app, the newer one wins", "Here to reply to Zoya?", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+            assertEquals("before Earmark has learned either app, the newer one wins", "Zoya", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.note.who)
         }
     }
 
@@ -670,7 +705,7 @@ class EngineTest {
         at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5), "free at 5?")))
         at(at(16, 6), Event.NotificationPosted(Fixtures.zoya(at(16, 6), "can you send the notes?")))
         val chip = at(at(16, 7), Event.Unlocked).one<Effect.ShowChip>().chip
-        assertEquals("Here to reply to Rahul?", chip.title)
+        assertEquals("Rahul", chip.note.who)
 
         at(at(16, 7, 2), Event.ChipActed(chip.loopId))
         at(at(16, 7, 3), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))
@@ -679,7 +714,7 @@ class EngineTest {
 
         at(at(16, 8), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
         val pill = at(at(16, 8, 11), Event.Tick).one<Effect.ShowPill>().pill
-        assertEquals("Next up", pill.label)
+        assertEquals("Next up", pill.why)
         assertEquals("Reply to Zoya", pill.task)
     }
 
@@ -710,12 +745,12 @@ class EngineTest {
         with(Script(tenSeconds)) {
             at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
             val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
-            at(at(16, 12, 3), Event.ChipHeld(chip.loopId))
+            at(at(16, 12, 3), Event.ChipFaded(chip.loopId))
             at(at(16, 12, 10), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
 
             at(at(16, 12, 15), Event.NotificationPosted(Fixtures.priya(at(16, 12, 15), "pick up your phone")))
             val urgent = at(at(16, 12, 26), Event.Tick).one<Effect.ShowPill>().pill
-            assertEquals("Before you forget", urgent.label)
+            assertEquals("Before you forget", urgent.why)
             assertEquals("Reply to Priya", urgent.task)
 
             at(at(16, 12, 30), Event.PillTapped(urgent.loopId))
@@ -724,7 +759,7 @@ class EngineTest {
             at(at(16, 13, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
             // 50 seconds after Priya's pill: there is no gap between pills (ADR 0030).
             val back = at(at(16, 13, 16), Event.Tick).one<Effect.ShowPill>().pill
-            assertEquals("You came here to", back.label)
+            assertEquals("You came here to reply", back.why)
             assertEquals("Reply to Rahul", back.task)
         }
 
@@ -732,7 +767,7 @@ class EngineTest {
     fun `an Instagram DM still waits while you scroll Instagram`() = with(Script(tenSeconds)) {
         at(at(16, 0), Event.ScreenOff)
         at(at(16, 5), Event.NotificationPosted(Fixtures.zoya(at(16, 5), "free at 5?")))
-        assertEquals("Here to reply to Zoya?", at(at(16, 6), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+        assertEquals("Zoya", at(at(16, 6), Event.Unlocked).one<Effect.ShowChip>().chip.note.who)
         at(at(16, 6, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
         assertEquals("Reply to Zoya", at(at(16, 6, 16), Event.Tick).one<Effect.ShowPill>().pill.task)
     }
@@ -743,7 +778,7 @@ class EngineTest {
             at(at(16, 0), Event.ScreenOff)
             at(at(16, 5), Event.NotificationPosted(Fixtures.family(at(16, 5), "Mom" to "Pranav can you get the cake?")))
             val chip = at(at(16, 6), Event.Unlocked).one<Effect.ShowChip>().chip
-            assertEquals("Here to reply to Mom in Family?", chip.title)
+            assertEquals("Mom in Family", chip.note.who)
             assertEquals("Family", at(at(16, 6, 2), Event.ChipActed(chip.loopId)).one<Effect.SuggestReplies>().to)
             assertTrue(log.none { "cake" in it || "Pranav" in it })
         }
@@ -791,8 +826,8 @@ class EngineTest {
         at(at(16, 5), Event.NotificationPosted(Fixtures.missedCall(at(16, 5))))
         // 0.35*exp(-4/30) + 0.125 + 0.25*0.75 + 0.075 + 0.15 = 0.8438
         val chip = at(at(16, 9), Event.Unlocked).one<Effect.ShowChip>().chip
-        assertEquals("Here to call Mom back?", chip.title)
-        assertEquals("Missed call · 4 min ago", chip.subtitle)
+        assertEquals("Mom", chip.note.who)
+        assertEquals("Missed call · 4 min ago", chip.note.words)
     }
 
     @Test
@@ -803,9 +838,9 @@ class EngineTest {
         assertEquals("Call Mom back", listed.label)
 
         val pill = at(at(16, 1, 11), Event.Tick).one<Effect.ShowPill>().pill
-        assertEquals("Before you forget", pill.label)
+        assertEquals("Before you forget", pill.why)
         assertEquals("Call Mom back", pill.task)
-        assertEquals("Do it now", pill.verb)
+        assertEquals("Call back", pill.note.verb)
 
         val back = at(at(16, 1, 20), Event.PillTapped(pill.loopId))
         assertEquals(Route.Notification(Fixtures.missedCall(at(16, 1)).key, Fixtures.DIALER), back.one<Effect.OpenWayBack>().route)
@@ -822,8 +857,10 @@ class EngineTest {
         at(at(16, 0), Event.ScreenOff)
         at(at(16, 30), Event.NotificationPosted(Fixtures.reminder(at(16, 30))))
         val chip = at(at(16, 30, 20), Event.Unlocked).one<Effect.ShowChip>().chip
-        assertEquals("Submit lab report?", chip.title)
-        assertEquals("Reminder in Keep · just now", chip.subtitle)
+        assertEquals("Submit lab report", chip.note.who)
+        assertEquals("Reminder in Keep · just now", chip.note.words)
+        assertEquals("Here to get this done?", chip.why)
+        assertFalse("a reminder shows its app's icon", chip.note.person)
     }
 
     @Test
@@ -841,8 +878,9 @@ class EngineTest {
         at(at(16, 0), Event.ScreenOff)
         at(at(16, 5), Event.NotificationPosted(Fixtures.email(at(16, 5))))
         val chip = at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip
-        assertEquals("Here to reply to Prof. Mehta's email?", chip.title)
-        assertEquals("“Lab report” · 5 min ago", chip.subtitle)
+        assertEquals("Prof. Mehta", chip.note.who)
+        assertEquals("“Lab report” · 5 min ago", chip.note.words)
+        assertEquals("Here to reply to this email?", chip.why)
     }
 
     @Test
@@ -850,12 +888,14 @@ class EngineTest {
         at(at(16, 0), Event.ScreenOff)
         at(at(16, 5), Event.NotificationPosted(Fixtures.airtel(at(16, 5))))
         val chip = at(at(16, 8), Event.Unlocked).one<Effect.ShowChip>().chip
-        assertEquals("Here to pay your Airtel postpaid bill?", chip.title)
-        assertEquals("₹499.00 · due 30-Oct · 3 min ago", chip.subtitle)
+        assertEquals("Airtel postpaid bill", chip.note.who)
+        assertEquals("₹499.00 · due 30-Oct · 3 min ago", chip.note.words)
+        assertEquals("Here to pay this bill?", chip.why)
+        assertFalse("a bill shows its app's icon, not a face", chip.note.person)
         at(at(16, 8, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
         val pill = at(at(16, 8, 16), Event.Tick).one<Effect.ShowPill>().pill
         assertEquals("Pay your Airtel postpaid bill ₹499", pill.task)
-        assertEquals("Pay now", pill.verb)
+        assertEquals("Pay", pill.note.verb)
     }
 
     @Test

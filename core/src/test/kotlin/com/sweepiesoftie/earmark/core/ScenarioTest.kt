@@ -15,22 +15,29 @@ class ScenarioTest {
         at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
 
         val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
-        assertEquals("Here to reply to Rahul?", chip.title)
-        assertEquals("“free at 5?” · 1 min ago", chip.subtitle)
-        assertEquals(null, chip.action)
+        assertEquals("Rahul", chip.note.who)
+        assertEquals("“free at 5?” · 1 min ago", chip.note.words)
+        assertEquals("Here to reply?", chip.why)
+        assertEquals("Reply", chip.note.verb)
+        assertTrue("a person, so their photo or initial", chip.note.person)
 
-        val held = at(at(16, 12, 3), Event.ChipHeld(chip.loopId))
-        assertTrue(Effect.ShowDot in held)
-        assertTrue(Effect.HideOverlay(Overlay.Chip) in held)
+        // Left alone, the chip fades and the dot says Earmark is still holding the guess.
+        val faded = at(at(16, 12, 8), Event.ChipFaded(chip.loopId))
+        assertTrue(Effect.ShowDot in faded)
+        assertTrue(Effect.HideOverlay(Overlay.Chip) in faded)
 
         at(at(16, 12, 10), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
         at(at(16, 12, 11), Event.PlaybackChanged(Playback.Playing))
         assertEquals("no pill while a reel plays", emptyList<Effect>(), at(at(16, 14), Event.Tick))
 
-        val pill = at(at(16, 15, 30), Event.PlaybackChanged(Playback.TrackChanged)).one<Effect.ShowPill>().pill
-        assertEquals("You came here to", pill.label)
+        val shown = at(at(16, 15, 30), Event.PlaybackChanged(Playback.TrackChanged))
+        assertTrue("the pill says it all, so the dot steps aside", Effect.HideOverlay(Overlay.Dot) in shown)
+        val pill = shown.one<Effect.ShowPill>().pill
+        assertEquals("Rahul", pill.note.who)
+        assertEquals("“free at 5?”", pill.note.words)
+        assertEquals("You came here to reply", pill.why)
         assertEquals("Reply to Rahul", pill.task)
-        assertEquals("Do it now", pill.verb)
+        assertEquals("Reply", pill.note.verb)
 
         val handBack = at(at(16, 16), Event.PillTapped(pill.loopId))
         assertEquals(Route.Notification("0|com.whatsapp|1|rahul|10123", Fixtures.CHATS), handBack.one<Effect.OpenWayBack>().route)
@@ -59,9 +66,12 @@ class ScenarioTest {
             at(at(8, 14), Event.CalendarSoon(listOf(flight)))
 
             val chip = at(at(8, 14, 5), Event.Unlocked).one<Effect.ShowChip>().chip
-            assertEquals("Here to book your ride?", chip.title)
-            assertEquals("Airport · 11:40 AM · leave by 9:10 AM", chip.subtitle)
-            at(at(8, 14, 8), Event.ChipHeld(chip.loopId))
+            assertEquals("Flight to Lisbon", chip.note.who)
+            assertEquals("Airport · 11:40 AM · leave by 9:10 AM", chip.note.words)
+            assertEquals("Here to book your ride?", chip.why)
+            assertEquals("Book", chip.note.verb)
+            assertFalse(chip.note.person)
+            at(at(8, 14, 8), Event.ChipFaded(chip.loopId))
 
             at(at(8, 14, 20), Event.ForegroundChanged(Fixtures.RIDE, "Ride"))
             at(at(8, 15), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
@@ -70,7 +80,7 @@ class ScenarioTest {
 
             val pill = at(at(8, 19), Event.PlaybackChanged(Playback.TrackChanged)).one<Effect.ShowPill>().pill
             assertEquals("Book your airport ride", pill.task)
-            assertEquals("Finish", pill.verb)
+            assertEquals("Finish", pill.note.verb)
 
             assertEquals(Route.LaunchApp(Fixtures.RIDE), at(at(8, 19, 5), Event.PillTapped(pill.loopId)).one<Effect.OpenWayBack>().route)
             at(at(8, 19, 6), Event.ForegroundChanged(Fixtures.RIDE, "Ride"))
@@ -87,8 +97,9 @@ class ScenarioTest {
             at(at(23, 40), Event.AlarmChanged(null))
 
             val chip = at(at(23, 42), Event.Unlocked).one<Effect.ShowChip>().chip
-            assertEquals("Set your 6:30 alarm?", chip.title)
-            assertEquals("You usually do on weeknights", chip.subtitle)
+            assertEquals("6:30 alarm", chip.note.who)
+            assertEquals("You usually set one on weeknights", chip.note.words)
+            assertEquals("Here to set your alarm?", chip.why)
 
             // The chip fades untouched; the loop is still watched (ADR 0007).
             at(at(23, 42, 20), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
@@ -98,7 +109,8 @@ class ScenarioTest {
 
             val pill = at(at(23, 47, 10), Event.PlaybackChanged(Playback.Paused)).one<Effect.ShowPill>().pill
             assertEquals("Set your 6:30 alarm", pill.task)
-            assertEquals("Set it", pill.verb)
+            assertEquals("You came here to set your alarm", pill.why)
+            assertEquals("Set it", pill.note.verb)
 
             assertEquals(Route.SetAlarm(LocalTime.of(6, 30)), at(at(23, 47, 12), Event.PillTapped(pill.loopId)).one<Effect.OpenWayBack>().route)
             val closed = at(at(23, 47, 30), Event.AlarmChanged(at(6, 30, day = 14))).one<Effect.RecordLoop>().entry
@@ -111,15 +123,16 @@ class ScenarioTest {
         at(at(13, 18), Event.NotificationPosted(Fixtures.aisha(at(13, 18))))
 
         val chip = at(at(13, 18, 20), Event.Unlocked).one<Effect.ShowChip>().chip
-        assertEquals("Here to pay Aisha back?", chip.title)
-        assertEquals("\$12.00 · Dinner at Nori · just now", chip.subtitle)
-        at(at(13, 18, 22), Event.ChipHeld(chip.loopId))
+        assertEquals("Aisha", chip.note.who)
+        assertEquals("\$12.00 · Dinner at Nori · just now", chip.note.words)
+        assertEquals("Here to settle up?", chip.why)
+        at(at(13, 18, 22), Event.ChipFaded(chip.loopId))
 
         // A text feed with nothing playing: drift itself is the pause (ADR 0005).
         at(at(13, 18, 30), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
         val pill = at(at(13, 20, 1), Event.Tick).one<Effect.ShowPill>().pill
         assertEquals("Pay Aisha back \$12", pill.task)
-        assertEquals("Pay now", pill.verb)
+        assertEquals("Pay", pill.note.verb)
 
         assertTrue(Effect.HideOverlay(Overlay.Pill) in at(at(13, 20, 5), Event.PillDismissed(pill.loopId)))
         at(at(13, 25), Event.ForegroundChanged("com.reddit.frontpage", "Reddit"))
@@ -127,9 +140,10 @@ class ScenarioTest {
         at(at(13, 40), Event.ScreenOff)
 
         val carry = at(at(18, 40), Event.Unlocked).one<Effect.ShowChip>().chip
-        assertEquals("Pay Aisha back \$12?", carry.title)
-        assertEquals("Still on your list from 1:18 PM", carry.subtitle)
-        assertEquals("Pay now", carry.action)
+        assertEquals("Aisha", carry.note.who)
+        assertEquals("\$12.00 · Dinner at Nori", carry.note.words)
+        assertEquals("Still on your list from 1:18 PM", carry.why)
+        assertEquals("Pay", carry.note.verb)
 
         assertEquals(Route.Notification(Fixtures.aisha(at(13, 18)).key, Fixtures.PAY), at(at(18, 40, 4), Event.ChipActed(carry.loopId)).one<Effect.OpenWayBack>().route)
         val closed = at(at(18, 41), Event.NotificationRemoved(Fixtures.aisha(at(13, 18)).key, RemovalReason.AppCancel)).one<Effect.RecordLoop>().entry

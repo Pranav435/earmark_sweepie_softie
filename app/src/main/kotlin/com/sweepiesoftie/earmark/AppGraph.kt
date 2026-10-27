@@ -3,6 +3,7 @@ package com.sweepiesoftie.earmark
 import android.annotation.SuppressLint
 import android.content.Context
 import com.sweepiesoftie.earmark.core.Event
+import com.sweepiesoftie.earmark.core.Waiting
 import com.sweepiesoftie.earmark.demo.DemoChats
 import com.sweepiesoftie.earmark.listener.InstalledApps
 import com.sweepiesoftie.earmark.listener.WayBackRegistry
@@ -14,8 +15,11 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-/** What the home screen shows about the listener: whether Android has connected it, and how many loops it holds open. */
-data class ListenerState(val connected: Boolean = false, val openLoops: Int = 0)
+/**
+ * What the home screen shows about the listener: whether Android has connected it, how many loops it holds open,
+ * and who's waiting, in the order Earmark would guess them (ADR 0032).
+ */
+data class ListenerState(val connected: Boolean = false, val openLoops: Int = 0, val waiting: List<Waiting> = emptyList())
 
 /**
  * Every long-lived object, wired by hand (ADR 0008). The activity and the listener share one process and this graph.
@@ -38,7 +42,7 @@ object AppGraph {
     /** Written by the listener, read by the home screen. */
     val listener: MutableStateFlow<ListenerState> = MutableStateFlow(ListenerState())
 
-    /** Events raised by screens (unmute a kind) for the listener to feed the engine. */
+    /** Events raised by screens (unmute a kind, open a waiting row) for the listener to feed the engine. */
     val uiEvents: MutableSharedFlow<Event> = MutableSharedFlow(extraBufferCapacity = 16)
 
     /** For writes that must outlive a screen or a listener rebind. */
