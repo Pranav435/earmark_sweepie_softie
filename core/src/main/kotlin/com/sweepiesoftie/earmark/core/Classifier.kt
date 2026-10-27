@@ -108,11 +108,16 @@ internal object Classifier {
         )
     }
 
+    /** A question mark in any script; shared with the quick replies so the two agree. */
+    fun hasQuestionMark(text: String): Boolean = text.any { it in QUESTION_MARKS }
+
+    fun hasTimeWord(text: String): Boolean = timeWords.containsMatchIn(text)
+
     private fun isOneTimeCode(text: String): Boolean = oneTimeCode.containsMatchIn(text) && codeDigits.containsMatchIn(text)
 
     /** A message to you is half due; a question and a time word add a quarter each, so "free at 5?" is fully due. */
     private fun replyDue(text: String): Double =
-        0.5 + (if (text.any { it in QUESTION_MARKS }) 0.25 else 0.0) + (if (timeWords.containsMatchIn(text)) 0.25 else 0.0)
+        0.5 + (if (hasQuestionMark(text)) 0.25 else 0.0) + (if (hasTimeWord(text)) 0.25 else 0.0)
 
     /** Latin, Arabic and full-width question marks. */
     private const val QUESTION_MARKS = "?؟？"

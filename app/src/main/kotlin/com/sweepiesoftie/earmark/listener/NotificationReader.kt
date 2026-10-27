@@ -7,6 +7,7 @@ import android.service.notification.StatusBarNotification
 import androidx.core.app.NotificationCompat
 import androidx.core.content.edit
 import com.sweepiesoftie.earmark.DebugLog
+import com.sweepiesoftie.earmark.core.GroupRemovals
 import com.sweepiesoftie.earmark.core.Message
 import com.sweepiesoftie.earmark.core.RemovalReason
 import com.sweepiesoftie.earmark.core.Signal
@@ -29,6 +30,7 @@ class NotificationReader(context: Context, private val wayBacks: WayBackRegistry
     }
 
     fun read(sbn: StatusBarNotification): Signal? = try {
+        groups.posted(sbn.key, sbn.groupKey, sbn.isGroupSummary())
         build(sbn)
     } catch (e: RuntimeException) {
         // A malformed extras bundle from another app must not take the listener down.
@@ -41,18 +43,24 @@ class NotificationReader(context: Context, private val wayBacks: WayBackRegistry
 
     fun forget(key: String): Unit = wayBacks.remove(key)
 
-    /** Why each group's summary was last removed. Main thread only, like the listener's callbacks. */
-    private val summaryReasons = HashMap<String, Int>()
+    /** Which chats each group is showing, and the reason they take when its summary goes. Main thread only. */
+    private val groups = GroupRemovals()
 
     /**
      * Android removes a summary's children with REASON_GROUP_SUMMARY_CANCELED, right after the summary
      * itself, so a child takes the summary's reason: a chat app clearing its group still counts as a clear.
+     * A tap on a group of several chats only opens the app, so they count as cleared by it (ADR 0026).
+     * Call once per removal: it also takes the chat off its group's count.
      */
-    fun reasonOf(sbn: StatusBarNotification, reason: Int): RemovalReason {
-        if (sbn.notification.flags and Notification.FLAG_GROUP_SUMMARY != 0) summaryReasons[sbn.groupKey] = reason
-        val cause = if (reason == NotificationListenerService.REASON_GROUP_SUMMARY_CANCELED) summaryReasons[sbn.groupKey] ?: reason else reason
-        return reasonOf(cause)
-    }
+    fun reasonOf(sbn: StatusBarNotification, reason: Int): RemovalReason = groups.removed(
+        key = sbn.key,
+        groupKey = sbn.groupKey,
+        isSummary = sbn.isGroupSummary(),
+        reason = reasonOf(reason),
+        bySummary = reason == NotificationListenerService.REASON_GROUP_SUMMARY_CANCELED,
+    )
+
+    private fun StatusBarNotification.isGroupSummary(): Boolean = notification.flags and Notification.FLAG_GROUP_SUMMARY != 0
 
     private fun build(sbn: StatusBarNotification): Signal {
         val n = sbn.notification

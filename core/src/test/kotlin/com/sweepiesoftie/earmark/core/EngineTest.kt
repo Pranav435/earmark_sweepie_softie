@@ -154,6 +154,23 @@ class EngineTest {
         }
 
     @Test
+    fun `tapping a group of chats opens only the guessed one, once its app is in front`() = with(Script()) {
+        at(at(16, 0), Event.NotificationPosted(Fixtures.rahul(at(16, 0))))
+        at(at(16, 0), Event.NotificationPosted(Fixtures.priya(at(16, 0))))
+        assertEquals("Here to reply to Rahul?", at(at(16, 2), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+
+        // A tap on the group: GroupRemovals reports each chat as cleared by its app (ADR 0026).
+        val rahulGone = at(at(16, 2, 5), Event.NotificationRemoved("0|com.whatsapp|1|rahul|10123", RemovalReason.AppCancel))
+        val priyaGone = at(at(16, 2, 5), Event.NotificationRemoved("0|com.whatsapp|2|priya|10123", RemovalReason.AppCancel))
+        assertTrue("the guess waits for its app", rahulGone.none { it is Effect.RecordLoop || it is Effect.SuggestReplies })
+        assertTrue("the other chat isn't opened", priyaGone.none { it is Effect.SuggestReplies })
+        assertEquals(Outcome.Done, priyaGone.one<Effect.RecordLoop>().entry.outcome)
+
+        val opened = at(at(16, 2, 6), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))
+        assertEquals("Rahul", opened.one<Effect.SuggestReplies>().to)
+    }
+
+    @Test
     fun `a message Earmark picks up goes on today's list as it arrives, and gets its outcome when it closes`() = with(Script()) {
         val listed = at(at(16, 0), Event.NotificationPosted(Fixtures.priya(at(16, 0)))).one<Effect.RecordLoop>().entry
         assertEquals("Reply to Priya", listed.label)
