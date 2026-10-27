@@ -33,7 +33,7 @@ class ScenarioTest {
 
         val handBack = at(at(16, 16), Event.PillTapped(pill.loopId))
         assertEquals(Route.Notification("0|com.whatsapp|1|rahul|10123", Fixtures.CHATS), handBack.one<Effect.OpenWayBack>().route)
-        assertTrue(handBack.any { it is Effect.SuggestReplies })
+        assertEquals("the strip names who it replies to", "Rahul", handBack.one<Effect.SuggestReplies>().to)
         assertTrue(Effect.HideOverlay(Overlay.Pill) in handBack)
 
         at(at(16, 16, 1), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))

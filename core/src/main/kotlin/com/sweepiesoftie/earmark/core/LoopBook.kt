@@ -16,6 +16,8 @@ internal data class Tracked(
     val ignored: Boolean = false,
     /** Its app cleared the notification because you opened the chat; it closes when you reply or leave. */
     val chatOpen: Boolean = false,
+    /** Its app cleared the notification before it was seen in front: if it shows within a few seconds, you opened the chat. */
+    val clearedAt: Instant? = null,
 )
 
 /** The open loops. Opening a loop with an existing id updates its evidence but keeps its history. */

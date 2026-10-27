@@ -181,7 +181,8 @@ public sealed interface Effect {
     public data class ShowPill(val pill: PillCard) : Effect
     public data class HideOverlay(val overlay: Overlay) : Effect
     public data class OpenWayBack(val loopId: LoopId, val route: Route) : Effect
-    public data class SuggestReplies(val loopId: LoopId, val notificationKey: String) : Effect
+    /** [to] is who the replies go to: the strip names them, because it stays while you move between chats in the app. */
+    public data class SuggestReplies(val loopId: LoopId, val notificationKey: String, val to: String) : Effect
     public data class SendReply(val loopId: LoopId, val notificationKey: String, val text: String) : Effect
     /** Drop the notification's intents and message text from adapter memory (ADR 0004). */
     public data class Forget(val notificationKey: String) : Effect

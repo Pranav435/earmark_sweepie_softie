@@ -32,7 +32,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
-data class ReplyStrip(val loopId: LoopId, val replies: List<String>)
+data class ReplyStrip(val loopId: LoopId, val to: String, val replies: List<String>)
 
 /** Everything the overlay windows draw. Each window is a stateless function of this. */
 data class OverlayUi(
@@ -107,9 +107,9 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
         dot.attach()
     }
 
-    fun showStrip(loopId: LoopId, replies: List<String>) {
+    fun showStrip(loopId: LoopId, to: String, replies: List<String>) {
         if (replies.isEmpty()) return
-        _ui.update { it.copy(strip = ReplyStrip(loopId, replies), reduceMotion = reduceMotion()) }
+        _ui.update { it.copy(strip = ReplyStrip(loopId, to, replies), reduceMotion = reduceMotion()) }
         strip.attach()
     }
 

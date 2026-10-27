@@ -3,7 +3,7 @@ package com.sweepiesoftie.earmark.core
 import java.time.Duration
 import java.time.Instant
 
-internal enum class Phase { Idle, Guessed, InFeed, Drifting, PillShown, HandedBack, Dismissed }
+internal enum class Phase { Idle, Guessed, InFeed, Drifting, PillShown, HandedBack, Left, Dismissed }
 
 /** The drift state for one unlock session. */
 internal data class Drift(
@@ -37,6 +37,7 @@ internal data class DriftStep(val drift: Drift, val showPill: Boolean = false, v
 /**
  * Idle → Guessed → InFeed → Drifting → PillShown → HandedBack | Dismissed.
  * The pill waits for the first pause after drift starts; blockers and playing media hold it back.
+ * The engine moves HandedBack to Left when you leave the loop's app with its chat not open.
  */
 internal object DriftMachine {
     fun guess(drift: Drift, loopId: LoopId, loopPackage: String?): Drift =

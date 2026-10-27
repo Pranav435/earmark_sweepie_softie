@@ -40,7 +40,13 @@ class KeepAliveService : Service() {
             stopSelf()
             return START_NOT_STICKY
         }
+        running = true
         return START_STICKY
+    }
+
+    override fun onDestroy() {
+        running = false
+        super.onDestroy()
     }
 
     private fun type(): Int =
@@ -78,12 +84,16 @@ class KeepAliveService : Service() {
         private const val CHANNEL = "running"
         private const val NOTIFICATION_ID = 3
 
+        /** In the foreground now, so opening Earmark doesn't post the "Earmark is on" notification again. */
+        @Volatile
+        private var running = false
+
         /**
          * Safe from anywhere. From the background Android allows it only with an exemption (after boot or an
          * update, with battery optimisation off, or while an overlay shows); a refusal is logged, not thrown.
          */
         fun start(context: Context) {
-            if (!Permissions.notificationAccess(context)) return
+            if (running || !Permissions.notificationAccess(context)) return
             try {
                 ContextCompat.startForegroundService(context, Intent(context, KeepAliveService::class.java))
             } catch (e: IllegalStateException) {
@@ -95,7 +105,13 @@ class KeepAliveService : Service() {
         }
 
         fun stop(context: Context) {
-            context.stopService(Intent(context, KeepAliveService::class.java))
+            try {
+                context.stopService(Intent(context, KeepAliveService::class.java))
+            } catch (e: IllegalStateException) {
+                AppGraph.debugLog.error("KeepAliveService stop", e)
+            } catch (e: SecurityException) {
+                AppGraph.debugLog.error("KeepAliveService stop", e)
+            }
         }
     }
 }

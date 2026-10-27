@@ -41,6 +41,19 @@ class NotificationReader(context: Context, private val wayBacks: WayBackRegistry
 
     fun forget(key: String): Unit = wayBacks.remove(key)
 
+    /** Why each group's summary was last removed. Main thread only, like the listener's callbacks. */
+    private val summaryReasons = HashMap<String, Int>()
+
+    /**
+     * Android removes a summary's children with REASON_GROUP_SUMMARY_CANCELED, right after the summary
+     * itself, so a child takes the summary's reason: a chat app clearing its group still counts as a clear.
+     */
+    fun reasonOf(sbn: StatusBarNotification, reason: Int): RemovalReason {
+        if (sbn.notification.flags and Notification.FLAG_GROUP_SUMMARY != 0) summaryReasons[sbn.groupKey] = reason
+        val cause = if (reason == NotificationListenerService.REASON_GROUP_SUMMARY_CANCELED) summaryReasons[sbn.groupKey] ?: reason else reason
+        return reasonOf(cause)
+    }
+
     private fun build(sbn: StatusBarNotification): Signal {
         val n = sbn.notification
         val style = NotificationCompat.MessagingStyle.extractMessagingStyleFromNotification(n)

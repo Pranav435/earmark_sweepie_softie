@@ -39,6 +39,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -375,7 +376,6 @@ fun ReplyStripOverlay(strip: ReplyStrip?, reduceMotion: Boolean, onReply: (LoopI
     strip?.let { last[0] = it }
     val shown = remember { MutableTransitionState(false) }
     SideEffect { shown.targetState = strip != null }
-    val pane = stringResource(R.string.overlay_strip_pane)
     val close = stringResource(R.string.overlay_strip_close)
     AnimatedVisibility(
         shown,
@@ -387,6 +387,7 @@ fun ReplyStripOverlay(strip: ReplyStrip?, reduceMotion: Boolean, onReply: (LoopI
         exit = fadeOut(tween(200, easing = EaseOut)),
     ) {
         val current = last[0] ?: return@AnimatedVisibility
+        val pane = stringResource(R.string.overlay_strip_pane, current.to)
         Row(
             Modifier
                 .fillMaxWidth()
@@ -410,13 +411,24 @@ fun ReplyStripOverlay(strip: ReplyStrip?, reduceMotion: Boolean, onReply: (LoopI
             ) {
                 Glyph(size = 32)
             }
+            // The strip stays while you move between chats in the app, so it says who a reply goes to.
+            Text(
+                stringResource(R.string.overlay_strip_to, current.to),
+                color = PaperDim,
+                fontFamily = InstrumentSans,
+                fontSize = 13.sp,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                // The pane title and every send button already name them for TalkBack.
+                modifier = Modifier.widthIn(max = 96.dp).padding(end = 8.dp).clearAndSetSemantics { },
+            )
             Row(
                 Modifier.weight(1f).horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 current.replies.forEachIndexed { index, reply ->
                     val first = index == 0
-                    val sendLabel = stringResource(R.string.overlay_strip_send, reply)
+                    val sendLabel = stringResource(R.string.overlay_strip_send, current.to, reply)
                     val source = remember(reply) { MutableInteractionSource() }
                     Box(
                         Modifier

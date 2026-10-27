@@ -59,52 +59,78 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
             )
             emptyList()
         }
-        Event.Tick -> expire(now) + stepDrift(DriftInput.Tick, now)
+        Event.Tick -> expire(now) + closeCleared(now) + stepDrift(DriftInput.Tick, now)
     }
 
     private fun onPosted(signal: Signal, now: Instant): List<Effect> =
         when (val result = Classifier.classify(signal, settings)) {
             is Classification.Open -> {
-                val isNew = book[result.loop.id] == null
+                val before = book[result.loop.id]
                 book.open(result.loop)
-                listOf(Effect.Log("${if (isNew) "opened" else "updated"} ${result.loop.id.value} (${result.loop.kind}, due %.2f) from ${signal.packageName}".format(result.loop.due)))
+                val effects = mutableListOf<Effect>(
+                    Effect.Log("${if (before == null) "opened" else "updated"} ${result.loop.id.value} (${result.loop.kind}, due %.2f) from ${signal.packageName}".format(result.loop.due)),
+                )
+                if (before != null && (before.chatOpen || before.clearedAt != null)) {
+                    // Its notification is showing again, so the chat is no longer open (ADR 0019).
+                    book.update(result.loop.id) { it.copy(chatOpen = false, clearedAt = null) }
+                    // The cleared notification won't be removed again, so nothing else would forget its way back.
+                    before.loop.notificationKey?.takeIf { it != result.loop.notificationKey }?.let { effects += Effect.Forget(it) }
+                }
+                effects
             }
             is Classification.Replied ->
                 book.byConversation(result.conversation)?.let { close(it.loop.id, Outcome.Done, now, "you replied in ${signal.packageName}", replied = true) }
                     ?: listOf(Effect.Log("skip ${signal.packageName}: last message is yours"), Effect.Forget(signal.key))
             is Classification.Booked -> {
                 bookedAt[result.packageName] = now
-                closeWhere(now, "booked in ${result.packageName}") { CloseRules.closedByBooking(it, result.packageName) }
+                closeWhere(now, "booked in ${result.packageName}") { CloseRules.closedByBooking(it.loop, result.packageName) }
             }
-            is Classification.Paid -> closeWhere(now, "paid in ${result.packageName}") { CloseRules.closedByPayment(it, result.packageName) }
+            is Classification.Paid -> closeWhere(now, "paid in ${result.packageName}") { CloseRules.closedByPayment(it.loop, result.packageName) }
             is Classification.Skip -> listOf(Effect.Log("skip ${signal.packageName}: ${result.reason}"), Effect.Forget(signal.key))
         }
 
     private fun onRemoved(event: Event.NotificationRemoved, now: Instant): List<Effect> {
         val tracked = book.byNotificationKey(event.key) ?: return listOf(Effect.Forget(event.key))
-        if (!opensChat(tracked, event.reason)) {
-            return close(tracked.loop.id, CloseRules.onRemoved(event.reason), now, "notification removed (${event.reason})")
-        }
-        // Chat apps clear the notification as the chat opens. Keep the loop, its reply action and its
-        // message text, so the reply strip can show and send; it closes when you reply or leave.
         val loop = tracked.loop
-        val handedBack = drift.phase == Phase.HandedBack
-        book.update(loop.id) { it.copy(chatOpen = true) }
-        drift = drift.copy(phase = Phase.HandedBack)
-        val effects = mutableListOf<Effect>(Effect.Log("${loop.id.value}: chat opened and ${loop.packageName} cleared its notification (${event.reason}); closes when you reply or leave"))
-        if (!handedBack && loop.notificationKey != null) effects += Effect.SuggestReplies(loop.id, loop.notificationKey)
-        return effects
+        if (opensChat(tracked, event.reason)) return openChat(loop, event.reason)
+        if (event.reason == RemovalReason.AppCancel && isGuessedReply(tracked)) {
+            // Chat apps clear it the moment they open, which can be before the foreground poll sees them.
+            book.update(loop.id) { it.copy(clearedAt = now) }
+            return listOf(Effect.Log("${loop.id.value}: ${loop.packageName} cleared its notification; closes unless it comes to the front"))
+        }
+        return close(loop.id, CloseRules.onRemoved(event.reason), now, "notification removed (${event.reason})")
     }
+
+    /** The guessed reply, with its chat not open yet: its notification going may mean you are opening the chat. */
+    private fun isGuessedReply(tracked: Tracked): Boolean =
+        tracked.loop.kind == LoopKind.Reply && tracked.loop.canReply && !tracked.chatOpen && drift.loopId == tracked.loop.id
 
     /** The guessed reply's notification went because you opened its chat: through Earmark, from the notification, or in its app. */
     private fun opensChat(tracked: Tracked, reason: RemovalReason): Boolean {
-        val loop = tracked.loop
-        if (loop.kind != LoopKind.Reply || !loop.canReply || tracked.chatOpen || drift.loopId != loop.id) return false
+        if (!isGuessedReply(tracked)) return false
         return when (reason) {
             RemovalReason.Click -> true
-            RemovalReason.AppCancel -> drift.phase == Phase.HandedBack || foreground?.packageName == loop.packageName
+            RemovalReason.AppCancel -> drift.phase == Phase.HandedBack || foreground?.packageName == tracked.loop.packageName
             RemovalReason.UserDismiss, RemovalReason.Other -> false
         }
+    }
+
+    /**
+     * Chat apps clear the notification as the chat opens. Keep the loop, its reply action and its
+     * message text, so the reply strip can show and send; it closes when you reply or leave.
+     */
+    private fun openChat(loop: Loop, reason: RemovalReason): List<Effect> {
+        val handedBack = drift.phase == Phase.HandedBack
+        book.update(loop.id) { it.copy(chatOpen = true, clearedAt = null) }
+        drift = drift.copy(phase = Phase.HandedBack)
+        val effects = mutableListOf<Effect>(Effect.Log("${loop.id.value}: chat opened and ${loop.packageName} cleared its notification ($reason); closes when you reply or leave"))
+        if (!handedBack) {
+            // You opened it yourself, so a chip or pill may still be showing over the chat.
+            effects += Effect.HideOverlay(Overlay.Chip)
+            effects += Effect.HideOverlay(Overlay.Pill)
+            if (loop.notificationKey != null) effects += suggestReplies(loop, loop.notificationKey)
+        }
+        return effects
     }
 
     private fun onUnlocked(now: Instant): List<Effect> {
@@ -152,7 +178,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         foreground?.let { stepDrift(DriftInput.Foreground(it.packageName), now) }.orEmpty()
 
     private fun onScreenOff(now: Instant): List<Effect> {
-        val left = book.all.filter { it.chatOpen }.map { it.loop.id }.flatMap { close(it, Outcome.Done, now, "screen off with the chat open") }
+        val left = closeWhere(now, "screen off after the chat app cleared it") { it.chatOpen || it.clearedAt != null }
         drift = DriftMachine.end(drift)
         foreground = null
         return left + hideAll()
@@ -168,8 +194,15 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         if (guess != null && drift.phase == Phase.HandedBack && event.packageName != guess.loop.packageName &&
             event.packageName != settings.ownPackage
         ) {
-            effects += if (guess.chatOpen) close(guess.loop.id, Outcome.Done, now, "left the chat") else listOf(Effect.HideOverlay(Overlay.ReplyStrip))
+            if (guess.chatOpen) {
+                effects += close(guess.loop.id, Outcome.Done, now, "left the chat")
+            } else {
+                // The hand-back is over: a later clear means the chat was read somewhere else, unless its app is in front then.
+                drift = drift.copy(phase = Phase.Left)
+                effects += Effect.HideOverlay(Overlay.ReplyStrip)
+            }
         }
+        if (guess?.clearedAt != null && event.packageName == guess.loop.packageName) effects += openChat(guess.loop, RemovalReason.AppCancel)
         if (guess?.loop?.kind == LoopKind.LeaveBy && guess.loop.leaveBy?.isMeeting == true && event.packageName in meetingApps) {
             effects += close(guess.loop.id, Outcome.Done, now, "meeting app opened")
         }
@@ -205,7 +238,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val rules = DriftRules(
             feedApps = settings.feedApps,
             driftAfter = settings.driftAfter,
-            pillAllowed = guess != null && !guess.pillShown && !guess.ignored && !settings.paused,
+            pillAllowed = guess != null && !guess.pillShown && !guess.ignored && guess.clearedAt == null && !settings.paused,
             cooldown = settings.pillCooldown,
         )
         val step = DriftMachine.step(drift, input, now, rules)
@@ -227,7 +260,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         if (next == null || !next.isAfter(now)) return effects
         val local = next.atZone(settings.zone)
         if (Situations.isWeekdayMorning(local)) effects += Effect.RecordAlarm(local.toLocalTime(), local.toLocalDate())
-        effects += closeWhere(now, "alarm set") { CloseRules.closedByAlarm(it, next) }
+        effects += closeWhere(now, "alarm set") { CloseRules.closedByAlarm(it.loop, next) }
         return effects
     }
 
@@ -294,9 +327,12 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun handBack(tracked: Tracked, from: String): List<Effect> {
         val loop = tracked.loop
         val effects = mutableListOf<Effect>(Effect.OpenWayBack(loop.id, loop.route), Effect.Log("hand-back from $from: ${loop.id.value} via ${routeName(loop.route)}"))
-        if (loop.canReply && loop.notificationKey != null) effects += Effect.SuggestReplies(loop.id, loop.notificationKey)
+        if (loop.canReply && loop.notificationKey != null) effects += suggestReplies(loop, loop.notificationKey)
         return effects
     }
+
+    /** A Reply loop always has someone to reply to; the task is only a fallback. */
+    private fun suggestReplies(loop: Loop, key: String): Effect = Effect.SuggestReplies(loop.id, key, to = loop.who ?: loop.task)
 
     private fun onPillDismissed(id: LoopId): List<Effect> {
         book.update(id) { it.copy(carryOver = true) }
@@ -312,8 +348,12 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun expire(now: Instant): List<Effect> =
         book.expired(now).flatMap { close(it.loop.id, Outcome.Expired, now, "expired") }
 
-    private fun closeWhere(now: Instant, why: String, predicate: (Loop) -> Boolean): List<Effect> =
-        book.all.filter { predicate(it.loop) }.map { it.loop.id }.flatMap { close(it, Outcome.Done, now, why) }
+    /** Its app cleared it and didn't come to the front, so the chat was read somewhere else. */
+    private fun closeCleared(now: Instant): List<Effect> =
+        closeWhere(now, "notification removed (${RemovalReason.AppCancel})") { it.clearedAt != null && Duration.between(it.clearedAt, now) >= clearWait }
+
+    private fun closeWhere(now: Instant, why: String, predicate: (Tracked) -> Boolean): List<Effect> =
+        book.all.filter(predicate).map { it.loop.id }.flatMap { close(it, Outcome.Done, now, why) }
 
     /** [replied] is true only when you answered, so a tap on the notification doesn't count as a reply. */
     private fun close(id: LoopId, outcome: Outcome, now: Instant, why: String, replied: Boolean = false): List<Effect> {
@@ -374,6 +414,8 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun hideAll(): List<Effect> = Overlay.entries.map { Effect.HideOverlay(it) }
 
     private companion object {
+        /** A few foreground polls, which run once a second. */
+        val clearWait: Duration = Duration.ofSeconds(3)
         val meetingApps = setOf("us.zoom.videomeetings", "com.google.android.apps.tachyon", "com.google.android.apps.meetings", "com.microsoft.teams", "com.cisco.webex.meetings")
     }
 }

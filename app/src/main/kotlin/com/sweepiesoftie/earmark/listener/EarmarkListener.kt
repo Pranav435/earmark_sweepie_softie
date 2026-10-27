@@ -91,7 +91,9 @@ class EarmarkListener : NotificationListenerService() {
         }
         s.scope.launch { graph.uiEvents.collect { dispatch(it) } }
 
-        // After a restart the loops are rebuilt from what is still waiting, with fresh intents.
+        // After a restart the loops are rebuilt from what is still waiting, with fresh intents. The new engine
+        // starts empty, so way backs the old one still held (such as an open chat's) would never be forgotten.
+        graph.wayBacks.clear()
         try {
             activeNotifications?.forEach { onNotificationPosted(it) }
         } catch (e: SecurityException) {
@@ -109,6 +111,7 @@ class EarmarkListener : NotificationListenerService() {
         session?.close()
         session = null
         graph.listener.value = ListenerState()
+        stopKeepAliveIfRevoked()
         requestRebind(ComponentName(this, EarmarkListener::class.java))
     }
 
@@ -116,7 +119,13 @@ class EarmarkListener : NotificationListenerService() {
         session?.close()
         session = null
         graph.listener.value = ListenerState()
+        stopKeepAliveIfRevoked()
         super.onDestroy()
+    }
+
+    /** With notification access off there is nothing to keep awake, and "Earmark is on" would be wrong. */
+    private fun stopKeepAliveIfRevoked() {
+        if (!Permissions.notificationAccess(this)) KeepAliveService.stop(this)
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
@@ -136,7 +145,8 @@ class EarmarkListener : NotificationListenerService() {
             dispatch(Event.BlockerChanged(Blocker.Navigation, false))
         }
         // The engine forgets the notification's intents and text, unless an open chat still needs them for the reply strip.
-        dispatch(Event.NotificationRemoved(sbn.key, NotificationReader.reasonOf(reason)))
+        // Only the way back held now is forgotten: the app may post the same key again before the engine answers.
+        enqueue(Event.NotificationRemoved(sbn.key, s.reader.reasonOf(sbn, reason)), graph.wayBacks[sbn.key])
     }
 
     override fun onInterruptionFilterChanged(interruptionFilter: Int) {
@@ -169,12 +179,29 @@ class EarmarkListener : NotificationListenerService() {
 
     /** Runs [event] through the engine on its own thread, then carries out the effects in order on the main thread. */
     fun dispatch(event: Event) {
+        enqueue(event, removed = null)
+    }
+
+    /** [removed] is the way back held when a removal arrived; the engine's Forget for that removal drops only it. */
+    private fun enqueue(event: Event, removed: WayBack?) {
         val s = session ?: return
+        val removedKey = (event as? Event.NotificationRemoved)?.key
         s.scope.launch(s.engineDispatcher) {
             val effects = s.engine.handle(event, Instant.now())
             val open = s.engine.openLoops
             graph.listener.update { if (session === s) it.copy(openLoops = open) else it }
-            if (effects.isNotEmpty()) withContext(Dispatchers.Main) { effects.forEach { run(s, it) } }
+            if (effects.isNotEmpty()) {
+                withContext(Dispatchers.Main) {
+                    effects.forEach { effect ->
+                        if (effect is Effect.Forget && effect.notificationKey == removedKey) {
+                            // Nothing held at removal means anything there now was posted since.
+                            removed?.let { graph.wayBacks.remove(effect.notificationKey, it) }
+                        } else {
+                            run(s, effect)
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -186,7 +213,10 @@ class EarmarkListener : NotificationListenerService() {
             is Effect.HideOverlay -> s.overlay.hide(effect.overlay)
             // Runs before the HideOverlay that follows it, so the window is still attached (Android 15 rule).
             is Effect.OpenWayBack -> s.handBack.open(effect.route)
-            is Effect.SuggestReplies -> s.suggester.suggest(effect.notificationKey) { replies -> s.overlay.showStrip(effect.loopId, replies) }
+            is Effect.SuggestReplies -> s.suggester.suggest(effect.notificationKey) { replies ->
+                // Replies arrive later; if the loop closed meanwhile, its way back is gone and the strip would be stale.
+                if (session === s && graph.wayBacks[effect.notificationKey] != null) s.overlay.showStrip(effect.loopId, effect.to, replies)
+            }
             is Effect.SendReply ->
                 if (s.handBack.reply(effect.notificationKey, effect.text)) dispatch(Event.ReplySent(effect.loopId)) else s.overlay.hide(Overlay.ReplyStrip)
             is Effect.Forget -> s.reader.forget(effect.notificationKey)

@@ -162,7 +162,7 @@ class EngineTest {
         at(at(16, 12, 3), Event.ChipHeld(chip.loopId))
 
         val tapped = at(at(16, 12, 20), Event.NotificationRemoved(key, RemovalReason.Click))
-        assertEquals(Effect.SuggestReplies(chip.loopId, key), tapped.one<Effect.SuggestReplies>())
+        assertEquals(Effect.SuggestReplies(chip.loopId, key, "Rahul"), tapped.one<Effect.SuggestReplies>())
         assertTrue(tapped.none { it is Effect.RecordLoop || it is Effect.Forget })
         at(at(16, 12, 21), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))
 
@@ -191,9 +191,85 @@ class EngineTest {
         at(at(16, 12), Event.Unlocked)
         at(at(16, 12, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
         // Read on another device, say: the chat app clears it, but you never opened the chat here.
-        val cleared = at(at(16, 13), Event.NotificationRemoved(key, RemovalReason.AppCancel))
-        assertEquals(Outcome.Done, cleared.one<Effect.RecordLoop>().entry.outcome)
-        assertTrue(cleared.none { it is Effect.SuggestReplies })
+        assertTrue(at(at(16, 13), Event.NotificationRemoved(key, RemovalReason.AppCancel)).none { it is Effect.SuggestReplies })
+        // It waits a moment, in case the chat app is in front but the foreground poll hasn't seen it yet.
+        assertTrue(at(at(16, 13, 1), Event.Tick).none { it is Effect.RecordLoop })
+        val closed = at(at(16, 13, 3), Event.Tick)
+        assertEquals(Outcome.Done, closed.one<Effect.RecordLoop>().entry.outcome)
+        assertTrue(Effect.Forget(key) in closed)
+        assertTrue(closed.none { it is Effect.SuggestReplies })
+    }
+
+    @Test
+    fun `opening the chat app yourself shows the strip, even when it clears the notification before it is seen in front`() = with(Script()) {
+        val key = Fixtures.rahul(at(16, 11)).key
+        at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+        at(at(16, 12), Event.Unlocked)
+        at(at(16, 12, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+
+        // You switch to WhatsApp from Recents, and it clears the notification before the next foreground poll.
+        val cleared = at(at(16, 12, 30), Event.NotificationRemoved(key, RemovalReason.AppCancel))
+        assertTrue(cleared.toString(), cleared.none { it is Effect.RecordLoop || it is Effect.Forget })
+        val opened = at(at(16, 12, 31), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))
+        assertEquals(Effect.SuggestReplies(LoopId("reply:hash-rahul"), key, "Rahul"), opened.one<Effect.SuggestReplies>())
+        assertTrue(Effect.HideOverlay(Overlay.Chip) in opened)
+        assertTrue("open in the chat after the wait", at(at(16, 12, 40), Event.Tick).none { it is Effect.RecordLoop })
+    }
+
+    @Test
+    fun `turning the screen off while waiting to see the chat app closes the loop`() = with(Script()) {
+        val key = Fixtures.rahul(at(16, 11)).key
+        at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+        at(at(16, 12), Event.Unlocked)
+        at(at(16, 12, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        at(at(16, 12, 30), Event.NotificationRemoved(key, RemovalReason.AppCancel))
+        assertEquals(Outcome.Done, at(at(16, 12, 31), Event.ScreenOff).one<Effect.RecordLoop>().entry.outcome)
+        assertEquals(0, engine.openLoops)
+    }
+
+    @Test
+    fun `after a hand-back, leaving the chat app means a later clear closes the loop`() = with(Script()) {
+        val key = Fixtures.rahul(at(16, 11)).key
+        at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+        val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
+        at(at(16, 12, 2), Event.ChipActed(chip.loopId))
+        at(at(16, 12, 3), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))
+        // The app kept its notification, and you left without replying.
+        assertTrue(Effect.HideOverlay(Overlay.ReplyStrip) in at(at(16, 13), Event.ForegroundChanged(Fixtures.FEED, "Instagram")))
+
+        // Read on WhatsApp Web: the app clears it while you are still elsewhere.
+        at(at(16, 14), Event.NotificationRemoved(key, RemovalReason.AppCancel))
+        assertEquals(Outcome.Done, at(at(16, 14, 3), Event.Tick).one<Effect.RecordLoop>().entry.outcome)
+    }
+
+    @Test
+    fun `opening the guessed chat from its notification hides the pill that was showing`() = with(Script()) {
+        val key = Fixtures.rahul(at(16, 11)).key
+        at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+        at(at(16, 12), Event.Unlocked)
+        at(at(16, 12, 10), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        assertTrue(at(at(16, 14), Event.Tick).any { it is Effect.ShowPill })
+
+        val tapped = at(at(16, 14, 30), Event.NotificationRemoved(key, RemovalReason.Click))
+        assertTrue(tapped.toString(), Effect.HideOverlay(Overlay.Pill) in tapped && Effect.HideOverlay(Overlay.Chip) in tapped)
+        assertTrue(tapped.any { it is Effect.SuggestReplies })
+        assertTrue(tapped.none { it is Effect.RecordLoop })
+    }
+
+    @Test
+    fun `a new message after the chat opened shows its notification again, so the loop isn't closed at screen off`() = with(Script()) {
+        val key = Fixtures.rahul(at(16, 11)).key
+        at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+        val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
+        at(at(16, 12, 2), Event.ChipActed(chip.loopId))
+        at(at(16, 12, 4), Event.NotificationRemoved(key, RemovalReason.AppCancel))
+
+        // You moved to another chat in the same app, and Rahul wrote again under a new notification.
+        val again = at(at(16, 13), Event.NotificationPosted(Fixtures.rahul(at(16, 13), "still free at 5?", key = "k-rahul-2")))
+        assertTrue("the cleared notification's way back is dropped", Effect.Forget(key) in again)
+
+        assertTrue(at(at(16, 14), Event.ScreenOff).none { it is Effect.RecordLoop })
+        assertEquals(1, engine.openLoops)
     }
 
     @Test

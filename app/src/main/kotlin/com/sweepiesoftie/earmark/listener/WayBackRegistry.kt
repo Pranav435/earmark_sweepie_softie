@@ -28,4 +28,13 @@ class WayBackRegistry {
     fun remove(key: String) {
         wayBacks.remove(key)
     }
+
+    /** Removes [key] only while it still maps to [expected], so a notification posted again under the same key keeps its new way back. */
+    fun remove(key: String, expected: WayBack) {
+        wayBacks.remove(key, expected)
+    }
+
+    fun clear() {
+        wayBacks.clear()
+    }
 }

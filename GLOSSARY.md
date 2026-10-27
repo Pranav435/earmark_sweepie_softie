@@ -101,7 +101,7 @@ _Avoid_: redirect, block
 A loop that closed as done after a hand-back.
 
 **Reply strip**:
-Up to three one-tap replies that Earmark shows above the chat's input area.
+Up to three one-tap replies that Earmark shows above the chat's input area, labelled with who they go to.
 _Avoid_: quick replies bar, suggestions
 
 ## Recap
