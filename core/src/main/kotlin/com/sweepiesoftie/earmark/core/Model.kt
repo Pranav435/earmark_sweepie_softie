@@ -156,6 +156,8 @@ public data class LoopEntry(
     val closedAt: Instant?,
     val outcome: Outcome?,
     val broughtBack: Boolean,
+    /** On today's list: a message or request Earmark picked up, or a loop it showed as a chip or pill (ADR 0025). */
+    val listed: Boolean,
 )
 
 public sealed interface Event {

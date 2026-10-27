@@ -16,14 +16,14 @@
 
     <!-- Recap -->
     <string name="recap_empty_title">Nothing on today\'s list yet.</string>
-    <string name="recap_empty_line">Things join this list when Earmark shows you their chip or pill.</string>
+    <string name="recap_empty_line">Messages and requests show up here as soon as Earmark picks them up.</string>
     <plurals name="recap_open_loops">
         <item quantity="one">Watching %d open loop. It can come back as a chip when you unlock, or as a pill if you drift into a feed app. The Log shows each step.</item>
         <item quantity="other">Watching %d open loops. The likeliest can come back as a chip when you unlock, or as a pill if you drift into a feed app. The Log shows each step.</item>
     </plurals>
     <plurals name="recap_title">
-        <item quantity="one">You came for %d thing.</item>
-        <item quantity="other">You came for %d things.</item>
+        <item quantity="one">%d thing today.</item>
+        <item quantity="other">%d things today.</item>
     </plurals>
     <string name="recap_all_done_one">Done.</string>
     <string name="recap_all_done">All %1$d done.</string>
@@ -35,7 +35,7 @@
     <string name="recap_never">Never blocked an app. Never counted a minute.</string>
     <string name="recap_tag_brought_back">brought back</string>
     <string name="recap_state_done">done</string>
-    <string name="recap_state_open">still open</string>
+    <string name="recap_state_open">waiting</string>
     <string name="recap_state_dismissed">dismissed</string>
     <string name="recap_state_expired">expired</string>
     <string name="recap_paused">Earmark is paused. It won\'t show chips or pills until you resume.</string>

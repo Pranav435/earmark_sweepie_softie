@@ -88,6 +88,10 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
                     // The cleared notification won't be removed again, so nothing else would forget its way back.
                     before.loop.notificationKey?.takeIf { it != result.loop.notificationKey }?.let { effects += Effect.Forget(it) }
                 }
+                if (before == null && result.loop.kind in pickedUp) {
+                    // On today's list as it arrives, so you can see Earmark has it (ADR 0025).
+                    effects += Effect.RecordLoop(entry(book[result.loop.id]!!, outcome = null, closedAt = null))
+                }
                 if (before != null && before.pillShown && result.loop.updatedAt.isAfter(before.loop.updatedAt)) {
                     // One pill per message, not per conversation: someone writing again is a new chance (ADR 0021).
                     book.update(result.loop.id) { it.copy(pillShown = false) }
@@ -461,7 +465,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val tracked = book.remove(id) ?: return emptyList()
         if (tracked.loop.kind == LoopKind.Routine || tracked.loop.kind == LoopKind.LeaveBy) closedSituations += id
         val effects = mutableListOf<Effect>(Effect.Log("closed ${id.value}: $outcome, $why"))
-        if (tracked.guessedAt != null) effects += Effect.RecordLoop(entry(tracked, outcome, now))
+        if (isListed(tracked)) effects += Effect.RecordLoop(entry(tracked, outcome, now))
         val conversation = tracked.loop.conversation
         if (replied && conversation != null) effects += recordReply(conversation, Duration.between(tracked.loop.updatedAt, now))
         tracked.loop.notificationKey?.let { effects += Effect.Forget(it) }
@@ -505,7 +509,10 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         closedAt = closedAt,
         outcome = outcome,
         broughtBack = outcome == Outcome.Done && tracked.handedBack,
+        listed = isListed(tracked),
     )
+
+    private fun isListed(tracked: Tracked): Boolean = tracked.guessedAt != null || tracked.loop.kind in pickedUp
 
     /** Spelled out because R8 renames classes in release builds. */
     private fun routeName(route: Route): String = when (route) {
@@ -518,6 +525,9 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun hideAll(): List<Effect> = Overlay.entries.map { Effect.HideOverlay(it) }
 
     private companion object {
+        /** Loops opened by a message or request that came in: listed from the moment they arrive (ADR 0025). */
+        val pickedUp = setOf(LoopKind.Reply, LoopKind.Payment)
+
         /** A few foreground polls, which run once a second. */
         val clearWait: Duration = Duration.ofSeconds(3)
 

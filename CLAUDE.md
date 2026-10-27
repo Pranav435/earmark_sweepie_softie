@@ -37,4 +37,5 @@ The release APK lands in `app/build/outputs/apk/release/`. Copy it to `dist/earm
 - **Shell quoting:** the YouTube launcher activity has a `$` in its name: `adb shell "am start -n 'com.google.android.youtube/.app.honeycomb.Shell\$HomeActivity'"`.
 - **Real chat notifications on the emulator:** `adb emu sms send 5551234 "free at 5?"` makes Google Messages post a MessagingStyle notification with a reply action that clears itself when the chat opens, like WhatsApp. Use it to test arrivals, taps and the reply strip without demo mode.
 - **Device setup:** `scripts/setup-phone.sh` installs the APK and grants every permission adb can grant, on a phone or the emulator.
+- **On-device check:** `scripts/check-pill.sh` (phone unlocked; `ANDROID_SERIAL` when the emulator is also attached) runs a message during use through a feed to a drawn pill and fails with the step that broke. Run it on the A34 after any change to the listener, the foreground poll, drift or the overlays. A scenario test can't catch an overlay that is attached but never drawn.
 - **Some project-folder files are iCloud placeholders** (`ls -lO` shows `dataless`), and reading one hangs.

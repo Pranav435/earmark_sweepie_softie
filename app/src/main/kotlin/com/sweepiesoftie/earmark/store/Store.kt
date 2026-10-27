@@ -1,6 +1,7 @@
 package com.sweepiesoftie.earmark.store
 
 import android.content.Context
+import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.Entity
@@ -39,6 +40,8 @@ data class LoopRow(
     val closedAt: Long?,
     val outcome: String?,
     val broughtBack: Boolean,
+    /** On today's list (ADR 0025): decided by the engine, so a swiped chip for a flow stays off it. */
+    @ColumnInfo(defaultValue = "0") val listed: Boolean,
 )
 
 /** Keyed by a salted hash of the conversation, never a name or number. */
@@ -59,7 +62,7 @@ data class AppRow(@PrimaryKey val packageName: String, val visits: Int, val medi
 interface EarmarkDao {
     @Upsert suspend fun upsertLoop(row: LoopRow)
 
-    @Query("SELECT * FROM loop_log WHERE guessedAt IS NOT NULL AND guessedAt >= :since ORDER BY guessedAt DESC")
+    @Query("SELECT * FROM loop_log WHERE listed = 1 AND (guessedAt >= :since OR openedAt >= :since) ORDER BY COALESCE(guessedAt, openedAt) DESC")
     fun things(since: Long): Flow<List<LoopRow>>
 
     @Query("UPDATE loop_log SET label = NULL WHERE openedAt < :before")
@@ -87,14 +90,14 @@ interface EarmarkDao {
     @Query("SELECT * FROM app_stats") suspend fun apps(): List<AppRow>
 }
 
-@Database(entities = [LoopRow::class, ContactRow::class, KindRow::class, AlarmRow::class, AppRow::class], version = 2, exportSchema = false)
+@Database(entities = [LoopRow::class, ContactRow::class, KindRow::class, AlarmRow::class, AppRow::class], version = 3, exportSchema = false)
 abstract class EarmarkDatabase : RoomDatabase() {
     abstract fun dao(): EarmarkDao
 }
 
 /** Room behind a small interface. Every call is wrapped here so a database failure is logged and skipped, never thrown. */
 class Store(context: Context, private val log: DebugLog) {
-    private val dao = Room.databaseBuilder(context, EarmarkDatabase::class.java, "earmark.db").addMigrations(ADD_APP_STATS).build().dao()
+    private val dao = Room.databaseBuilder(context, EarmarkDatabase::class.java, "earmark.db").addMigrations(ADD_APP_STATS, LIST_PICKED_UP).build().dao()
 
     fun things(since: Long): Flow<List<LoopRow>> = dao.things(since).catch { log.error("Store.things", it); emit(emptyList()) }
 
@@ -115,6 +118,7 @@ class Store(context: Context, private val log: DebugLog) {
                 closedAt = entry.closedAt?.toEpochMilli(),
                 outcome = entry.outcome?.name,
                 broughtBack = entry.broughtBack,
+                listed = entry.listed,
             ),
         )
     }
@@ -179,6 +183,14 @@ class Store(context: Context, private val log: DebugLog) {
         val ADD_APP_STATS: Migration = object : Migration(1, 2) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL("CREATE TABLE IF NOT EXISTS `app_stats` (`packageName` TEXT NOT NULL, `visits` INTEGER NOT NULL, `medianVisitSeconds` REAL NOT NULL, PRIMARY KEY(`packageName`))")
+            }
+        }
+
+        /** v0.1.10 lists picked-up messages as they arrive; everything already on the list stays there. */
+        val LIST_PICKED_UP: Migration = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE `loop_log` ADD COLUMN `listed` INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("UPDATE `loop_log` SET `listed` = 1 WHERE `guessedAt` IS NOT NULL")
             }
         }
 

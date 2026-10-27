@@ -154,6 +154,40 @@ class EngineTest {
         }
 
     @Test
+    fun `a message Earmark picks up goes on today's list as it arrives, and gets its outcome when it closes`() = with(Script()) {
+        val listed = at(at(16, 0), Event.NotificationPosted(Fixtures.priya(at(16, 0)))).one<Effect.RecordLoop>().entry
+        assertEquals("Reply to Priya", listed.label)
+        assertEquals(at(16, 0), listed.openedAt)
+        assertEquals(null, listed.outcome)
+        assertTrue("picked up, so listed, though never guessed", listed.listed && listed.guessedAt == null)
+
+        // A second message in the same chat is the same thing on the list.
+        assertTrue(at(at(16, 1), Event.NotificationPosted(Fixtures.priya(at(16, 1), "you there?"))).none { it is Effect.RecordLoop })
+
+        val reply = Fixtures.priya(at(16, 2)).let { it.copy(messages = it.messages + Message(null, "yes!", at(16, 2), fromUser = true)) }
+        val closed = at(at(16, 2), Event.NotificationPosted(reply)).one<Effect.RecordLoop>().entry
+        assertEquals(Outcome.Done, closed.outcome)
+        assertTrue(closed.listed)
+    }
+
+    @Test
+    fun `a payment request is listed as it arrives too`() = with(Script()) {
+        val listed = at(at(16, 0), Event.NotificationPosted(Fixtures.aisha(at(16, 0)))).one<Effect.RecordLoop>().entry
+        assertEquals("Pay Aisha back \$12", listed.label)
+        assertTrue(listed.listed)
+    }
+
+    @Test
+    fun `an unfinished flow is only listed once its pill shows, as before`() =
+        with(Script(Fixtures.settings.copy(driftAfter = java.time.Duration.ofSeconds(10)))) {
+            at(at(19, 0), Event.Unlocked)
+            at(at(19, 0, 5), Event.ForegroundChanged(Fixtures.RIDE, "Uber"))
+            assertTrue(at(at(19, 1), Event.ForegroundChanged(Fixtures.FEED, "Instagram")).none { it is Effect.RecordLoop })
+            val shown = at(at(19, 1, 11), Event.Tick).one<Effect.RecordLoop>().entry
+            assertTrue(shown.listed)
+        }
+
+    @Test
     fun `with the smart timer, an urgent message comes back after half of the usual 45 seconds`() =
         with(Script(Fixtures.settings.copy(smartDrift = true))) {
             at(at(16, 0), Event.Unlocked)

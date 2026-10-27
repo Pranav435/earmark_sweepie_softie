@@ -121,7 +121,7 @@ Today's list of things and how each one ended.
 _Avoid_: report, stats, dashboard
 
 **Thing**:
-A loop that Earmark showed as a chip today or that you reached from a pill. The recap counts things.
+A loop on today's recap: a message or request Earmark picked up today, listed as it arrives, or a loop it showed as a chip or pill. The recap counts things.
 
 **Demo mode**:
 A setting where Earmark posts its own sample notifications and uses a 10-second drift timer, so every story runs on any phone.
