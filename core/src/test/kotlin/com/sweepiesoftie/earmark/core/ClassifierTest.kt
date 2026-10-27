@@ -32,10 +32,11 @@ class ClassifierTest {
     }
 
     @Test
-    fun `a question with a time word is fully due`() {
+    fun `a message to you is half due, and a question and a time word add a quarter each`() {
         assertEquals(1.0, open(Fixtures.rahul(now, "free at 5?")).due, 1e-9)
-        assertEquals(0.5, open(Fixtures.rahul(now, "free tonight")).due, 1e-9)
-        assertEquals(0.0, open(Fixtures.rahul(now, "haha nice")).due, 1e-9)
+        assertEquals(0.75, open(Fixtures.rahul(now, "free tonight")).due, 1e-9)
+        assertEquals(0.75, open(Fixtures.rahul(now, "free?")).due, 1e-9)
+        assertEquals(0.5, open(Fixtures.rahul(now, "haha nice")).due, 1e-9)
     }
 
     @Test
@@ -98,7 +99,7 @@ class ClassifierTest {
     @Test
     fun `questions and clock times in any script count as due`() {
         assertEquals(1.0, open(Fixtures.rahul(now, "can you send the slides before the 4:30 sync?")).due, 1e-9)
-        assertEquals(0.5, open(Fixtures.rahul(now, "هل أنت متاح؟")).due, 1e-9)
-        assertEquals(0.5, open(Fixtures.rahul(now, "今日来られる？")).due, 1e-9)
+        assertEquals(0.75, open(Fixtures.rahul(now, "هل أنت متاح؟")).due, 1e-9)
+        assertEquals(0.75, open(Fixtures.rahul(now, "今日来られる？")).due, 1e-9)
     }
 }

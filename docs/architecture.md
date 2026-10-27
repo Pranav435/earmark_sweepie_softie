@@ -43,11 +43,14 @@ Effects out  ShowChip(card) · ShowDot · ShowPill(card) · HideOverlay(which) �
 ## The guess (at every unlock)
 
 ```
-score = 0.35·recent + 0.25·who + 0.25·due + 0.15·history  (+0.15 if unlocked ≤ 60 s after the notification)
+score = 0.35·recent + 0.25·who + 0.25·due + 0.15·history  (+0.15 at the first unlock after the message or request)
 recent = exp(-age / 30 min)   who = reply affinity for this contact (default 0.5)
-due = time words, "?", event start, request age   history = confirm rate for this kind (default 0.5)
+due = 0.5 for a message to you, +0.25 for "?", +0.25 for a time word; event start; request age
+history = confirm rate for this kind (default 0.5)
 chip only if score > 0.70 · 3 ignores in a row mute that kind
 ```
+
+ADR 0017 changed `due` and the boost after the first real-phone test, where a plain "hey" could never clear the bar.
 
 ## Drift state machine
 

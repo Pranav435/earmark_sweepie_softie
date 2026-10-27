@@ -16,25 +16,25 @@ internal data class Score(val recent: Double, val who: Double, val due: Double, 
 internal object Ranker {
     const val CHIP_THRESHOLD: Double = 0.70
     private const val UNLOCK_BOOST = 0.15
-    private val boostWindow: Duration = Duration.ofSeconds(60)
     private const val RECENT_HALF_LIFE_MINUTES = 30.0
 
-    fun score(loop: Loop, unlockedAt: Instant, stats: Stats): Score {
+    /** [lastUnlock] is the unlock before this one, or null when the engine hasn't seen one since it started. */
+    fun score(loop: Loop, unlockedAt: Instant, stats: Stats, lastUnlock: Instant? = null): Score {
         val ageMinutes = Duration.between(loop.updatedAt, unlockedAt).toMillis().coerceAtLeast(0) / 60_000.0
         // Alarms and events are about now, not about when Earmark noticed them.
         val recent = when (loop.kind) {
             LoopKind.Routine, LoopKind.LeaveBy -> 1.0
             else -> exp(-ageMinutes / RECENT_HALF_LIFE_MINUTES)
         }
-        val unlockedSoonAfter = !unlockedAt.isBefore(loop.updatedAt) &&
-            Duration.between(loop.updatedAt, unlockedAt) <= boostWindow &&
+        // The first unlock after a message or request arrives is the one most likely to be for it, however long after.
+        val firstUnlockSince = (lastUnlock == null || loop.updatedAt.isAfter(lastUnlock)) &&
             loop.kind in setOf(LoopKind.Reply, LoopKind.Payment)
         return Score(
             recent = recent,
             who = who(loop, stats),
             due = loop.due,
             history = history(stats.kinds[loop.kind]),
-            boost = if (unlockedSoonAfter) UNLOCK_BOOST else 0.0,
+            boost = if (firstUnlockSince) UNLOCK_BOOST else 0.0,
         )
     }
 

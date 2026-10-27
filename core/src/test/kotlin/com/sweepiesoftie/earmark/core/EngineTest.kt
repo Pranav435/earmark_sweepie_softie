@@ -11,9 +11,29 @@ class EngineTest {
         at(at(14, 0), Event.NotificationPosted(Fixtures.rahul(at(14, 0), "haha nice")))
         assertTrue(at(at(16, 12), Event.Unlocked).none { it is Effect.ShowChip })
         val line = log.last()
-        // 0.35*exp(-132/30) + 0.125 + 0 + 0.075 = 0.2043
-        assertTrue(line, line.startsWith("unlock: no chip, best reply:hash-rahul scored 0.20"))
+        // 0.35*exp(-132/30) + 0.125 + 0.25*0.5 + 0.075 + 0.15 = 0.4793
+        assertTrue(line, line.startsWith("unlock: no chip, best reply:hash-rahul scored 0.48"))
         assertTrue(log.none { "haha" in it })
+    }
+
+    @Test
+    fun `a plain direct message gets a chip at the first unlock after it arrives`() = with(Script()) {
+        at(at(16, 0), Event.ScreenOff)
+        at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5), "hey")))
+        // 0.35*exp(-5/30) + 0.125 + 0.25*0.5 + 0.075 + 0.15 = 0.7713
+        val chip = at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip
+        assertEquals("Here to reply to Rahul?", chip.title)
+        assertEquals("“hey” · 5 min ago", chip.subtitle)
+    }
+
+    @Test
+    fun `a plain message doesn't come back as a chip at later unlocks`() = with(Script()) {
+        at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5), "hey")))
+        assertTrue(at(at(16, 5, 30), Event.Unlocked).any { it is Effect.ShowChip })
+        at(at(16, 6), Event.ScreenOff)
+        // 0.35*exp(-5/30) + 0.125 + 0.125 + 0.075 = 0.6213, with no boost the second time
+        assertTrue(at(at(16, 10), Event.Unlocked).none { it is Effect.ShowChip })
+        assertTrue(log.last(), "boost 0.00" in log.last())
     }
 
     @Test

@@ -110,9 +110,9 @@ internal object Classifier {
 
     private fun isOneTimeCode(text: String): Boolean = oneTimeCode.containsMatchIn(text) && codeDigits.containsMatchIn(text)
 
-    /** Half for a question, half for a time word: "free at 5?" is fully due. */
+    /** A message to you is half due; a question and a time word add a quarter each, so "free at 5?" is fully due. */
     private fun replyDue(text: String): Double =
-        (if (text.any { it in QUESTION_MARKS }) 0.5 else 0.0) + (if (timeWords.containsMatchIn(text)) 0.5 else 0.0)
+        0.5 + (if (text.any { it in QUESTION_MARKS }) 0.25 else 0.0) + (if (timeWords.containsMatchIn(text)) 0.25 else 0.0)
 
     /** Latin, Arabic and full-width question marks. */
     private const val QUESTION_MARKS = "?؟？"

@@ -16,12 +16,16 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private var nextAlarm: Instant? = null
     private var calendar: List<CalendarEvent> = emptyList()
     private var foreground: Visit? = null
+    private var lastUnlock: Instant? = null
     private val bookedAt = HashMap<String, Instant>()
 
     /** Routine and Leave-by loops are rebuilt from the clock and calendar, so remember which already closed. */
     private val closedSituations = HashSet<LoopId>()
 
     private data class Visit(val packageName: String, val appLabel: String, val since: Instant)
+
+    /** How many loops are open, for the home screen. Read it on the engine's thread, like [handle]. */
+    public val openLoops: Int get() = book.all.size
 
     public fun handle(event: Event, now: Instant): List<Effect> = when (event) {
         is Event.NotificationPosted -> onPosted(event.signal, now)
@@ -82,6 +86,8 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     }
 
     private fun onUnlocked(now: Instant): List<Effect> {
+        val previousUnlock = lastUnlock
+        lastUnlock = now
         val effects = mutableListOf<Effect>()
         effects += hideAll()
         drift = DriftMachine.end(drift)
@@ -93,7 +99,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val carry = book.all.filter { it.carryOver }.maxByOrNull { it.loop.updatedAt }
         if (carry != null) {
             book.update(carry.loop.id) { it.copy(carryOver = false, guessedAt = now) }
-            val score = Ranker.score(carry.loop, now, stats)
+            val score = Ranker.score(carry.loop, now, stats, previousUnlock)
             drift = DriftMachine.guess(drift, carry.loop.id, carry.loop.packageName)
             effects += Effect.Log("unlock: carry-over chip for ${carry.loop.id.value}, score $score")
             effects += Effect.ShowChip(copy.carryOverChip(carry.loop, score.total))
@@ -102,7 +108,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
 
         val candidates = book.all.filter { !kindStat(it.loop.kind).muted }
         val muted = book.all.size - candidates.size
-        val best = candidates.map { it to Ranker.score(it.loop, now, stats) }.maxByOrNull { it.second.total }
+        val best = candidates.map { it to Ranker.score(it.loop, now, stats, previousUnlock) }.maxByOrNull { it.second.total }
         if (best == null) {
             return effects + Effect.Log("unlock: no chip, no open loops" + if (muted > 0) " ($muted muted)" else "")
         }
