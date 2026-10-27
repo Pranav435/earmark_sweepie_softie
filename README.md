@@ -1,4 +1,4 @@
-# Earmark v0.1.15
+# Earmark v0.1.16
 
 Earmark guesses the one thing you unlocked your phone to do. If you drift into a feed, it hands that exact task back in one tap. It never blocks an app and never counts minutes. Everything runs on the phone: the APK has no internet permission.
 
@@ -6,9 +6,9 @@ This build is for testers. It runs on Android 10 or later and was tested on an A
 
 ## Install
 
-The APK is `dist/earmark-v0.1.15.apk` in this repository. On GitHub, open that file and use **Download raw file**.
+The APK is `dist/earmark-v0.1.16.apk` in this repository. On GitHub, open that file and use **Download raw file**.
 
-- **From a computer:** connect the phone with USB debugging on, then run `adb install -r dist/earmark-v0.1.15.apk`.
+- **From a computer:** connect the phone with USB debugging on, then run `adb install -r dist/earmark-v0.1.16.apk`.
 - **On the phone:** copy the file to the phone, open it from Files, and allow installs from that app when Android asks.
 
 `scripts/setup-phone.sh` installs the APK and grants every permission that adb can grant, in one go. Then `scripts/check-pill.sh`, with the phone unlocked, checks the whole path on the phone in about 30 seconds: it posts a test message, opens Instagram or YouTube, and checks that the pill is shown and actually drawn. It leaves a "Reply to Test" row on today's list.
@@ -17,9 +17,9 @@ The APK is `dist/earmark-v0.1.15.apk` in this repository. On GitHub, open that f
 
 - **"App not installed" or "conflicts with an existing package":** an older Earmark signed with a different key is on the phone. Builds from before 27 October 2026 were signed with a debug key. Uninstall Earmark, then install again.
 - **Play Protect says the app is unsafe or unrecognised:** tap **More details › Install anyway**. Earmark isn't from the Play Store, and it asks for notification access, which Play Protect treats as sensitive.
-- **Blocked with a message about sensitive permissions, and no way past it:** in some countries Google blocks apps that ask for notification access when they're installed from a browser, a messaging app or a file manager. Install over USB with `adb install -r dist/earmark-v0.1.15.apk` or `scripts/setup-phone.sh`, which that check doesn't cover.
+- **Blocked with a message about sensitive permissions, and no way past it:** in some countries Google blocks apps that ask for notification access when they're installed from a browser, a messaging app or a file manager. Install over USB with `adb install -r dist/earmark-v0.1.16.apk` or `scripts/setup-phone.sh`, which that check doesn't cover.
 
-The APK is signed with the Sweepie Softie release key. To check it, run `apksigner verify --print-certs dist/earmark-v0.1.15.apk`; it should show `CN=Sweepie Softie, OU=Earmark, O=Sweepie Softie`.
+The APK is signed with the Sweepie Softie release key. To check it, run `apksigner verify --print-certs dist/earmark-v0.1.16.apk`; it should show `CN=Sweepie Softie, OU=Earmark, O=Sweepie Softie`.
 
 ## Allow restricted settings (Android 13 and later)
 
@@ -49,19 +49,20 @@ If a permission is missing, Earmark keeps running and does less. The Log screen 
 
 ## What you'll see
 
-- **Chip:** after you unlock, a dark capsule at the top makes its guess, for example "Here to reply to Rahul?". Tap ✓ to keep it, and it shrinks into a small marigold dot under the status bar. Tap the chip itself to go there now. Swipe it sideways (or long-press it) for "not this". If you ignore it, it fades, and Earmark still watches.
-- **Pill:** if you open a feed app such as YouTube or Instagram while that loop is open, Earmark shows it a few seconds in, or, if a video is playing, at the next reel, short or pause: "You came here to · Reply to Rahul · **Do it now**". For a message that arrived while you were using the phone, it reads "Before you forget · Reply to Priya · **Do it now**". Swipe it away (or long-press it) for "not now", and it comes back as a chip at your next unlock.
-- **Reply strip:** after Do it now on a message, up to three one-tap replies appear above the chat's input. They come from Smart Reply, or, when it can't answer (another language, or a very short message such as "hi"), from simple quick replies that fit the message: "Yes / No / Let me check" for a question, "Hey!" for a greeting, "Got it / Will reply soon / Can I call you?" otherwise. They also appear when you open any message's chat from its notification. They stay when WhatsApp or Messages clears the notification as the chat opens, and go away when you reply or leave the app. The strip names who the replies go to, since it stays while you move between chats.
+- **Notes:** the chip and the pill look like a note from a friend: a paper card (a warm dark one in dark mode) just under the status bar. It shows the person's photo from the notification, or their initial, or the app's icon for a bill, an alarm or a ride. Then their name, their own words, a small line on why it's there, and one button: **Reply**, **Call back**, **Pay**, **Set it**, **Finish**, **Book**, **Join** or **Open**. A long message is cut to the part that's urgent or asks something, about a dozen words.
+- **Chip:** after you unlock, a note makes its guess, for example "Rahul · “free at 5?” · just now · *Here to reply?*" with a **Reply** button. Tap the button, or anywhere on the note, to go straight there. Swipe it sideways (or long-press it) for "not this". If you ignore it, it fades, and a small marigold dot under the status bar shows Earmark is still holding it.
+- **Pill:** if you open a feed app such as YouTube or Instagram while that loop is open, Earmark shows it a few seconds in, or, if a video is playing, at the next reel, short or pause: "Rahul · “free at 5?” · *You came here to reply*" with **Reply**. It arrives with two soft taps of vibration, unless the phone is on silent. For a message that arrived while you were using the phone, the small line reads "Before you forget". Swipe it away (or long-press it) for "not now", and it comes back as a chip at your next unlock.
+- **Reply strip:** after Reply on a message, up to three one-tap replies appear above the chat's input. They come from Smart Reply, or, when it can't answer (another language, or a very short message such as "hi"), from simple quick replies that fit the message: "Yes / No / Let me check" for a question, "Hey!" for a greeting, "Got it / Will reply soon / Can I call you?" otherwise. They also appear when you open any message's chat from its notification. They stay when WhatsApp or Messages clears the notification as the chat opens, and go away when you reply or leave the app. The strip names who the replies go to, since it stays while you move between chats.
 - **"Earmark is on":** a silent notification, with a small icon in the status bar, while Earmark runs. It keeps the phone from pausing Earmark in the background, which Samsung phones otherwise do.
-- **Recap (home screen):** today's list. Each message or request Earmark picks up appears the moment it arrives, with a marigold ring while it's waiting, alongside anything Earmark showed you as a chip or pill. Each row shows how it ended, and the footer says how many times Earmark brought you back.
+- **Home screen:** who's waiting, for example "Rahul and 2 others are waiting.", and under it "Brought you back 3 times today." Each message or request Earmark picks up is listed the moment it arrives, in the order Earmark would guess them. Tap one to go straight to that chat, the call log or the bill. Everything else from today, and how it ended, is folded under **Earlier today**.
 
-**Which message wins.** When several messages are waiting, from any apps, Earmark picks the one that asks most of you: "call me asap" beats "that was fun", and a question beats a plain message. "ok", "thanks", 👍 and reactions don't count as waiting at all. Between people you've never answered through Earmark, the app you usually deal with sooner wins, once Earmark has seen five of that app's messages close. When you've dealt with the guess, the strongest message still waiting becomes **next up**, with no chip: if you then drift into a feed, its pill reads "Next up · Reply to Zoya · Do it now". An urgent message that arrives while you're on the phone takes over even a guess you came for, which comes back after it. An Instagram DM is watched while you scroll Instagram itself, until you open the chat.
+**Which message wins.** When several messages are waiting, from any apps, Earmark picks the one that asks most of you: "call me asap" beats "that was fun", and a question beats a plain message. "ok", "thanks", 👍 and reactions don't count as waiting at all. Between people you've never answered through Earmark, the app you usually deal with sooner wins, once Earmark has seen five of that app's messages close. When you've dealt with the guess, the strongest message still waiting becomes **next up**, with no chip: if you then drift into a feed, its pill's small line reads "Next up". An urgent message that arrives while you're on the phone takes over even a guess you came for, which comes back after it. An Instagram DM is watched while you scroll Instagram itself, until you open the chat.
 
-**Not just messages.** Earmark also picks up a **missed call** ("Call Mom back"; Do it now opens the call log, so a stray tap never rings anyone), a **reminder** you set in Keep, Google Tasks, Samsung Reminder, Microsoft To Do or your calendar (the chip is the reminder itself: "Submit lab report?"), an **email** from a person that asks you something or is urgent ("Reply to Prof. Mehta's email"), and a **bill** that's due, from a text or an app ("Pay your Airtel bill ₹499"). These sit alongside payment requests, a ride or order you left unfinished, your weeknight alarm, and calendar events with a place or meeting link. Texts from businesses, with sender IDs such as AX-AIRTEL, are never treated as messages to answer.
+**Not just messages.** Earmark also picks up a **missed call** ("Call Mom back"; **Call back** opens the call log, so a stray tap never rings anyone), a **reminder** you set in Keep, Google Tasks, Samsung Reminder, Microsoft To Do or your calendar (the note is the reminder itself: "Submit lab report"), an **email** from a person that asks you something or is urgent ("Reply to Prof. Mehta's email"), and a **bill** that's due, from a text or an app ("Pay your Airtel bill ₹499"). These sit alongside payment requests, a ride or order you left unfinished, your weeknight alarm, and calendar events with a place or meeting link. Texts from businesses, with sender IDs such as AX-AIRTEL, are never treated as messages to answer.
 
 **Groups.** A group message counts when it's for you: it says your name or @You (your name comes from your contact card, if you allow it, and from **Settings › Your name**), it uses urgent words such as "urgent", "hospital" or "jaldi", or it asks a question in a group whose notifications you usually tap. The chip names the group ("Here to reply to Mom in Family?"), and the reply strip replies to the group. Other group chatter is ignored, except that Earmark counts whether you tap or swipe away each group's notifications.
 
-No chip appears when a message arrives while you're using the phone, because its heads-up already showed. Earmark makes it the guess quietly instead, and lists it on the home screen. If you drift into a feed, the pill brings it back. Messages that arrive while the phone is locked are guessed when you unlock, and only those get a chip. The dot only appears after you tap ✓ on a chip. While today's list is empty, the home screen says how many loops Earmark is watching. Earmark follows the phone's light or dark theme.
+No chip appears when a message arrives while you're using the phone, because its heads-up already showed. Earmark makes it the guess quietly instead, and lists it on the home screen. If you drift into a feed, the pill brings it back. Messages that arrive while the phone is locked are guessed when you unlock, and only those get a chip. The dot only appears after a chip fades while its loop is still the guess, and goes when the pill shows. While nobody's waiting, the home screen says how many loops Earmark is watching. Earmark follows the phone's light or dark theme.
 
 With TalkBack, the chip and pill announce themselves when they appear. Every control is labelled. The "not this" and "not now" swipes are also in the TalkBack actions menu.
 
@@ -76,32 +77,32 @@ Turn on **Settings › Demo mode** first for the demo scripts. Demo mode posts r
 **Demo mode:**
 
 1. On the home screen, tap **Send Rahul's message**.
-2. Lock and unlock. The chip reads "Here to reply to Rahul?" with "“free at 5?” · just now". Tap ✓.
-3. Open YouTube. A few seconds in, the pill reads "You came here to · Reply to Rahul · Do it now".
-4. Tap **Do it now**. The demo chat with Rahul opens, with reply buttons above the message box.
-5. Tap the first reply. It sends, Rahul answers, and the strip and the dot go away.
-6. Open Earmark. The recap shows "Reply to Rahul" with a green check and "brought back".
+2. Lock and unlock. The chip reads "Rahul" with "“free at 5?” · just now" and "Here to reply?". Let it fade; the dot appears.
+3. Open YouTube. A few seconds in, the pill arrives with two soft taps: "Rahul · “free at 5?” · You came here to reply · Reply".
+4. Tap **Reply**. The demo chat with Rahul opens, with reply buttons above the message box.
+5. Tap the first reply. It sends, Rahul answers, and the strip goes away.
+6. Open Earmark. Under **Earlier today**, "Reply to Rahul" has a green check and "brought back", and the headline says Earmark brought you back.
 
 **With real apps:** lock the phone, then ask a friend to send you a WhatsApp or Google Messages message. Any message works, and a question such as "free at 5?" scores highest. Leave it unread, unlock within about 10 minutes, then follow steps 2 to 6. With Right away, the default drift timer, the pill comes about 3 seconds after your feed app opens. In Settings you can pick Smart instead, which waits for how long you usually stay in that app, or a fixed time. The Log screen says when the pill will come, for example "pill after 3 s (right away)". WhatsApp and Messages clear their notification as soon as the chat opens; the reply strip stays anyway and sends through it.
 
-**A message while you're on the phone:** unlock, open YouTube or Instagram, and have a friend message you. No chip appears. After the drift timer, at a pause, the pill reads "Before you forget · Reply to …". Or tap the message's notification instead: the chat opens with the reply strip. Lock and unlock afterwards, and that message doesn't come back as a chip.
+**A message while you're on the phone:** unlock, open YouTube or Instagram, and have a friend message you. No chip appears. After the drift timer, at a pause, the pill's small line reads "Before you forget". Or tap the message's notification instead: the chat opens with the reply strip. Lock and unlock afterwards, and that message doesn't come back as a chip.
 
 ### 2. The Ride
 
 The Ride story needs a ride app (Uber, Ola, Lyft, Bolt, Rapido or Grab) and the calendar permission. It has no demo version.
 
 1. Add a calendar event starting about 2½ hours from now, titled "Flight to Lisbon", with location "Airport · Terminal 1".
-2. Lock and unlock. The chip reads "Here to book your ride?" with "Airport · <start> · leave by <time>". Tap ✓.
+2. Lock and unlock. The chip reads "Flight to Lisbon" with "Airport · <start> · leave by <time>" and "Here to book your ride?". Let it fade.
 3. Open the ride app, start a booking, and leave within 2 minutes without confirming.
-4. Open a feed app. At the first pause, the pill reads "You came here to · Book your airport ride · Finish".
+4. Open a feed app. At the first pause, the pill reads "Flight to Lisbon · You came here to book your ride · Finish".
 5. Tap **Finish**. The ride app opens where you left it. When its "booked" or "driver is on the way" notification arrives, the loop closes.
 
 ### 3. Bedtime
 
 **Demo mode:** make sure no alarm is set for tomorrow morning.
 
-1. Lock and unlock. The chip reads "Set your 6:30 alarm?" with "You usually do on weeknights". Let it fade.
-2. Open YouTube and play a video. While it plays, Earmark waits. Pause it, and the pill reads "You came here to · Set your 6:30 alarm · Set it".
+1. Lock and unlock. The chip reads "6:30 alarm" with "You usually set one on weeknights" and "Here to set your alarm?". Let it fade.
+2. Open YouTube and play a video. While it plays, Earmark waits. Pause it, and the pill reads "6:30 alarm · You came here to set your alarm · Set it".
 3. Tap **Set it**. The Clock app opens with 6:30 filled in. Save it, and the loop closes.
 
 **With real apps:** set the same weekday alarm on at least three weeknights. On a weeknight after 22:30, with no alarm set for the next morning, follow steps 1 to 3.
@@ -110,10 +111,10 @@ The Ride story needs a ride app (Uber, Ola, Lyft, Bolt, Rapido or Grab) and the 
 
 **Demo mode:**
 
-1. Tap **Send Aisha's request**. Lock and unlock. The chip reads "Here to pay Aisha back?". Tap ✓.
-2. Open YouTube. The pill reads "Pay Aisha back $12 · Pay now". Swipe it away.
-3. Lock and unlock. The carry-over chip reads "Pay Aisha back $12?" with "Still on your list from <time>" and a **Pay now** button.
-4. Tap **Pay now**. The demo payment screen opens. Tap **Pay $12.00**, and the loop closes as brought back.
+1. Tap **Send Aisha's request**. Lock and unlock. The chip reads "Aisha" with "$12.00 · Dinner at Nori" and "Here to settle up?". Let it fade.
+2. Open YouTube. The pill reads "Aisha · You came here to settle up · Pay". Swipe it away.
+3. Lock and unlock. The carry-over chip reads "Aisha" with "Still on your list from <time>" and a **Pay** button.
+4. Tap **Pay**. The demo payment screen opens. Tap **Pay $12.00**, and the loop closes as brought back.
 
 **With real apps:** ask someone to request money from you in Google Pay, PhonePe, PayPal, Venmo or Cash App, then follow steps 1 to 4.
 
@@ -132,13 +133,14 @@ The Log is kept in memory, so it starts empty after Earmark restarts.
 
 - No internet permission, no account and no server. Smart Reply runs on the phone with a bundled model.
 - Message text and the notifications' tap and reply actions stay in memory until the loop closes. Notifications Earmark skips are forgotten straight away.
+- The sender's photo on a chip, pill or waiting row is the one their app put in the notification. It is held in memory with the message text and goes when the loop closes. Earmark never reads your contacts for it.
 - For each message or request Earmark picks up, and each chip or pill, the database stores the loop's kind, times, outcome, and a short label such as "Pay Aisha back $12". After 24 hours the label is cleared, and the recap shows only the kind and time. Contact statistics are keyed by a salted hash, never a name or number.
 - For the smart drift timer, the database keeps one running number per feed app: how long you usually stay in it. Nothing about what you did there.
 - For ranking, the database keeps per chat app how many of its messages you dealt with or left, and how soon you usually got to them, and per conversation (by salted hash) how often you opened or swiped away its notifications. Counts only.
 - Urgency and mentions are worked out on the phone from the words, with word lists, and never logged. With the optional contacts permission, Earmark reads only your own contact card and keeps what it finds in memory. Names you type in Settings › Your name stay in Earmark's private storage on the phone. Neither is ever logged.
 - The Log screen shows why each chip or pill was or wasn't shown. It never shows message text.
 
-## Known limits in v0.1.15
+## Known limits in v0.1.16
 
 - Earmark can't see inside other apps, so unfinished bookings are inferred from how long you spent in a ride, food or shopping app.
 - Reel boundaries are best-effort and depend on whether the feed app publishes media sessions. A feed with nothing playing gets the pill as soon as drift starts.
