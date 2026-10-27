@@ -1,0 +1,5 @@
+# Demo mode posts real notifications into the real pipeline
+
+Demo mode does not inject fake events into the engine. Earmark posts real `MessagingStyle` notifications (Rahul: "free at 5?"; Aisha requested $12.00) with a real reply action, and the listener reads them like any other app's notifications. The Classifier normally skips Earmark's own notifications and accepts them only while demo mode is on. The way back opens a small built-in demo chat. The drift timer drops from 90 s to 10 s, and the alarm history for the Bedtime story is seeded.
+
+**Why:** the demo exercises the listener, the classifier, `RemoteInput` and loop closing exactly as real use does, so a working demo is evidence that the product works.
