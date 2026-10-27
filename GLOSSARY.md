@@ -125,10 +125,10 @@ Being in a feed app for longer than the drift timer while the guessed loop is st
 _Avoid_: distraction, doomscroll, relapse
 
 **Drift timer**:
-How long a feed app can be in front before it counts as drift. Smart by default: your usual visit to that feed app, sooner when the loop is urgent or you held its chip, between 15 seconds and 2 minutes. A fixed time can be picked in Settings.
+How long a feed app can be in front before it counts as drift. Right away by default: 3 seconds, long enough to tell you're not just passing through. Smart, in Settings, is your usual visit to that feed app, sooner when the loop is urgent or you held its chip, between 15 seconds and 2 minutes. A fixed time can be picked in Settings too.
 
 **Usual visit**:
-How long you usually stay in a feed app, learned on the phone from your visits. A visit a pill cut short doesn't count.
+How long you usually stay in a feed app, learned on the phone from your visits, for the Smart drift timer. A visit a pill cut short doesn't count.
 
 **Pause**:
 A natural break in the feed: media paused or stopped, the next reel starting, or an app switch.

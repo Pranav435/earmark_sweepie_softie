@@ -1,6 +1,7 @@
 package com.sweepiesoftie.earmark.store
 
 import android.content.Context
+import com.sweepiesoftie.earmark.core.DriftTimer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -9,8 +10,8 @@ import kotlinx.coroutines.flow.update
 data class UserSettings(
     val demoMode: Boolean = false,
     val paused: Boolean = false,
-    /** Smart works the timer out per guess (ADR 0023); off, [driftSeconds] is used. */
-    val driftSmart: Boolean = true,
+    /** Right away by default (ADR 0030); Fixed uses [driftSeconds]. */
+    val driftTimer: DriftTimer = DriftTimer.RightAway,
     val driftSeconds: Int = 90,
     val feedsOn: Set<String> = emptySet(),
     val feedsOff: Set<String> = emptySet(),
@@ -19,11 +20,7 @@ data class UserSettings(
 ) {
     val typedNames: List<String> get() = names.split(',', '\n').map { it.trim() }.filter { it.isNotEmpty() }
 
-    /** Demo mode uses a 10-second drift timer so a story fits in a minute (ADR 0006). */
-    val effectiveDriftSeconds: Int get() = if (demoMode) DEMO_DRIFT_SECONDS else driftSeconds
-
     companion object {
-        const val DEMO_DRIFT_SECONDS: Int = 10
         val driftChoices: List<Int> = listOf(30, 60, 90, 180, 300)
     }
 }
@@ -37,9 +34,9 @@ class SettingsStore(context: Context) {
 
     fun setPaused(on: Boolean): Unit = edit { it.copy(paused = on) }
 
-    fun setDriftSeconds(seconds: Int): Unit = edit { it.copy(driftSmart = false, driftSeconds = seconds) }
+    fun setDriftSeconds(seconds: Int): Unit = edit { it.copy(driftTimer = DriftTimer.Fixed, driftSeconds = seconds) }
 
-    fun setDriftSmart(): Unit = edit { it.copy(driftSmart = true) }
+    fun setDriftTimer(timer: DriftTimer): Unit = edit { it.copy(driftTimer = timer) }
 
     fun setNames(names: String): Unit = edit { it.copy(names = names) }
 
@@ -54,7 +51,7 @@ class SettingsStore(context: Context) {
         prefs.edit()
             .putBoolean(DEMO, s.demoMode)
             .putBoolean(PAUSED, s.paused)
-            .putBoolean(DRIFT_SMART, s.driftSmart)
+            .putString(DRIFT_TIMER, s.driftTimer.name)
             .putInt(DRIFT, s.driftSeconds)
             .putStringSet(FEEDS_ON, s.feedsOn)
             .putStringSet(FEEDS_OFF, s.feedsOff)
@@ -65,7 +62,7 @@ class SettingsStore(context: Context) {
     private fun read() = UserSettings(
         demoMode = prefs.getBoolean(DEMO, false),
         paused = prefs.getBoolean(PAUSED, false),
-        driftSmart = prefs.getBoolean(DRIFT_SMART, true),
+        driftTimer = DriftTimer.entries.find { it.name == prefs.getString(DRIFT_TIMER, null) } ?: DriftTimer.RightAway,
         driftSeconds = prefs.getInt(DRIFT, 90),
         feedsOn = prefs.getStringSet(FEEDS_ON, emptySet()).orEmpty().toSet(),
         feedsOff = prefs.getStringSet(FEEDS_OFF, emptySet()).orEmpty().toSet(),
@@ -76,7 +73,8 @@ class SettingsStore(context: Context) {
         const val DEMO = "demo_mode"
         const val PAUSED = "paused"
         const val DRIFT = "drift_seconds"
-        const val DRIFT_SMART = "drift_smart"
+        // A new key, so updating turns Right away on even for someone who picked Smart or a fixed time (ADR 0030).
+        const val DRIFT_TIMER = "drift_timer"
         const val FEEDS_ON = "feeds_on"
         const val FEEDS_OFF = "feeds_off"
         const val NAMES = "names"

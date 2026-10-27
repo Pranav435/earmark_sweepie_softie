@@ -58,7 +58,11 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         is Event.SettingsChanged -> {
             this.settings = event.settings
             copy = Copy(event.settings)
-            val drift = if (event.settings.smartDrift) "smart" else "after ${event.settings.driftAfter.seconds}s"
+            val drift = when (event.settings.driftTimer) {
+                DriftTimer.RightAway -> "right away"
+                DriftTimer.Smart -> "smart"
+                DriftTimer.Fixed -> "after ${event.settings.driftAfter.seconds}s"
+            }
             listOf(Effect.Log("settings: drift $drift, demo ${event.settings.demoMode}, paused ${event.settings.paused}, ${event.settings.feedApps.size} feed apps, ${event.settings.myNames.size} names for mentions"))
         }
         is Event.StatsLoaded -> {
@@ -357,12 +361,13 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         )
     }
 
-    private fun driftTimer(guess: Tracked?): SmartDrift.Timer =
-        if (settings.smartDrift && guess != null) {
+    private fun driftTimer(guess: Tracked?): SmartDrift.Timer = when {
+        // Right away still lets you pass through a feed app on the way somewhere else.
+        settings.driftTimer == DriftTimer.RightAway -> SmartDrift.Timer(SmartDrift.shortestVisit, "right away")
+        settings.driftTimer == DriftTimer.Smart && guess != null ->
             SmartDrift.timer(guess.loop, guess.held, foreground?.let { stats.apps[it.packageName] })
-        } else {
-            SmartDrift.Timer(settings.driftAfter, "fixed timer")
-        }
+        else -> SmartDrift.Timer(settings.driftAfter, "fixed timer")
+    }
 
     private fun stepDrift(input: DriftInput, now: Instant): List<Effect> {
         val guess = book[drift.loopId]
@@ -379,7 +384,6 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
                 guess.clearedAt != null -> "its app cleared the notification"
                 else -> null
             },
-            cooldown = settings.pillCooldown,
         )
         val step = DriftMachine.step(drift, input, now, rules)
         drift = step.drift

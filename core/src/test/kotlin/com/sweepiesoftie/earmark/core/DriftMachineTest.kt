@@ -49,15 +49,9 @@ class DriftMachineTest {
     }
 
     @Test
-    fun `the engine can hold the pill, and there are ten minutes between pills`() {
+    fun `the engine can hold the pill`() {
         val once = DriftMachine.step(drifting(), DriftInput.Media(Playback.Paused), at(16, 14), rules.copy(pillHeld = "its pill already showed for this message"))
         assertFalse(once.showPill)
         assertEquals("media Paused, held: its pill already showed for this message", once.reason)
-
-        val recent = drifting().copy(lastPillAt = at(16, 5))
-        val cooling = DriftMachine.step(recent, DriftInput.Media(Playback.Paused), at(16, 14), rules)
-        assertFalse(cooling.showPill)
-        assertEquals("media Paused, held: 10 min between pills, 60 s left", cooling.reason)
-        assertTrue(DriftMachine.step(recent, DriftInput.Media(Playback.Paused), at(16, 15, 1), rules).showPill)
     }
 }

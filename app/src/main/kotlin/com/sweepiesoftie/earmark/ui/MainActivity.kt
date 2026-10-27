@@ -182,7 +182,7 @@ private fun Root() {
                             }
                         },
                         onDrift = graph.settings::setDriftSeconds,
-                        onDriftSmart = graph.settings::setDriftSmart,
+                        onDriftTimer = graph.settings::setDriftTimer,
                         onFeed = graph.settings::setFeed,
                         onNames = graph.settings::setNames,
                         onShowAllApps = { showAll = true },

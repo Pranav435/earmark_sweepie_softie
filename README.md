@@ -50,7 +50,7 @@ If a permission is missing, Earmark keeps running and does less. The Log screen 
 ## What you'll see
 
 - **Chip:** after you unlock, a dark capsule at the top makes its guess, for example "Here to reply to Rahul?". Tap ✓ to keep it, and it shrinks into a small marigold dot under the status bar. Tap the chip itself to go there now. Swipe it sideways (or long-press it) for "not this". If you ignore it, it fades, and Earmark still watches.
-- **Pill:** if you open a feed app such as YouTube or Instagram while that loop is open, Earmark waits for a natural pause, then shows "You came here to · Reply to Rahul · **Do it now**". For a message that arrived while you were using the phone, it reads "Before you forget · Reply to Priya · **Do it now**". Swipe it away (or long-press it) for "not now", and it comes back as a chip at your next unlock.
+- **Pill:** if you open a feed app such as YouTube or Instagram while that loop is open, Earmark shows it a few seconds in, or, if a video is playing, at the next reel, short or pause: "You came here to · Reply to Rahul · **Do it now**". For a message that arrived while you were using the phone, it reads "Before you forget · Reply to Priya · **Do it now**". Swipe it away (or long-press it) for "not now", and it comes back as a chip at your next unlock.
 - **Reply strip:** after Do it now on a message, up to three one-tap replies appear above the chat's input. They come from Smart Reply, or, when it can't answer (another language, or a very short message such as "hi"), from simple quick replies that fit the message: "Yes / No / Let me check" for a question, "Hey!" for a greeting, "Got it / Will reply soon / Can I call you?" otherwise. They also appear when you open any message's chat from its notification. They stay when WhatsApp or Messages clears the notification as the chat opens, and go away when you reply or leave the app. The strip names who the replies go to, since it stays while you move between chats.
 - **"Earmark is on":** a silent notification, with a small icon in the status bar, while Earmark runs. It keeps the phone from pausing Earmark in the background, which Samsung phones otherwise do.
 - **Recap (home screen):** today's list. Each message or request Earmark picks up appears the moment it arrives, with a marigold ring while it's waiting, alongside anything Earmark showed you as a chip or pill. Each row shows how it ended, and the footer says how many times Earmark brought you back.
@@ -67,7 +67,7 @@ With TalkBack, the chip and pill announce themselves when they appear. Every con
 
 ## Test scripts
 
-Turn on **Settings › Demo mode** first for the demo scripts. Demo mode posts real notifications from Earmark that go through the same pipeline as any other app's. It shortens the drift timer to 10 seconds, removes the 10-minute gap between pills, and gives you a weeknight 6:30 alarm habit.
+Turn on **Settings › Demo mode** first for the demo scripts. Demo mode posts real notifications from Earmark that go through the same pipeline as any other app's. It always uses the Right away drift timer, and gives you a weeknight 6:30 alarm habit.
 
 "Lock and unlock" means: press power, wake the phone, and unlock it.
 
@@ -77,12 +77,12 @@ Turn on **Settings › Demo mode** first for the demo scripts. Demo mode posts r
 
 1. On the home screen, tap **Send Rahul's message**.
 2. Lock and unlock. The chip reads "Here to reply to Rahul?" with "“free at 5?” · just now". Tap ✓.
-3. Open YouTube and stay there for 10 seconds. The pill reads "You came here to · Reply to Rahul · Do it now".
+3. Open YouTube. A few seconds in, the pill reads "You came here to · Reply to Rahul · Do it now".
 4. Tap **Do it now**. The demo chat with Rahul opens, with reply buttons above the message box.
 5. Tap the first reply. It sends, Rahul answers, and the strip and the dot go away.
 6. Open Earmark. The recap shows "Reply to Rahul" with a green check and "brought back".
 
-**With real apps:** lock the phone, then ask a friend to send you a WhatsApp or Google Messages message. Any message works, and a question such as "free at 5?" scores highest. Leave it unread, unlock within about 10 minutes, then follow steps 2 to 6. Your feed app needs to stay in front for the drift timer. With Smart, the default, that's 45 seconds for a plain message and 23 seconds for "free at 5?" until Earmark has learned how long you usually stay in that app. The Log screen says when the pill will come, for example "pill after 23 s". WhatsApp and Messages clear their notification as soon as the chat opens; the reply strip stays anyway and sends through it.
+**With real apps:** lock the phone, then ask a friend to send you a WhatsApp or Google Messages message. Any message works, and a question such as "free at 5?" scores highest. Leave it unread, unlock within about 10 minutes, then follow steps 2 to 6. With Right away, the default drift timer, the pill comes about 3 seconds after your feed app opens. In Settings you can pick Smart instead, which waits for how long you usually stay in that app, or a fixed time. The Log screen says when the pill will come, for example "pill after 3 s (right away)". WhatsApp and Messages clear their notification as soon as the chat opens; the reply strip stays anyway and sends through it.
 
 **A message while you're on the phone:** unlock, open YouTube or Instagram, and have a friend message you. No chip appears. After the drift timer, at a pause, the pill reads "Before you forget · Reply to …". Or tap the message's notification instead: the chat opens with the reply strip. Lock and unlock afterwards, and that message doesn't come back as a chip.
 
@@ -146,7 +146,7 @@ The Log is kept in memory, so it starts empty after Earmark restarts.
 - Smart Reply is English only, and calls very short messages such as "hi" or "ok" not English. For those the strip offers quick replies, which are English and simple. When Smart Reply holds back because it isn't confident, which includes sensitive topics, the strip stays hidden. The Log screen says which. Chip and pill copy is English only.
 - The reply strip sits just above the chat's input, so it can cover the newest message until you reply or close it.
 - On the Galaxy A34, the pill was checked over Instagram with Earmark in the background and its screen opened and left: in demo mode, with a fixed 30 s timer and with the smart timer. The reply strip was checked with a real WhatsApp "hi" opened from its notification. The chip at unlock uses the same overlay fix but wasn't re-checked there.
-- The smart drift timer starts at 45 seconds and needs five visits to a feed app before it goes by your usual visit there.
+- The Smart drift timer, an option in Settings, starts at 45 seconds and needs five visits to a feed app before it goes by your usual visit there. With Right away, the default, a pill cuts most visits short, so Smart learns slowly.
 - Urgency comes from word lists in English, Hinglish and Hindi, so it misses urgent messages that use none of those words, and a name that's also a common word can count as a mention. A group mention the app shows as a phone number isn't recognised.
 - Missed calls close when the dialer clears them. Google's dialer clears every missed call once you call anyone back or look at Recents, so they all close as done.
 - Opening an email closes its loop as done; Earmark can't see whether you replied. An email that asks nothing isn't picked up, but a newsletter worded as a question can be. Snoozing a reminder closes it until it goes off again.

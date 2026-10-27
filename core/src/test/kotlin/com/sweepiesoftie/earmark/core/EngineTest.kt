@@ -207,7 +207,7 @@ class EngineTest {
 
     @Test
     fun `with the smart timer, an urgent message comes back after half of the usual 45 seconds`() =
-        with(Script(Fixtures.settings.copy(smartDrift = true))) {
+        with(Script(Fixtures.settings.copy(driftTimer = DriftTimer.Smart))) {
             at(at(16, 0), Event.Unlocked)
             at(at(16, 0, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
             at(at(16, 1), Event.NotificationPosted(Fixtures.rahul(at(16, 1))))
@@ -219,7 +219,7 @@ class EngineTest {
 
     @Test
     fun `with the smart timer, a plain message waits for your usual visit to that feed`() =
-        with(Script(Fixtures.settings.copy(smartDrift = true), Stats(apps = mapOf(Fixtures.FEED to AppStat(visits = 6, medianVisitSeconds = 60.0))))) {
+        with(Script(Fixtures.settings.copy(driftTimer = DriftTimer.Smart), Stats(apps = mapOf(Fixtures.FEED to AppStat(visits = 6, medianVisitSeconds = 60.0))))) {
             at(at(16, 0), Event.Unlocked)
             at(at(16, 0, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
             at(at(16, 1), Event.NotificationPosted(Fixtures.priya(at(16, 1))))
@@ -229,7 +229,7 @@ class EngineTest {
         }
 
     @Test
-    fun `holding the chip makes the smart timer a quarter shorter`() = with(Script(Fixtures.settings.copy(smartDrift = true))) {
+    fun `holding the chip makes the smart timer a quarter shorter`() = with(Script(Fixtures.settings.copy(driftTimer = DriftTimer.Smart))) {
         at(at(16, 0), Event.NotificationPosted(Fixtures.priya(at(16, 0))))
         val chip = at(at(16, 2), Event.Unlocked).one<Effect.ShowChip>().chip
         at(at(16, 2, 3), Event.ChipHeld(chip.loopId))
@@ -240,7 +240,7 @@ class EngineTest {
     }
 
     @Test
-    fun `time in a feed app is learned, but not a visit a pill cut short`() = with(Script(Fixtures.settings.copy(smartDrift = true))) {
+    fun `time in a feed app is learned, but not a visit a pill cut short`() = with(Script(Fixtures.settings.copy(driftTimer = DriftTimer.Smart))) {
         at(at(16, 0), Event.Unlocked)
         at(at(16, 0, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
         val learned = at(at(16, 0, 45), Event.ForegroundChanged(Fixtures.CHATS, "Chats")).one<Effect.RecordApp>()
@@ -258,6 +258,31 @@ class EngineTest {
         // Putting the phone down ends a visit too.
         at(at(16, 3), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
         assertEquals(AppStat(visits = 2, medianVisitSeconds = 50.0), at(at(16, 4), Event.ScreenOff).one<Effect.RecordApp>().stat)
+    }
+
+    // Right away (ADR 0030).
+
+    private val rightAway = Fixtures.settings.copy(driftTimer = DriftTimer.RightAway)
+
+    @Test
+    fun `right away, the pill shows once a feed app has been in front longer than passing through`() = with(Script(rightAway)) {
+        at(at(16, 0), Event.NotificationPosted(Fixtures.priya(at(16, 0))))
+        at(at(16, 2), Event.Unlocked).one<Effect.ShowChip>()
+        at(at(16, 2, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        assertTrue(log.last(), "pill after 3 s (right away)" in log.last())
+
+        assertTrue(at(at(16, 2, 7), Event.Tick).none { it is Effect.ShowPill })
+        assertEquals("Reply to Priya", at(at(16, 2, 8), Event.Tick).one<Effect.ShowPill>().pill.task)
+    }
+
+    @Test
+    fun `right away, scrolling to the next reel is the pause`() = with(Script(rightAway)) {
+        at(at(16, 0), Event.NotificationPosted(Fixtures.priya(at(16, 0))))
+        at(at(16, 2), Event.Unlocked)
+        at(at(16, 2, 5), Event.PlaybackChanged(Playback.Playing))
+        at(at(16, 2, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        assertTrue(at(at(16, 2, 8), Event.Tick).none { it is Effect.ShowPill })
+        assertEquals("Reply to Priya", at(at(16, 2, 11), Event.PlaybackChanged(Playback.TrackChanged)).one<Effect.ShowPill>().pill.task)
     }
 
     @Test
@@ -654,7 +679,7 @@ class EngineTest {
 
     @Test
     fun `an urgent message takes over a guess you came for, which comes back after it`() =
-        with(Script(tenSeconds.copy(pillCooldown = java.time.Duration.ZERO))) {
+        with(Script(tenSeconds)) {
             at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
             val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
             at(at(16, 12, 3), Event.ChipHeld(chip.loopId))
@@ -669,6 +694,7 @@ class EngineTest {
             at(at(16, 12, 31), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))
             at(at(16, 13), Event.ReplySent(urgent.loopId))
             at(at(16, 13, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+            // 50 seconds after Priya's pill: there is no gap between pills (ADR 0030).
             val back = at(at(16, 13, 16), Event.Tick).one<Effect.ShowPill>().pill
             assertEquals("You came here to", back.label)
             assertEquals("Reply to Rahul", back.task)

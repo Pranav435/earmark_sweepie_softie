@@ -60,7 +60,7 @@
 
     <!-- Demo -->
     <string name="demo_title">Demo mode</string>
-    <string name="demo_body">These post real notifications that Earmark reads like any other app\'s. After sending one, lock the phone, unlock it, then open a feed app such as YouTube. The drift timer is 10 seconds.</string>
+    <string name="demo_body">These post real notifications that Earmark reads like any other app\'s. After sending one, lock the phone, unlock it, then open a feed app such as YouTube. The pill comes right away.</string>
     <string name="demo_rahul">Send Rahul\'s message</string>
     <string name="demo_aisha">Send Aisha\'s request</string>
     <string name="demo_bedtime">Bedtime: demo mode gives you a habit of a 6:30 alarm on weeknights. While no alarm is set for tomorrow, the next unlock offers to set one.</string>
@@ -86,11 +86,12 @@
     <string name="settings_pause">Pause Earmark</string>
     <string name="settings_pause_body">No chips and no pills until you turn this off.</string>
     <string name="settings_demo">Demo mode</string>
-    <string name="settings_demo_body">Sample notifications and a 10-second drift timer, so every story runs on any phone.</string>
+    <string name="settings_demo_body">Sample notifications, and the pill comes right away, so every story runs on any phone.</string>
     <string name="settings_drift">Drift timer</string>
-    <string name="settings_drift_body">How long a feed app can be in front before Earmark offers to hand the loop back. Smart goes by how long you usually stay in each feed app, and comes back sooner for something urgent or a chip you said yes to.</string>
+    <string name="settings_drift_body">How long a feed app can be in front before Earmark offers to hand the loop back. Right away offers it a few seconds after you open the feed. Smart goes by how long you usually stay in each feed app, and comes back sooner for something urgent or a chip you said yes to.</string>
+    <string name="settings_drift_right_away">Right away</string>
     <string name="settings_drift_smart">Smart</string>
-    <string name="settings_drift_demo">Demo mode uses 10 seconds.</string>
+    <string name="settings_drift_demo">Demo mode uses Right away.</string>
     <string name="settings_seconds">%1$d s</string>
     <string name="settings_minutes">%1$d min</string>
     <string name="settings_feeds">Feed apps</string>

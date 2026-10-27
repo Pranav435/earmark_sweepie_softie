@@ -123,14 +123,23 @@ public enum class Overlay { Chip, Dot, Pill, ReplyStrip }
 
 public enum class Outcome { Done, Dismissed, Expired }
 
+/** How long a feed app can be in front before it is drift. */
+public enum class DriftTimer {
+    /** As soon as you're in the feed, not just passing through it (ADR 0030). */
+    RightAway,
+
+    /** Your usual visit to the feed app, sooner when the loop is urgent or held (ADR 0023). */
+    Smart,
+
+    /** [Settings.driftAfter]. */
+    Fixed,
+}
+
 public data class Settings(
     val ownPackage: String,
     val feedApps: Set<String> = CuratedApps.feeds,
+    val driftTimer: DriftTimer = DriftTimer.Fixed,
     val driftAfter: Duration = Duration.ofSeconds(90),
-    /** Work the timer out for each guess from your usual visit to the feed and how urgent the loop is (ADR 0023), instead of [driftAfter]. */
-    val smartDrift: Boolean = false,
-    /** Minimum time between any two pills. Demo mode sets it to zero so stories can run back to back. */
-    val pillCooldown: Duration = Duration.ofMinutes(10),
     val demoMode: Boolean = false,
     val paused: Boolean = false,
     val use24Hour: Boolean = false,

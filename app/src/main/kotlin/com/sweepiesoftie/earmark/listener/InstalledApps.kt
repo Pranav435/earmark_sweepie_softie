@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.provider.AlarmClock
 import android.text.format.DateFormat
 import com.sweepiesoftie.earmark.core.CuratedApps
+import com.sweepiesoftie.earmark.core.DriftTimer
 import com.sweepiesoftie.earmark.core.Settings
 import com.sweepiesoftie.earmark.store.UserSettings
 import java.time.Duration
@@ -62,10 +63,9 @@ class InstalledApps(private val context: Context) {
         return Settings(
             ownPackage = context.packageName,
             feedApps = (defaults + user.feedsOn) - user.feedsOff,
-            driftAfter = Duration.ofSeconds(user.effectiveDriftSeconds.toLong()),
-            // Demo mode keeps its 10 seconds, so every story runs the same on any phone.
-            smartDrift = user.driftSmart && !user.demoMode,
-            pillCooldown = if (user.demoMode) Duration.ZERO else Duration.ofMinutes(10),
+            // Demo mode is always right away, so every story runs the same on any phone.
+            driftTimer = if (user.demoMode) DriftTimer.RightAway else user.driftTimer,
+            driftAfter = Duration.ofSeconds(user.driftSeconds.toLong()),
             demoMode = user.demoMode,
             paused = user.paused,
             use24Hour = DateFormat.is24HourFormat(context),

@@ -20,8 +20,6 @@ internal data class Drift(
     val feedSince: Instant? = null,
     val playback: Playback = Playback.None,
     val blockers: Set<Blocker> = emptySet(),
-    /** Survives sessions: the 10-minute cooldown is between any two pills. */
-    val lastPillAt: Instant? = null,
     /** The guess this one took over for a detour, such as a chat opened from its own notification. It comes back after. */
     val resume: Drift? = null,
 )
@@ -39,7 +37,6 @@ internal data class DriftRules(
     val driftAfter: Duration,
     /** Why the guess can't have a pill now, for DebugLog, or null when it can. */
     val pillHeld: String? = null,
-    val cooldown: Duration = Duration.ofMinutes(10),
 )
 
 internal data class DriftStep(val drift: Drift, val showPill: Boolean = false, val reason: String? = null)
@@ -53,7 +50,7 @@ internal object DriftMachine {
     fun guess(drift: Drift, loopId: LoopId, loopPackage: String?, origin: Origin = Origin.Unlock): Drift =
         drift.copy(phase = Phase.Guessed, loopId = loopId, loopPackage = loopPackage, origin = origin, feedSince = null, resume = null)
 
-    fun end(drift: Drift): Drift = Drift(playback = drift.playback, blockers = drift.blockers, lastPillAt = drift.lastPillAt)
+    fun end(drift: Drift): Drift = Drift(playback = drift.playback, blockers = drift.blockers)
 
     /** Back to [previous] after a detour. Drift starts over, but a pill already shown or swiped away stays that way. */
     fun resume(drift: Drift, previous: Drift): Drift = previous.copy(
@@ -61,7 +58,6 @@ internal object DriftMachine {
         feedSince = null,
         playback = drift.playback,
         blockers = drift.blockers,
-        lastPillAt = drift.lastPillAt,
         resume = null,
     )
 
@@ -89,7 +85,7 @@ internal object DriftMachine {
                         DriftStep(d.copy(phase = Phase.Drifting), reason = "drifting; waiting for a pause")
                     } else {
                         // Nothing is playing, so there is no pause to wait for (ADR 0005).
-                        tryPill(d.copy(phase = Phase.Drifting), now, rules, "drift with nothing playing")
+                        tryPill(d.copy(phase = Phase.Drifting), rules, "drift with nothing playing")
                     }
                 }
                 else -> DriftStep(d)
@@ -97,29 +93,27 @@ internal object DriftMachine {
             Phase.Drifting -> when (input) {
                 is DriftInput.Foreground -> when {
                     input.packageName == d.loopPackage -> DriftStep(d.copy(phase = Phase.Guessed, feedSince = null), reason = "came back on their own")
-                    else -> tryPill(d, now, rules, "app switch", pause = true)
+                    else -> tryPill(d, rules, "app switch", pause = true)
                 }
                 is DriftInput.Media ->
-                    if (input.playback == Playback.Playing) DriftStep(d) else tryPill(d, now, rules, "media ${input.playback}", pause = true)
+                    if (input.playback == Playback.Playing) DriftStep(d) else tryPill(d, rules, "media ${input.playback}", pause = true)
                 is DriftInput.Block ->
-                    if (!input.active && d.playback != Playback.Playing) tryPill(d, now, rules, "blocker cleared") else DriftStep(d)
+                    if (!input.active && d.playback != Playback.Playing) tryPill(d, rules, "blocker cleared") else DriftStep(d)
                 is DriftInput.Tick ->
-                    if (d.playback != Playback.Playing) tryPill(d, now, rules, "still drifting", quiet = true) else DriftStep(d)
+                    if (d.playback != Playback.Playing) tryPill(d, rules, "still drifting", quiet = true) else DriftStep(d)
             }
             else -> DriftStep(d)
         }
     }
 
-    private fun tryPill(d: Drift, now: Instant, rules: DriftRules, why: String, pause: Boolean = false, quiet: Boolean = false): DriftStep {
+    private fun tryPill(d: Drift, rules: DriftRules, why: String, pause: Boolean = false, quiet: Boolean = false): DriftStep {
         val held = when {
             d.blockers.isNotEmpty() -> "held: ${d.blockers.joinToString()}"
             !pause && d.playback == Playback.Playing -> "held: media playing"
             rules.pillHeld != null -> "held: ${rules.pillHeld}"
-            d.lastPillAt != null && Duration.between(d.lastPillAt, now) < rules.cooldown ->
-                "held: ${rules.cooldown.toMinutes()} min between pills, ${rules.cooldown.minus(Duration.between(d.lastPillAt, now)).seconds} s left"
             else -> null
         }
         if (held != null) return DriftStep(d, reason = if (quiet) null else "$why, $held")
-        return DriftStep(d.copy(phase = Phase.PillShown, lastPillAt = now), showPill = true, reason = "pill at $why")
+        return DriftStep(d.copy(phase = Phase.PillShown), showPill = true, reason = "pill at $why")
     }
 }
