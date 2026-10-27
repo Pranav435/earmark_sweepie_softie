@@ -5,3 +5,5 @@ Demo mode does not inject fake events into the engine. Earmark posts real `Messa
 **Why:** the demo exercises the listener, the classifier, `RemoteInput` and loop closing exactly as real use does, so a working demo is evidence that the product works.
 
 **Addendum (Phase 2):** demo mode also drops the 22:30 bedtime window for the alarm routine, so the Bedtime story can run at any hour. The weeknight check and the "no alarm set for tomorrow" check still apply.
+
+**Addendum (Phase 3):** demo mode also drops the 10-minute cooldown between pills, so a tester can run the stories one after another. The one-pill-per-loop limit still applies.

@@ -71,4 +71,13 @@ class EngineTest {
         assertEquals("Finish in Uber", pill.task)
         assertEquals("Finish", pill.verb)
     }
+
+    @Test
+    fun `unlocking straight into a feed that was already open still counts as drift`() = with(Script(Fixtures.settings.copy(driftAfter = java.time.Duration.ofSeconds(10)))) {
+        at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+        // The watcher reports the app in front a moment before the engine sees the unlock.
+        at(at(16, 12), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        at(at(16, 12), Event.Unlocked)
+        assertEquals("Reply to Rahul", at(at(16, 12, 11), Event.Tick).one<Effect.ShowPill>().pill.task)
+    }
 }

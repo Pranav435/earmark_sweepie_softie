@@ -92,7 +92,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
             drift = DriftMachine.guess(drift, carry.loop.id, carry.loop.packageName)
             effects += Effect.Log("unlock: carry-over chip for ${carry.loop.id.value}, score $score")
             effects += Effect.ShowChip(copy.carryOverChip(carry.loop, score.total))
-            return effects
+            return effects + resumeForeground(now)
         }
 
         val candidates = book.all.filter { !kindStat(it.loop.kind).muted }
@@ -110,8 +110,12 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         effects += Effect.Log("unlock: chip for ${tracked.loop.id.value}, score $score of ${candidates.size} open")
         effects += Effect.ShowChip(copy.chip(tracked.loop, score.total, now))
         effects += Effect.RecordLoop(entry(guessed, outcome = null, closedAt = null))
-        return effects
+        return effects + resumeForeground(now)
     }
+
+    /** The app in front may have been reported before the unlock: replay it so a feed left open still counts. */
+    private fun resumeForeground(now: Instant): List<Effect> =
+        foreground?.let { stepDrift(DriftInput.Foreground(it.packageName), now) }.orEmpty()
 
     private fun onScreenOff(): List<Effect> {
         drift = DriftMachine.end(drift)
@@ -170,6 +174,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
             feedApps = settings.feedApps,
             driftAfter = settings.driftAfter,
             pillAllowed = guess != null && !guess.pillShown && !guess.ignored && !settings.paused,
+            cooldown = settings.pillCooldown,
         )
         val step = DriftMachine.step(drift, input, now, rules)
         drift = step.drift

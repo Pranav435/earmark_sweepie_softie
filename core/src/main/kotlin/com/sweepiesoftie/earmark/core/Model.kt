@@ -97,6 +97,8 @@ public data class Settings(
     val ownPackage: String,
     val feedApps: Set<String> = CuratedApps.feeds,
     val driftAfter: Duration = Duration.ofSeconds(90),
+    /** Minimum time between any two pills. Demo mode sets it to zero so stories can run back to back. */
+    val pillCooldown: Duration = Duration.ofMinutes(10),
     val demoMode: Boolean = false,
     val paused: Boolean = false,
     val use24Hour: Boolean = false,
