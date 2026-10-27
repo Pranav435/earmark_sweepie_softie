@@ -49,6 +49,36 @@ object Fixtures {
         category = "msg",
     )
 
+    /** A WhatsApp group: each pair is a sender and their message, a minute apart, ending at [at]. */
+    fun family(at: Instant, vararg messages: Pair<String, String>, key: String = "0|com.whatsapp|9|family|10123"): Signal = Signal(
+        key = key,
+        packageName = CHATS,
+        appLabel = "Chats",
+        postedAt = at,
+        title = "Family",
+        text = messages.last().second,
+        messages = messages.mapIndexed { i, (sender, text) -> Message(sender, text, at.minusSeconds(60L * (messages.size - 1 - i))) },
+        conversationKey = "hash-family",
+        isGroupConversation = true,
+        conversationTitle = "Family",
+        hasReplyAction = true,
+        category = "msg",
+    )
+
+    /** An Instagram DM: Instagram is a feed app as well as where the chat lives. */
+    fun zoya(at: Instant, text: String = "hey", key: String = "0|com.instagram.android|5|zoya|10123"): Signal = Signal(
+        key = key,
+        packageName = FEED,
+        appLabel = "Instagram",
+        postedAt = at,
+        title = "Zoya",
+        text = text,
+        messages = listOf(Message("Zoya", text, at)),
+        conversationKey = "hash-zoya",
+        hasReplyAction = true,
+        category = "msg",
+    )
+
     fun aisha(at: Instant, key: String = "0|com.google.android.apps.nbu.paisa.user|7|null|10200"): Signal = Signal(
         key = key,
         packageName = PAY,

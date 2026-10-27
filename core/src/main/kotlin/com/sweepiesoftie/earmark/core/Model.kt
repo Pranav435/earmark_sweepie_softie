@@ -45,6 +45,13 @@ public data class Loop(
     /** How soon this is due, 0..1, worked out when the loop opens. */
     val due: Double,
     val canReply: Boolean = false,
+    /** What the message asks for is urgent ("call me asap"): it can take over a guess you came for (ADR 0027). */
+    val urgent: Boolean = false,
+    /** Why it's due, for DebugLog: "urgent", "asks", "mentions you". Never message text. */
+    val why: List<String> = emptyList(),
+    /** A group conversation, and the group's name when the app gives one (ADR 0028). */
+    val inGroup: Boolean = false,
+    val groupName: String? = null,
     /** Set when the user went to the loop's app and left without finishing; the verb becomes "Finish". */
     val started: Boolean = false,
     /** Ride ("Book") or meeting ("Join") for Leave-by loops. */
@@ -65,7 +72,10 @@ public data class Signal(
     /** Hashed by the adapter before it reaches the core (ADR 0004). */
     val conversationKey: String? = null,
     val isGroupConversation: Boolean = false,
-    val mentionsUser: Boolean = false,
+    /** The group's name, for a group conversation. */
+    val conversationTitle: String? = null,
+    /** How the app names you in its own conversation (WhatsApp says "You"), for an @mention of you. */
+    val selfName: String? = null,
     val hasReplyAction: Boolean = false,
     val isOngoing: Boolean = false,
     val isGroupSummary: Boolean = false,
@@ -73,7 +83,15 @@ public data class Signal(
     val category: String? = null,
 )
 
-public data class Message(val sender: String?, val text: String, val at: Instant, val fromUser: Boolean = false, val isBot: Boolean = false)
+/** [mentionsYou] is set when the app itself marked the message as mentioning you (ADR 0028). */
+public data class Message(
+    val sender: String?,
+    val text: String,
+    val at: Instant,
+    val fromUser: Boolean = false,
+    val isBot: Boolean = false,
+    val mentionsYou: Boolean = false,
+)
 
 public data class CalendarEvent(
     val id: Long,
@@ -109,6 +127,8 @@ public data class Settings(
     val clockPackage: String? = null,
     /** Installed ride app used as the way back for Leave-by loops with a place. */
     val rideApp: String? = null,
+    /** Your name and nicknames from your own contact card, so a group message that mentions you counts (ADR 0028). Never stored or logged. */
+    val myNames: List<String> = emptyList(),
 )
 
 public data class KindStat(val holds: Int = 0, val ignores: Int = 0, val ignoreStreak: Int = 0) {
@@ -119,10 +139,36 @@ public data class KindStat(val holds: Int = 0, val ignores: Int = 0, val ignoreS
     }
 }
 
-public data class ContactStat(val replies: Int = 0, val medianReplyMinutes: Double = 0.0)
+/**
+ * How you answer one conversation, keyed by its hashed key: replies and how fast, and how often you open its
+ * notifications rather than swipe them away (ADR 0028).
+ */
+public data class ContactStat(val replies: Int = 0, val medianReplyMinutes: Double = 0.0, val opened: Int = 0, val swiped: Int = 0) {
+    /** Opened rather than swiped away, smoothed so a conversation with no taps reads 0.5. */
+    val openRate: Double get() = (opened + 1.0) / (opened + swiped + 2.0)
 
-/** How long you usually stay in a feed app, for the smart drift timer. Keyed by package; nothing about what you did there. */
-public data class AppStat(val visits: Int = 0, val medianVisitSeconds: Double = 0.0)
+    /** You open this conversation's notifications more often than not, so a question in it is for you too. */
+    val opensOften: Boolean get() = opened >= OPENS_OFTEN && openRate >= OPEN_RATE
+
+    public companion object {
+        public const val OPENS_OFTEN: Int = 3
+        private const val OPEN_RATE = 0.6
+    }
+}
+
+/**
+ * Per app, keyed by package; nothing about what you did there. How long you usually stay in a feed app, for the
+ * smart drift timer, and how you deal with messages in a chat app, so a new person there starts from that (ADR 0027).
+ */
+public data class AppStat(
+    val visits: Int = 0,
+    val medianVisitSeconds: Double = 0.0,
+    /** Messages you dealt with, and ones you swiped away or left to expire. */
+    val done: Int = 0,
+    val left: Int = 0,
+    /** How long after a message you usually deal with it. */
+    val medianDoneMinutes: Double = 0.0,
+)
 
 /** What the store hands the engine at start-up. */
 public data class Stats(

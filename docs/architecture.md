@@ -38,19 +38,24 @@ Effects out  ShowChip(card) · ShowDot · ShowPill(card) · HideOverlay(which) �
 | Chip | Unlock-time guess ("Here to reply to Rahul?"). ✓ holds it; ignoring it lets it fade |
 | Drift | A feed app has been in front longer than the drift timer while the guessed loop is open and the loop's own app is not in front. Smart by default: your usual visit to that app, sooner for urgent loops or a held chip, 15 s to 2 min (ADR 0023); 10 s in demo mode |
 | Pause | Media paused or stopped, the audio player changing (a reel boundary), or an app switch |
-| Pill | The drift prompt: "You came here to · Reply to Rahul · **Do it now**", or "Before you forget · …" for a message that arrived while the phone was in use |
+| Pill | The drift prompt: "You came here to · Reply to Rahul · **Do it now**", "Before you forget · …" for a message that arrived while the phone was in use, or "Next up · …" for the loop waiting after one you dealt with |
 
 ## The guess (at every unlock)
 
 ```
 score = 0.35·recent + 0.25·who + 0.25·due + 0.15·history  (+0.15 for a message or request that came in while the phone was put down)
-recent = exp(-age / 30 min)   who = reply affinity for this contact (default 0.5)
-due = 0.5 for a message to you, +0.25 for "?", +0.25 for a time word; event start; request age
+recent = exp(-age / 30 min)
+who    = your replies to them; else how often you open their notifications; else how you deal with
+         messages in their app; else 0.5 (× 0.8 for a group with no history of its own)
+due    = 0.5 for a message to you, +0.25 if it asks (a "?" or a request), +0.25 for a time word,
+         +0.25 if they keep writing; 1.0 if urgent; no loop at all for only "ok" or 👍; event start; request age
 history = confirm rate for this kind (default 0.5)
 chip only if score > 0.70 · 3 ignores in a row mute that kind
 ```
 
-ADR 0017 changed `due` and the boost after the first real-phone test, where a plain "hey" could never clear the bar. ADR 0020 gives the boost only to messages that came in while the phone was put down. A message that arrives while the phone is in use gets no chip; it is scored the same way as it arrives and, above the bar, quietly becomes the guess.
+ADR 0017 changed `due` and the boost after the first real-phone test, where a plain "hey" could never clear the bar. ADR 0020 gives the boost only to messages that came in while the phone was put down. A message that arrives while the phone is in use gets no chip; it is scored the same way as it arrives and, above the bar, quietly becomes the guess if it scores higher than an earlier arrival. An urgent one takes over even a guess you came for, which comes back after it. When the guess is dealt with, the strongest loop left above the bar becomes **next up** (ADR 0027).
+
+`due` is read from every message since your last one, with English, Hinglish and Hindi word lists (`Urgency`). A group message is a loop only when it's for you: it mentions you, it's urgent, or it asks something in a group whose notifications you usually open (ADR 0028). The loop quotes that message and keeps its age, so the chatter after it doesn't count as a new message.
 
 ## Drift state machine
 
@@ -64,7 +69,7 @@ ADR 0017 changed `due` and the boost after the first real-phone test, where a pl
 
 ## Persistence and privacy
 
-Message text, `PendingIntent`s and Smart Reply input stay in memory until the loop closes. Room stores `loop_log` (kind, times, outcome, brought-back flag, and a label kept for 24 h for the recap), `contact_stats` (a hashed conversation key, reply count and median reply latency) and `kind_stats` (confirms, ignores, muted). After a process restart, `onListenerConnected` rebuilds loops from `getActiveNotifications()` with fresh intents. Permissions: the notification listener binding, `PACKAGE_USAGE_STATS`, `SYSTEM_ALERT_WINDOW`, `READ_CALENDAR` (optional), `POST_NOTIFICATIONS` (the "Earmark is on" notification and demo mode), `FOREGROUND_SERVICE` and `FOREGROUND_SERVICE_SPECIAL_USE`, `RECEIVE_BOOT_COMPLETED`, `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` and `SET_ALARM` (a normal permission that `ACTION_SET_ALARM` requires for the alarm routine's way back).
+Message text, `PendingIntent`s and Smart Reply input stay in memory until the loop closes. Room stores `loop_log` (kind, times, outcome, brought-back flag, and a label kept for 24 h for the recap), `contact_stats` (a hashed conversation key, reply count, median reply latency, and how often its notifications were opened or swiped away), `app_stats` (per package: your usual visit to a feed app, and how many of a chat app's messages you dealt with or left and how soon) and `kind_stats` (confirms, ignores, muted). Your name from your own contact card stays in memory; names typed in Settings are kept in Earmark's private preferences. After a process restart, `onListenerConnected` rebuilds loops from `getActiveNotifications()` with fresh intents. Permissions: the notification listener binding, `PACKAGE_USAGE_STATS`, `SYSTEM_ALERT_WINDOW`, `READ_CALENDAR` (optional), `READ_CONTACTS` (optional, only your own contact card is read), `POST_NOTIFICATIONS` (the "Earmark is on" notification and demo mode), `FOREGROUND_SERVICE` and `FOREGROUND_SERVICE_SPECIAL_USE`, `RECEIVE_BOOT_COMPLETED`, `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` and `SET_ALARM` (a normal permission that `ACTION_SET_ALARM` requires for the alarm routine's way back).
 
 ## Android constraints designed for
 

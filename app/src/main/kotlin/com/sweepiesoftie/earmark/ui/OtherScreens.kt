@@ -24,9 +24,16 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,6 +44,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sweepiesoftie.earmark.DebugLog
@@ -62,6 +70,7 @@ class SettingsActions(
     val onDrift: (Int) -> Unit,
     val onDriftSmart: () -> Unit,
     val onFeed: (String, Boolean) -> Unit,
+    val onNames: (String) -> Unit,
     val onShowAllApps: () -> Unit,
     val onUnmute: (LoopKind) -> Unit,
     val onPermissions: () -> Unit,
@@ -89,6 +98,29 @@ fun SettingsScreen(state: SettingsState, actions: SettingsActions) {
                 }
             }
             if (user.demoMode) Text(stringResource(R.string.settings_drift_demo), style = MaterialTheme.typography.bodyMedium, color = Tone.Muted, modifier = Modifier.padding(top = 8.dp))
+        }
+        item {
+            SectionTitle(stringResource(R.string.settings_names))
+            Text(stringResource(R.string.settings_names_body), style = MaterialTheme.typography.bodyMedium, color = Tone.Muted)
+            Spacer(Modifier.heightIn(min = 12.dp))
+            // Local text, so typing isn't slowed by the round trip through the settings store.
+            var names by rememberSaveable { mutableStateOf(user.names) }
+            OutlinedTextField(
+                value = names,
+                onValueChange = { names = it; actions.onNames(it) },
+                label = { Text(stringResource(R.string.settings_names_label)) },
+                placeholder = { Text(stringResource(R.string.settings_names_hint)) },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words, autoCorrectEnabled = false),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Tone.Ink,
+                    unfocusedBorderColor = Tone.Line,
+                    focusedLabelColor = Tone.Ink,
+                    unfocusedLabelColor = Tone.Muted,
+                    cursorColor = Tone.Ink,
+                ),
+                modifier = Modifier.fillMaxWidth(),
+            )
         }
         if (state.muted.isNotEmpty()) {
             item {
@@ -167,6 +199,7 @@ data class PermissionState(
     val usage: Boolean = false,
     val overlay: Boolean = false,
     val calendar: Boolean = false,
+    val contacts: Boolean = false,
     val postNotifications: Boolean = false,
     val battery: Boolean = false,
 ) {
@@ -179,6 +212,7 @@ class OnboardingActions(
     val onOverlay: () -> Unit,
     val onBattery: () -> Unit,
     val onCalendar: () -> Unit,
+    val onContacts: () -> Unit,
     val onPostNotifications: () -> Unit,
     val onAppInfo: () -> Unit,
     val onDone: () -> Unit,
@@ -203,7 +237,8 @@ fun OnboardingScreen(state: PermissionState, actions: OnboardingActions) {
         item { PermissionRow(3, stringResource(R.string.onboarding_overlay), stringResource(R.string.onboarding_overlay_body), state.overlay, stringResource(R.string.onboarding_open_settings), actions.onOverlay) }
         item { PermissionRow(4, stringResource(R.string.onboarding_battery), stringResource(R.string.onboarding_battery_body), state.battery, stringResource(R.string.onboarding_allow), actions.onBattery) }
         item { PermissionRow(5, stringResource(R.string.onboarding_calendar), stringResource(R.string.onboarding_calendar_body), state.calendar, stringResource(R.string.onboarding_allow), actions.onCalendar) }
-        item { PermissionRow(6, stringResource(R.string.onboarding_post), stringResource(R.string.onboarding_post_body), state.postNotifications, stringResource(R.string.onboarding_allow), actions.onPostNotifications) }
+        item { PermissionRow(6, stringResource(R.string.onboarding_contacts), stringResource(R.string.onboarding_contacts_body), state.contacts, stringResource(R.string.onboarding_allow), actions.onContacts) }
+        item { PermissionRow(7, stringResource(R.string.onboarding_post), stringResource(R.string.onboarding_post_body), state.postNotifications, stringResource(R.string.onboarding_allow), actions.onPostNotifications) }
         if (!state.notifications && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             item {
                 Column(

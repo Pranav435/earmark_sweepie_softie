@@ -52,11 +52,31 @@ Earmark's pick, at unlock, of the one loop you most likely came for.
 _Avoid_: prediction, suggestion
 
 **Score**:
-How strongly a loop is guessed, from 0 to about 1.15; a chip appears only above 0.70.
+How strongly a loop is guessed, from 0 to about 1.15; a chip appears only above 0.70. It weighs how recent the loop is, who it's with, how due it is and how often you said yes to its kind.
 
 **Arrival**:
 A message or request that comes in while you are using the phone. Its heads-up already showed, so it gets no chip, but it can quietly become the guess.
 _Avoid_: mid-session message
+
+**Urgent**:
+A message that says it can't wait, such as "call me asap", "hospital" or "jaldi". It is fully due, and as an arrival it can take over a guess you came for, which comes back after.
+_Avoid_: important, priority
+
+**Acknowledgement**:
+A message that only answers or reacts, such as "ok", "thanks", 👍 or a reaction. It owes nothing, so it opens no loop.
+
+**Next up**:
+The loop that quietly becomes the guess once you've dealt with the one before it, while you're still using the phone. It gets no chip.
+
+**For you**:
+A group message that mentions you, is urgent, or asks something in a group whose notifications you usually open. Only these open loops.
+_Avoid_: relevant
+
+**Chatter**:
+Group messages that aren't for you. They open no loop; only a tap or swipe on their notification is learned.
+
+**Mention**:
+Your name, first name or a nickname from your own contact card in a group message, or the app's @name for you.
 
 **Chip**:
 The small card that shows the guess right after unlock.
@@ -100,7 +120,7 @@ A natural break in the feed: media paused or stopped, the next reel starting, or
 Something that holds the pill back: a call, active navigation, Do Not Disturb or media still playing.
 
 **Pill**:
-The prompt shown at a pause during drift: "You came here to · Reply to Rahul · Do it now". For an arrival it reads "Before you forget · Reply to Priya · Do it now".
+The prompt shown at a pause during drift: "You came here to · Reply to Rahul · Do it now". For an arrival it reads "Before you forget · Reply to Priya · Do it now", and for a next up "Next up · Reply to Zoya · Do it now".
 _Avoid_: nudge, interruption, alert
 
 **Hand-back**:

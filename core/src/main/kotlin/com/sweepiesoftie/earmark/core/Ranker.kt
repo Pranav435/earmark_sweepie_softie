@@ -4,12 +4,12 @@ import java.time.Duration
 import java.time.Instant
 import kotlin.math.exp
 
-internal data class Score(val recent: Double, val who: Double, val due: Double, val history: Double, val boost: Double) {
+internal data class Score(val recent: Double, val who: Double, val due: Double, val history: Double, val boost: Double, val whoFrom: String = "new") {
     val total: Double get() = 0.35 * recent + 0.25 * who + 0.25 * due + 0.15 * history + boost
 
     /** For DebugLog: the breakdown, never the loop's text. */
     override fun toString(): String =
-        "%.2f (recent %.2f · who %.2f · due %.2f · history %.2f · boost %.2f)".format(total, recent, who, due, history, boost)
+        "%.2f (recent %.2f · who %.2f from %s · due %.2f · history %.2f · boost %.2f)".format(total, recent, who, whoFrom, due, history, boost)
 }
 
 /** Scores open loops at unlock, and messages as they come in during use, with the starting weights from architecture.md. */
@@ -31,21 +31,15 @@ internal object Ranker {
         }
         // Your first chance to act on a message or request is the one most likely to be for it.
         val boosted = unseen && loop.kind in setOf(LoopKind.Reply, LoopKind.Payment)
+        val who = Affinity.who(loop, stats)
         return Score(
             recent = recent,
-            who = who(loop, stats),
+            who = who.value,
             due = loop.due,
             history = history(stats.kinds[loop.kind]),
             boost = if (boosted) UNLOCK_BOOST else 0.0,
+            whoFrom = who.from,
         )
-    }
-
-    /** Reply affinity: more replies raise it, slow replies (median over 30 min) take a quarter off. */
-    private fun who(loop: Loop, stats: Stats): Double {
-        val stat = loop.conversation?.let { stats.contacts[it] } ?: return 0.5
-        if (stat.replies == 0) return 0.5
-        val often = (0.4 + 0.06 * stat.replies).coerceAtMost(1.0)
-        return if (stat.medianReplyMinutes <= 30.0) often else often * 0.75
     }
 
     /** Confirm rate with one smoothing hold and ignore, so a kind with no history scores 0.5. */

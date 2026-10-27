@@ -5,13 +5,18 @@ import java.time.Instant
 
 internal enum class Phase { Idle, Guessed, InFeed, Drifting, PillShown, HandedBack, Left, Dismissed }
 
+/**
+ * Why the guess is the guess, which the pill says: you came for it ("You came here to"), it came in while you
+ * were using the phone ("Before you forget", ADR 0020), or it was waiting after one you dealt with ("Next up", ADR 0027).
+ */
+internal enum class Origin { Unlock, Arrival, NextUp }
+
 /** The drift state for one unlock session. */
 internal data class Drift(
     val phase: Phase = Phase.Idle,
     val loopId: LoopId? = null,
     val loopPackage: String? = null,
-    /** The guess came in while the phone was in use, rather than being what you unlocked it for. */
-    val arrived: Boolean = false,
+    val origin: Origin = Origin.Unlock,
     val feedSince: Instant? = null,
     val playback: Playback = Playback.None,
     val blockers: Set<Blocker> = emptySet(),
@@ -45,8 +50,8 @@ internal data class DriftStep(val drift: Drift, val showPill: Boolean = false, v
  * The engine moves HandedBack to Left when you leave the loop's app with its chat not open.
  */
 internal object DriftMachine {
-    fun guess(drift: Drift, loopId: LoopId, loopPackage: String?, arrived: Boolean = false): Drift =
-        drift.copy(phase = Phase.Guessed, loopId = loopId, loopPackage = loopPackage, arrived = arrived, feedSince = null, resume = null)
+    fun guess(drift: Drift, loopId: LoopId, loopPackage: String?, origin: Origin = Origin.Unlock): Drift =
+        drift.copy(phase = Phase.Guessed, loopId = loopId, loopPackage = loopPackage, origin = origin, feedSince = null, resume = null)
 
     fun end(drift: Drift): Drift = Drift(playback = drift.playback, blockers = drift.blockers, lastPillAt = drift.lastPillAt)
 

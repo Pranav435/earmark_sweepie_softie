@@ -110,6 +110,7 @@ private fun Root() {
         bindWaitOver = true
     }
     val requestCalendar = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { permissions = readPermissions(activity) }
+    val requestContacts = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { permissions = readPermissions(activity) }
     val requestPost = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { permissions = readPermissions(activity) }
 
     val pane = activity.getString(
@@ -130,6 +131,7 @@ private fun Root() {
                     onOverlay = { activity.openSettings(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, withPackage = true) },
                     onBattery = activity::askBatteryUnrestricted,
                     onCalendar = { requestCalendar.launch(Manifest.permission.READ_CALENDAR) },
+                    onContacts = { requestContacts.launch(Manifest.permission.READ_CONTACTS) },
                     onPostNotifications = { requestPostNotifications(requestPost::launch) },
                     onAppInfo = { activity.openSettings(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, withPackage = true) },
                     onDone = { screen = Screen.Recap },
@@ -182,6 +184,7 @@ private fun Root() {
                         onDrift = graph.settings::setDriftSeconds,
                         onDriftSmart = graph.settings::setDriftSmart,
                         onFeed = graph.settings::setFeed,
+                        onNames = graph.settings::setNames,
                         onShowAllApps = { showAll = true },
                         onUnmute = { kind -> graph.uiEvents.tryEmit(Event.KindUnmuted(kind)) },
                         onPermissions = { screen = Screen.Onboarding },
@@ -260,6 +263,7 @@ private fun readPermissions(activity: MainActivity) = PermissionState(
     usage = Permissions.usageAccess(activity),
     overlay = Permissions.overlay(activity),
     calendar = Permissions.calendar(activity),
+    contacts = Permissions.contacts(activity),
     postNotifications = Permissions.postNotifications(activity),
     battery = Permissions.batteryUnrestricted(activity),
 )

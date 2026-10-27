@@ -93,6 +93,10 @@
     <string name="settings_feeds">Feed apps</string>
     <string name="settings_feeds_body">Time in these apps counts toward drift. Nothing is ever blocked.</string>
     <string name="settings_feeds_more">Show all apps</string>
+    <string name="settings_names">Your name</string>
+    <string name="settings_names_body">A group message that says one of these names counts as for you, like an @mention. Earmark also reads your own contact card if you allow Contacts. Kept on this phone and never logged.</string>
+    <string name="settings_names_label">Names you go by</string>
+    <string name="settings_names_hint">Priya, Pri</string>
     <string name="settings_muted">Muted guesses</string>
     <string name="settings_muted_body">You ignored these three times in a row, so Earmark stopped guessing them.</string>
     <string name="settings_unmute">Unmute</string>
@@ -118,6 +122,8 @@
     <string name="onboarding_overlay_body">To show the chip and the pill on top of any app.</string>
     <string name="onboarding_calendar">Calendar (optional)</string>
     <string name="onboarding_calendar_body">For Leave-by loops: when to set off for an event or join a call.</string>
+    <string name="onboarding_contacts">Your name (optional)</string>
+    <string name="onboarding_contacts_body">Reads only your own contact card, so Earmark can tell when a group message says your name. Your other contacts are never read. You can also type your names in Settings.</string>
     <string name="onboarding_battery">Battery: unrestricted</string>
     <string name="onboarding_battery_body">So the phone doesn\'t pause Earmark while you\'re in other apps. Samsung phones need this.</string>
     <string name="onboarding_post">Notifications (optional)</string>

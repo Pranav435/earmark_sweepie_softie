@@ -14,7 +14,11 @@ data class UserSettings(
     val driftSeconds: Int = 90,
     val feedsOn: Set<String> = emptySet(),
     val feedsOff: Set<String> = emptySet(),
+    /** Names you go by, as typed in Settings, for mentions in groups; your contact card adds its own (ADR 0028). */
+    val names: String = "",
 ) {
+    val typedNames: List<String> get() = names.split(',', '\n').map { it.trim() }.filter { it.isNotEmpty() }
+
     /** Demo mode uses a 10-second drift timer so a story fits in a minute (ADR 0006). */
     val effectiveDriftSeconds: Int get() = if (demoMode) DEMO_DRIFT_SECONDS else driftSeconds
 
@@ -37,6 +41,8 @@ class SettingsStore(context: Context) {
 
     fun setDriftSmart(): Unit = edit { it.copy(driftSmart = true) }
 
+    fun setNames(names: String): Unit = edit { it.copy(names = names) }
+
     fun setFeed(packageName: String, on: Boolean): Unit = edit {
         if (on) it.copy(feedsOn = it.feedsOn + packageName, feedsOff = it.feedsOff - packageName)
         else it.copy(feedsOn = it.feedsOn - packageName, feedsOff = it.feedsOff + packageName)
@@ -52,6 +58,7 @@ class SettingsStore(context: Context) {
             .putInt(DRIFT, s.driftSeconds)
             .putStringSet(FEEDS_ON, s.feedsOn)
             .putStringSet(FEEDS_OFF, s.feedsOff)
+            .putString(NAMES, s.names)
             .apply()
     }
 
@@ -62,6 +69,7 @@ class SettingsStore(context: Context) {
         driftSeconds = prefs.getInt(DRIFT, 90),
         feedsOn = prefs.getStringSet(FEEDS_ON, emptySet()).orEmpty().toSet(),
         feedsOff = prefs.getStringSet(FEEDS_OFF, emptySet()).orEmpty().toSet(),
+        names = prefs.getString(NAMES, "").orEmpty(),
     )
 
     private companion object {
@@ -71,5 +79,6 @@ class SettingsStore(context: Context) {
         const val DRIFT_SMART = "drift_smart"
         const val FEEDS_ON = "feeds_on"
         const val FEEDS_OFF = "feeds_off"
+        const val NAMES = "names"
     }
 }

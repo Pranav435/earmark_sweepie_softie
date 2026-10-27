@@ -8,12 +8,12 @@ import org.junit.Test
 class EngineTest {
     @Test
     fun `no chip below the bar, and the log says why without message text`() = with(Script()) {
-        at(at(14, 0), Event.NotificationPosted(Fixtures.rahul(at(14, 0), "haha nice")))
+        at(at(14, 0), Event.NotificationPosted(Fixtures.rahul(at(14, 0), "that was fun")))
         assertTrue(at(at(16, 12), Event.Unlocked).none { it is Effect.ShowChip })
         val line = log.last()
         // 0.35*exp(-132/30) + 0.125 + 0.25*0.5 + 0.075 + 0.15 = 0.4793
         assertTrue(line, line.startsWith("unlock: no chip, best reply:hash-rahul scored 0.48"))
-        assertTrue(log.none { "haha" in it })
+        assertTrue(log.none { "fun" in it })
     }
 
     @Test
@@ -135,7 +135,8 @@ class EngineTest {
         val effects = at(at(16, 12), Event.NotificationRemoved(Fixtures.rahul(at(16, 11)).key, RemovalReason.Click)) +
             at(at(16, 12, 1), Event.ForegroundChanged(Fixtures.CHATS, "Chats")) +
             at(at(16, 13), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
-        assertTrue(effects.none { it is Effect.RecordContact })
+        // The tap is learned as an open (ADR 0028), not as a reply.
+        assertEquals(ContactStat(opened = 1), effects.one<Effect.RecordContact>().stat)
         assertEquals(0, engine.openLoops)
     }
 
@@ -573,5 +574,168 @@ class EngineTest {
         at(at(19, 0, 5), Event.ForegroundChanged(Fixtures.RIDE, "Uber"))
         assertTrue(at(at(19, 1), Event.ForegroundChanged(Fixtures.FEED, "Instagram")).none { it is Effect.RecordLoop })
         assertEquals(at(19, 1, 11), at(at(19, 1, 11), Event.Tick).one<Effect.RecordLoop>().entry.guessedAt)
+    }
+
+    // Ranking across apps, next up, and urgent group messages (ADRs 0027 and 0028).
+
+    private val tenSeconds = Fixtures.settings.copy(driftAfter = java.time.Duration.ofSeconds(10))
+
+    @Test
+    fun `the message that asks most gets the chip, whichever app it came on`() = with(Script()) {
+        at(at(16, 0), Event.ScreenOff)
+        at(at(16, 5), Event.NotificationPosted(Fixtures.zoya(at(16, 5), "call me asap")))
+        at(at(16, 8), Event.NotificationPosted(Fixtures.rahul(at(16, 8), "that was fun")))
+        // Zoya: 0.35*exp(-5/30) + 0.125 + 0.25*1.0 + 0.075 + 0.15 = 0.8963; Rahul, newer but plain: 0.8024
+        assertEquals("Here to reply to Zoya?", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+    }
+
+    @Test
+    fun `with nothing else to go on, the app you deal with sooner wins`() {
+        val apps = mapOf(
+            Fixtures.CHATS to AppStat(done = 20, left = 2, medianDoneMinutes = 5.0),
+            Fixtures.FEED to AppStat(done = 2, left = 10, medianDoneMinutes = 300.0),
+        )
+        with(Script(stats = Stats(apps = apps))) {
+            at(at(16, 0), Event.ScreenOff)
+            at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5), "hey")))
+            at(at(16, 6), Event.NotificationPosted(Fixtures.zoya(at(16, 6), "hey")))
+            // Rahul: who 0.66 from WhatsApp, 0.811 in all; Zoya is newer, but who 0.34 from Instagram makes 0.742.
+            assertEquals("Here to reply to Rahul?", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+            assertTrue(log.last(), "who 0.66 from app" in log.last())
+        }
+        with(Script()) {
+            at(at(16, 0), Event.ScreenOff)
+            at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5), "hey")))
+            at(at(16, 6), Event.NotificationPosted(Fixtures.zoya(at(16, 6), "hey")))
+            assertEquals("before Earmark has learned either app, the newer one wins", "Here to reply to Zoya?", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+        }
+    }
+
+    @Test
+    fun `once you deal with the guess, the next message waiting takes its place`() = with(Script(tenSeconds)) {
+        at(at(16, 0), Event.ScreenOff)
+        at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5), "free at 5?")))
+        at(at(16, 6), Event.NotificationPosted(Fixtures.zoya(at(16, 6), "can you send the notes?")))
+        val chip = at(at(16, 7), Event.Unlocked).one<Effect.ShowChip>().chip
+        assertEquals("Here to reply to Rahul?", chip.title)
+
+        at(at(16, 7, 2), Event.ChipActed(chip.loopId))
+        at(at(16, 7, 3), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))
+        at(at(16, 7, 20), Event.ReplySent(chip.loopId))
+        assertTrue(log.toString(), log.any { it.startsWith("next up: reply:hash-zoya") })
+
+        at(at(16, 8), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        val pill = at(at(16, 8, 11), Event.Tick).one<Effect.ShowPill>().pill
+        assertEquals("Next up", pill.label)
+        assertEquals("Reply to Zoya", pill.task)
+    }
+
+    @Test
+    fun `nothing is lined up next once the phone is put down`() = with(Script()) {
+        at(at(16, 0), Event.ScreenOff)
+        at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5), "free at 5?")))
+        at(at(16, 6), Event.NotificationPosted(Fixtures.priya(at(16, 6), "can you call me later?")))
+        val chip = at(at(16, 7), Event.Unlocked).one<Effect.ShowChip>().chip
+        at(at(16, 7, 2), Event.ChipActed(chip.loopId))
+        at(at(16, 7, 3), Event.NotificationRemoved(Fixtures.rahul(at(16, 5)).key, RemovalReason.AppCancel))
+        assertEquals(Outcome.Done, at(at(16, 9), Event.ScreenOff).one<Effect.RecordLoop>().entry.outcome)
+        assertTrue(log.none { it.startsWith("next up") })
+    }
+
+    @Test
+    fun `an earlier urgent message stays the guess when a plain one comes in after it`() = with(Script(tenSeconds)) {
+        at(at(16, 0), Event.Unlocked)
+        at(at(16, 0, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        at(at(16, 1), Event.NotificationPosted(Fixtures.rahul(at(16, 1), "call me asap")))
+        at(at(16, 1, 5), Event.NotificationPosted(Fixtures.priya(at(16, 1, 5))))
+        assertTrue(log.last(), log.last().endsWith("reply:hash-rahul stays the guess at 0.95"))
+        assertEquals("Reply to Rahul", at(at(16, 1, 11), Event.Tick).one<Effect.ShowPill>().pill.task)
+    }
+
+    @Test
+    fun `an urgent message takes over a guess you came for, which comes back after it`() =
+        with(Script(tenSeconds.copy(pillCooldown = java.time.Duration.ZERO))) {
+            at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+            val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
+            at(at(16, 12, 3), Event.ChipHeld(chip.loopId))
+            at(at(16, 12, 10), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+
+            at(at(16, 12, 15), Event.NotificationPosted(Fixtures.priya(at(16, 12, 15), "pick up your phone")))
+            val urgent = at(at(16, 12, 26), Event.Tick).one<Effect.ShowPill>().pill
+            assertEquals("Before you forget", urgent.label)
+            assertEquals("Reply to Priya", urgent.task)
+
+            at(at(16, 12, 30), Event.PillTapped(urgent.loopId))
+            at(at(16, 12, 31), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))
+            at(at(16, 13), Event.ReplySent(urgent.loopId))
+            at(at(16, 13, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+            val back = at(at(16, 13, 16), Event.Tick).one<Effect.ShowPill>().pill
+            assertEquals("You came here to", back.label)
+            assertEquals("Reply to Rahul", back.task)
+        }
+
+    @Test
+    fun `an Instagram DM still waits while you scroll Instagram`() = with(Script(tenSeconds)) {
+        at(at(16, 0), Event.ScreenOff)
+        at(at(16, 5), Event.NotificationPosted(Fixtures.zoya(at(16, 5), "free at 5?")))
+        assertEquals("Here to reply to Zoya?", at(at(16, 6), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+        at(at(16, 6, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        assertEquals("Reply to Zoya", at(at(16, 6, 16), Event.Tick).one<Effect.ShowPill>().pill.task)
+    }
+
+    @Test
+    fun `a group mention gets a chip that names the group, and the strip replies to the group`() =
+        with(Script(Fixtures.settings.copy(myNames = listOf("Pranav Savla")))) {
+            at(at(16, 0), Event.ScreenOff)
+            at(at(16, 5), Event.NotificationPosted(Fixtures.family(at(16, 5), "Mom" to "Pranav can you get the cake?")))
+            val chip = at(at(16, 6), Event.Unlocked).one<Effect.ShowChip>().chip
+            assertEquals("Here to reply to Mom in Family?", chip.title)
+            assertEquals("Family", at(at(16, 6, 2), Event.ChipActed(chip.loopId)).one<Effect.SuggestReplies>().to)
+            assertTrue(log.none { "cake" in it || "Pranav" in it })
+        }
+
+    @Test
+    fun `taps on a group's chatter are learned, and then a question there is for you`() = with(Script()) {
+        repeat(3) { i ->
+            val posted = at(16, 10 * i)
+            val chatter = Fixtures.family(posted, "Mom" to "saw this today")
+            assertTrue(Effect.Forget(chatter.key) in at(posted, Event.NotificationPosted(chatter)))
+            val tapped = at(posted.plusSeconds(60), Event.NotificationRemoved(chatter.key, RemovalReason.Click))
+            assertEquals(ContactStat(opened = i + 1), tapped.one<Effect.RecordContact>().stat)
+        }
+        at(at(16, 40), Event.NotificationPosted(Fixtures.family(at(16, 40), "Mom" to "who's coming saturday?")))
+        assertEquals(1, engine.openLoops)
+        assertTrue(log.last(), log.last().startsWith("opened reply:hash-family (Reply, due 0.75: asks, a group you open)"))
+    }
+
+    @Test
+    fun `a swiped-away group's chatter teaches the opposite`() = with(Script()) {
+        val chatter = Fixtures.family(at(16, 0), "Mom" to "saw this today")
+        at(at(16, 0), Event.NotificationPosted(chatter))
+        assertEquals(ContactStat(swiped = 1), at(at(16, 1), Event.NotificationRemoved(chatter.key, RemovalReason.UserDismiss)).one<Effect.RecordContact>().stat)
+    }
+
+    @Test
+    fun `each closed message teaches Earmark how you treat its app, outside demo mode`() {
+        with(Script()) {
+            at(at(16, 0), Event.NotificationPosted(Fixtures.rahul(at(16, 0), "hey")))
+            val done = at(at(16, 6), Event.NotificationRemoved(Fixtures.rahul(at(16, 0)).key, RemovalReason.AppCancel))
+            assertEquals(AppStat(done = 1, medianDoneMinutes = 6.0), done.one<Effect.RecordApp>().stat)
+            at(at(16, 10), Event.NotificationPosted(Fixtures.priya(at(16, 10))))
+            val swiped = at(at(16, 11), Event.NotificationRemoved(Fixtures.priya(at(16, 10)).key, RemovalReason.UserDismiss))
+            assertEquals(AppStat(done = 1, left = 1, medianDoneMinutes = 6.0), swiped.one<Effect.RecordApp>().stat)
+        }
+        with(Script(Fixtures.settings.copy(demoMode = true))) {
+            at(at(16, 0), Event.NotificationPosted(Fixtures.rahul(at(16, 0), "hey")))
+            assertTrue(at(at(16, 6), Event.NotificationRemoved(Fixtures.rahul(at(16, 0)).key, RemovalReason.AppCancel)).none { it is Effect.RecordApp })
+        }
+    }
+
+    @Test
+    fun `an app reposting a waiting chat with only an ok keeps its loop and way back`() = with(Script()) {
+        at(at(16, 0), Event.NotificationPosted(Fixtures.rahul(at(16, 0), "free at 5?")))
+        val ok = Fixtures.rahul(at(16, 1)).copy(messages = listOf(Message("Rahul", "ok", at(16, 1))))
+        assertTrue(at(at(16, 1), Event.NotificationPosted(ok)).none { it is Effect.Forget })
+        assertEquals(1, engine.openLoops)
     }
 }

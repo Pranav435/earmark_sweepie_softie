@@ -13,6 +13,7 @@ import com.sweepiesoftie.earmark.core.Effect
 import com.sweepiesoftie.earmark.core.Engine
 import com.sweepiesoftie.earmark.core.Event
 import com.sweepiesoftie.earmark.core.Overlay
+import com.sweepiesoftie.earmark.core.Settings
 import com.sweepiesoftie.earmark.overlay.OverlayHost
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -42,7 +43,14 @@ class EarmarkListener : NotificationListenerService() {
         val engineDispatcher: ExecutorCoroutineDispatcher =
             Executors.newSingleThreadExecutor { Thread(it, "earmark-engine") }.asCoroutineDispatcher()
         val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
-        val engine = Engine(graph.apps.engineSettings(graph.settings.state.value))
+        val profile = ProfileReader(this@EarmarkListener, log)
+
+        /** What the engine was last given. Main thread only. */
+        var settings: Settings = withCard(graph.apps.engineSettings(graph.settings.state.value))
+        val engine = Engine(settings)
+
+        /** The names you typed in Settings, plus those on your contact card. Reads the card, so not on the main thread when it can wait. */
+        fun withCard(settings: Settings): Settings = settings.copy(myNames = (settings.myNames + profile.names()).distinct())
         val reader = NotificationReader(this@EarmarkListener, graph.wayBacks, log)
         val overlay = OverlayHost(this@EarmarkListener, log, ::dispatch)
         val handBack = HandBack(this@EarmarkListener, graph.wayBacks, log)
@@ -75,7 +83,7 @@ class EarmarkListener : NotificationListenerService() {
         val s = Session()
         session = s
         graph.listener.value = ListenerState(connected = true)
-        log.add("listener connected")
+        log.add("listener connected; ${s.settings.myNames.size} names for mentions")
         KeepAliveService.start(this)
         s.receivers.start()
         s.pause.start()
@@ -85,8 +93,8 @@ class EarmarkListener : NotificationListenerService() {
         }
         s.scope.launch {
             graph.settings.state.drop(1).collect { user ->
-                val settings = withContext(Dispatchers.IO) { graph.apps.engineSettings(user) }
-                dispatch(Event.SettingsChanged(settings))
+                s.settings = withContext(Dispatchers.IO) { s.withCard(graph.apps.engineSettings(user)) }
+                dispatch(Event.SettingsChanged(s.settings))
             }
         }
         s.scope.launch { graph.uiEvents.collect { dispatch(it) } }
@@ -164,7 +172,13 @@ class EarmarkListener : NotificationListenerService() {
         s.watcher.start()
         graph.appScope.launch { graph.store.trim(System.currentTimeMillis()) }
         s.scope.launch {
-            val events = withContext(Dispatchers.IO) { s.calendar.soon() }
+            val (events, card) = withContext(Dispatchers.IO) { s.calendar.soon() to s.profile.names() }
+            // Contacts may have been allowed, or your card changed, since the engine was last given your names.
+            val names = (graph.settings.state.value.typedNames + card).distinct()
+            if (names != s.settings.myNames) {
+                s.settings = s.settings.copy(myNames = names)
+                dispatch(Event.SettingsChanged(s.settings))
+            }
             if (events != null) dispatch(Event.CalendarSoon(events))
             dispatch(Event.Unlocked)
         }

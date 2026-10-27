@@ -72,6 +72,8 @@ class InstalledApps(private val context: Context) {
             zone = ZoneId.systemDefault(),
             clockPackage = clockPackage(),
             rideApp = rideApp(),
+            // The listener adds the names on your contact card.
+            myNames = user.typedNames,
         )
     }
 }

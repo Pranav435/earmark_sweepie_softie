@@ -29,6 +29,10 @@ object Permissions {
     fun calendar(context: Context): Boolean =
         context.checkSelfPermission(Manifest.permission.READ_CALENDAR) == PackageManager.PERMISSION_GRANTED
 
+    /** Only your own contact card is read with it (ADR 0028). */
+    fun contacts(context: Context): Boolean =
+        context.checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
+
     /** Battery optimisation off ("Unrestricted" on Samsung), so the phone doesn't pause Earmark in the background. */
     fun batteryUnrestricted(context: Context): Boolean =
         context.getSystemService(PowerManager::class.java)?.isIgnoringBatteryOptimizations(context.packageName) == true

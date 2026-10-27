@@ -265,6 +265,7 @@ grant "Notification access" cmd notification allow_listener "$LISTENER"
 grant "Usage access" appops set "$PKG" GET_USAGE_STATS allow
 grant "Display over other apps" appops set "$PKG" SYSTEM_ALERT_WINDOW allow
 grant "Calendar (optional)" pm grant "$PKG" android.permission.READ_CALENDAR
+grant "Your name, from your own contact card (optional)" pm grant "$PKG" android.permission.READ_CONTACTS
 if (( SDK >= 33 )); then grant "Notifications (optional)" pm grant "$PKG" android.permission.POST_NOTIFICATIONS; fi
 pause
 

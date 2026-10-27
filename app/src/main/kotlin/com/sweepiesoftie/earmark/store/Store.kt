@@ -44,9 +44,15 @@ data class LoopRow(
     @ColumnInfo(defaultValue = "0") val listed: Boolean,
 )
 
-/** Keyed by a salted hash of the conversation, never a name or number. */
+/** Keyed by a salted hash of the conversation, never a name or number. Opens and swipes are counts of taps on its notifications (ADR 0028). */
 @Entity(tableName = "contact_stats")
-data class ContactRow(@PrimaryKey val conversation: String, val replies: Int, val medianReplyMinutes: Double)
+data class ContactRow(
+    @PrimaryKey val conversation: String,
+    val replies: Int,
+    val medianReplyMinutes: Double,
+    @ColumnInfo(defaultValue = "0") val opened: Int,
+    @ColumnInfo(defaultValue = "0") val swiped: Int,
+)
 
 @Entity(tableName = "kind_stats")
 data class KindRow(@PrimaryKey val kind: String, val holds: Int, val ignores: Int, val ignoreStreak: Int)
@@ -54,9 +60,19 @@ data class KindRow(@PrimaryKey val kind: String, val holds: Int, val ignores: In
 @Entity(tableName = "alarm_seen")
 data class AlarmRow(@PrimaryKey val date: String, val minuteOfDay: Int)
 
-/** Your usual visit to a feed app, for the smart drift timer (ADR 0023). A package name and two numbers, nothing else. */
+/**
+ * Per app: your usual visit to a feed app, for the smart drift timer (ADR 0023), and how many of its messages you
+ * dealt with or left and how soon (ADR 0027). A package name and numbers, nothing else.
+ */
 @Entity(tableName = "app_stats")
-data class AppRow(@PrimaryKey val packageName: String, val visits: Int, val medianVisitSeconds: Double)
+data class AppRow(
+    @PrimaryKey val packageName: String,
+    val visits: Int,
+    val medianVisitSeconds: Double,
+    @ColumnInfo(defaultValue = "0") val done: Int,
+    @ColumnInfo(defaultValue = "0") val left: Int,
+    @ColumnInfo(defaultValue = "0") val medianDoneMinutes: Double,
+)
 
 @Dao
 interface EarmarkDao {
@@ -90,14 +106,14 @@ interface EarmarkDao {
     @Query("SELECT * FROM app_stats") suspend fun apps(): List<AppRow>
 }
 
-@Database(entities = [LoopRow::class, ContactRow::class, KindRow::class, AlarmRow::class, AppRow::class], version = 3, exportSchema = false)
+@Database(entities = [LoopRow::class, ContactRow::class, KindRow::class, AlarmRow::class, AppRow::class], version = 4, exportSchema = false)
 abstract class EarmarkDatabase : RoomDatabase() {
     abstract fun dao(): EarmarkDao
 }
 
 /** Room behind a small interface. Every call is wrapped here so a database failure is logged and skipped, never thrown. */
 class Store(context: Context, private val log: DebugLog) {
-    private val dao = Room.databaseBuilder(context, EarmarkDatabase::class.java, "earmark.db").addMigrations(ADD_APP_STATS, LIST_PICKED_UP).build().dao()
+    private val dao = Room.databaseBuilder(context, EarmarkDatabase::class.java, "earmark.db").addMigrations(ADD_APP_STATS, LIST_PICKED_UP, LEARN_OPENS_AND_APPS).build().dao()
 
     fun things(since: Long): Flow<List<LoopRow>> = dao.things(since).catch { log.error("Store.things", it); emit(emptyList()) }
 
@@ -128,11 +144,11 @@ class Store(context: Context, private val log: DebugLog) {
     }
 
     suspend fun record(conversation: String, stat: ContactStat): Unit? = guard("record contact") {
-        dao.upsertContact(ContactRow(conversation, stat.replies, stat.medianReplyMinutes))
+        dao.upsertContact(ContactRow(conversation, stat.replies, stat.medianReplyMinutes, stat.opened, stat.swiped))
     }
 
     suspend fun recordApp(packageName: String, stat: AppStat): Unit? = guard("record app") {
-        dao.upsertApp(AppRow(packageName, stat.visits, stat.medianVisitSeconds))
+        dao.upsertApp(AppRow(packageName, stat.visits, stat.medianVisitSeconds, stat.done, stat.left, stat.medianDoneMinutes))
     }
 
     suspend fun recordAlarm(time: LocalTime, on: LocalDate): Unit? = guard("record alarm") {
@@ -148,9 +164,9 @@ class Store(context: Context, private val log: DebugLog) {
     suspend fun stats(): Stats = guard("load stats") {
         Stats(
             kinds = dao.kinds().mapNotNull { row -> kindOf(row.kind)?.let { it to KindStat(row.holds, row.ignores, row.ignoreStreak) } }.toMap(),
-            contacts = dao.contacts().associate { it.conversation to ContactStat(it.replies, it.medianReplyMinutes) },
+            contacts = dao.contacts().associate { it.conversation to ContactStat(it.replies, it.medianReplyMinutes, it.opened, it.swiped) },
             weeknightAlarms = dao.recentAlarms().map { LocalTime.of(it.minuteOfDay / 60, it.minuteOfDay % 60) },
-            apps = dao.apps().associate { it.packageName to AppStat(it.visits, it.medianVisitSeconds) },
+            apps = dao.apps().associate { it.packageName to AppStat(it.visits, it.medianVisitSeconds, it.done, it.left, it.medianDoneMinutes) },
         )
     } ?: Stats()
 
@@ -191,6 +207,17 @@ class Store(context: Context, private val log: DebugLog) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL("ALTER TABLE `loop_log` ADD COLUMN `listed` INTEGER NOT NULL DEFAULT 0")
                 db.execSQL("UPDATE `loop_log` SET `listed` = 1 WHERE `guessedAt` IS NOT NULL")
+            }
+        }
+
+        /** v0.1.12 learns taps on each conversation's notifications and how you deal with each app's messages; counts start at zero. */
+        val LEARN_OPENS_AND_APPS: Migration = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE `contact_stats` ADD COLUMN `opened` INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE `contact_stats` ADD COLUMN `swiped` INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE `app_stats` ADD COLUMN `done` INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE `app_stats` ADD COLUMN `left` INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE `app_stats` ADD COLUMN `medianDoneMinutes` REAL NOT NULL DEFAULT 0")
             }
         }
 

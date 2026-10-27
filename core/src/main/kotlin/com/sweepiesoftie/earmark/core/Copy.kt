@@ -18,7 +18,7 @@ internal class Copy(private val settings: Settings) {
     fun chip(loop: Loop, score: Double, now: Instant): ChipCard {
         val ago = ago(Duration.between(loop.updatedAt, now))
         val (title, subtitle) = when (loop.kind) {
-            LoopKind.Reply -> "Here to reply to ${loop.who}?" to "${loop.detail} · $ago"
+            LoopKind.Reply -> "Here to reply to ${loop.who}${loop.groupName?.let { " in $it" }.orEmpty()}?" to "${loop.detail} · $ago"
             LoopKind.Payment -> "Here to pay ${loop.who} back?" to "${loop.detail} · $ago"
             LoopKind.Routine -> "${loop.task}?" to "You usually do on weeknights"
             LoopKind.Flow -> "Here to finish in ${loop.who}?" to "You left before it went through · $ago"
@@ -37,9 +37,15 @@ internal class Copy(private val settings: Settings) {
         score = score,
     )
 
-    /** [arrived] is true when the loop came in while you were using the phone, so you didn't come here for it. */
-    fun pill(loop: Loop, arrived: Boolean): PillCard =
-        PillCard(loop.id, loop.kind, if (arrived) "Before you forget" else "You came here to", loop.task, verb(loop))
+    /** The label says why the task is back: you came for it, it came in while you were on the phone, or it was waiting after another. */
+    fun pill(loop: Loop, origin: Origin): PillCard {
+        val label = when (origin) {
+            Origin.Unlock -> "You came here to"
+            Origin.Arrival -> "Before you forget"
+            Origin.NextUp -> "Next up"
+        }
+        return PillCard(loop.id, loop.kind, label, loop.task, verb(loop))
+    }
 
     fun verb(loop: Loop): String = when (loop.kind) {
         LoopKind.Reply -> "Do it now"

@@ -7,6 +7,8 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <!-- Optional: Earmark reads only your own contact card, for your name in group messages (ADR 0028). -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- Shows that Earmark is running (ADR 0018), and demo mode's sample messages (ADR 0006). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- A foreground service stops One UI and others from freezing the listener's process (ADR 0018). -->

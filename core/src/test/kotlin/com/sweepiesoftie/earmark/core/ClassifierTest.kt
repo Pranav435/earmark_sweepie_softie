@@ -36,13 +36,29 @@ class ClassifierTest {
         assertEquals(1.0, open(Fixtures.rahul(now, "free at 5?")).due, 1e-9)
         assertEquals(0.75, open(Fixtures.rahul(now, "free tonight")).due, 1e-9)
         assertEquals(0.75, open(Fixtures.rahul(now, "free?")).due, 1e-9)
-        assertEquals(0.5, open(Fixtures.rahul(now, "haha nice")).due, 1e-9)
+        assertEquals(0.5, open(Fixtures.rahul(now, "that was fun")).due, 1e-9)
+    }
+
+    @Test
+    fun `an urgent message is fully due, and the log gets why without its words`() {
+        val loop = open(Fixtures.rahul(now, "call me asap"))
+        assertEquals(1.0, loop.due, 1e-9)
+        assertTrue(loop.urgent)
+        assertEquals("asap is also a time word", listOf("urgent", "asks", "time"), loop.why)
+    }
+
+    @Test
+    fun `a message that only acknowledges owes nothing`() {
+        assertEquals("nothing to answer", skipReason(Fixtures.rahul(now, "haha ok 👍")))
+        // An earlier question they're still waiting on keeps it a loop.
+        val rahul = Fixtures.rahul(now.minusSeconds(60), "free at 5?")
+        val thenOk = rahul.copy(messages = rahul.messages + Message("Rahul", "ok", now))
+        assertEquals(1.0, open(thenOk).due, 1e-9)
     }
 
     @Test
     fun `skips the cases that are not owed`() {
         val rahul = Fixtures.rahul(now)
-        assertEquals("group without a mention", skipReason(rahul.copy(isGroupConversation = true)))
         assertEquals("one-time code", skipReason(rahul.copy(messages = listOf(Message("HDFC", "482913 is your OTP for login", now)))))
         assertEquals("bot", skipReason(rahul.copy(messages = listOf(Message("Swiggy Bot", "Rate your order?", now, isBot = true)))))
         assertEquals("group summary", skipReason(rahul.copy(isGroupSummary = true)))
@@ -50,9 +66,68 @@ class ClassifierTest {
         assertEquals("own notification", skipReason(rahul.copy(packageName = Fixtures.OWN, isOwn = true)))
     }
 
+    private val withName = Fixtures.settings.copy(myNames = listOf("Pranav Savla"))
+
     @Test
-    fun `a group message that mentions you is a loop`() {
-        assertEquals(LoopKind.Reply, open(Fixtures.rahul(now).copy(isGroupConversation = true, mentionsUser = true)).kind)
+    fun `group chatter isn't a loop, but is quiet so a tap on it can be learned`() {
+        val chatter = Fixtures.family(now, "Mom" to "who's coming saturday?")
+        assertEquals(Classification.Quiet("hash-family"), Classifier.classify(chatter, withName))
+    }
+
+    @Test
+    fun `a group message that mentions you is a loop that quotes it and names the group`() {
+        val family = Fixtures.family(now, "Mom" to "Pranav can you get the cake?", "Riya" to "haha", "Dev" to "lol same")
+        val loop = open(family, withName)
+        assertEquals("Reply to Mom in Family", loop.task)
+        assertEquals("“Pranav can you get the cake?”", loop.detail)
+        assertEquals("the chatter after it isn't a new message to you", family.messages.first().at, loop.updatedAt)
+        assertEquals(0.75, loop.due, 1e-9)
+        assertEquals(listOf("asks", "mentions you"), loop.why)
+        assertTrue(loop.inGroup)
+    }
+
+    @Test
+    fun `WhatsApp's message count is left off the group's name, and its ~ before people you haven't saved`() {
+        val family = Fixtures.family(now, "~ Riya" to "Pranav are you coming?").copy(conversationTitle = "Family (2 messages)")
+        assertEquals("Reply to Riya in Family", open(family, withName).task)
+    }
+
+    @Test
+    fun `a mention as WhatsApp writes it, with the name between direction marks, counts`() {
+        val family = Fixtures.family(now, "Mom" to "@\u2068Pranav Savla\u2069 can you get the cake?")
+        assertEquals("Reply to Mom in Family", open(family, withName).task)
+    }
+
+    @Test
+    fun `WhatsApp's "Mentioned you" message counts as a mention, with the real sender taken back out of its text`() {
+        // As seen on the A34: the sender is "📣 Mentioned you", and the text starts with who wrote it.
+        val family = Fixtures.family(now, "📣 Mentioned you" to "Riya: @\u2068Pranav Savla\u2069 \tsee this")
+        val loop = open(family)
+        assertEquals("Reply to Riya in Family", loop.task)
+        assertEquals("“@Pranav Savla see this”", loop.detail)
+        assertTrue(loop.why.toString(), "mentions you" in loop.why)
+    }
+
+    @Test
+    fun `an @You mention counts without your contact card`() {
+        val family = Fixtures.family(now, "Mom" to "@You see this").copy(selfName = "You")
+        assertEquals("Reply to Mom in Family", open(family).task)
+    }
+
+    @Test
+    fun `an urgent group message is a loop even without a mention`() {
+        val loop = open(Fixtures.family(now, "Dev" to "Dad's in the hospital, call me"), Fixtures.settings)
+        assertTrue(loop.urgent)
+        assertEquals(1.0, loop.due, 1e-9)
+    }
+
+    @Test
+    fun `in a group you usually open, a question is for you, but chatter still isn't`() {
+        val opens = Stats(contacts = mapOf("hash-family" to ContactStat(opened = 4, swiped = 1)))
+        assertEquals("Reply to Mom in Family", (Classifier.classify(Fixtures.family(now, "Mom" to "who's coming saturday?"), Fixtures.settings, opens) as Classification.Open).loop.task)
+        assertEquals(Classification.Quiet("hash-family"), Classifier.classify(Fixtures.family(now, "Mom" to "saw this today"), Fixtures.settings, opens))
+        val swipes = Stats(contacts = mapOf("hash-family" to ContactStat(opened = 3, swiped = 4)))
+        assertEquals(Classification.Quiet("hash-family"), Classifier.classify(Fixtures.family(now, "Mom" to "who's coming saturday?"), Fixtures.settings, swipes))
     }
 
     @Test

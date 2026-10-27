@@ -44,9 +44,11 @@ internal object SmartDrift {
     /** A running median that moves at most 10 s a visit, like the reply latency estimate: no list of visits is kept. */
     fun learn(old: AppStat?, visit: Duration): AppStat {
         val seconds = visit.coerceAtMost(longestVisit).seconds.toDouble()
-        if (old == null || old.visits == 0) return AppStat(visits = 1, medianVisitSeconds = seconds)
-        val step = minOf(STEP_SECONDS, abs(seconds - old.medianVisitSeconds))
-        val median = if (seconds > old.medianVisitSeconds) old.medianVisitSeconds + step else old.medianVisitSeconds - step
-        return AppStat(visits = old.visits + 1, medianVisitSeconds = median)
+        // The app's other numbers, such as how you deal with its messages, carry over.
+        val stat = old ?: AppStat()
+        if (stat.visits == 0) return stat.copy(visits = 1, medianVisitSeconds = seconds)
+        val step = minOf(STEP_SECONDS, abs(seconds - stat.medianVisitSeconds))
+        val median = if (seconds > stat.medianVisitSeconds) stat.medianVisitSeconds + step else stat.medianVisitSeconds - step
+        return stat.copy(visits = stat.visits + 1, medianVisitSeconds = median)
     }
 }

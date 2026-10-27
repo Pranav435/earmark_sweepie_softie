@@ -21,7 +21,7 @@ class RankerTest {
     @Test
     fun `an old message stays below the bar even at the first unlock after it`() {
         // recent = exp(-120/30) = 0.0183; 0.35*0.0183 + 0.125 + 0.25*0.5 + 0.075 + 0.15 = 0.4814
-        val score = Ranker.score(reply(at(14, 12), "haha nice"), now = at(16, 12), stats = Stats())
+        val score = Ranker.score(reply(at(14, 12), "that was fun"), now = at(16, 12), stats = Stats())
         assertEquals(0.4814, score.total, 0.0005)
         assertTrue(score.total <= Ranker.CHIP_THRESHOLD)
     }
@@ -47,5 +47,25 @@ class RankerTest {
         val slow = Stats(contacts = mapOf("hash-rahul" to ContactStat(replies = 10, medianReplyMinutes = 240.0)))
         assertEquals(1.0, Ranker.score(reply(at(16, 11)), at(16, 12), quick).who, 1e-9)
         assertEquals(0.75, Ranker.score(reply(at(16, 11)), at(16, 12), slow).who, 1e-9)
+    }
+
+    @Test
+    fun `who comes from opening their notifications when you've never replied through Earmark`() {
+        // 0.3 + 0.4 * (3 + 1) / (3 + 0 + 2) = 0.62
+        val opens = Stats(contacts = mapOf("hash-rahul" to ContactStat(opened = 3)))
+        val score = Ranker.score(reply(at(16, 11)), at(16, 12), opens)
+        assertEquals(0.62, score.who, 1e-9)
+        assertEquals("opens", score.whoFrom)
+    }
+
+    @Test
+    fun `a new person starts from how you treat their app, and a new group from a bit less`() {
+        val apps = Stats(apps = mapOf(Fixtures.CHATS to AppStat(done = 9, left = 1, medianDoneMinutes = 0.0)))
+        // 0.3 + 0.2 * (9 + 1) / (10 + 2) + 0.2 * exp(0) = 0.6667
+        assertEquals(0.6667, Ranker.score(reply(at(16, 11)), at(16, 12), apps).who, 0.0005)
+        assertEquals("fewer than five closed messages isn't enough to go on", 0.5,
+            Ranker.score(reply(at(16, 11)), at(16, 12), Stats(apps = mapOf(Fixtures.CHATS to AppStat(done = 4)))).who, 1e-9)
+        val group = (Classifier.classify(Fixtures.family(at(16, 11), "Dev" to "urgent, call me"), Fixtures.settings) as Classification.Open).loop
+        assertEquals(0.4, Ranker.score(group, at(16, 12), Stats()).who, 1e-9)
     }
 }

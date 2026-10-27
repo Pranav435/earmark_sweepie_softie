@@ -41,6 +41,7 @@ Earmark's first screen lists each permission with a button. It checks them again
 | Usage access | Know which app is in front, only while the screen is on | Open settings › Earmark › Permit usage access | `adb shell appops set com.sweepiesoftie.earmark GET_USAGE_STATS allow` |
 | Display over other apps | Show the chip and the pill on top of any app | Open settings › Allow display over other apps | `adb shell appops set com.sweepiesoftie.earmark SYSTEM_ALERT_WINDOW allow` |
 | Calendar (optional) | Leave-by loops for events with a place or a meeting link | Allow | `adb shell pm grant com.sweepiesoftie.earmark android.permission.READ_CALENDAR` |
+| Your name (optional) | Reads only your own contact card, so a group message that says your name counts. Your other contacts are never read | Allow | `adb shell pm grant com.sweepiesoftie.earmark android.permission.READ_CONTACTS` |
 | Battery: unrestricted | So the phone doesn't pause Earmark while other apps are in front. Samsung phones need it | Allow | `adb shell dumpsys deviceidle whitelist +com.sweepiesoftie.earmark` |
 | Notifications (optional) | Shows the "Earmark is on" notification, and lets demo mode post its sample messages | Allow | `adb shell pm grant com.sweepiesoftie.earmark android.permission.POST_NOTIFICATIONS` |
 
@@ -53,6 +54,10 @@ If a permission is missing, Earmark keeps running and does less. The Log screen 
 - **Reply strip:** after Do it now on a message, up to three one-tap replies appear above the chat's input. They come from Smart Reply, or, when it can't answer (another language, or a very short message such as "hi"), from simple quick replies that fit the message: "Yes / No / Let me check" for a question, "Hey!" for a greeting, "Got it / Will reply soon / Can I call you?" otherwise. They also appear when you open any message's chat from its notification. They stay when WhatsApp or Messages clears the notification as the chat opens, and go away when you reply or leave the app. The strip names who the replies go to, since it stays while you move between chats.
 - **"Earmark is on":** a silent notification, with a small icon in the status bar, while Earmark runs. It keeps the phone from pausing Earmark in the background, which Samsung phones otherwise do.
 - **Recap (home screen):** today's list. Each message or request Earmark picks up appears the moment it arrives, with a marigold ring while it's waiting, alongside anything Earmark showed you as a chip or pill. Each row shows how it ended, and the footer says how many times Earmark brought you back.
+
+**Which message wins.** When several messages are waiting, from any apps, Earmark picks the one that asks most of you: "call me asap" beats "that was fun", and a question beats a plain message. "ok", "thanks", 👍 and reactions don't count as waiting at all. Between people you've never answered through Earmark, the app you usually deal with sooner wins, once Earmark has seen five of that app's messages close. When you've dealt with the guess, the strongest message still waiting becomes **next up**, with no chip: if you then drift into a feed, its pill reads "Next up · Reply to Zoya · Do it now". An urgent message that arrives while you're on the phone takes over even a guess you came for, which comes back after it. An Instagram DM is watched while you scroll Instagram itself, until you open the chat.
+
+**Groups.** A group message counts when it's for you: it says your name or @You (your name comes from your contact card, if you allow it, and from **Settings › Your name**), it uses urgent words such as "urgent", "hospital" or "jaldi", or it asks a question in a group whose notifications you usually tap. The chip names the group ("Here to reply to Mom in Family?"), and the reply strip replies to the group. Other group chatter is ignored, except that Earmark counts whether you tap or swipe away each group's notifications.
 
 No chip appears when a message arrives while you're using the phone, because its heads-up already showed. Earmark makes it the guess quietly instead, and lists it on the home screen. If you drift into a feed, the pill brings it back. Messages that arrive while the phone is locked are guessed when you unlock, and only those get a chip. The dot only appears after you tap ✓ on a chip. While today's list is empty, the home screen says how many loops Earmark is watching. Earmark follows the phone's light or dark theme.
 
@@ -127,6 +132,8 @@ The Log is kept in memory, so it starts empty after Earmark restarts.
 - Message text and the notifications' tap and reply actions stay in memory until the loop closes. Notifications Earmark skips are forgotten straight away.
 - For each message or request Earmark picks up, and each chip or pill, the database stores the loop's kind, times, outcome, and a short label such as "Pay Aisha back $12". After 24 hours the label is cleared, and the recap shows only the kind and time. Contact statistics are keyed by a salted hash, never a name or number.
 - For the smart drift timer, the database keeps one running number per feed app: how long you usually stay in it. Nothing about what you did there.
+- For ranking, the database keeps per chat app how many of its messages you dealt with or left, and how soon you usually got to them, and per conversation (by salted hash) how often you opened or swiped away its notifications. Counts only.
+- Urgency and mentions are worked out on the phone from the words, with word lists, and never logged. With the optional contacts permission, Earmark reads only your own contact card and keeps what it finds in memory. Names you type in Settings › Your name stay in Earmark's private storage on the phone. Neither is ever logged.
 - The Log screen shows why each chip or pill was or wasn't shown. It never shows message text.
 
 ## Known limits in v0.1.11
@@ -138,6 +145,7 @@ The Log is kept in memory, so it starts empty after Earmark restarts.
 - The reply strip sits just above the chat's input, so it can cover the newest message until you reply or close it.
 - On the Galaxy A34, the pill was checked over Instagram with Earmark in the background and its screen opened and left: in demo mode, with a fixed 30 s timer and with the smart timer. The reply strip was checked with a real WhatsApp "hi" opened from its notification. The chip at unlock uses the same overlay fix but wasn't re-checked there.
 - The smart drift timer starts at 45 seconds and needs five visits to a feed app before it goes by your usual visit there.
+- Urgency comes from word lists in English, Hinglish and Hindi, so it misses urgent messages that use none of those words, and a name that's also a common word can count as a mention. A group mention the app shows as a phone number isn't recognised.
 - On some Android 16 builds the system never tells apps about an unlock (`USER_PRESENT`), so Earmark watches the lock screen briefly after the screen turns on instead (ADR 0013).
 
 ## For developers

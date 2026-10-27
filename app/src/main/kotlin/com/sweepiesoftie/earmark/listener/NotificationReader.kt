@@ -86,8 +86,6 @@ class NotificationReader(context: Context, private val wayBacks: WayBackRegistry
         }
         val lastSender = messages.lastOrNull { !it.fromUser }?.sender
         val conversation = n.shortcutId ?: style?.conversationTitle?.toString() ?: lastSender ?: sbn.tag ?: sbn.id.toString()
-        val userName = user?.name?.toString()
-        val lastText = messages.lastOrNull()?.text.orEmpty()
 
         wayBacks.put(
             sbn.key,
@@ -108,7 +106,9 @@ class NotificationReader(context: Context, private val wayBacks: WayBackRegistry
             messages = messages,
             conversationKey = hash(sbn.packageName + "|" + conversation),
             isGroupConversation = style?.isGroupConversation == true,
-            mentionsUser = userName != null && lastText.contains("@$userName", ignoreCase = true),
+            conversationTitle = style?.conversationTitle?.toString(),
+            // Whether a message mentions you is the core's call (ADR 0028); it needs the name the app uses for you.
+            selfName = user?.name?.toString(),
             hasReplyAction = reply != null,
             isOngoing = sbn.isOngoing,
             isGroupSummary = n.flags and Notification.FLAG_GROUP_SUMMARY != 0,
