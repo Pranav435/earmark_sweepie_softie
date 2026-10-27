@@ -10,7 +10,7 @@ export JAVA_HOME=/opt/homebrew/opt/openjdk@21        # JDK 21 is not on PATH
 ./gradlew :core:test :app:assembleRelease lint         # ship gate: tests, minified APK, lint 0 errors
 ```
 
-The release APK lands in `app/build/outputs/apk/release/`. Copy it to `dist/earmark-v0.1.apk`, which is committed so testers can download it from GitHub, then check `aapt2 dump permissions` shows no `INTERNET`.
+The release APK lands in `app/build/outputs/apk/release/`. Copy it to `dist/earmark-v<versionName>.apk`, which is committed so testers can download it from GitHub, and `git rm` the previous one. Then check that `aapt2 dump permissions` shows no `INTERNET`, and that `apksigner verify --print-certs` shows the Sweepie Softie key. Bump `versionCode` for every release so it installs as an update, and update the APK name in README.md and `scripts/setup-phone.sh`.
 
 ## Where changes go
 
@@ -22,10 +22,12 @@ The release APK lands in `app/build/outputs/apk/release/`. Copy it to `dist/earm
 
 - **Signing:** release builds use the Sweepie Softie key named in the git-ignored `keystore.properties` (the keystore is `~/.android/earmark-release.jks` on Pranav's Mac; see ADR 0016). If that file is missing, Gradle falls back to the debug key with a warning. Don't ship that APK: it can't update an installed Earmark.
 
+- **Scoring on real phones:** a chip needs a score above 0.70, and most real messages arrive minutes before the phone is picked up. ADR 0017 tuned `due` and the unlock boost after a plain WhatsApp "hey" never showed a chip on a Galaxy A34. Check a scoring change against a message that is a few minutes old, not just 60 seconds.
 - **Release-only crashes:** R8 strips ML Kit's reflectively loaded registrars. The keep rules are in `app/proguard-rules.pro`. Always smoke-test the release APK, because a debug build hides this.
 - **Unlock:** the Android 16 emulator doesn't deliver `USER_PRESENT` to runtime receivers. `SystemReceivers` watches the keyguard after `SCREEN_ON` instead (ADR 0013). On the emulator, run `adb shell locksettings set-disabled false` so there is a lock screen to dismiss.
 - **compileSdk 37, targetSdk 36:** Compose 1.12 requires compileSdk 37; the test emulator is API 36.
 - **Slow downloads here:** single connections to GitHub and dl.google.com crawl, so fetch large files with parallel `curl -r` ranges.
+- **Dark mode:** screens take colours from `Tone` (Components.kt), which follows the system theme; `Brand` is for the overlays and marigold fills, which look the same in both themes. Check both with `adb shell cmd uimode night yes|no`.
 - **Overlays:** uiautomator can't see them, so tap by coordinates. The chip ✓ sits at about (960, 379) and the pill button at about (893, 376) on the 1080×2400 emulator. Injected touches bypass TalkBack, so check accessibility through the node tree (`uiautomator dump`).
 - **Shell quoting:** the YouTube launcher activity has a `$` in its name: `adb shell "am start -n 'com.google.android.youtube/.app.honeycomb.Shell\$HomeActivity'"`.
 - **Device setup:** `scripts/setup-phone.sh` installs the APK and grants every permission adb can grant, on a phone or the emulator.

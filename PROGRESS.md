@@ -71,3 +71,9 @@ Start: Tue Oct 27 11:27:46 IST 2026 (budget 3 h, feature freeze 2:30 → 13:57, 
   - The keystore is ~/.android/earmark-release.jks; keystore.properties is git-ignored.
   - Verified with apksigner. Reinstalled on the emulator with setup-phone.sh, and the chip still shows (21 ms after unlock).
   - The README now covers the debug-key conflict, Play Protect, and the sensitive-permission block on browser and file-manager installs.
+- 13:55 v0.1.1, after the first real-phone test (Samsung Galaxy A34): a WhatsApp message brought no chip, and the home screen said "Nothing guessed yet today."
+  - Cause, reproduced on the emulator with a WhatsApp-shaped notification: a message with no "?" and no time word could score at most 0.70, and the chip needs more than 0.70. A question cleared the bar only within about 60 seconds of arriving. The log line was "unlock: no chip, best reply:… scored 0.70 … needs > 0.7".
+  - Fix (ADR 0017): a Reply's `due` starts at 0.5, and the +0.15 boost goes to the first unlock after the message, however long after. A plain "hey" two minutes old now scores 0.80 and shows a chip. 45 :core tests green (3 new), including the four scenario tests with their copy unchanged.
+  - The home screen now says how many loops Earmark is watching and that it guesses at unlock. If notification access is on but Android hasn't connected the listener, it shows a banner and asks Android to rebind.
+  - Dark mode: the screens follow the system theme through `Tone`; the overlays stay ink with a hairline edge in dark mode. Checked on the emulator with `cmd uimode night yes`.
+  - dist/earmark-v0.1.1.apk (versionCode 2), signed with the Sweepie Softie key, installs over v0.1. No INTERNET permission; lint 0 errors.
