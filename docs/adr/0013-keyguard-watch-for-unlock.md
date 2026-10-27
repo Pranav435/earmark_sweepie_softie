@@ -1,0 +1,3 @@
+# Unlock is detected by watching the keyguard after SCREEN_ON
+
+The Android 16 emulator image delivers `USER_PRESENT` to system receivers but not to Earmark's runtime receiver, and phones with no lock screen never send it. So after `SCREEN_ON`, `SystemReceivers` checks `KeyguardManager.isKeyguardLocked` every 100 ms until the keyguard opens. The check stops on `SCREEN_OFF` or after two minutes. `USER_PRESENT` is still handled when it does arrive, and a 2-second debounce stops one unlock from counting twice. The polling only runs while the lock screen is showing, uses no wakelock, and keeps the chip well inside the 300 ms budget (measured at 12–160 ms).
