@@ -250,9 +250,10 @@ public data class Waiting(val loopId: LoopId, val kind: LoopKind, val note: Note
 
 /**
  * What the "Earmark this" tile says (ADR 0035): the app an Own loop holds, and the app in front that a tap would
- * hold, or null for the home screen, a feed, Earmark itself or a locked phone.
+ * hold, or null for the home screen, a feed, Earmark itself or a locked phone. [feed] names a feed app in front,
+ * so the tile can say why it won't hold it (ADR 0037).
  */
-public data class TileState(val holding: String? = null, val canHold: String? = null)
+public data class TileState(val holding: String? = null, val canHold: String? = null, val feed: String? = null)
 
 /** One row of the recap, upserted by loop id. Labels are trimmed to kind and time after 24 h by the store. */
 public data class LoopEntry(

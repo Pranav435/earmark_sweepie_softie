@@ -6,6 +6,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.provider.AlarmClock
 import android.text.format.DateFormat
+import androidx.core.net.toUri
 import com.sweepiesoftie.earmark.core.CuratedApps
 import com.sweepiesoftie.earmark.core.DriftTimer
 import com.sweepiesoftie.earmark.core.Settings
@@ -27,15 +28,19 @@ class InstalledApps(private val context: Context) {
         packageName
     }
 
-    /** Launcher apps that are curated feeds or sit in the video, social or game categories, minus messaging apps. */
+    /**
+     * Launcher apps that are curated feeds or sit in the video, social or game categories, minus messaging apps and
+     * browsers. The Play Store files Brave and Tor Browser under social, and a browser is a tool, not a feed (ADR 0037).
+     */
     fun feedCandidates(): List<FeedCandidate> {
         val launcher = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
         val feedCategories = setOf(ApplicationInfo.CATEGORY_VIDEO, ApplicationInfo.CATEGORY_SOCIAL, ApplicationInfo.CATEGORY_GAME)
+        val browsers = browsers()
         return pm.queryIntentActivities(launcher, 0)
             .map { it.activityInfo.applicationInfo }
             .distinctBy { it.packageName }
             .filter { it.packageName != context.packageName && it.packageName !in CuratedApps.messaging }
-            .filter { it.packageName in CuratedApps.feeds || it.category in feedCategories }
+            .filter { it.packageName in CuratedApps.feeds || (it.category in feedCategories && it.packageName !in browsers) }
             .map { FeedCandidate(it.packageName, pm.getApplicationLabel(it).toString(), onByDefault = true) }
             .sortedBy { it.label.lowercase() }
     }
@@ -51,6 +56,12 @@ class InstalledApps(private val context: Context) {
             .map { FeedCandidate(it.packageName, pm.getApplicationLabel(it).toString(), it.packageName in defaults) }
             .sortedWith(compareByDescending<FeedCandidate> { it.onByDefault }.thenBy { it.label.lowercase() })
     }
+
+    /** Apps that open any web link, which only browsers do. */
+    private fun browsers(): Set<String> =
+        pm.queryIntentActivities(Intent(Intent.ACTION_VIEW, "https://example.com".toUri()).addCategory(Intent.CATEGORY_BROWSABLE), PackageManager.MATCH_ALL)
+            .map { it.activityInfo.packageName }
+            .toSet()
 
     fun clockPackage(): String? =
         pm.queryIntentActivities(Intent(AlarmClock.ACTION_SET_ALARM), 0).firstOrNull()?.activityInfo?.packageName

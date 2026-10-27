@@ -99,6 +99,7 @@
     <!-- Earmark this tile (ADR 0035) -->
     <string name="tile_label">Earmark this</string>
     <string name="tile_nothing">Open an app first</string>
+    <string name="tile_feed">%1$s is a feed app</string>
     <string name="tile_off">Earmark isn\'t connected</string>
 
     <!-- Settings -->

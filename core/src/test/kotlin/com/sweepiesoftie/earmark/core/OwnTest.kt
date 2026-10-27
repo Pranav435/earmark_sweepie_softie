@@ -95,6 +95,10 @@ class OwnTest {
             assertTrue(label, at(at(16, 0, 10 * i + 5), Event.Earmarked).none { it is Effect.RecordLoop })
         }
         assertEquals(0, engine.openLoops)
+        at(at(16, 0, 50), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        assertEquals("the tile says why it's off", TileState(feed = "Instagram"), engine.tile)
+        at(at(16, 0, 55), Event.ForegroundChanged(launcher, "Home"))
+        assertNull(engine.tile.feed)
         at(at(16, 1), Event.ForegroundChanged(chrome, "Chrome"))
         at(at(16, 1, 5), Event.ScreenOff)
         assertNull("locked", engine.tile.canHold)

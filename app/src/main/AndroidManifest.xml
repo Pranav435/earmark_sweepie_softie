@@ -39,6 +39,12 @@
         <intent>
             <action android:name="android.intent.action.SET_ALARM" />
         </intent>
+        <!-- Browsers, which are never feeds by category (ADR 0037). -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
         <!-- Launchers: the home screen is no app to earmark (ADR 0035). -->
         <intent>
             <action android:name="android.intent.action.MAIN" />

@@ -42,5 +42,7 @@ public object CuratedApps {
         "com.whatsapp", "com.whatsapp.w4b", "com.google.android.apps.messaging", "org.telegram.messenger",
         "org.thoughtcrime.securesms", "com.facebook.orca", "com.discord", "com.Slack", "com.microsoft.teams",
         "com.samsung.android.messaging", "jp.naver.line.android", "com.viber.voip",
+        "com.aratai.chat", "com.jio.messageslite", "com.google.android.apps.dynamite", "com.tencent.mm", "com.kakao.talk",
+        "com.imo.android.imoim", "im.vector.app", "com.facebook.mlite",
     )
 }

@@ -58,7 +58,11 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     public fun held(): Waiting? = book[drift.loopId]?.takeIf { drift.phase in holding }?.let { copy.waiting(it.loop) }
 
     /** What the "Earmark this" tile says (ADR 0035). Read it on the engine's thread, like [handle]. */
-    public val tile: TileState get() = TileState(holding = own()?.loop?.who, canHold = holdable()?.appLabel)
+    public val tile: TileState get() = TileState(
+        holding = own()?.loop?.who,
+        canHold = holdable()?.appLabel,
+        feed = foreground?.takeIf { inUse && it.packageName in settings.feedApps }?.appLabel,
+    )
 
     /** The message model's weights loaded, so it reads messages beside the word lists (ADR 0031). The first read loads them. */
     public val messageModel: Boolean get() = MessageModel.loaded
