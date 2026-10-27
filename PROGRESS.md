@@ -77,3 +77,12 @@ Start: Tue Oct 27 11:27:46 IST 2026 (budget 3 h, feature freeze 2:30 → 13:57, 
   - The home screen now says how many loops Earmark is watching and that it guesses at unlock. If notification access is on but Android hasn't connected the listener, it shows a banner and asks Android to rebind.
   - Dark mode: the screens follow the system theme through `Tone`; the overlays stay ink with a hairline edge in dark mode. Checked on the emulator with `cmd uimode night yes`.
   - dist/earmark-v0.1.1.apk (versionCode 2), signed with the Sweepie Softie key, installs over v0.1. No INTERNET permission; lint 0 errors.
+- 14:20 v0.1.2, after the second A34 test: chips and pills showed only when Earmark was opened, and WhatsApp showed no suggested replies.
+  - Background: One UI freezes apps that have no foreground service. While frozen, notifications, unlocks and the foreground poll queue up, and arrive together when the app opens. `am freeze` reproduced it on the emulator; the stock emulator never freezes a bound listener (adj 250). `KeepAliveService` (specialUse foreground service, silent "Earmark is on" notification) now holds the process at adj 200 (ADR 0018). It's started by the listener, the app, boot and update. Onboarding asks for battery optimisation off, and the home screen shows a banner while it's on.
+  - Reply strip: WhatsApp clears its notification as the chat opens, which closed the loop and dropped the reply action. The guessed Reply loop now stays open in a chat-open state until you reply, leave the app or turn the screen off (ADR 0019). The strip also shows when you open the guessed chat from its notification. The demo chat now clears its notification on open, like WhatsApp.
+  - On the emulator, release build:
+    - Chip, then YouTube, then the pill at drift.
+    - Do it now: the chat opened and cleared its notification, and the strip showed 3 replies. A reply sent through the cleared notification's action, and the loop closed as done.
+    - Leaving the chat closed the loop.
+    - Opening the chat from the notification after ✓ showed the strip.
+  - 50 :core tests green (5 new); lint 0 errors.

@@ -1,4 +1,4 @@
-# Earmark v0.1.1
+# Earmark v0.1.2
 
 Earmark guesses the one thing you unlocked your phone to do. If you drift into a feed, it hands that exact task back in one tap. It never blocks an app and never counts minutes. Everything runs on the phone: the APK has no internet permission.
 
@@ -6,9 +6,9 @@ This build is for testers. It runs on Android 10 or later and was tested on an A
 
 ## Install
 
-The APK is `dist/earmark-v0.1.1.apk` in this repository. On GitHub, open that file and use **Download raw file**.
+The APK is `dist/earmark-v0.1.2.apk` in this repository. On GitHub, open that file and use **Download raw file**.
 
-- **From a computer:** connect the phone with USB debugging on, then run `adb install -r dist/earmark-v0.1.1.apk`.
+- **From a computer:** connect the phone with USB debugging on, then run `adb install -r dist/earmark-v0.1.2.apk`.
 - **On the phone:** copy the file to the phone, open it from Files, and allow installs from that app when Android asks.
 
 `scripts/setup-phone.sh` installs the APK and grants every permission that adb can grant, in one go.
@@ -17,9 +17,9 @@ The APK is `dist/earmark-v0.1.1.apk` in this repository. On GitHub, open that fi
 
 - **"App not installed" or "conflicts with an existing package":** an older Earmark signed with a different key is on the phone. Builds from before 27 October 2026 were signed with a debug key. Uninstall Earmark, then install again.
 - **Play Protect says the app is unsafe or unrecognised:** tap **More details › Install anyway**. Earmark isn't from the Play Store, and it asks for notification access, which Play Protect treats as sensitive.
-- **Blocked with a message about sensitive permissions, and no way past it:** in some countries Google blocks apps that ask for notification access when they're installed from a browser, a messaging app or a file manager. Install over USB with `adb install -r dist/earmark-v0.1.1.apk` or `scripts/setup-phone.sh`, which that check doesn't cover.
+- **Blocked with a message about sensitive permissions, and no way past it:** in some countries Google blocks apps that ask for notification access when they're installed from a browser, a messaging app or a file manager. Install over USB with `adb install -r dist/earmark-v0.1.2.apk` or `scripts/setup-phone.sh`, which that check doesn't cover.
 
-The APK is signed with the Sweepie Softie release key. To check it, run `apksigner verify --print-certs dist/earmark-v0.1.1.apk`; it should show `CN=Sweepie Softie, OU=Earmark, O=Sweepie Softie`.
+The APK is signed with the Sweepie Softie release key. To check it, run `apksigner verify --print-certs dist/earmark-v0.1.2.apk`; it should show `CN=Sweepie Softie, OU=Earmark, O=Sweepie Softie`.
 
 ## Allow restricted settings (Android 13 and later)
 
@@ -41,7 +41,8 @@ Earmark's first screen lists each permission with a button. It checks them again
 | Usage access | Know which app is in front, only while the screen is on | Open settings › Earmark › Permit usage access | `adb shell appops set com.sweepiesoftie.earmark GET_USAGE_STATS allow` |
 | Display over other apps | Show the chip and the pill on top of any app | Open settings › Allow display over other apps | `adb shell appops set com.sweepiesoftie.earmark SYSTEM_ALERT_WINDOW allow` |
 | Calendar (optional) | Leave-by loops for events with a place or a meeting link | Allow | `adb shell pm grant com.sweepiesoftie.earmark android.permission.READ_CALENDAR` |
-| Notifications (demo mode only) | Lets demo mode post its sample messages | Allow | `adb shell pm grant com.sweepiesoftie.earmark android.permission.POST_NOTIFICATIONS` |
+| Battery: unrestricted | So the phone doesn't pause Earmark while other apps are in front. Samsung phones need it | Allow | `adb shell dumpsys deviceidle whitelist +com.sweepiesoftie.earmark` |
+| Notifications (optional) | Shows the "Earmark is on" notification, and lets demo mode post its sample messages | Allow | `adb shell pm grant com.sweepiesoftie.earmark android.permission.POST_NOTIFICATIONS` |
 
 If a permission is missing, Earmark keeps running and does less. The Log screen (top right of the home screen) says which part is idle and why.
 
@@ -49,7 +50,8 @@ If a permission is missing, Earmark keeps running and does less. The Log screen 
 
 - **Chip:** after you unlock, a dark capsule at the top makes its guess, for example "Here to reply to Rahul?". Tap ✓ to keep it, and it shrinks into a small marigold dot under the status bar. Tap the chip itself to go there now. Swipe it sideways (or long-press it) for "not this". If you ignore it, it fades, and Earmark still watches.
 - **Pill:** if you open a feed app such as YouTube or Instagram while that loop is open, Earmark waits for a natural pause, then shows "You came here to · Reply to Rahul · **Do it now**". Swipe it away (or long-press it) for "not now", and it comes back as a chip at your next unlock.
-- **Reply strip:** after Do it now on a message, up to three one-tap replies appear above the chat's input.
+- **Reply strip:** after Do it now on a message, up to three one-tap replies appear above the chat's input. They also appear if you open the guessed chat yourself from its notification. They stay when WhatsApp or Messages clears the notification as the chat opens, and go away when you reply or leave the app.
+- **"Earmark is on":** a silent notification, with a small icon in the status bar, while Earmark runs. It keeps the phone from pausing Earmark in the background, which Samsung phones otherwise do.
 - **Recap (home screen):** what you came for today, how each one ended, and how many times Earmark brought you back.
 
 Nothing appears when a message arrives. Earmark makes its guess when you unlock, and the dot only appears after you tap ✓ on the chip. Until something is guessed, the home screen says how many loops Earmark is watching. Earmark follows the phone's light or dark theme.
@@ -73,7 +75,7 @@ Turn on **Settings › Demo mode** first for the demo scripts. Demo mode posts r
 5. Tap the first reply. It sends, Rahul answers, and the strip and the dot go away.
 6. Open Earmark. The recap shows "Reply to Rahul" with a green check and "brought back".
 
-**With real apps:** lock the phone, then ask a friend to send you a WhatsApp or Google Messages message. Any message works, and a question such as "free at 5?" scores highest. Leave it unread, unlock within about 10 minutes, then follow steps 2 to 6. Your feed app needs to stay in front for 90 seconds, or whatever you set in Settings › Drift timer. Some apps clear their notification as soon as the chat opens. Earmark counts that as done, so the reply strip steps aside and the app's own reply suggestions take over.
+**With real apps:** lock the phone, then ask a friend to send you a WhatsApp or Google Messages message. Any message works, and a question such as "free at 5?" scores highest. Leave it unread, unlock within about 10 minutes, then follow steps 2 to 6. Your feed app needs to stay in front for 90 seconds, or whatever you set in Settings › Drift timer. WhatsApp and Messages clear their notification as soon as the chat opens; the reply strip stays anyway and sends through it.
 
 ### 2. The Ride
 
@@ -113,7 +115,7 @@ The Ride story needs a ride app (Uber, Ola, Lyft, Bolt, Rapido or Grab) and the 
    - No "opened reply:… from com.whatsapp" line means Earmark never saw the message. Check notification access, and that WhatsApp's own notifications are on.
    - "unlock: no chip, best … scored 0.62 …, needs > 0.7" means Earmark saw it but wasn't sure enough. A message gets the most weight at the first unlock after it arrives, and less as it gets older.
    - No "unlock" line means Earmark didn't notice the unlock. Lock the phone, wait a few seconds, and unlock it again.
-3. On Samsung phones, open Settings › Apps › Earmark › Battery and choose **Unrestricted**, so One UI doesn't put Earmark to sleep.
+3. If the home screen asks to let Earmark run in the background, tap **Allow**. Without it, Samsung phones pause Earmark while other apps are in front, so chips and pills only show once you open Earmark. You can also set it in Settings › Apps › Earmark › Battery › **Unrestricted**.
 
 The Log is kept in memory, so it starts empty after Earmark restarts.
 
@@ -124,13 +126,14 @@ The Log is kept in memory, so it starts empty after Earmark restarts.
 - The database stores loop kinds, times, outcomes, and a short label such as "Pay Aisha back $12". After 24 hours the label is cleared, and the recap shows only the kind and time. Contact statistics are keyed by a salted hash, never a name or number.
 - The Log screen shows why each chip or pill was or wasn't shown. It never shows message text.
 
-## Known limits in v0.1.1
+## Known limits in v0.1.2
 
 - Earmark can't see inside other apps, so unfinished bookings are inferred from how long you spent in a ride, food or shopping app.
 - Reel boundaries are best-effort and depend on whether the feed app publishes media sessions. A feed with nothing playing gets the pill as soon as drift starts.
 - Stored tap actions are lost on reboot; Earmark then opens the app instead of the exact chat.
 - Smart Reply is English only. Chip and pill copy is English only.
-- Messaging apps that clear their notification when the chat opens close the loop at that point, so Earmark's reply strip doesn't appear for them.
+- The reply strip sits just above the chat's input, so it can cover the newest message until you reply or close it.
+- Earmark's background fix (a foreground service) was tested on the emulator. Samsung doesn't publish when One UI freezes apps, so a real Samsung phone is the final check.
 - On some Android 16 builds the system never tells apps about an unlock (`USER_PRESENT`), so Earmark watches the lock screen briefly after the screen turns on instead (ADR 0013).
 
 ## For developers
