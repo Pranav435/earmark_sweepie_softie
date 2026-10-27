@@ -18,8 +18,19 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectHorizontalDragGestures
-import androidx.compose.foundation.gestures.detectVerticalDragGestures
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.material3.ripple
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.layout.onSizeChanged
+import kotlinx.coroutines.launch
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -42,9 +53,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -52,7 +61,6 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.CustomAccessibilityAction
@@ -77,7 +85,7 @@ import com.sweepiesoftie.earmark.ui.theme.InstrumentSans
 import kotlin.math.abs
 
 /** Ease-out for everything that enters; motion stays inside 200–300 ms. */
-private val EaseOut = CubicBezierEasing(0.2f, 0f, 0f, 1f)
+private val EaseOut = CubicBezierEasing(0.23f, 1f, 0.32f, 1f)
 private val Capsule = RoundedCornerShape(28.dp)
 private val PaperDim = Brand.Paper.copy(alpha = 0.72f)
 
@@ -147,7 +155,6 @@ private fun Chip(
         fade.animateTo(0f, tween(timeoutMillis.toInt(), easing = LinearEasing))
         onFaded(chip.loopId)
     }
-    var dragX by remember(chip.loopId) { mutableFloatStateOf(0f) }
     val pane = stringResource(R.string.overlay_chip_pane)
     val keep = stringResource(R.string.overlay_chip_keep)
     val notThis = stringResource(R.string.overlay_chip_not_this)
@@ -156,16 +163,7 @@ private fun Chip(
     Column(
         Modifier
             .fillMaxWidth()
-            .graphicsLayer {
-                translationX = dragX
-                alpha = 1f - (abs(dragX) / 600f).coerceAtMost(0.7f)
-            }
-            .pointerInput(chip.loopId) {
-                detectHorizontalDragGestures(
-                    onDragEnd = { if (abs(dragX) > 160f) onDismiss(chip.loopId) else dragX = 0f },
-                    onDragCancel = { dragX = 0f },
-                ) { _, delta -> dragX += delta }
-            }
+            .swipeAway(chip.loopId) { onDismiss(chip.loopId) }
             .clip(Capsule)
             .background(Brand.Ink)
             .semantics(mergeDescendants = false) {
@@ -184,7 +182,12 @@ private fun Chip(
                     .weight(1f)
                     .heightIn(min = 48.dp)
                     .clip(Capsule)
-                    .clickable(onClickLabel = chip.action ?: open, role = Role.Button) { onAct(chip.loopId) },
+                    .combinedClickable(
+                        onClickLabel = chip.action ?: open,
+                        role = Role.Button,
+                        onLongClickLabel = notThis,
+                        onLongClick = { onDismiss(chip.loopId) },
+                    ) { onAct(chip.loopId) },
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Glyph()
@@ -198,16 +201,18 @@ private fun Chip(
             if (chip.action != null) {
                 VerbButton(chip.action!!) { onAct(chip.loopId) }
             } else {
+                val source = remember { MutableInteractionSource() }
                 Box(
                     Modifier
                         .size(48.dp)
+                        .pressFeedback(source)
                         .clip(CircleShape)
                         .background(Brand.Marigold)
-                        .clickable(role = Role.Button) { onHold(chip.loopId) }
+                        .clickable(interactionSource = source, indication = ripple(), role = Role.Button) { onHold(chip.loopId) }
                         .semantics { contentDescription = keep },
                     contentAlignment = Alignment.Center,
                 ) {
-                    Text("✓", color = Brand.Ink, fontSize = 22.sp, fontWeight = FontWeight.Bold, modifier = Modifier.clearAndSetSemantics { })
+                    Image(painterResource(R.drawable.ic_check), contentDescription = null, modifier = Modifier.size(26.dp))
                 }
             }
         }
@@ -229,31 +234,19 @@ private fun Chip(
 
 @Composable
 private fun Pill(pill: PillCard, onAct: (LoopId) -> Unit, onDismiss: (LoopId) -> Unit) {
-    var dragY by remember(pill.loopId) { mutableFloatStateOf(0f) }
-    var dragX by remember(pill.loopId) { mutableFloatStateOf(0f) }
     val pane = stringResource(R.string.overlay_pill_pane)
     val label = stringResource(R.string.overlay_pill_label)
     val notNow = stringResource(R.string.overlay_pill_not_now)
     Row(
         Modifier
             .fillMaxWidth()
-            .graphicsLayer {
-                translationY = dragY.coerceAtMost(0f)
-                translationX = dragX
-                alpha = 1f - ((abs(dragX) + abs(dragY.coerceAtMost(0f))) / 500f).coerceAtMost(0.7f)
-            }
-            .pointerInput(pill.loopId) {
-                detectVerticalDragGestures(
-                    onDragEnd = { if (dragY < -60f) onDismiss(pill.loopId) else dragY = 0f },
-                    onDragCancel = { dragY = 0f },
-                ) { _, delta -> dragY += delta }
-            }
-            .pointerInput(pill.loopId) {
-                detectHorizontalDragGestures(
-                    onDragEnd = { if (abs(dragX) > 160f) onDismiss(pill.loopId) else dragX = 0f },
-                    onDragCancel = { dragX = 0f },
-                ) { _, delta -> dragX += delta }
-            }
+            .swipeAway(pill.loopId) { onDismiss(pill.loopId) }
+            .combinedClickable(
+                onClickLabel = pill.verb,
+                role = Role.Button,
+                onLongClickLabel = notNow,
+                onLongClick = { onDismiss(pill.loopId) },
+            ) { onAct(pill.loopId) }
             .clip(Capsule)
             .background(Brand.Ink)
             .border(1.dp, Brand.Marigold.copy(alpha = 0.35f), Capsule)
@@ -271,7 +264,7 @@ private fun Pill(pill: PillCard, onAct: (LoopId) -> Unit, onDismiss: (LoopId) ->
                 .weight(1f)
                 .semantics(mergeDescendants = true) { },
         ) {
-            Text(label, color = PaperDim, style = MaterialTheme.typography.labelSmall, maxLines = 2)
+            Text(label, color = PaperDim, fontFamily = InstrumentSans, fontSize = 12.sp, lineHeight = 16.sp, maxLines = 2)
             Text(pill.task, color = Brand.Paper, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, maxLines = 3, overflow = TextOverflow.Ellipsis)
         }
         Spacer(Modifier.width(8.dp))
@@ -281,12 +274,14 @@ private fun Pill(pill: PillCard, onAct: (LoopId) -> Unit, onDismiss: (LoopId) ->
 
 @Composable
 private fun VerbButton(verb: String, description: String = verb, onClick: () -> Unit) {
+    val source = remember { MutableInteractionSource() }
     Box(
         Modifier
             .sizeIn(minWidth = 64.dp, minHeight = 48.dp)
+            .pressFeedback(source)
             .clip(Capsule)
             .background(Brand.Marigold)
-            .clickable(role = Role.Button, onClick = onClick)
+            .clickable(interactionSource = source, indication = ripple(), role = Role.Button, onClick = onClick)
             .semantics { contentDescription = description }
             .padding(horizontal = 18.dp, vertical = 12.dp),
         contentAlignment = Alignment.Center,
@@ -371,3 +366,47 @@ fun ReplyStripOverlay(strip: ReplyStrip?, reduceMotion: Boolean, onReply: (LoopI
         }
     }
 }
+
+/**
+ * Swipe sideways to dismiss: past a third of the width, or a quick flick at any distance.
+ * Long-press does the same for anyone who can't drag (WCAG 2.5.7).
+ */
+@Composable
+private fun Modifier.swipeAway(key: Any, onDismiss: () -> Unit): Modifier {
+    val offset = remember(key) { Animatable(0f) }
+    var width by remember(key) { mutableIntStateOf(0) }
+    val scope = rememberCoroutineScope()
+    val state = rememberDraggableState { delta -> scope.launch { offset.snapTo(offset.value + delta) } }
+    return this
+        .onSizeChanged { width = it.width }
+        .graphicsLayer {
+            translationX = offset.value
+            alpha = 1f - (abs(offset.value) / size.width.coerceAtLeast(1f)).coerceAtMost(0.8f)
+        }
+        .draggable(
+            state = state,
+            orientation = Orientation.Horizontal,
+            onDragStopped = { velocity ->
+                val travel = width.coerceAtLeast(1).toFloat()
+                if (abs(offset.value) > travel / 3 || abs(velocity) > FLING_VELOCITY) {
+                    offset.animateTo(if (offset.value + velocity >= 0) travel else -travel, tween(180, easing = EaseOut))
+                    onDismiss()
+                } else {
+                    offset.animateTo(0f, tween(200, easing = EaseOut))
+                }
+            },
+        )
+}
+
+/** Scales to 0.97 while pressed, so a tap visibly lands. */
+@Composable
+private fun Modifier.pressFeedback(source: MutableInteractionSource): Modifier {
+    val pressed by source.collectIsPressedAsState()
+    val scale by animateFloatAsState(if (pressed) 0.97f else 1f, tween(120, easing = EaseOut), label = "press")
+    return graphicsLayer {
+        scaleX = scale
+        scaleY = scale
+    }
+}
+
+private const val FLING_VELOCITY = 1200f

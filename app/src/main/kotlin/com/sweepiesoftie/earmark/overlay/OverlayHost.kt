@@ -201,6 +201,8 @@ class OverlayHost(private val context: Context, private val log: DebugLog, priva
                 return
             }
             try {
+                // A detached view misses configuration changes such as a new font scale.
+                view.dispatchConfigurationChanged(context.resources.configuration)
                 wm.addView(view, params)
                 attached = true
             } catch (e: RuntimeException) {

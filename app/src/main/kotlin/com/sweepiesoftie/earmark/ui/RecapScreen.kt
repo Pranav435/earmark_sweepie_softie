@@ -1,5 +1,6 @@
 package com.sweepiesoftie.earmark.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -25,6 +26,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -100,7 +104,7 @@ private fun Headline(state: RecapState) {
             else -> stringResource(R.string.recap_some_done, state.done, total)
         }
         if (second != null) {
-            Text(second, fontFamily = InstrumentSerif, fontStyle = FontStyle.Italic, fontSize = 40.sp, lineHeight = 44.sp, color = Brand.MarigoldDeep)
+            Text(second, fontFamily = InstrumentSerif, fontStyle = FontStyle.Italic, fontSize = 40.sp, lineHeight = 44.sp, color = Brand.MarigoldText)
         } else {
             Spacer(Modifier.heightIn(min = 8.dp))
             Text(stringResource(R.string.recap_empty_line), style = MaterialTheme.typography.bodyLarge, color = Tone.Muted)
@@ -125,34 +129,46 @@ private fun RecapRowView(row: RecapRow) {
             .heightIn(min = 64.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(Tone.Card)
-            .border(1.dp, Tone.Line, RoundedCornerShape(16.dp))
             .clearAndSetSemantics { contentDescription = spoken }
             .padding(horizontal = 14.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        // At large font sizes the tag moves under the time so the label keeps its width.
+        val stacked = LocalDensity.current.fontScale > 1.3f
         StatusMark(row.outcome)
         Spacer(Modifier.width(14.dp))
-        Column(Modifier.weight(1f)) {
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(label, style = MaterialTheme.typography.bodyLarge, color = if (row.outcome == Outcome.Done || row.outcome == null) Brand.Ink else Tone.Muted)
             Text(row.time, style = MaterialTheme.typography.labelSmall, color = Tone.Muted)
+            if (row.broughtBack && stacked) BroughtBackTag(tag)
         }
-        if (row.broughtBack) {
+        if (row.broughtBack && !stacked) {
             Spacer(Modifier.width(8.dp))
-            Text(
-                "↶ $tag",
-                style = MaterialTheme.typography.labelSmall,
-                color = Brand.Ink,
-                modifier = Modifier.clip(RoundedCornerShape(12.dp)).background(Tone.MarigoldWash).padding(horizontal = 8.dp, vertical = 4.dp),
-            )
+            BroughtBackTag(tag)
         }
     }
+}
+
+@Composable
+private fun BroughtBackTag(tag: String) {
+    Text(
+        "↶ $tag",
+        style = MaterialTheme.typography.labelSmall,
+        color = Brand.Ink,
+        modifier = Modifier.clip(RoundedCornerShape(12.dp)).background(Tone.MarigoldWash).padding(horizontal = 8.dp, vertical = 4.dp),
+    )
 }
 
 @Composable
 private fun StatusMark(outcome: Outcome?) {
     when (outcome) {
         Outcome.Done -> Box(Modifier.size(28.dp).clip(CircleShape).background(Tone.Done), contentAlignment = Alignment.Center) {
-            Text("✓", color = Brand.Paper, style = MaterialTheme.typography.labelLarge)
+            Image(
+                painterResource(R.drawable.ic_check),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(Brand.Paper),
+                modifier = Modifier.size(18.dp),
+            )
         }
         null -> Box(Modifier.size(28.dp).border(2.dp, Brand.Marigold, CircleShape))
         else -> Box(Modifier.size(28.dp).border(2.dp, Tone.Line, CircleShape))

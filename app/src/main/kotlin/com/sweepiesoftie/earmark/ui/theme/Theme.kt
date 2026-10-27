@@ -20,6 +20,9 @@ object Brand {
     val Ink2: Color = Color(0xFF2A261D)
     val Marigold: Color = Color(0xFFFFB224)
     val MarigoldDeep: Color = Color(0xFFE08E00)
+
+    /** Marigold dark enough for text on paper (about 4.6:1); the brand marigolds are for fills. */
+    val MarigoldText: Color = Color(0xFFA35F00)
 }
 
 val InstrumentSerif: FontFamily = FontFamily(

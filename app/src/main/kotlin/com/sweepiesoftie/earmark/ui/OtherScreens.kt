@@ -1,6 +1,7 @@
 package com.sweepiesoftie.earmark.ui
 
 import android.os.Build
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -29,6 +30,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -235,7 +238,11 @@ private fun PermissionRow(step: Int, title: String, body: String, granted: Boole
             Modifier.size(32.dp).clip(CircleShape).background(if (granted) Tone.Done else Tone.MarigoldWash).clearAndSetSemantics { },
             contentAlignment = Alignment.Center,
         ) {
-            Text(if (granted) "✓" else step.toString(), style = MaterialTheme.typography.labelLarge, color = if (granted) Brand.Paper else Brand.Ink)
+            if (granted) {
+                Image(painterResource(R.drawable.ic_check), contentDescription = null, colorFilter = ColorFilter.tint(Brand.Paper), modifier = Modifier.size(20.dp))
+            } else {
+                Text(step.toString(), style = MaterialTheme.typography.labelLarge, color = Brand.Ink, maxLines = 1)
+            }
         }
         Spacer(Modifier.width(14.dp))
         Column(Modifier.weight(1f).semantics(mergeDescendants = true) { }) {

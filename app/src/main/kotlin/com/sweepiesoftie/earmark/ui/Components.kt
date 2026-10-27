@@ -132,7 +132,7 @@ fun SecondaryButton(label: String, modifier: Modifier = Modifier, onClick: () ->
 @Composable
 fun SectionTitle(text: String) {
     Text(
-        text.uppercase(),
+        text,
         style = MaterialTheme.typography.labelSmall,
         color = Tone.Muted,
         modifier = Modifier.padding(top = 28.dp, bottom = 8.dp).semantics { heading() },
