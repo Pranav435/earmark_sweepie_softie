@@ -29,6 +29,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -51,7 +52,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sweepiesoftie.earmark.AppGraph
 import com.sweepiesoftie.earmark.R
-import com.sweepiesoftie.earmark.ui.theme.Brand
+import com.sweepiesoftie.earmark.ui.Tone
 import com.sweepiesoftie.earmark.ui.theme.EarmarkTheme
 import com.sweepiesoftie.earmark.ui.theme.InstrumentSerif
 
@@ -68,7 +69,9 @@ class DemoActivity : ComponentActivity() {
                     PayScreen(paid = paid, onPay = { DemoNotifier.payAisha(this) })
                 } else {
                     val lines by AppGraph.demo.rahul.collectAsState()
-                    ChatScreen(lines = lines, onBack = ::finish, onSend = { DemoNotifier.reply(this, it) })
+                    Surface(color = MaterialTheme.colorScheme.background) {
+                        ChatScreen(lines = lines, onBack = ::finish, onSend = { DemoNotifier.reply(this, it) })
+                    }
                 }
             }
         }
@@ -81,30 +84,34 @@ class DemoActivity : ComponentActivity() {
     }
 }
 
-private val ChatBackground = Color(0xFFF1EDE4)
-private val Sent = Color(0xFFD9F5C8)
+/** The demo chat's own colours, so it reads as another app in light and dark. */
+private class ChatColors(val background: Color, val received: Color, val sent: Color, val online: Color)
+
+private val LightChat = ChatColors(Color(0xFFF1EDE4), Color.White, Color(0xFFD9F5C8), Color(0xFF2E7D32))
+private val DarkChat = ChatColors(Color(0xFF0F0E0A), Color(0xFF26221A), Color(0xFF1F3B29), Color(0xFF7CC47F))
 
 @Composable
 private fun ChatScreen(lines: List<ChatLine>, onBack: () -> Unit, onSend: (String) -> Unit) {
     var draft by rememberSaveable { mutableStateOf("") }
     val list = rememberLazyListState()
     LaunchedEffect(lines.size) { if (lines.isNotEmpty()) list.animateScrollToItem(lines.lastIndex) }
-    Column(Modifier.fillMaxSize().background(ChatBackground).imePadding()) {
+    val chat = if (Tone.Dark) DarkChat else LightChat
+    Column(Modifier.fillMaxSize().background(chat.background).imePadding()) {
         Row(
-            Modifier.fillMaxWidth().background(Brand.Paper).statusBarsPadding().padding(horizontal = 4.dp, vertical = 6.dp),
+            Modifier.fillMaxWidth().background(Tone.Paper).statusBarsPadding().padding(horizontal = 4.dp, vertical = 6.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
                 Modifier.size(48.dp).clip(CircleShape).clickable(role = Role.Button, onClickLabel = stringResource(R.string.nav_back), onClick = onBack),
                 contentAlignment = Alignment.Center,
-            ) { Text("←", fontSize = 22.sp, color = Brand.Ink) }
+            ) { Text("←", fontSize = 22.sp, color = Tone.Ink) }
             Box(Modifier.size(40.dp).clip(CircleShape).background(Color(0xFFE8734A)), contentAlignment = Alignment.Center) {
                 Text("R", color = Color.White, fontWeight = FontWeight.Bold)
             }
             Spacer(Modifier.width(12.dp))
             Column(Modifier.semantics(mergeDescendants = true) { heading() }) {
                 Text("Rahul", style = MaterialTheme.typography.titleMedium)
-                Text(stringResource(R.string.demo_online), style = MaterialTheme.typography.bodyMedium, color = Color(0xFF2E7D32))
+                Text(stringResource(R.string.demo_online), style = MaterialTheme.typography.bodyMedium, color = chat.online)
             }
         }
         LazyColumn(
@@ -120,7 +127,7 @@ private fun ChatScreen(lines: List<ChatLine>, onBack: () -> Unit, onSend: (Strin
                         modifier = Modifier
                             .widthIn(max = 300.dp)
                             .clip(RoundedCornerShape(16.dp))
-                            .background(if (line.fromUser) Sent else Color.White)
+                            .background(if (line.fromUser) chat.sent else chat.received)
                             .padding(horizontal = 14.dp, vertical = 10.dp),
                     )
                 }
@@ -136,7 +143,7 @@ private fun ChatScreen(lines: List<ChatLine>, onBack: () -> Unit, onSend: (Strin
                 placeholder = { Text(stringResource(R.string.demo_message_hint)) },
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(28.dp),
-                colors = OutlinedTextFieldDefaults.colors(focusedContainerColor = Color.White, unfocusedContainerColor = Color.White),
+                colors = OutlinedTextFieldDefaults.colors(focusedContainerColor = chat.received, unfocusedContainerColor = chat.received),
             )
             Spacer(Modifier.width(8.dp))
             Box(

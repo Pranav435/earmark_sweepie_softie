@@ -12,6 +12,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+
+/** What the home screen shows about the listener: whether Android has connected it, and how many loops it holds open. */
+data class ListenerState(val connected: Boolean = false, val openLoops: Int = 0)
 
 /**
  * Every long-lived object, wired by hand (ADR 0008). The activity and the listener share one process and this graph.
@@ -30,6 +34,9 @@ object AppGraph {
     val debugLog: DebugLog = DebugLog()
     val wayBacks: WayBackRegistry = WayBackRegistry()
     val demo: DemoChats = DemoChats()
+
+    /** Written by the listener, read by the home screen. */
+    val listener: MutableStateFlow<ListenerState> = MutableStateFlow(ListenerState())
 
     /** Events raised by screens (unmute a kind) for the listener to feed the engine. */
     val uiEvents: MutableSharedFlow<Event> = MutableSharedFlow(extraBufferCapacity = 16)

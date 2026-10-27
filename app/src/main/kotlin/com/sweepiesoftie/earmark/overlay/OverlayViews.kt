@@ -83,6 +83,7 @@ import com.sweepiesoftie.earmark.R
 import com.sweepiesoftie.earmark.core.ChipCard
 import com.sweepiesoftie.earmark.core.LoopId
 import com.sweepiesoftie.earmark.core.PillCard
+import com.sweepiesoftie.earmark.ui.Tone
 import com.sweepiesoftie.earmark.ui.theme.Brand
 import com.sweepiesoftie.earmark.ui.theme.InstrumentSans
 import kotlinx.coroutines.delay
@@ -94,6 +95,11 @@ import kotlin.math.sign
 private val EaseOut = CubicBezierEasing(0.23f, 1f, 0.32f, 1f)
 private val Capsule = RoundedCornerShape(28.dp)
 private val PaperDim = Brand.Paper.copy(alpha = 0.72f)
+
+/** The capsules stay ink in both themes; in dark mode a hairline keeps them apart from a dark app behind. */
+@Composable
+private fun Modifier.darkEdge(): Modifier =
+    if (Tone.Dark) border(1.dp, Brand.Paper.copy(alpha = 0.16f), Capsule) else this
 
 /** The chip shows at many unlocks a day, so its entrance is quick. */
 private fun enter(reduceMotion: Boolean): EnterTransition =
@@ -207,6 +213,7 @@ private fun Chip(
             .swipeAway(swipe, upToo = false) { onDismiss(chip.loopId) }
             .clip(Capsule)
             .background(Brand.Ink)
+            .darkEdge()
             .semantics(mergeDescendants = false) {
                 paneTitle = pane
                 customActions = listOf(
@@ -386,6 +393,7 @@ fun ReplyStripOverlay(strip: ReplyStrip?, reduceMotion: Boolean, onReply: (LoopI
                 .padding(horizontal = 12.dp)
                 .clip(Capsule)
                 .background(Brand.Ink.copy(alpha = 0.94f))
+                .darkEdge()
                 .semantics { paneTitle = pane }
                 .padding(6.dp),
             verticalAlignment = Alignment.CenterVertically,

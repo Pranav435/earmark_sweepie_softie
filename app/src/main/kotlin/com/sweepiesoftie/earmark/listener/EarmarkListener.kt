@@ -7,6 +7,7 @@ import android.os.SystemClock
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import com.sweepiesoftie.earmark.AppGraph
+import com.sweepiesoftie.earmark.ListenerState
 import com.sweepiesoftie.earmark.core.Blocker
 import com.sweepiesoftie.earmark.core.Effect
 import com.sweepiesoftie.earmark.core.Engine
@@ -20,6 +21,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.Instant
@@ -72,6 +74,7 @@ class EarmarkListener : NotificationListenerService() {
         session?.close()
         val s = Session()
         session = s
+        graph.listener.value = ListenerState(connected = true)
         log.add("listener connected")
         s.receivers.start()
         s.pause.start()
@@ -104,12 +107,14 @@ class EarmarkListener : NotificationListenerService() {
         log.add("listener disconnected; asking to rebind")
         session?.close()
         session = null
+        graph.listener.value = ListenerState()
         requestRebind(ComponentName(this, EarmarkListener::class.java))
     }
 
     override fun onDestroy() {
         session?.close()
         session = null
+        graph.listener.value = ListenerState()
         super.onDestroy()
     }
 
@@ -166,6 +171,8 @@ class EarmarkListener : NotificationListenerService() {
         val s = session ?: return
         s.scope.launch(s.engineDispatcher) {
             val effects = s.engine.handle(event, Instant.now())
+            val open = s.engine.openLoops
+            graph.listener.update { if (session === s) it.copy(openLoops = open) else it }
             if (effects.isNotEmpty()) withContext(Dispatchers.Main) { effects.forEach { run(s, it) } }
         }
     }

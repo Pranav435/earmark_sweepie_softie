@@ -41,6 +41,7 @@ import com.sweepiesoftie.earmark.listener.EarmarkListener
 import com.sweepiesoftie.earmark.store.Store
 import com.sweepiesoftie.earmark.ui.theme.EarmarkTheme
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
@@ -88,6 +89,14 @@ private fun Root() {
     BackHandler(screen == Screen.Settings || screen == Screen.Log) { screen = Screen.Recap }
 
     val user by graph.settings.state.collectAsState()
+    val listener by graph.listener.collectAsState()
+    // Android binds the listener a moment after access is granted, so wait before saying it isn't connected.
+    var bindWaitOver by remember { mutableStateOf(false) }
+    LaunchedEffect(permissions.notifications) {
+        bindWaitOver = false
+        delay(LISTENER_BIND_WAIT_MILLIS)
+        bindWaitOver = true
+    }
     val requestCalendar = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { permissions = readPermissions(activity) }
     val requestPost = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { permissions = readPermissions(activity) }
 
@@ -120,6 +129,8 @@ private fun Root() {
                         rows = rows,
                         paused = user.paused,
                         missingPermission = !permissions.required,
+                        notListening = permissions.notifications && !listener.connected && bindWaitOver,
+                        openLoops = listener.openLoops,
                         demoMode = user.demoMode,
                         canPostNotifications = permissions.postNotifications,
                     ),
@@ -128,6 +139,7 @@ private fun Root() {
                         onLog = { screen = Screen.Log },
                         onResume = { graph.settings.setPaused(false) },
                         onFixPermissions = { screen = Screen.Onboarding },
+                        onNotificationAccess = { activity.openSettings(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS) },
                         onDemoRahul = { DemoNotifier.postRahul(activity) },
                         onDemoAisha = { DemoNotifier.postAisha(activity) },
                         onAllowNotifications = { requestPostNotifications(requestPost::launch) },
@@ -167,15 +179,22 @@ private fun Root() {
             }
         }
     }
-    LaunchedEffect(permissions.notifications) {
-        // Nudge the system to bind the listener as soon as access is granted.
-        if (permissions.notifications) {
-            android.service.notification.NotificationListenerService.requestRebind(
-                android.content.ComponentName(activity, EarmarkListener::class.java),
-            )
+    LaunchedEffect(permissions.notifications, listener.connected) {
+        // Nudge the system to bind the listener when access is on but it isn't connected, such as after an
+        // update or a force stop, which some phones don't recover from on their own.
+        if (permissions.notifications && !listener.connected) {
+            try {
+                android.service.notification.NotificationListenerService.requestRebind(
+                    android.content.ComponentName(activity, EarmarkListener::class.java),
+                )
+            } catch (e: RuntimeException) {
+                graph.debugLog.error("requestRebind", e)
+            }
         }
     }
 }
+
+private const val LISTENER_BIND_WAIT_MILLIS = 3_000L
 
 @Composable
 private fun recapRows() = run {

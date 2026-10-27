@@ -44,7 +44,6 @@ import com.sweepiesoftie.earmark.R
 import com.sweepiesoftie.earmark.core.LoopKind
 import com.sweepiesoftie.earmark.listener.FeedCandidate
 import com.sweepiesoftie.earmark.store.UserSettings
-import com.sweepiesoftie.earmark.ui.theme.Brand
 import com.sweepiesoftie.earmark.ui.theme.InstrumentSerif
 import java.text.DateFormat
 import java.util.Date
@@ -127,13 +126,13 @@ private fun Choice(label: String, selected: Boolean, enabled: Boolean, onClick: 
         Modifier
             .heightIn(min = 48.dp)
             .clip(RoundedCornerShape(24.dp))
-            .background(if (selected) Brand.Ink else Tone.Card)
-            .border(1.dp, if (selected) Brand.Ink else Tone.Line, RoundedCornerShape(24.dp))
+            .background(if (selected) Tone.Ink else Tone.Card)
+            .border(1.dp, if (selected) Tone.Ink else Tone.Line, RoundedCornerShape(24.dp))
             .selectable(selected = selected, enabled = enabled, role = Role.RadioButton, onClick = onClick)
             .padding(horizontal = 18.dp, vertical = 12.dp),
         contentAlignment = Alignment.Center,
     ) {
-        Text(label, style = MaterialTheme.typography.labelLarge, color = if (selected) Brand.Paper else if (enabled) Brand.Ink else Tone.Muted)
+        Text(label, style = MaterialTheme.typography.labelLarge, color = if (selected) Tone.Paper else if (enabled) Tone.Ink else Tone.Muted)
     }
 }
 
@@ -239,9 +238,9 @@ private fun PermissionRow(step: Int, title: String, body: String, granted: Boole
             contentAlignment = Alignment.Center,
         ) {
             if (granted) {
-                Image(painterResource(R.drawable.ic_check), contentDescription = null, colorFilter = ColorFilter.tint(Brand.Paper), modifier = Modifier.size(20.dp))
+                Image(painterResource(R.drawable.ic_check), contentDescription = null, colorFilter = ColorFilter.tint(Tone.Paper), modifier = Modifier.size(20.dp))
             } else {
-                Text(step.toString(), style = MaterialTheme.typography.labelLarge, color = Brand.Ink, maxLines = 1)
+                Text(step.toString(), style = MaterialTheme.typography.labelLarge, color = Tone.Ink, maxLines = 1)
             }
         }
         Spacer(Modifier.width(14.dp))
@@ -256,12 +255,12 @@ private fun PermissionRow(step: Int, title: String, body: String, granted: Boole
                 Modifier
                     .heightIn(min = 48.dp)
                     .clip(RoundedCornerShape(24.dp))
-                    .background(Brand.Ink)
+                    .background(Tone.Ink)
                     .clickable(role = Role.Button, onClickLabel = "$action: $title", onClick = onAction)
                     .padding(horizontal = 14.dp, vertical = 12.dp),
                 contentAlignment = Alignment.Center,
             ) {
-                Text(action, color = Brand.Paper, style = MaterialTheme.typography.labelLarge)
+                Text(action, color = Tone.Paper, style = MaterialTheme.typography.labelLarge)
             }
         }
     }

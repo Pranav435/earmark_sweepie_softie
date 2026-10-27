@@ -52,6 +52,9 @@ data class RecapState(
     val rows: List<RecapRow> = emptyList(),
     val paused: Boolean = false,
     val missingPermission: Boolean = false,
+    /** Notification access is on, but Android hasn't connected the listener. */
+    val notListening: Boolean = false,
+    val openLoops: Int = 0,
     val demoMode: Boolean = false,
     val canPostNotifications: Boolean = true,
 ) {
@@ -64,6 +67,7 @@ class RecapActions(
     val onLog: () -> Unit,
     val onResume: () -> Unit,
     val onFixPermissions: () -> Unit,
+    val onNotificationAccess: () -> Unit,
     val onDemoRahul: () -> Unit,
     val onDemoAisha: () -> Unit,
     val onAllowNotifications: () -> Unit,
@@ -82,6 +86,7 @@ fun RecapScreen(state: RecapState, actions: RecapActions) {
             }
         }
         if (state.missingPermission) item { Banner(stringResource(R.string.recap_missing), stringResource(R.string.recap_fix), actions.onFixPermissions) }
+        if (state.notListening) item { Banner(stringResource(R.string.recap_not_listening), stringResource(R.string.onboarding_open_settings), actions.onNotificationAccess) }
         if (state.paused) item { Banner(stringResource(R.string.recap_paused), stringResource(R.string.recap_resume), actions.onResume) }
         item { Headline(state) }
         items(state.rows, key = { it.id }) { RecapRowView(it) }
@@ -96,7 +101,7 @@ private fun Headline(state: RecapState) {
     val total = state.rows.size
     Column(Modifier.padding(top = 24.dp, bottom = 12.dp).semantics(mergeDescendants = true) { heading() }) {
         val title = if (total == 0) stringResource(R.string.recap_empty_title) else pluralStringResource(R.plurals.recap_title, total, total)
-        Text(title, fontFamily = InstrumentSerif, fontSize = 40.sp, lineHeight = 44.sp, color = Brand.Ink)
+        Text(title, fontFamily = InstrumentSerif, fontSize = 40.sp, lineHeight = 44.sp, color = Tone.Ink)
         val second = when {
             total == 0 -> null
             state.done == total && total == 1 -> stringResource(R.string.recap_all_done_one)
@@ -104,10 +109,11 @@ private fun Headline(state: RecapState) {
             else -> stringResource(R.string.recap_some_done, state.done, total)
         }
         if (second != null) {
-            Text(second, fontFamily = InstrumentSerif, fontStyle = FontStyle.Italic, fontSize = 40.sp, lineHeight = 44.sp, color = Brand.MarigoldText)
+            Text(second, fontFamily = InstrumentSerif, fontStyle = FontStyle.Italic, fontSize = 40.sp, lineHeight = 44.sp, color = Tone.MarigoldText)
         } else {
             Spacer(Modifier.heightIn(min = 8.dp))
-            Text(stringResource(R.string.recap_empty_line), style = MaterialTheme.typography.bodyLarge, color = Tone.Muted)
+            val line = if (state.openLoops > 0) pluralStringResource(R.plurals.recap_open_loops, state.openLoops, state.openLoops) else stringResource(R.string.recap_empty_line)
+            Text(line, style = MaterialTheme.typography.bodyLarge, color = Tone.Muted)
         }
     }
 }
@@ -138,7 +144,7 @@ private fun RecapRowView(row: RecapRow) {
         StatusMark(row.outcome)
         Spacer(Modifier.width(14.dp))
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            Text(label, style = MaterialTheme.typography.bodyLarge, color = if (row.outcome == Outcome.Done || row.outcome == null) Brand.Ink else Tone.Muted)
+            Text(label, style = MaterialTheme.typography.bodyLarge, color = if (row.outcome == Outcome.Done || row.outcome == null) Tone.Ink else Tone.Muted)
             Text(row.time, style = MaterialTheme.typography.labelSmall, color = Tone.Muted)
             if (row.broughtBack && stacked) BroughtBackTag(tag)
         }
@@ -154,7 +160,7 @@ private fun BroughtBackTag(tag: String) {
     Text(
         "↶ $tag",
         style = MaterialTheme.typography.labelSmall,
-        color = Brand.Ink,
+        color = Tone.Ink,
         modifier = Modifier.clip(RoundedCornerShape(12.dp)).background(Tone.MarigoldWash).padding(horizontal = 8.dp, vertical = 4.dp),
     )
 }
@@ -166,7 +172,7 @@ private fun StatusMark(outcome: Outcome?) {
             Image(
                 painterResource(R.drawable.ic_check),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(Brand.Paper),
+                colorFilter = ColorFilter.tint(Tone.Paper),
                 modifier = Modifier.size(18.dp),
             )
         }
@@ -199,19 +205,22 @@ private fun Banner(text: String, action: String, onAction: () -> Unit) {
 
 @Composable
 private fun DemoCard(state: RecapState, actions: RecapActions) {
+    // Ink stands out on paper; on a dark screen an ink card would vanish and a paper one would glare, so it's raised instead.
+    val fill = if (Tone.Dark) Tone.Card else Tone.Ink
+    val text = if (Tone.Dark) Tone.Ink else Tone.Paper
     Column(
-        Modifier.fillMaxWidth().padding(top = 20.dp).clip(RoundedCornerShape(20.dp)).background(Brand.Ink).padding(18.dp),
+        Modifier.fillMaxWidth().padding(top = 20.dp).clip(RoundedCornerShape(20.dp)).background(fill).border(1.dp, Tone.Line, RoundedCornerShape(20.dp)).padding(18.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Text(stringResource(R.string.demo_title), style = MaterialTheme.typography.titleMedium, color = Brand.Paper, modifier = Modifier.semantics { heading() })
-        Text(stringResource(R.string.demo_body), style = MaterialTheme.typography.bodyMedium, color = Brand.Paper.copy(alpha = 0.75f))
+        Text(stringResource(R.string.demo_title), style = MaterialTheme.typography.titleMedium, color = text, modifier = Modifier.semantics { heading() })
+        Text(stringResource(R.string.demo_body), style = MaterialTheme.typography.bodyMedium, color = text.copy(alpha = 0.75f))
         if (!state.canPostNotifications) {
             DemoButton(stringResource(R.string.demo_allow_notifications), actions.onAllowNotifications)
         } else {
             DemoButton(stringResource(R.string.demo_rahul), actions.onDemoRahul)
             DemoButton(stringResource(R.string.demo_aisha), actions.onDemoAisha)
         }
-        Text(stringResource(R.string.demo_bedtime), style = MaterialTheme.typography.bodyMedium, color = Brand.Paper.copy(alpha = 0.75f))
+        Text(stringResource(R.string.demo_bedtime), style = MaterialTheme.typography.bodyMedium, color = text.copy(alpha = 0.75f))
     }
 }
 

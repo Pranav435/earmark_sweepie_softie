@@ -1,9 +1,14 @@
 package com.sweepiesoftie.earmark.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -52,18 +57,79 @@ private val EarmarkTypography = Typography(
     labelSmall = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Medium, fontSize = 11.sp, lineHeight = 14.sp, letterSpacing = 0.6.sp),
 )
 
-private val EarmarkColors = lightColorScheme(
-    primary = Brand.Ink,
-    onPrimary = Brand.Paper,
-    secondary = Brand.Marigold,
-    onSecondary = Brand.Ink,
-    background = Brand.Paper,
-    onBackground = Brand.Ink,
-    surface = Brand.Paper,
-    onSurface = Brand.Ink,
+/**
+ * The screens' colours in one theme. [ink] is the foreground and [paper] the background, so dark mode
+ * swaps them: ink-filled buttons turn paper-coloured, and their paper text turns ink.
+ */
+@Immutable
+data class Tones(
+    val dark: Boolean,
+    val ink: Color,
+    val paper: Color,
+    val card: Color,
+    val line: Color,
+    val muted: Color,
+    val done: Color,
+    /** Marigold for text: deepened on paper, the brand fill on ink. */
+    val marigoldText: Color,
+    val marigoldWash: Color,
 )
 
+private val LightTones = Tones(
+    dark = false,
+    ink = Brand.Ink,
+    paper = Brand.Paper,
+    card = Color(0xFFFFFDF8),
+    line = Brand.Ink.copy(alpha = 0.12f),
+    muted = Brand.Ink.copy(alpha = 0.62f),
+    done = Color(0xFF2E9E5B),
+    marigoldText = Brand.MarigoldText,
+    marigoldWash = Color(0xFFFFEBC2),
+)
+
+private val DarkTones = Tones(
+    dark = true,
+    ink = Brand.Paper,
+    paper = Brand.Ink,
+    card = Color(0xFF26221A),
+    line = Brand.Paper.copy(alpha = 0.14f),
+    muted = Brand.Paper.copy(alpha = 0.66f),
+    done = Color(0xFF4CC27E),
+    marigoldText = Brand.Marigold,
+    marigoldWash = Color(0xFF3A2B0C),
+)
+
+val LocalTones = staticCompositionLocalOf { LightTones }
+
+private fun colorScheme(tones: Tones) = if (tones.dark) {
+    darkColorScheme(
+        primary = tones.ink,
+        onPrimary = tones.paper,
+        secondary = Brand.Marigold,
+        onSecondary = Brand.Ink,
+        background = tones.paper,
+        onBackground = tones.ink,
+        surface = tones.paper,
+        onSurface = tones.ink,
+    )
+} else {
+    lightColorScheme(
+        primary = tones.ink,
+        onPrimary = tones.paper,
+        secondary = Brand.Marigold,
+        onSecondary = Brand.Ink,
+        background = tones.paper,
+        onBackground = tones.ink,
+        surface = tones.paper,
+        onSurface = tones.ink,
+    )
+}
+
+/** Follows the system's light or dark setting. */
 @Composable
-fun EarmarkTheme(content: @Composable () -> Unit) {
-    MaterialTheme(colorScheme = EarmarkColors, typography = EarmarkTypography, content = content)
+fun EarmarkTheme(dark: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+    val tones = if (dark) DarkTones else LightTones
+    CompositionLocalProvider(LocalTones provides tones) {
+        MaterialTheme(colorScheme = colorScheme(tones), typography = EarmarkTypography, content = content)
+    }
 }

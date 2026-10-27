@@ -23,6 +23,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,14 +37,19 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.sweepiesoftie.earmark.R
 import com.sweepiesoftie.earmark.ui.theme.Brand
+import com.sweepiesoftie.earmark.ui.theme.LocalTones
 
-/** Hairline and muted text tones derived from the brand ink. */
+/** The current theme's screen colours ([Tones]). Ink is the foreground and Paper the background, in light and dark. */
 object Tone {
-    val Muted: Color = Brand.Ink.copy(alpha = 0.62f)
-    val Line: Color = Brand.Ink.copy(alpha = 0.12f)
-    val Card: Color = Color(0xFFFFFDF8)
-    val Done: Color = Color(0xFF2E9E5B)
-    val MarigoldWash: Color = Color(0xFFFFEBC2)
+    val Dark: Boolean @Composable @ReadOnlyComposable get() = LocalTones.current.dark
+    val Ink: Color @Composable @ReadOnlyComposable get() = LocalTones.current.ink
+    val Paper: Color @Composable @ReadOnlyComposable get() = LocalTones.current.paper
+    val Muted: Color @Composable @ReadOnlyComposable get() = LocalTones.current.muted
+    val Line: Color @Composable @ReadOnlyComposable get() = LocalTones.current.line
+    val Card: Color @Composable @ReadOnlyComposable get() = LocalTones.current.card
+    val Done: Color @Composable @ReadOnlyComposable get() = LocalTones.current.done
+    val MarigoldText: Color @Composable @ReadOnlyComposable get() = LocalTones.current.marigoldText
+    val MarigoldWash: Color @Composable @ReadOnlyComposable get() = LocalTones.current.marigoldWash
 }
 
 @Composable
@@ -105,12 +111,12 @@ fun PrimaryButton(label: String, modifier: Modifier = Modifier, enabled: Boolean
         modifier
             .heightIn(min = 48.dp)
             .clip(RoundedCornerShape(24.dp))
-            .background(if (enabled) Brand.Ink else Brand.Ink.copy(alpha = 0.3f))
+            .background(if (enabled) Tone.Ink else Tone.Ink.copy(alpha = 0.3f))
             .clickable(role = Role.Button, enabled = enabled, onClick = onClick)
             .padding(horizontal = 20.dp, vertical = 12.dp),
         contentAlignment = Alignment.Center,
     ) {
-        Text(label, color = Brand.Paper, style = MaterialTheme.typography.labelLarge)
+        Text(label, color = Tone.Paper, style = MaterialTheme.typography.labelLarge)
     }
 }
 
@@ -120,7 +126,7 @@ fun SecondaryButton(label: String, modifier: Modifier = Modifier, onClick: () ->
         modifier
             .heightIn(min = 48.dp)
             .clip(RoundedCornerShape(24.dp))
-            .border(1.dp, Brand.Ink.copy(alpha = 0.3f), RoundedCornerShape(24.dp))
+            .border(1.dp, Tone.Ink.copy(alpha = 0.3f), RoundedCornerShape(24.dp))
             .clickable(role = Role.Button, onClick = onClick)
             .padding(horizontal = 20.dp, vertical = 12.dp),
         contentAlignment = Alignment.Center,
@@ -159,11 +165,12 @@ fun SwitchRow(title: String, body: String?, checked: Boolean, onChange: (Boolean
             checked = checked,
             onCheckedChange = null,
             colors = SwitchDefaults.colors(
-                checkedTrackColor = Brand.Ink,
-                checkedThumbColor = Brand.Marigold,
+                // A marigold thumb on a paper track is too faint, so dark mode fills the track instead.
+                checkedTrackColor = if (Tone.Dark) Brand.Marigold else Brand.Ink,
+                checkedThumbColor = if (Tone.Dark) Brand.Ink else Brand.Marigold,
                 uncheckedTrackColor = Tone.Card,
-                uncheckedBorderColor = Brand.Ink.copy(alpha = 0.4f),
-                uncheckedThumbColor = Brand.Ink.copy(alpha = 0.55f),
+                uncheckedBorderColor = Tone.Ink.copy(alpha = 0.4f),
+                uncheckedThumbColor = Tone.Ink.copy(alpha = 0.55f),
             ),
             modifier = Modifier.clearAndSetSemantics { },
         )
