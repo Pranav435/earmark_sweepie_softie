@@ -66,4 +66,32 @@ class ClassifierTest {
         val replied = rahul.copy(messages = rahul.messages + Message(null, "Yes, 5 works!", now.plusSeconds(60), fromUser = true))
         assertEquals(Classification.Replied("hash-rahul"), Classifier.classify(replied, Fixtures.settings))
     }
+
+    private fun note(pkg: String, title: String?, text: String?) =
+        Signal("0|$pkg|3|null|1", pkg, pkg, now, title = title, text = text)
+
+    @Test
+    fun `payment requests as the big payment apps word them`() {
+        val venmo = open(note("com.venmo", "Venmo", "Aisha Khan requests \$12.00 for dinner"))
+        assertEquals("Pay Aisha Khan back \$12", venmo.task)
+        val paypal = open(note("com.paypal.android.p2pmobile", "PayPal", "Aisha sent you a request for \$12.00 USD"))
+        assertEquals("Pay Aisha back \$12", paypal.task)
+        val gpay = open(note("com.google.android.apps.nbu.paisa.user", "Aisha Khan requested ₹450.00", "Tap to pay"))
+        assertEquals("Pay Aisha Khan back ₹450", gpay.task)
+        assertEquals("₹450.00", gpay.detail)
+        val phonepe = open(note("com.phonepe.app", "Payment request", "Payment request of ₹500 from Aisha"))
+        assertEquals("Pay Aisha back ₹500", phonepe.task)
+    }
+
+    @Test
+    fun `a booked, confirmed or on-the-way notice is evidence for flows and leave-by`() {
+        assertEquals(Classification.Booked("com.ubercab"), Classifier.classify(note("com.ubercab", "Ramesh is arriving in 4 min", "White Swift · KA01AB1234"), Fixtures.settings))
+        assertEquals(Classification.Booked("com.olacabs.customer"), Classifier.classify(note("com.olacabs.customer", "Your ride is confirmed", "Driver Suresh, 3 mins away"), Fixtures.settings))
+        assertEquals(Classification.Booked("in.swiggy.android"), Classifier.classify(note("in.swiggy.android", "Order placed successfully", "Your food is being prepared"), Fixtures.settings))
+    }
+
+    @Test
+    fun `a paid receipt is evidence, not a new request`() {
+        assertEquals(Classification.Paid("com.venmo"), Classifier.classify(note("com.venmo", "Venmo", "You paid Aisha Khan \$12.00"), Fixtures.settings))
+    }
 }

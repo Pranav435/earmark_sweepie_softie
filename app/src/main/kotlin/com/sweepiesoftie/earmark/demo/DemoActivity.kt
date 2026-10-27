@@ -167,9 +167,9 @@ private fun PayScreen(paid: Boolean, onPay: () -> Unit) {
                 Text("✓", color = blue, fontSize = 48.sp, fontWeight = FontWeight.Bold)
             }
             Spacer(Modifier.heightIn(min = 24.dp))
-            Text(stringResource(R.string.demo_paid), color = Color.White, fontFamily = InstrumentSerif, fontSize = 34.sp, textAlign = TextAlign.Center, modifier = Modifier.semantics { heading() })
+            Text(stringResource(R.string.demo_paid), color = Color.White, fontFamily = InstrumentSerif, fontSize = 34.sp, lineHeight = 40.sp, textAlign = TextAlign.Center, modifier = Modifier.semantics { heading() })
         } else {
-            Text(stringResource(R.string.demo_pay_title), color = Color.White, fontFamily = InstrumentSerif, fontSize = 34.sp, textAlign = TextAlign.Center, modifier = Modifier.semantics { heading() })
+            Text(stringResource(R.string.demo_pay_title), color = Color.White, fontFamily = InstrumentSerif, fontSize = 34.sp, lineHeight = 40.sp, textAlign = TextAlign.Center, modifier = Modifier.semantics { heading() })
             Text(stringResource(R.string.demo_pay_note), color = Color.White.copy(alpha = 0.8f), style = MaterialTheme.typography.bodyLarge)
             Spacer(Modifier.heightIn(min = 32.dp))
             Box(

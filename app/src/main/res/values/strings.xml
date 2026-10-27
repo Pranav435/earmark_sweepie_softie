@@ -53,7 +53,7 @@
     <string name="demo_body">These post real notifications that Earmark reads like any other app\'s. After sending one, lock the phone, unlock it, then open a feed app such as YouTube. The drift timer is 10 seconds.</string>
     <string name="demo_rahul">Send Rahul\'s message</string>
     <string name="demo_aisha">Send Aisha\'s request</string>
-    <string name="demo_bedtime">Bedtime is ready: you usually set a 6:30 alarm on weeknights, and no alarm is set for tomorrow.</string>
+    <string name="demo_bedtime">Bedtime: demo mode gives you a habit of a 6:30 alarm on weeknights. While no alarm is set for tomorrow, the next unlock offers to set one.</string>
     <string name="demo_allow_notifications">Allow notifications for the demo</string>
     <string name="demo_channel">Demo messages</string>
     <string name="demo_reply_label">Reply</string>
