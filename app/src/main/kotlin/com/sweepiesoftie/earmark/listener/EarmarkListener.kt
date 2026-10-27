@@ -207,7 +207,9 @@ class EarmarkListener : NotificationListenerService() {
             val effects = s.engine.handle(event, now)
             val open = s.engine.openLoops
             val waiting = s.engine.waiting(now)
-            graph.listener.update { if (session === s) it.copy(openLoops = open, waiting = waiting) else it }
+            val held = s.engine.held()
+            val tile = s.engine.tile
+            graph.listener.update { if (session === s) it.copy(openLoops = open, waiting = waiting, held = held, tile = tile) else it }
             if (effects.isNotEmpty()) {
                 withContext(Dispatchers.Main) {
                     effects.forEach { effect ->

@@ -50,6 +50,7 @@ internal class Copy(private val settings: Settings) {
             // The reminder's own words are the note.
             LoopKind.Reminder -> loop.task.trimEnd('?', '.') to loop.detail
             LoopKind.Payment, LoopKind.CallBack, LoopKind.Email -> (loop.who ?: loop.task) to loop.detail
+            LoopKind.Own -> (loop.who ?: loop.task) to "You earmarked it"
         }
         return Note(who, words, verb(loop), person, loop.packageName, faceKey = loop.notificationKey.takeIf { person })
     }
@@ -63,6 +64,7 @@ internal class Copy(private val settings: Settings) {
         LoopKind.Routine -> "set your alarm"
         LoopKind.Flow -> "finish"
         LoopKind.Reminder -> "get this done"
+        LoopKind.Own -> "get back to it"
         LoopKind.LeaveBy -> when {
             loop.leaveBy?.isMeeting == true -> "join"
             loop.route is Route.LaunchApp -> "book your ride"
@@ -74,7 +76,7 @@ internal class Copy(private val settings: Settings) {
         LoopKind.Reply, LoopKind.Email -> "Reply"
         // A call back opens the call log rather than dialling, so a stray tap never rings anyone (ADR 0029).
         LoopKind.CallBack -> "Call back"
-        LoopKind.Reminder -> "Open"
+        LoopKind.Reminder, LoopKind.Own -> "Open"
         LoopKind.Payment -> "Pay"
         LoopKind.Routine -> "Set it"
         LoopKind.Flow -> "Finish"

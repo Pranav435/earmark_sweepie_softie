@@ -11,6 +11,7 @@ import com.sweepiesoftie.earmark.core.DriftTimer
 import com.sweepiesoftie.earmark.core.Settings
 import com.sweepiesoftie.earmark.store.UserSettings
 import java.time.Duration
+import java.time.Instant
 import java.time.ZoneId
 
 /** An app that could count as a feed, for the Settings list. */
@@ -67,13 +68,19 @@ class InstalledApps(private val context: Context) {
             driftTimer = if (user.demoMode) DriftTimer.RightAway else user.driftTimer,
             driftAfter = Duration.ofSeconds(user.driftSeconds.toLong()),
             demoMode = user.demoMode,
-            paused = user.paused,
+            pausedUntil = user.pausedUntil?.let { if (it == UserSettings.UNTIL_RESUMED) Instant.MAX else Instant.ofEpochMilli(it) },
             use24Hour = DateFormat.is24HourFormat(context),
             zone = ZoneId.systemDefault(),
             clockPackage = clockPackage(),
             rideApp = rideApp(),
             // The listener adds the names on your contact card.
             myNames = user.typedNames,
+            homeApps = homeApps(),
         )
     }
+
+    /** Launchers, and the system UI that recents and the shade belong to on some phones: none is an app to earmark. */
+    fun homeApps(): Set<String> =
+        pm.queryIntentActivities(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME), 0).map { it.activityInfo.packageName }.toSet() +
+            "com.android.systemui"
 }

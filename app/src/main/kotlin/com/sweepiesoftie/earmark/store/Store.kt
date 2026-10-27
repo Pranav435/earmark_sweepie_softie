@@ -44,7 +44,10 @@ data class LoopRow(
     @ColumnInfo(defaultValue = "0") val listed: Boolean,
 )
 
-/** Keyed by a salted hash of the conversation, never a name or number. Opens and swipes are counts of taps on its notifications (ADR 0028). */
+/**
+ * Keyed by a salted hash of the conversation, never a name or number. Opens and swipes are counts of taps on its
+ * notifications (ADR 0028); [ignoreStreak] counts "not this" on its chips in a row, and three mute it (ADR 0033).
+ */
 @Entity(tableName = "contact_stats")
 data class ContactRow(
     @PrimaryKey val conversation: String,
@@ -52,6 +55,7 @@ data class ContactRow(
     val medianReplyMinutes: Double,
     @ColumnInfo(defaultValue = "0") val opened: Int,
     @ColumnInfo(defaultValue = "0") val swiped: Int,
+    @ColumnInfo(defaultValue = "0") val ignoreStreak: Int,
 )
 
 @Entity(tableName = "kind_stats")
@@ -97,6 +101,8 @@ interface EarmarkDao {
 
     @Query("SELECT * FROM contact_stats") suspend fun contacts(): List<ContactRow>
 
+    @Query("SELECT COUNT(*) FROM contact_stats WHERE ignoreStreak >= :muteAfter") fun mutedChats(muteAfter: Int): Flow<Int>
+
     @Query("SELECT * FROM kind_stats") suspend fun kinds(): List<KindRow>
 
     @Query("SELECT * FROM kind_stats") fun kindsFlow(): Flow<List<KindRow>>
@@ -106,20 +112,24 @@ interface EarmarkDao {
     @Query("SELECT * FROM app_stats") suspend fun apps(): List<AppRow>
 }
 
-@Database(entities = [LoopRow::class, ContactRow::class, KindRow::class, AlarmRow::class, AppRow::class], version = 4, exportSchema = false)
+@Database(entities = [LoopRow::class, ContactRow::class, KindRow::class, AlarmRow::class, AppRow::class], version = 5, exportSchema = false)
 abstract class EarmarkDatabase : RoomDatabase() {
     abstract fun dao(): EarmarkDao
 }
 
 /** Room behind a small interface. Every call is wrapped here so a database failure is logged and skipped, never thrown. */
 class Store(context: Context, private val log: DebugLog) {
-    private val dao = Room.databaseBuilder(context, EarmarkDatabase::class.java, "earmark.db").addMigrations(ADD_APP_STATS, LIST_PICKED_UP, LEARN_OPENS_AND_APPS).build().dao()
+    private val dao = Room.databaseBuilder(context, EarmarkDatabase::class.java, "earmark.db").addMigrations(ADD_APP_STATS, LIST_PICKED_UP, LEARN_OPENS_AND_APPS, MUTE_CHATS).build().dao()
 
     fun things(since: Long): Flow<List<LoopRow>> = dao.things(since).catch { log.error("Store.things", it); emit(emptyList()) }
 
+    /** Kinds with a person behind them mute one chat at a time instead, so a streak saved by an older version doesn't count (ADR 0033). */
     fun mutedKinds(): Flow<List<LoopKind>> = dao.kindsFlow()
-        .map { rows -> rows.filter { it.ignoreStreak >= KindStat.MUTE_AFTER_IGNORES }.mapNotNull { kindOf(it.kind) } }
+        .map { rows -> rows.filter { it.ignoreStreak >= KindStat.MUTE_AFTER_IGNORES }.mapNotNull { kindOf(it.kind) }.filterNot { it.withPeople } }
         .catch { log.error("Store.mutedKinds", it); emit(emptyList()) }
+
+    /** How many chats are muted. Only hashes are stored, so Settings can't say who. */
+    fun mutedChats(): Flow<Int> = dao.mutedChats(KindStat.MUTE_AFTER_IGNORES).catch { log.error("Store.mutedChats", it); emit(0) }
 
     suspend fun record(entry: LoopEntry): Unit? = guard("record loop") {
         dao.upsertLoop(
@@ -144,7 +154,7 @@ class Store(context: Context, private val log: DebugLog) {
     }
 
     suspend fun record(conversation: String, stat: ContactStat): Unit? = guard("record contact") {
-        dao.upsertContact(ContactRow(conversation, stat.replies, stat.medianReplyMinutes, stat.opened, stat.swiped))
+        dao.upsertContact(ContactRow(conversation, stat.replies, stat.medianReplyMinutes, stat.opened, stat.swiped, stat.ignoreStreak))
     }
 
     suspend fun recordApp(packageName: String, stat: AppStat): Unit? = guard("record app") {
@@ -164,7 +174,7 @@ class Store(context: Context, private val log: DebugLog) {
     suspend fun stats(): Stats = guard("load stats") {
         Stats(
             kinds = dao.kinds().mapNotNull { row -> kindOf(row.kind)?.let { it to KindStat(row.holds, row.ignores, row.ignoreStreak) } }.toMap(),
-            contacts = dao.contacts().associate { it.conversation to ContactStat(it.replies, it.medianReplyMinutes, it.opened, it.swiped) },
+            contacts = dao.contacts().associate { it.conversation to ContactStat(it.replies, it.medianReplyMinutes, it.opened, it.swiped, it.ignoreStreak) },
             weeknightAlarms = dao.recentAlarms().map { LocalTime.of(it.minuteOfDay / 60, it.minuteOfDay % 60) },
             apps = dao.apps().associate { it.packageName to AppStat(it.visits, it.medianVisitSeconds, it.done, it.left, it.medianDoneMinutes) },
         )
@@ -218,6 +228,13 @@ class Store(context: Context, private val log: DebugLog) {
                 db.execSQL("ALTER TABLE `app_stats` ADD COLUMN `done` INTEGER NOT NULL DEFAULT 0")
                 db.execSQL("ALTER TABLE `app_stats` ADD COLUMN `left` INTEGER NOT NULL DEFAULT 0")
                 db.execSQL("ALTER TABLE `app_stats` ADD COLUMN `medianDoneMinutes` REAL NOT NULL DEFAULT 0")
+            }
+        }
+
+        /** v0.1.17 mutes a chat rather than a whole kind; every chat starts unmuted. */
+        val MUTE_CHATS: Migration = object : Migration(4, 5) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE `contact_stats` ADD COLUMN `ignoreStreak` INTEGER NOT NULL DEFAULT 0")
             }
         }
 

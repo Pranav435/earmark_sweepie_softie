@@ -31,6 +31,9 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     /** Group chatter showing now, by notification key, with its hashed conversation: a tap on it is learned (ADR 0028). */
     private val quiet = HashMap<String, String>()
 
+    /** Loops marked "Already done" on the home screen, with their latest message then, so a repost doesn't reopen them (ADR 0036). */
+    private val doneHere = HashMap<LoopId, Instant>()
+
     /** [interrupted] is set when a pill showed during the visit, so it isn't learned as a usual visit. */
     private data class Visit(val packageName: String, val appLabel: String, val since: Instant, val interrupted: Boolean = false)
 
@@ -47,6 +50,16 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         .sortedWith(Ranker.unlockOrder.reversed())
         .map { copy.waiting(it.first) }
 
+    /**
+     * The guess Earmark is holding for you this session, for the "Earmark is on" notification: what the dot means,
+     * in words TalkBack can read (ADR 0034). Null once it's handed back or swiped away, and when the phone is put down.
+     * Read it on the engine's thread, like [handle].
+     */
+    public fun held(): Waiting? = book[drift.loopId]?.takeIf { drift.phase in holding }?.let { copy.waiting(it.loop) }
+
+    /** What the "Earmark this" tile says (ADR 0035). Read it on the engine's thread, like [handle]. */
+    public val tile: TileState get() = TileState(holding = own()?.loop?.who, canHold = holdable()?.appLabel)
+
     /** The message model's weights loaded, so it reads messages beside the word lists (ADR 0031). The first read loads them. */
     public val messageModel: Boolean get() = MessageModel.loaded
 
@@ -60,15 +73,19 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         is Event.BlockerChanged -> stepDrift(DriftInput.Block(event.blocker, event.active), now)
         is Event.AlarmChanged -> onAlarm(event.nextAlarm, now)
         is Event.CalendarSoon -> onCalendar(event.events, now)
-        is Event.ChipDismissed -> onChipDismissed(event.loopId)
+        is Event.ChipDismissed -> onChipDismissed(event.loopId, now)
         is Event.ChipFaded -> onChipFaded(event.loopId)
-        is Event.ChipActed -> onChipActed(event.loopId)
+        is Event.ChipActed -> acted(event.loopId, "chip", listOf(Overlay.Chip))
+        is Event.HeldOpened -> onHeldOpened(event.loopId)
         is Event.WaitingOpened -> onWaitingOpened(event.loopId)
+        is Event.WaitingDone -> onWaitingDone(event.loopId, now)
+        Event.Earmarked -> onEarmarked(now)
         is Event.PillTapped -> onPillTapped(event.loopId)
         is Event.PillDismissed -> onPillDismissed(event.loopId)
         is Event.ReplyChosen -> onReplyChosen(event)
         is Event.ReplySent -> close(event.loopId, Outcome.Done, now, "reply sent", replied = true)
         is Event.KindUnmuted -> setKind(event.kind, KindStat(holds = kindStat(event.kind).holds, ignores = kindStat(event.kind).ignores))
+        Event.ChatsUnmuted -> onChatsUnmuted()
         is Event.SettingsChanged -> {
             this.settings = event.settings
             copy = Copy(event.settings)
@@ -77,7 +94,12 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
                 DriftTimer.Smart -> "smart"
                 DriftTimer.Fixed -> "after ${event.settings.driftAfter.seconds}s"
             }
-            listOf(Effect.Log("settings: drift $drift, demo ${event.settings.demoMode}, paused ${event.settings.paused}, ${event.settings.feedApps.size} feed apps, ${event.settings.myNames.size} names for mentions"))
+            val paused = when (val until = event.settings.pausedUntil) {
+                null -> "no"
+                Instant.MAX -> "until resumed"
+                else -> "until ${copy.time(until)}"
+            }
+            listOf(Effect.Log("settings: drift $drift, demo ${event.settings.demoMode}, paused $paused, ${event.settings.feedApps.size} feed apps, ${event.settings.myNames.size} names for mentions"))
         }
         is Event.StatsLoaded -> {
             // Counts the engine already holds are newer than any snapshot still being written to Room.
@@ -98,6 +120,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun onPosted(signal: Signal, now: Instant): List<Effect> =
         when (val result = Classifier.classify(signal, settings, stats)) {
             is Classification.Open if isLeaveByAlready(result.loop) -> skip(signal, "its event is already a leave-by")
+            is Classification.Open if isDoneHere(result.loop) -> skip(signal, "marked done on the home screen, nothing new since")
             is Classification.Open -> {
                 quiet -= signal.key
                 val before = book[result.loop.id]
@@ -141,6 +164,14 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun isLeaveByAlready(loop: Loop): Boolean =
         loop.kind == LoopKind.Reminder && book.all.any { it.loop.leaveBy?.title.equals(loop.task, ignoreCase = true) }
 
+    /** Marked "Already done" with nothing newer since. Something newer opens it again, and the mark is forgotten. */
+    private fun isDoneHere(loop: Loop): Boolean {
+        val marked = doneHere[loop.id] ?: return false
+        if (!loop.updatedAt.isAfter(marked)) return true
+        doneHere -= loop.id
+        return false
+    }
+
     /** Its text and intents go at once, unless an open loop still answers to this notification and the app only reposted it. */
     private fun skip(signal: Signal, reason: String): List<Effect> =
         if (book.byNotificationKey(signal.key) != null) {
@@ -156,7 +187,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
      * urgent one takes over even a guess you came for, which comes back once the urgent one is dealt with.
      */
     private fun onArrival(loop: Loop, before: Tracked?, now: Instant): List<Effect> {
-        if (!inUse || settings.paused) return emptyList()
+        if (!inUse || settings.paused(now)) return emptyList()
         // Only a new message counts: not an app posting the same one again, or one delivered late.
         if (before != null && !loop.updatedAt.isAfter(before.loop.updatedAt)) return emptyList()
         if (Duration.between(loop.updatedAt, now) > arrivalWindow) return emptyList()
@@ -169,7 +200,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val replaceable = drift.phase == Phase.Idle || drift.phase == Phase.Left || (watching && drift.origin != Origin.Unlock) || urgentOver
         if (!replaceable) return listOf(Effect.Log("$id came in during use; ${drift.loopId?.value} stays the guess (${drift.phase})"))
         if (book[loop.id]?.ignored == true) return listOf(Effect.Log("$id came in during use; its chip was swiped this session"))
-        if (kindStat(loop.kind).muted) return listOf(Effect.Log("$id came in during use; ${loop.kind} is muted"))
+        if (muted(loop)) return listOf(Effect.Log("$id came in during use; ${if (loop.kind.withPeople) "its chat" else loop.kind} is muted"))
         val score = Ranker.score(loop, now, stats, unseen = true)
         if (score.total <= Ranker.CHIP_THRESHOLD) {
             return listOf(Effect.Log("$id came in during use; scored $score, needs > ${Ranker.CHIP_THRESHOLD}"))
@@ -256,7 +287,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         effects += expire(now)
         book.all.toList().forEach { book.update(it.loop.id) { t -> t.copy(ignored = false) } }
         effects += openSituations(now)
-        if (settings.paused) return effects + Effect.Log("unlock: Earmark is paused")
+        if (settings.paused(now)) return effects + Effect.Log("unlock: Earmark is paused")
 
         val carry = book.all.filter { it.carryOver }.maxByOrNull { it.loop.updatedAt }
         if (carry != null) {
@@ -268,7 +299,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
             return effects + resumeForeground(now)
         }
 
-        val candidates = book.all.filter { !kindStat(it.loop.kind).muted }
+        val candidates = book.all.filter { !muted(it.loop) }
         val muted = book.all.size - candidates.size
         val best = candidates.map { it to Ranker.score(it.loop, now, stats, unseen(it.loop)) }
             .maxWithOrNull { a, b -> Ranker.unlockOrder.compare(a.first.loop to a.second, b.first.loop to b.second) }
@@ -304,7 +335,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         // Before closing anything, so nothing is lined up next for a phone that was just put down.
         inUse = false
         val left = closeWhere(now, "screen off after the chat app cleared it") { it.chatOpen || it.clearedAt != null }
-        val learned = foreground?.let { learnVisit(it, now) }.orEmpty()
+        val learned = foreground?.let { learnVisit(it, now) + leftOwn(it, now) }.orEmpty()
         drift = DriftMachine.end(drift)
         foreground = null
         return left + learned + hideAll()
@@ -315,7 +346,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val effects = mutableListOf<Effect>()
         val previous = foreground
         foreground = Visit(event.packageName, event.appLabel, now)
-        if (previous != null && previous.packageName != event.packageName) effects += leftApp(previous, now) + learnVisit(previous, now)
+        if (previous != null && previous.packageName != event.packageName) effects += leftApp(previous, now) + learnVisit(previous, now) + leftOwn(previous, now)
 
         val guess = book[drift.loopId]
         if (guess != null && drift.phase == Phase.HandedBack && event.packageName != guess.loop.packageName &&
@@ -351,7 +382,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         }
         if (book[LoopId("flow:${visit.packageName}")] != null) return emptyList()
         val tracked = book.open(Situations.flow(visit.packageName, visit.appLabel, now))
-        if (drift.phase != Phase.Idle || settings.paused || kindStat(LoopKind.Flow).muted) {
+        if (drift.phase != Phase.Idle || settings.paused(now) || kindStat(LoopKind.Flow).muted) {
             return listOf(Effect.Log("opened ${tracked.loop.id.value} (Flow)"))
         }
         // You were just there, so no chip: the flow quietly becomes this session's guess. It only
@@ -361,11 +392,23 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     }
 
     /**
+     * Going back to an earmarked app for a while, from the pill or on your own, is doing what you earmarked it for,
+     * once you leave. The visit you earmarked it in never counts: you earmarked it to come back to (ADR 0035).
+     */
+    private fun leftOwn(visit: Visit, now: Instant): List<Effect> {
+        val tracked = book[Situations.own(visit.packageName, visit.appLabel, now).id] ?: return emptyList()
+        if (!visit.since.isAfter(tracked.loop.openedAt)) return emptyList()
+        val stayed = Duration.between(visit.since, now)
+        if (stayed < Situations.ownDwell) return emptyList()
+        return close(tracked.loop.id, Outcome.Done, now, "back in ${visit.packageName} for ${stayed.seconds} s, then left")
+    }
+
+    /**
      * Your usual visit to each feed app sets the smart drift timer. Demo visits and paused time aren't you,
      * and a visit a pill cut short would teach the timer to be shorter still.
      */
     private fun learnVisit(visit: Visit, now: Instant): List<Effect> {
-        if (visit.packageName !in settings.feedApps || visit.interrupted || settings.demoMode || settings.paused) return emptyList()
+        if (visit.packageName !in settings.feedApps || visit.interrupted || settings.demoMode || settings.paused(now)) return emptyList()
         val length = Duration.between(visit.since, now)
         if (length < SmartDrift.shortestVisit) return emptyList()
         val stat = SmartDrift.learn(stats.apps[visit.packageName], length)
@@ -393,7 +436,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
             driftAfter = timer.after,
             pillHeld = when {
                 guess == null -> "no guess"
-                settings.paused -> "Earmark is paused"
+                settings.paused(now) -> "Earmark is paused"
                 guess.pillShown -> "its pill already showed for this message"
                 guess.ignored -> "its chip was swiped"
                 guess.clearedAt != null -> "its app cleared the notification"
@@ -456,31 +499,104 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         return listOfNotNull(Effect.HideOverlay(Overlay.Chip), Effect.ShowDot.takeIf { holding }, Effect.Log("chip faded: ${id.value}" + if (holding) "; dot shows" else ""))
     }
 
-    private fun onChipDismissed(id: LoopId): List<Effect> {
-        val tracked = book.update(id) { it.copy(ignored = true, guessedAt = null) } ?: return emptyList()
+    private fun onChipDismissed(id: LoopId, now: Instant): List<Effect> {
+        val before = book[id] ?: return emptyList()
+        // You made it, so "not this" lets it go and teaches nothing (ADR 0035).
+        if (before.loop.kind == LoopKind.Own) {
+            return listOf(Effect.HideOverlay(Overlay.Chip), Effect.HideOverlay(Overlay.Dot)) + close(id, Outcome.Dismissed, now, "let go from its chip")
+        }
+        val tracked = book.update(id) { it.copy(ignored = true, guessedAt = null) }!!
         if (drift.loopId == id) drift = DriftMachine.end(drift)
-        val stat = kindStat(tracked.loop.kind)
-        val next = stat.copy(ignores = stat.ignores + 1, ignoreStreak = stat.ignoreStreak + 1)
-        val effects = mutableListOf(
+        val effects = listOf(
             Effect.HideOverlay(Overlay.Chip),
             Effect.HideOverlay(Overlay.Dot),
             // A rejected guess is not a thing you came for.
             Effect.RecordLoop(entry(tracked, outcome = null, closedAt = null)),
-            Effect.Log("chip dismissed: ${id.value}" + if (next.muted) "; ${tracked.loop.kind} muted after ${next.ignoreStreak} ignores" else ""),
         )
-        return effects + setKind(tracked.loop.kind, next)
+        return effects + learnNotThis(tracked.loop)
     }
 
-    private fun onChipActed(id: LoopId): List<Effect> {
+    /**
+     * Its kind's history learns every "not this". Three in a row mute the chat when a person is behind it, so one
+     * chat you keep waving off doesn't silence every message, and the kind otherwise (ADR 0033).
+     */
+    private fun learnNotThis(loop: Loop): List<Effect> {
+        val kind = kindStat(loop.kind)
+        val conversation = loop.conversation?.takeIf { loop.kind.withPeople }
+        if (conversation == null) {
+            val next = kind.copy(ignores = kind.ignores + 1, ignoreStreak = if (loop.kind.withPeople) 0 else kind.ignoreStreak + 1)
+            val muted = if (next.muted) "; ${loop.kind} muted after ${next.ignoreStreak} in a row" else ""
+            return setKind(loop.kind, next) + Effect.Log("chip dismissed: ${loop.id.value}$muted")
+        }
+        val chat = stats.contacts[conversation] ?: ContactStat()
+        val next = chat.copy(ignoreStreak = chat.ignoreStreak + 1)
+        val muted = if (next.muted) "; its chat muted after ${next.ignoreStreak} in a row" else ""
+        return setKind(loop.kind, kind.copy(ignores = kind.ignores + 1)) + setContact(conversation, next) +
+            Effect.Log("chip dismissed: ${loop.id.value}$muted")
+    }
+
+    /** The chip's one button is how you say "yes, this one" (ADR 0032), and it starts the chat's count of "not this" again. */
+    private fun confirm(loop: Loop): List<Effect> {
+        val kind = kindStat(loop.kind)
+        val effects = setKind(loop.kind, kind.copy(holds = kind.holds + 1, ignoreStreak = 0)).toMutableList()
+        val conversation = loop.conversation?.takeIf { loop.kind.withPeople }
+        val chat = conversation?.let { stats.contacts[it] }
+        if (conversation != null && chat != null && chat.ignoreStreak > 0) effects += setContact(conversation, chat.copy(ignoreStreak = 0))
+        return effects
+    }
+
+    /** The chip's button, or the held guess's on the running notification (ADR 0034): hand it back, and learn the yes. */
+    private fun acted(id: LoopId, from: String, hide: List<Overlay>): List<Effect> {
         val tracked = book[id] ?: return emptyList()
         // Only the carry-over chip brings a loop back; a first chip tap is you doing what you came for.
         val carried = tracked.pillShown
         book.update(id) { it.copy(handedBack = it.handedBack || carried) }
         drift = drift.copy(phase = Phase.HandedBack)
-        val stat = kindStat(tracked.loop.kind)
-        // The chip's one button is how you say "yes, this one" (ADR 0032).
-        return handBack(tracked, "chip") + Effect.HideOverlay(Overlay.Chip) +
-            setKind(tracked.loop.kind, stat.copy(holds = stat.holds + 1, ignoreStreak = 0))
+        return handBack(tracked, from) + hide.map { Effect.HideOverlay(it) } + confirm(tracked.loop)
+    }
+
+    /** The running notification can lag the engine by an event; a loop that stopped being the guess still opens, as a detour. */
+    private fun onHeldOpened(id: LoopId): List<Effect> =
+        if (drift.loopId == id) acted(id, "running notification", listOf(Overlay.Chip, Overlay.Pill, Overlay.Dot)) else onWaitingOpened(id)
+
+    /**
+     * "Already done" on a waiting row: you dealt with it somewhere Earmark can't see, such as on a laptop (ADR 0036).
+     * Done, not brought back, and nothing is learned about its kind.
+     */
+    private fun onWaitingDone(id: LoopId, now: Instant): List<Effect> {
+        val tracked = book[id] ?: return listOf(Effect.Log("waiting row ${id.value}: already closed"))
+        doneHere[id] = tracked.loop.updatedAt
+        return close(id, Outcome.Done, now, "marked done on the home screen")
+    }
+
+    /**
+     * The "Earmark this" tile (ADR 0035). It holds the app in front as an Own loop, which becomes the guess at once, so
+     * drift brings it back; the guess it took over comes back once it closes. Tapped while one is held, it lets go.
+     */
+    private fun onEarmarked(now: Instant): List<Effect> {
+        own()?.let { return close(it.loop.id, Outcome.Dismissed, now, "let go from the tile") }
+        val app = holdable() ?: return listOf(Effect.Log("tile: nothing to hold, ${foreground?.packageName ?: "no app"} in front"))
+        val loop = Situations.own(app.packageName, app.appLabel, now)
+        book.open(loop)
+        val tracked = book.update(loop.id) { it.copy(guessedAt = now) }!!
+        val previous = drift.takeIf { it.loopId != null }
+        drift = DriftMachine.guess(drift, loop.id, home(loop)).copy(resume = previous)
+        val ahead = previous?.let { " (ahead of ${it.loopId?.value}, which comes back after)" }.orEmpty()
+        return listOf(Effect.Log("earmarked ${app.packageName} from the tile; it's the guess$ahead"), Effect.RecordLoop(entry(tracked, outcome = null, closedAt = null))) +
+            resumeForeground(now)
+    }
+
+    private fun own(): Tracked? = book.all.firstOrNull { it.loop.kind == LoopKind.Own }
+
+    /** The app in front, unless it's the home screen, a feed or Earmark itself. Nothing is in front of a locked phone. */
+    private fun holdable(): Visit? = foreground?.takeIf {
+        inUse && it.packageName != settings.ownPackage && it.packageName !in settings.feedApps && it.packageName !in settings.homeApps
+    }
+
+    private fun onChatsUnmuted(): List<Effect> {
+        val muted = stats.contacts.filterValues { it.muted }
+        return muted.flatMap { (conversation, stat) -> setContact(conversation, stat.copy(ignoreStreak = 0)) } +
+            Effect.Log("chats unmuted: ${muted.size}")
     }
 
     /**
@@ -550,7 +666,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         if (isListed(tracked)) effects += Effect.RecordLoop(entry(tracked, outcome, now))
         val conversation = tracked.loop.conversation
         if (replied && conversation != null) effects += recordReply(conversation, Duration.between(tracked.loop.updatedAt, now))
-        if (tracked.loop.kind in fromPeople) effects += learnApp(tracked.loop, outcome, now)
+        if (tracked.loop.kind.withPeople) effects += learnApp(tracked.loop, outcome, now)
         tracked.loop.notificationKey?.let { effects += Effect.Forget(it) }
         if (drift.loopId == id) {
             val back = drift.resume?.takeIf { book[it.loopId] != null }
@@ -568,9 +684,9 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
      * so drift can bring that one back too (ADR 0027). It needs the score a chip needs, and gets no chip.
      */
     private fun nextUp(now: Instant): List<Effect> {
-        if (!inUse || settings.paused) return emptyList()
+        if (!inUse || settings.paused(now)) return emptyList()
         val (tracked, score) = book.all
-            .filter { !kindStat(it.loop.kind).muted && !it.ignored && !it.pillShown && !it.chatOpen && it.clearedAt == null }
+            .filter { !muted(it.loop) && !it.ignored && !it.pillShown && !it.chatOpen && it.clearedAt == null }
             .map { it to Ranker.score(it.loop, now, stats, unseen(it.loop)) }
             .maxByOrNull { it.second.total } ?: return emptyList()
         if (score.total <= Ranker.CHIP_THRESHOLD) {
@@ -584,17 +700,14 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun recordReply(conversation: String, latency: Duration): Effect {
         val old = stats.contacts[conversation] ?: ContactStat()
         val median = Affinity.median(old.medianReplyMinutes, old.replies, latency.toMillis() / 60_000.0)
-        val stat = old.copy(replies = old.replies + 1, medianReplyMinutes = median)
-        stats = stats.copy(contacts = stats.contacts + (conversation to stat))
-        return Effect.RecordContact(conversation, stat)
+        return setContact(conversation, old.copy(replies = old.replies + 1, medianReplyMinutes = median)).single()
     }
 
     /** A tap or a swipe on a conversation's notification, kept as two counts under its hashed key (ADR 0028). Demo chats aren't you. */
     private fun learnOpen(conversation: String?, reason: RemovalReason): List<Effect> {
         if (conversation == null || settings.demoMode) return emptyList()
         val stat = Affinity.learnOpen(stats.contacts[conversation], reason) ?: return emptyList()
-        stats = stats.copy(contacts = stats.contacts + (conversation to stat))
-        return listOf(Effect.RecordContact(conversation, stat))
+        return setContact(conversation, stat)
     }
 
     /** How you deal with messages in each app, so someone new there starts from it (ADR 0027). */
@@ -609,6 +722,18 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     }
 
     private fun kindStat(kind: LoopKind): KindStat = stats.kinds[kind] ?: KindStat()
+
+    /** A chat you waved off three times in a row, or a kind with nobody behind it; never something you earmarked (ADR 0033). */
+    private fun muted(loop: Loop): Boolean = when {
+        loop.kind == LoopKind.Own -> false
+        loop.kind.withPeople -> loop.conversation?.let { stats.contacts[it]?.muted } == true
+        else -> kindStat(loop.kind).muted
+    }
+
+    private fun setContact(conversation: String, stat: ContactStat): List<Effect> {
+        stats = stats.copy(contacts = stats.contacts + (conversation to stat))
+        return listOf(Effect.RecordContact(conversation, stat))
+    }
 
     private fun setKind(kind: LoopKind, stat: KindStat): List<Effect> {
         stats = stats.copy(kinds = stats.kinds + (kind to stat))
@@ -640,8 +765,8 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun hideAll(): List<Effect> = Overlay.entries.map { Effect.HideOverlay(it) }
 
     private companion object {
-        /** Loops with a person at the other end: how you deal with them teaches Earmark about their app (ADR 0027). */
-        val fromPeople = setOf(LoopKind.Reply, LoopKind.CallBack, LoopKind.Email)
+        /** The guess is held, not yet handed back or waved off: what the dot and the running notification say (ADR 0034). */
+        val holding = setOf(Phase.Guessed, Phase.InFeed, Phase.Drifting, Phase.PillShown)
 
         /** A few foreground polls, which run once a second. */
         val clearWait: Duration = Duration.ofSeconds(3)

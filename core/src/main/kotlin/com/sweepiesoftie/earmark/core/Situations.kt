@@ -7,7 +7,7 @@ import java.time.Instant
 import java.time.LocalTime
 import java.time.ZonedDateTime
 
-/** Loops that come from the time and place you are in rather than from a notification: Routine, Leave-by and Flow. */
+/** Loops that come from the time and place you are in rather than from a notification: Routine, Leave-by, Flow and Own. */
 internal object Situations {
     private val bedtime: LocalTime = LocalTime.of(22, 30)
     private val routineEnds: LocalTime = LocalTime.of(4, 0)
@@ -15,6 +15,10 @@ internal object Situations {
     private val leaveByWindow: Duration = Duration.ofHours(2)
     val flowDwell: Duration = Duration.ofMinutes(2)
     private val flowLifetime: Duration = Duration.ofHours(2)
+
+    /** How long back in an earmarked app counts as doing what you earmarked it for, not passing through, and how long one is kept (ADR 0035). */
+    val ownDwell: Duration = Duration.ofSeconds(20)
+    private val ownLifetime: Duration = Duration.ofHours(6)
     private val airport = Regex("""(?i)\b(flight|airport|terminal)\b""")
 
     /**
@@ -114,5 +118,22 @@ internal object Situations {
         updatedAt = leftAt,
         expiresAt = leftAt.plus(flowLifetime),
         due = 0.5,
+    )
+
+    /** The app in front, held from the "Earmark this" tile. You asked for it, so it's fully due. */
+    fun own(packageName: String, appLabel: String, at: Instant): Loop = Loop(
+        id = LoopId("own:$packageName"),
+        kind = LoopKind.Own,
+        task = "Get back to $appLabel",
+        who = appLabel,
+        detail = null,
+        packageName = packageName,
+        conversation = null,
+        notificationKey = null,
+        route = Route.LaunchApp(packageName),
+        openedAt = at,
+        updatedAt = at,
+        expiresAt = at.plus(ownLifetime),
+        due = 1.0,
     )
 }

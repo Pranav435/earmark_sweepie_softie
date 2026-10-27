@@ -3,6 +3,7 @@ package com.sweepiesoftie.earmark.core
 import com.sweepiesoftie.earmark.core.Fixtures.at
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -37,20 +38,146 @@ class EngineTest {
         assertTrue(log.last(), "boost 0.00" in log.last())
     }
 
+    /** A chip for Rahul's latest message at the first unlock after it, answered with "not this". */
+    private fun Script.notThisRahul(day: Int) {
+        val posted = at(16, 11, day = day)
+        at(posted.minusSeconds(60), Event.ScreenOff)
+        at(posted, Event.NotificationPosted(Fixtures.rahul(posted, key = "k$day")))
+        val chip = at(posted.plusSeconds(30), Event.Unlocked).one<Effect.ShowChip>().chip
+        assertEquals("Rahul", chip.note.who)
+        at(posted.plusSeconds(32), Event.ChipDismissed(chip.loopId))
+    }
+
     @Test
-    fun `three ignores in a row mute the kind`() = with(Script()) {
+    fun `three not-this in a row on one chat mute that chat, not every reply`() = with(Script()) {
+        (13..15).forEach { notThisRahul(it) }
+        val posted = at(16, 11, day = 16)
+        at(posted.minusSeconds(60), Event.ScreenOff)
+        at(posted, Event.NotificationPosted(Fixtures.rahul(posted, key = "k16")))
+        assertTrue(at(posted.plusSeconds(30), Event.Unlocked).none { it is Effect.ShowChip })
+        assertTrue(log.last(), log.last().startsWith("unlock: no chip, no open loops (1 muted)"))
+
+        at(posted.plusSeconds(40), Event.ScreenOff)
+        at(posted.plusSeconds(50), Event.NotificationPosted(Fixtures.priya(posted.plusSeconds(50), "free at 5?")))
+        assertEquals("Priya", at(posted.plusSeconds(60), Event.Unlocked).one<Effect.ShowChip>().chip.note.who)
+
+        val unmuted = at(posted.plusSeconds(70), Event.ChatsUnmuted).one<Effect.RecordContact>()
+        assertEquals("hash-rahul", unmuted.conversation)
+        assertEquals(0, unmuted.stat.ignoreStreak)
+        at(posted.plusSeconds(80), Event.ChipDismissed(LoopId("reply:hash-priya")))
+        at(posted.plusSeconds(90), Event.ScreenOff)
+        at(posted.plusSeconds(100), Event.NotificationPosted(Fixtures.rahul(posted.plusSeconds(100), "call me asap", key = "k16")))
+        assertEquals("Rahul", at(posted.plusSeconds(110), Event.Unlocked).one<Effect.ShowChip>().chip.note.who)
+    }
+
+    @Test
+    fun `not-this on three different chats mutes nothing`() = with(Script()) {
         repeat(3) { day ->
             val posted = at(16, 11, day = 13 + day)
             at(posted, Event.NotificationPosted(Fixtures.rahul(posted, key = "k$day").copy(conversationKey = "c$day")))
             val chip = at(posted.plusSeconds(30), Event.Unlocked).one<Effect.ShowChip>().chip
-            at(posted.plusSeconds(32), Event.ChipDismissed(chip.loopId))
+            val effects = at(posted.plusSeconds(32), Event.ChipDismissed(chip.loopId))
+            assertEquals("the reply's history still learns the no", day + 1, effects.one<Effect.RecordKind>().stat.ignores)
         }
         val posted = at(16, 11, day = 16)
         at(posted, Event.NotificationPosted(Fixtures.rahul(posted, key = "k3").copy(conversationKey = "c3")))
-        assertTrue(at(posted.plusSeconds(30), Event.Unlocked).none { it is Effect.ShowChip })
+        assertTrue(at(posted.plusSeconds(30), Event.Unlocked).any { it is Effect.ShowChip })
+    }
 
-        at(posted.plusSeconds(40), Event.KindUnmuted(LoopKind.Reply))
-        assertTrue(at(posted.plusSeconds(50), Event.Unlocked).any { it is Effect.ShowChip })
+    @Test
+    fun `saying yes to a chat's chip starts its count again`() = with(Script()) {
+        (13..14).forEach { notThisRahul(it) }
+        val posted = at(16, 11, day = 15)
+        at(posted.minusSeconds(60), Event.ScreenOff)
+        at(posted, Event.NotificationPosted(Fixtures.rahul(posted, key = "k15")))
+        val chip = at(posted.plusSeconds(30), Event.Unlocked).one<Effect.ShowChip>().chip
+        assertEquals(0, at(posted.plusSeconds(32), Event.ChipActed(chip.loopId)).one<Effect.RecordContact>().stat.ignoreStreak)
+        (16..17).forEach { notThisRahul(it) }
+        val later = at(16, 11, day = 18)
+        at(later.minusSeconds(60), Event.ScreenOff)
+        at(later, Event.NotificationPosted(Fixtures.rahul(later, key = "k18")))
+        assertTrue(at(later.plusSeconds(30), Event.Unlocked).any { it is Effect.ShowChip })
+    }
+
+    @Test
+    fun `a kind with nobody behind it still mutes as a kind`() = with(Script()) {
+        repeat(3) { day ->
+            val posted = at(13, 18, day = 13 + day)
+            at(posted, Event.NotificationPosted(Fixtures.aisha(posted, key = "pay$day")))
+            val chip = at(posted.plusSeconds(20), Event.Unlocked).one<Effect.ShowChip>().chip
+            at(posted.plusSeconds(22), Event.ChipDismissed(chip.loopId))
+        }
+        val posted = at(13, 18, day = 16)
+        at(posted, Event.NotificationPosted(Fixtures.aisha(posted, key = "pay3")))
+        assertTrue(at(posted.plusSeconds(20), Event.Unlocked).none { it is Effect.ShowChip })
+
+        at(posted.plusSeconds(30), Event.KindUnmuted(LoopKind.Payment))
+        assertTrue(at(posted.plusSeconds(40), Event.Unlocked).any { it is Effect.ShowChip })
+    }
+
+    @Test
+    fun `the running notification names the held guess until it's handed back`() = with(Script()) {
+        at(at(16, 0), Event.ScreenOff)
+        at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5))))
+        assertNull("nothing is the guess before the unlock", engine.held())
+        val chip = at(at(16, 6), Event.Unlocked).one<Effect.ShowChip>().chip
+        at(at(16, 6, 8), Event.ChipFaded(chip.loopId))
+        val held = engine.held()!!
+        assertEquals(chip.loopId, held.loopId)
+        assertEquals("Rahul", held.note.who)
+        assertEquals("“free at 5?”", held.note.words)
+        assertEquals("Reply", held.note.verb)
+
+        val opened = at(at(16, 7), Event.HeldOpened(chip.loopId))
+        assertEquals(Route.Notification(Fixtures.rahul(at(16, 5)).key, Fixtures.CHATS), opened.one<Effect.OpenWayBack>().route)
+        assertTrue(Effect.HideOverlay(Overlay.Dot) in opened)
+        assertEquals("tapping it is a yes, as on the chip", 1, opened.one<Effect.RecordKind>().stat.holds)
+        assertNull("you're on it now", engine.held())
+    }
+
+    @Test
+    fun `nothing is held once the chip is swiped away or the phone is put down`() = with(Script()) {
+        at(at(16, 0), Event.ScreenOff)
+        at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5))))
+        val chip = at(at(16, 6), Event.Unlocked).one<Effect.ShowChip>().chip
+        at(at(16, 6, 2), Event.ChipDismissed(chip.loopId))
+        assertNull(engine.held())
+
+        at(at(16, 7), Event.ScreenOff)
+        at(at(16, 8), Event.NotificationPosted(Fixtures.priya(at(16, 8), "free at 5?")))
+        at(at(16, 9), Event.Unlocked)
+        assertEquals("Priya", engine.held()?.note?.who)
+        at(at(16, 10), Event.ScreenOff)
+        assertNull(engine.held())
+    }
+
+    @Test
+    fun `already done on a waiting row closes it, and the same notification posted again stays closed`() = with(Script()) {
+        at(at(16, 0), Event.NotificationPosted(Fixtures.rahul(at(16, 0))))
+        val id = engine.waiting(at(16, 1)).single().loopId
+        val closed = at(at(16, 2), Event.WaitingDone(id))
+        assertEquals(Outcome.Done, closed.one<Effect.RecordLoop>().entry.outcome)
+        assertFalse(closed.one<Effect.RecordLoop>().entry.broughtBack)
+        assertTrue(closed.any { it is Effect.Forget })
+        assertTrue(engine.waiting(at(16, 3)).isEmpty())
+
+        // WhatsApp posts the same chat again when another one changes.
+        at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 0))))
+        assertEquals(0, engine.openLoops)
+        at(at(16, 9), Event.NotificationPosted(Fixtures.rahul(at(16, 9), "and dinner after?")))
+        assertEquals("a new message is something new to answer", 1, engine.openLoops)
+    }
+
+    @Test
+    fun `a pause ends at the time you picked`() = with(Script(Fixtures.settings.copy(pausedUntil = at(17, 0)))) {
+        at(at(16, 0), Event.ScreenOff)
+        at(at(16, 5), Event.NotificationPosted(Fixtures.rahul(at(16, 5))))
+        assertTrue(at(at(16, 6), Event.Unlocked).none { it is Effect.ShowChip })
+        assertEquals("unlock: Earmark is paused", log.last())
+
+        at(at(16, 59), Event.ScreenOff)
+        at(at(17, 1), Event.NotificationPosted(Fixtures.priya(at(17, 1), "free at 5?")))
+        assertEquals("Priya", at(at(17, 2), Event.Unlocked).one<Effect.ShowChip>().chip.note.who)
     }
 
     @Test
@@ -88,7 +215,7 @@ class EngineTest {
     }
 
     @Test
-    fun `paused Earmark shows nothing`() = with(Script(Fixtures.settings.copy(paused = true))) {
+    fun `paused until you resume, Earmark shows nothing`() = with(Script(Fixtures.settings.copy(pausedUntil = java.time.Instant.MAX))) {
         at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
         assertTrue(at(at(16, 12), Event.Unlocked).none { it is Effect.ShowChip })
     }

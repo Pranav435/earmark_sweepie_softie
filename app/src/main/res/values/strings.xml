@@ -21,7 +21,8 @@
     </plurals>
     <string name="home_a_reminder">A reminder</string>
     <string name="home_a_reminder_lower">a reminder</string>
-    <string name="home_tap_hint">Tap one to go straight there.</string>
+    <string name="home_tap_hint">Tap one to go straight there. Press and hold one you\'ve already dealt with.</string>
+    <string name="home_already_done">Already done</string>
     <string name="home_earlier">Earlier today · %1$d</string>
     <string name="home_show">Show</string>
     <string name="home_hide">Hide</string>
@@ -45,6 +46,7 @@
     <string name="recap_state_expired">expired</string>
     <string name="recap_state_lost">no longer watched</string>
     <string name="recap_paused">Earmark is paused. It won\'t show chips or pills until you resume.</string>
+    <string name="recap_paused_until">Earmark is paused until %1$s. No chips or pills till then.</string>
     <string name="recap_resume">Resume</string>
     <string name="recap_missing">Earmark is missing a permission, so it can\'t guess yet.</string>
     <string name="recap_fix">Fix it</string>
@@ -63,6 +65,7 @@
     <string name="kind_call_back">Missed call</string>
     <string name="kind_reminder">Reminder</string>
     <string name="kind_email">Email</string>
+    <string name="kind_own">Earmarked app</string>
 
     <!-- Demo -->
     <string name="demo_title">Demo mode</string>
@@ -86,11 +89,33 @@
     <string name="keep_alive_channel">Earmark running</string>
     <string name="keep_alive_title">Earmark is on</string>
     <string name="keep_alive_body">Running in the background so it can guess when you unlock.</string>
+    <!-- The held guess (ADR 0034); its name, words and verb come from the core -->
+    <string name="keep_alive_holding">Holding: %1$s</string>
+    <string name="keep_alive_paused">Earmark is paused</string>
+    <string name="keep_alive_paused_until">Until %1$s. No chips or pills till then.</string>
+    <string name="keep_alive_paused_forever">Until you resume it. No chips or pills till then.</string>
+    <string name="keep_alive_resume">Resume</string>
+
+    <!-- Earmark this tile (ADR 0035) -->
+    <string name="tile_label">Earmark this</string>
+    <string name="tile_nothing">Open an app first</string>
+    <string name="tile_off">Earmark isn\'t connected</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
     <string name="settings_pause">Pause Earmark</string>
-    <string name="settings_pause_body">No chips and no pills until you turn this off.</string>
+    <string name="settings_pause_body">No chips and no pills while it\'s paused.</string>
+    <string name="settings_pause_hour">For an hour</string>
+    <string name="settings_pause_morning">Until %1$s</string>
+    <string name="settings_pause_forever">Until I resume</string>
+    <string name="settings_paused_until">Paused until %1$s.</string>
+    <string name="settings_paused_forever">Paused until you resume it.</string>
+    <string name="settings_resume">Resume</string>
+    <string name="settings_tile">Earmark this</string>
+    <string name="settings_tile_body">A Quick Settings tile. Tap it in any app and Earmark holds that app for you: if you drift into a feed, the pill brings you back to it. Tap it again to let go.</string>
+    <string name="settings_tile_add">Add the tile</string>
+    <string name="settings_tile_how">Add it from the edit button in your Quick Settings.</string>
+    <string name="settings_tile_added">The tile is in your Quick Settings.</string>
     <string name="settings_demo">Demo mode</string>
     <string name="settings_demo_body">Sample notifications, and the pill comes right away, so every story runs on any phone.</string>
     <string name="settings_drift">When the pill comes</string>
@@ -108,7 +133,11 @@
     <string name="settings_names_label">Names you go by</string>
     <string name="settings_names_hint">Priya, Pri</string>
     <string name="settings_muted">Muted guesses</string>
-    <string name="settings_muted_body">You ignored these three times in a row, so Earmark stopped guessing them.</string>
+    <string name="settings_muted_body">You said “not this” to these three times in a row, so Earmark stopped guessing them.</string>
+    <plurals name="settings_muted_chats">
+        <item quantity="one">%d chat</item>
+        <item quantity="other">%d chats</item>
+    </plurals>
     <string name="settings_unmute">Unmute</string>
     <string name="settings_testers">For testers</string>
     <string name="settings_permissions">Permissions</string>

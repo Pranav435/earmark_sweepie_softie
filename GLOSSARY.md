@@ -47,7 +47,11 @@ A loop for an upcoming event with a place or a meeting link that you need to set
 _Avoid_: calendar loop, event loop
 
 **Own**:
-A loop you name yourself. Not in v0.1.
+A loop you make with the "Earmark this" tile: the app in front, held so that drift brings you back to it. It closes once you've gone back to that app for a while and left, or when you tap the tile again.
+
+**Earmark this**:
+The Quick Settings tile that makes an Own loop from the app in front, or lets go of the one it holds.
+_Avoid_: bookmark, save for later
 
 **Way back**:
 The exact route back into a loop: the notification's tap action, its reply action, or an app or alarm intent.
@@ -118,13 +122,16 @@ _Avoid_: banner, toast, popup
 A chip running out its timer without a tap. The loop is still watched, and the dot shows while it stays the guess.
 
 **Ignore**:
-Swiping a chip away. Three ignores in a row mute that kind.
+Swiping a chip away, "not this". Three in a row mute that chat, or the kind when nobody is behind it.
 
 **Mute**:
-The state of a kind that Earmark no longer guesses because you ignored it three times in a row.
+The state of a chat, or of a kind with nobody behind it, that Earmark no longer guesses because you said "not this" to it three times in a row. A muted chat is still listed as waiting.
 
 **Dot**:
 The small marigold mark under the status bar that shows Earmark is holding a guess whose chip faded.
+
+**Held guess**:
+The guess Earmark is holding this session, until it's handed back, waved off, or the phone is put down. The "Earmark is on" notification names it, with its verb, so it can be read and acted on without seeing the dot.
 
 ## Drift and hand-back
 
@@ -165,7 +172,10 @@ _Avoid_: quick replies bar, suggestions
 ## Recap
 
 **Waiting**:
-An open loop on the home screen, in the order Earmark would guess it. Tapping it opens its way back.
+An open loop on the home screen, in the order Earmark would guess it. Tapping it opens its way back; pressing and holding it marks it already done.
+
+**Already done**:
+Closing a waiting row by hand, for something dealt with where Earmark can't see. Done, not brought back.
 
 **Recap**:
 Today's list of things and how each one ended. The home screen leads with who's waiting and folds the rest into "Earlier today".

@@ -3,6 +3,7 @@ package com.sweepiesoftie.earmark
 import android.annotation.SuppressLint
 import android.content.Context
 import com.sweepiesoftie.earmark.core.Event
+import com.sweepiesoftie.earmark.core.TileState
 import com.sweepiesoftie.earmark.core.Waiting
 import com.sweepiesoftie.earmark.demo.DemoChats
 import com.sweepiesoftie.earmark.listener.InstalledApps
@@ -16,10 +17,17 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
- * What the home screen shows about the listener: whether Android has connected it, how many loops it holds open,
- * and who's waiting, in the order Earmark would guess them (ADR 0032).
+ * What the screens show about the listener: whether Android has connected it, how many loops it holds open, who's
+ * waiting, in the order Earmark would guess them (ADR 0032), the guess it's holding for the running notification
+ * (ADR 0034), and what the "Earmark this" tile would do (ADR 0035).
  */
-data class ListenerState(val connected: Boolean = false, val openLoops: Int = 0, val waiting: List<Waiting> = emptyList())
+data class ListenerState(
+    val connected: Boolean = false,
+    val openLoops: Int = 0,
+    val waiting: List<Waiting> = emptyList(),
+    val held: Waiting? = null,
+    val tile: TileState = TileState(),
+)
 
 /**
  * Every long-lived object, wired by hand (ADR 0008). The activity and the listener share one process and this graph.
@@ -42,7 +50,7 @@ object AppGraph {
     /** Written by the listener, read by the home screen. */
     val listener: MutableStateFlow<ListenerState> = MutableStateFlow(ListenerState())
 
-    /** Events raised by screens (unmute a kind, open a waiting row) for the listener to feed the engine. */
+    /** Events raised by screens, the running notification and the tile (unmute, open a waiting row, earmark) for the listener to feed the engine. */
     val uiEvents: MutableSharedFlow<Event> = MutableSharedFlow(extraBufferCapacity = 16)
 
     /** For writes that must outlive a screen or a listener rebind. */

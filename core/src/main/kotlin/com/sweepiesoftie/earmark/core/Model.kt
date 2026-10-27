@@ -5,15 +5,21 @@ import java.time.Instant
 import java.time.LocalTime
 import java.time.ZoneId
 
-/** The kinds of loop v0.1 can open. "Own" waits for the Quick Settings tile in v0.2. */
+/** The kinds of loop Earmark can open. An Own loop is one you make with the "Earmark this" tile (ADR 0035). */
 public enum class LoopKind {
-    Reply, Payment, Flow, Routine, LeaveBy, CallBack, Reminder, Email;
+    Reply, Payment, Flow, Routine, LeaveBy, CallBack, Reminder, Email, Own;
 
     /**
-     * Opened by something that came in (a message, call, email, reminder, request or bill) rather than by the
-     * clock, the calendar or an app you left: listed as it arrives (ADR 0025), and boosted at your first unlock after it.
+     * Opened by something that came in (a message, call, email, reminder, request or bill), or by you, rather than
+     * by the clock, the calendar or an app you left: listed as it arrives (ADR 0025), and boosted at your first unlock after it.
      */
     internal val cameIn: Boolean get() = this != Flow && this != Routine && this != LeaveBy
+
+    /**
+     * A person at the other end. How you deal with them teaches Earmark about their app (ADR 0027), and "not this"
+     * three times in a row mutes their chat rather than the whole kind (ADR 0033).
+     */
+    public val withPeople: Boolean get() = this == Reply || this == CallBack || this == Email
 }
 
 @JvmInline
@@ -143,7 +149,8 @@ public data class Settings(
     val driftTimer: DriftTimer = DriftTimer.Fixed,
     val driftAfter: Duration = Duration.ofSeconds(90),
     val demoMode: Boolean = false,
-    val paused: Boolean = false,
+    /** No chips or pills before this time; [Instant.MAX] until you resume (ADR 0036). */
+    val pausedUntil: Instant? = null,
     val use24Hour: Boolean = false,
     val zone: ZoneId = ZoneId.systemDefault(),
     /** Package that answers `ACTION_SET_ALARM`, so time spent setting an alarm is not drift. */
@@ -152,7 +159,11 @@ public data class Settings(
     val rideApp: String? = null,
     /** Your name and nicknames from your own contact card, so a group message that mentions you counts (ADR 0028). Never stored or logged. */
     val myNames: List<String> = emptyList(),
-)
+    /** Launchers: the home screen is no app to earmark (ADR 0035). */
+    val homeApps: Set<String> = emptySet(),
+) {
+    public fun paused(now: Instant): Boolean = pausedUntil?.isAfter(now) == true
+}
 
 public data class KindStat(val holds: Int = 0, val ignores: Int = 0, val ignoreStreak: Int = 0) {
     val muted: Boolean get() = ignoreStreak >= MUTE_AFTER_IGNORES
@@ -164,9 +175,18 @@ public data class KindStat(val holds: Int = 0, val ignores: Int = 0, val ignoreS
 
 /**
  * How you answer one conversation, keyed by its hashed key: replies and how fast, and how often you open its
- * notifications rather than swipe them away (ADR 0028).
+ * notifications rather than swipe them away (ADR 0028). [ignoreStreak] counts "not this" on its chips in a row;
+ * three mute just this chat (ADR 0033).
  */
-public data class ContactStat(val replies: Int = 0, val medianReplyMinutes: Double = 0.0, val opened: Int = 0, val swiped: Int = 0) {
+public data class ContactStat(
+    val replies: Int = 0,
+    val medianReplyMinutes: Double = 0.0,
+    val opened: Int = 0,
+    val swiped: Int = 0,
+    val ignoreStreak: Int = 0,
+) {
+    val muted: Boolean get() = ignoreStreak >= KindStat.MUTE_AFTER_IGNORES
+
     /** Opened rather than swiped away, smoothed so a conversation with no taps reads 0.5. */
     val openRate: Double get() = (opened + 1.0) / (opened + swiped + 2.0)
 
@@ -228,6 +248,12 @@ public data class PillCard(val loopId: LoopId, val kind: LoopKind, val note: Not
 /** An open loop on the home screen, in the order Earmark would guess them (ADR 0032). [at] is when it last came in. */
 public data class Waiting(val loopId: LoopId, val kind: LoopKind, val note: Note, val task: String, val at: Instant)
 
+/**
+ * What the "Earmark this" tile says (ADR 0035): the app an Own loop holds, and the app in front that a tap would
+ * hold, or null for the home screen, a feed, Earmark itself or a locked phone.
+ */
+public data class TileState(val holding: String? = null, val canHold: String? = null)
+
 /** One row of the recap, upserted by loop id. Labels are trimmed to kind and time after 24 h by the store. */
 public data class LoopEntry(
     val loopId: LoopId,
@@ -261,9 +287,17 @@ public sealed interface Event {
     public data class PillDismissed(val loopId: LoopId) : Event
     /** A waiting row on the home screen was tapped: open its way back, as a chip tap would. */
     public data class WaitingOpened(val loopId: LoopId) : Event
+    /** "Already done" on a waiting row: you dealt with it where Earmark can't see (ADR 0036). */
+    public data class WaitingDone(val loopId: LoopId) : Event
+    /** The verb on the "Earmark is on" notification while it names the held guess (ADR 0034). */
+    public data class HeldOpened(val loopId: LoopId) : Event
+    /** The "Earmark this" tile was tapped: hold the app in front, or let go of the one held (ADR 0035). */
+    public data object Earmarked : Event
     public data class ReplyChosen(val loopId: LoopId, val text: String) : Event
     public data class ReplySent(val loopId: LoopId) : Event
     public data class KindUnmuted(val kind: LoopKind) : Event
+    /** Every chat muted by "not this" can be guessed again (ADR 0033). */
+    public data object ChatsUnmuted : Event
     public data class SettingsChanged(val settings: Settings) : Event
     public data class StatsLoaded(val stats: Stats) : Event
     public data object Tick : Event

@@ -39,6 +39,11 @@
         <intent>
             <action android:name="android.intent.action.SET_ALARM" />
         </intent>
+        <!-- Launchers: the home screen is no app to earmark (ADR 0035). -->
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.HOME" />
+        </intent>
     </queries>
 
     <application
@@ -72,6 +77,34 @@
         <receiver
             android:name=".demo.DemoReplyReceiver"
             android:exported="false" />
+
+        <!-- The running notification's hand-back for the held guess (ADR 0034). Its own task, so Earmark's screens stay put. -->
+        <activity
+            android:name=".listener.HandBackActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@style/Theme.Earmark.Invisible" />
+
+        <receiver
+            android:name=".listener.KeepAliveService$Resume"
+            android:exported="false" />
+
+        <!-- "Earmark this" in Quick Settings (ADR 0035). -->
+        <service
+            android:name=".listener.EarmarkTile"
+            android:exported="true"
+            android:icon="@drawable/ic_glyph"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service>
 
         <service
             android:name=".listener.KeepAliveService"

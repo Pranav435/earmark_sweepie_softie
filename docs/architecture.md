@@ -22,8 +22,9 @@ Earmark is an Android app (Kotlin, Compose, minSdk 29, targetSdk 36) that turns 
 ```
 Events in    NotificationPosted · NotificationRemoved(reason) · Unlocked · ScreenOff · ForegroundChanged(pkg)
              PlaybackChanged · BlockerChanged(call | nav | dnd) · AlarmChanged · CalendarSoon
-             ChipHeld · ChipDismissed · ChipActed · PillTapped · PillDismissed · ReplyChosen · ReplySent
-             KindUnmuted · SettingsChanged · StatsLoaded · Tick
+             ChipFaded · ChipDismissed · ChipActed · PillTapped · PillDismissed · ReplyChosen · ReplySent
+             WaitingOpened · WaitingDone · HeldOpened · Earmarked
+             KindUnmuted · ChatsUnmuted · SettingsChanged · StatsLoaded · Tick
 Effects out  ShowChip(card) · ShowDot · ShowPill(card) · HideOverlay(which) · OpenWayBack(loopId, route)
              SuggestReplies(loopId) · SendReply(loopId, text) · RecordLoop · RecordKind · RecordContact
              RecordAlarm · Log(decision)
@@ -50,7 +51,8 @@ who    = your replies to them; else how often you open their notifications; else
 due    = 0.5 for a message to you, +0.25 if it asks (a "?" or a request), +0.25 for a time word,
          +0.25 if they keep writing; 1.0 if urgent; no loop at all for only "ok" or 👍; event start; request age
 history = confirm rate for this kind (default 0.5)
-chip only if score > 0.70 · an urgent loop above the bar comes first · 3 ignores in a row mute that kind
+chip only if score > 0.70 · an urgent loop above the bar comes first · 3 ignores in a row mute that chat,
+         or the kind when nobody is behind it (ADR 0033)
 ```
 
 ADR 0017 changed `due` and the boost after the first real-phone test, where a plain "hey" could never clear the bar. ADR 0020 gives the boost only to messages that came in while the phone was put down. A message that arrives while the phone is in use gets no chip; it is scored the same way as it arrives and, above the bar, quietly becomes the guess if it scores higher than an earlier arrival. An urgent one takes over even a guess you came for, which comes back after it. When the guess is dealt with, the strongest loop left above the bar becomes **next up** (ADR 0027).
@@ -69,7 +71,7 @@ ADR 0017 changed `due` and the boost after the first real-phone test, where a pl
 
 ## Persistence and privacy
 
-Message text, `PendingIntent`s and Smart Reply input stay in memory until the loop closes. Room stores `loop_log` (kind, times, outcome, brought-back flag, and a label kept for 24 h for the recap), `contact_stats` (a hashed conversation key, reply count, median reply latency, and how often its notifications were opened or swiped away), `app_stats` (per package: your usual visit to a feed app, and how many of a chat app's messages you dealt with or left and how soon) and `kind_stats` (confirms, ignores, muted). Your name from your own contact card stays in memory; names typed in Settings are kept in Earmark's private preferences. After a process restart, `onListenerConnected` rebuilds loops from `getActiveNotifications()` with fresh intents. Permissions: the notification listener binding, `PACKAGE_USAGE_STATS`, `SYSTEM_ALERT_WINDOW`, `READ_CALENDAR` (optional), `READ_CONTACTS` (optional, only your own contact card is read), `POST_NOTIFICATIONS` (the "Earmark is on" notification and demo mode), `FOREGROUND_SERVICE` and `FOREGROUND_SERVICE_SPECIAL_USE`, `RECEIVE_BOOT_COMPLETED`, `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` and `SET_ALARM` (a normal permission that `ACTION_SET_ALARM` requires for the alarm routine's way back).
+Message text, `PendingIntent`s and Smart Reply input stay in memory until the loop closes. Room stores `loop_log` (kind, times, outcome, brought-back flag, and a label kept for 24 h for the recap), `contact_stats` (a hashed conversation key, reply count, median reply latency, how often its notifications were opened or swiped away, and "not this" on its chips in a row), `app_stats` (per package: your usual visit to a feed app, and how many of a chat app's messages you dealt with or left and how soon) and `kind_stats` (confirms, ignores, muted). The engine also publishes the held guess, which the "Earmark is on" notification names (ADR 0034), and what the "Earmark this" tile would do (ADR 0035). Your name from your own contact card stays in memory; names typed in Settings are kept in Earmark's private preferences. After a process restart, `onListenerConnected` rebuilds loops from `getActiveNotifications()` with fresh intents. Permissions: the notification listener binding, `PACKAGE_USAGE_STATS`, `SYSTEM_ALERT_WINDOW`, `READ_CALENDAR` (optional), `READ_CONTACTS` (optional, only your own contact card is read), `POST_NOTIFICATIONS` (the "Earmark is on" notification and demo mode), `FOREGROUND_SERVICE` and `FOREGROUND_SERVICE_SPECIAL_USE`, `RECEIVE_BOOT_COMPLETED`, `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` and `SET_ALARM` (a normal permission that `ACTION_SET_ALARM` requires for the alarm routine's way back).
 
 ## Android constraints designed for
 

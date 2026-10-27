@@ -5,6 +5,9 @@ import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.ActivityNotFoundException
+import android.app.StatusBarManager
+import android.content.ComponentName
+import android.graphics.drawable.Icon
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -26,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
@@ -43,8 +47,10 @@ import com.sweepiesoftie.earmark.core.Event
 import com.sweepiesoftie.earmark.demo.DemoNotifier
 import com.sweepiesoftie.earmark.listener.Permissions
 import com.sweepiesoftie.earmark.listener.EarmarkListener
+import com.sweepiesoftie.earmark.listener.EarmarkTile
 import com.sweepiesoftie.earmark.listener.KeepAliveService
 import com.sweepiesoftie.earmark.store.Store
+import com.sweepiesoftie.earmark.store.UserSettings
 import com.sweepiesoftie.earmark.ui.theme.EarmarkTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -70,6 +76,23 @@ class MainActivity : ComponentActivity() {
     /** Android's own "let this app run in the background?" prompt; it switches battery optimisation off for Earmark. */
     @SuppressLint("BatteryLife")
     fun askBatteryUnrestricted(): Unit = openSettings(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, withPackage = true)
+
+    /** Android 13 and later ask, in a system dialog, whether to add the "Earmark this" tile to Quick Settings (ADR 0035). */
+    fun requestTile() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
+        try {
+            getSystemService(StatusBarManager::class.java).requestAddTileService(
+                ComponentName(this, EarmarkTile::class.java),
+                getString(R.string.tile_label),
+                Icon.createWithResource(this, R.drawable.ic_glyph),
+                mainExecutor,
+            ) { result ->
+                if (result == StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ALREADY_ADDED) Toast.makeText(this, R.string.settings_tile_added, Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: RuntimeException) {
+            AppGraph.debugLog.error("request tile", e)
+        }
+    }
 
     /** Opens a system settings page, falling back to the general list when an OEM has moved it. */
     fun openSettings(action: String, withPackage: Boolean = false) {
@@ -104,6 +127,7 @@ private fun Root() {
     BackHandler(screen == Screen.Settings || screen == Screen.Log || (screen == Screen.Onboarding && setupStart != SetupStep.Intro)) { screen = Screen.Recap }
 
     val user by graph.settings.state.collectAsState()
+    val pausedUntil = pausedUntil(user)
     val listener by graph.listener.collectAsState()
     // Android binds the listener a moment after access is granted, so wait before saying it isn't connected.
     var bindWaitOver by remember { mutableStateOf(false) }
@@ -148,7 +172,7 @@ private fun Root() {
                     RecapState(
                         waiting = waiting,
                         rows = rows.filter { row -> waiting.none { it.loopId.value == row.id } },
-                        paused = user.paused,
+                        pausedUntil = pausedUntil,
                         missingPermission = !permissions.required,
                         notListening = permissions.notifications && !listener.connected && bindWaitOver,
                         openLoops = listener.openLoops,
@@ -158,9 +182,10 @@ private fun Root() {
                     ),
                     RecapActions(
                         onOpen = { graph.uiEvents.tryEmit(Event.WaitingOpened(it)) },
+                        onDone = { graph.uiEvents.tryEmit(Event.WaitingDone(it)) },
                         onSettings = { screen = Screen.Settings },
                         onLog = { screen = Screen.Log },
-                        onResume = { graph.settings.setPaused(false) },
+                        onResume = { graph.settings.pause(null) },
                         onFixPermissions = setup,
                         onNotificationAccess = { activity.openSettings(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS) },
                         onBattery = activity::askBatteryUnrestricted,
@@ -176,11 +201,21 @@ private fun Root() {
                     value = withContext(Dispatchers.IO) { if (showAll) graph.apps.launcherApps() else graph.apps.feedCandidates() }
                 }
                 val muted by remember { graph.store.mutedKinds() }.collectAsState(emptyList())
+                val mutedChats by remember { graph.store.mutedChats() }.collectAsState(0)
                 SettingsScreen(
-                    SettingsState(user = user, feeds = feeds, showAllApps = showAll, muted = muted),
+                    SettingsState(
+                        user = user,
+                        feeds = feeds,
+                        showAllApps = showAll,
+                        muted = muted,
+                        mutedChats = mutedChats,
+                        pausedUntil = pausedUntil,
+                        canAddTile = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU,
+                    ),
                     SettingsActions(
                         onBack = { screen = Screen.Recap },
-                        onPaused = graph.settings::setPaused,
+                        onPause = graph.settings::pause,
+                        onAddTile = activity::requestTile,
                         onDemo = { on ->
                             graph.settings.setDemoMode(on)
                             if (on) graph.appScope.launch {
@@ -194,6 +229,7 @@ private fun Root() {
                         onNames = graph.settings::setNames,
                         onShowAllApps = { showAll = true },
                         onUnmute = { kind -> graph.uiEvents.tryEmit(Event.KindUnmuted(kind)) },
+                        onUnmuteChats = { graph.uiEvents.tryEmit(Event.ChatsUnmuted) },
                         onPermissions = setup,
                         onLog = { screen = Screen.Log },
                     ),
@@ -221,6 +257,21 @@ private fun Root() {
 }
 
 private const val LISTENER_BIND_WAIT_MILLIS = 3_000L
+
+/** When the pause in force ends, or null. Recomposes when a pause runs out by itself, so the banner goes then. */
+@Composable
+private fun pausedUntil(user: UserSettings): Long? {
+    var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
+    LaunchedEffect(user.pausedUntil) {
+        now = System.currentTimeMillis()
+        val until = user.pausedUntil ?: return@LaunchedEffect
+        if (until != UserSettings.UNTIL_RESUMED && until > now) {
+            delay(until - now)
+            now = System.currentTimeMillis()
+        }
+    }
+    return user.pausedUntil?.takeIf { it > now }
+}
 
 @Composable
 private fun recapRows() = run {

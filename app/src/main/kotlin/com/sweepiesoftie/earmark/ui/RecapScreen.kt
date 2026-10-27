@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -56,6 +57,7 @@ import com.sweepiesoftie.earmark.core.LoopId
 import com.sweepiesoftie.earmark.core.LoopKind
 import com.sweepiesoftie.earmark.core.Outcome
 import com.sweepiesoftie.earmark.core.Waiting
+import com.sweepiesoftie.earmark.store.UserSettings
 import com.sweepiesoftie.earmark.ui.theme.Brand
 import com.sweepiesoftie.earmark.ui.theme.InstrumentSans
 import com.sweepiesoftie.earmark.ui.theme.InstrumentSerif
@@ -68,7 +70,8 @@ data class RecapRow(val id: String, val kind: LoopKind, val label: String?, val 
 data class RecapState(
     val waiting: List<Waiting> = emptyList(),
     val rows: List<RecapRow> = emptyList(),
-    val paused: Boolean = false,
+    /** When a pause in force ends, or [UserSettings.UNTIL_RESUMED]; null when Earmark isn't paused. */
+    val pausedUntil: Long? = null,
     val missingPermission: Boolean = false,
     /** Notification access is on, but Android hasn't connected the listener. */
     val notListening: Boolean = false,
@@ -83,6 +86,8 @@ data class RecapState(
 
 class RecapActions(
     val onOpen: (LoopId) -> Unit,
+    /** "Already done": dealt with somewhere Earmark can't see (ADR 0036). */
+    val onDone: (LoopId) -> Unit,
     val onSettings: () -> Unit,
     val onLog: () -> Unit,
     val onResume: () -> Unit,
@@ -111,9 +116,9 @@ fun RecapScreen(state: RecapState, actions: RecapActions) {
         if (state.missingPermission) item { Banner(stringResource(R.string.recap_missing), stringResource(R.string.recap_fix), actions.onFixPermissions) }
         if (state.batteryRestricted) item { Banner(stringResource(R.string.recap_battery), stringResource(R.string.recap_battery_allow), actions.onBattery) }
         if (state.notListening) item { Banner(stringResource(R.string.recap_not_listening), stringResource(R.string.onboarding_open_settings), actions.onNotificationAccess) }
-        if (state.paused) item { Banner(stringResource(R.string.recap_paused), stringResource(R.string.recap_resume), actions.onResume) }
+        state.pausedUntil?.let { until -> item { Banner(pausedLine(until), stringResource(R.string.recap_resume), actions.onResume) } }
         item { Headline(state) }
-        items(state.waiting, key = { it.loopId.value }) { WaitingRow(it, actions.onOpen) }
+        items(state.waiting, key = { it.loopId.value }) { WaitingRow(it, actions.onOpen, actions.onDone) }
         if (state.rows.isNotEmpty()) {
             item { EarlierToggle(state.rows.size, earlier) { earlier = !earlier } }
             if (earlier) items(state.rows, key = { it.id }) { RecapRowView(it) }
@@ -172,9 +177,19 @@ private fun headline(waiting: List<Waiting>): AnnotatedString {
     }
 }
 
-/** One person or thing waiting. The whole row opens it, straight to the chat, the call log or the bill. */
 @Composable
-private fun WaitingRow(waiting: Waiting, onOpen: (LoopId) -> Unit) {
+private fun pausedLine(until: Long): String {
+    if (until == UserSettings.UNTIL_RESUMED) return stringResource(R.string.recap_paused)
+    val context = LocalContext.current
+    return stringResource(R.string.recap_paused_until, android.text.format.DateFormat.getTimeFormat(context).format(Date(until)))
+}
+
+/**
+ * One person or thing waiting. The whole row opens it, straight to the chat, the call log or the bill. Pressed and
+ * held, or from TalkBack's actions, it closes as already done (ADR 0036).
+ */
+@Composable
+private fun WaitingRow(waiting: Waiting, onOpen: (LoopId) -> Unit, onDone: (LoopId) -> Unit) {
     val context = LocalContext.current
     val time = remember { android.text.format.DateFormat.getTimeFormat(context) }
     val shape = RoundedCornerShape(18.dp)
@@ -185,7 +200,12 @@ private fun WaitingRow(waiting: Waiting, onOpen: (LoopId) -> Unit) {
             .clip(shape)
             .background(Tone.Card)
             .border(1.dp, Tone.Line, shape)
-            .clickable(role = Role.Button, onClickLabel = waiting.task) { onOpen(waiting.loopId) }
+            .combinedClickable(
+                role = Role.Button,
+                onClickLabel = waiting.task,
+                onLongClickLabel = stringResource(R.string.home_already_done),
+                onLongClick = { onDone(waiting.loopId) },
+            ) { onOpen(waiting.loopId) }
             .padding(horizontal = 12.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -361,5 +381,6 @@ fun kindName(kind: LoopKind): String = stringResource(
         LoopKind.CallBack -> R.string.kind_call_back
         LoopKind.Reminder -> R.string.kind_reminder
         LoopKind.Email -> R.string.kind_email
+        LoopKind.Own -> R.string.kind_own
     },
 )
