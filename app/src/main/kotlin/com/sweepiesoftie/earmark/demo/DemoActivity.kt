@@ -77,6 +77,11 @@ class DemoActivity : ComponentActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (intent.getStringExtra(EXTRA_SCREEN) != SCREEN_PAY) DemoNotifier.chatOpened(this)
+    }
+
     companion object {
         const val EXTRA_SCREEN = "screen"
         const val SCREEN_CHAT = "chat"

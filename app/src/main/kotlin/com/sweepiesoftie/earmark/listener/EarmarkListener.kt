@@ -76,6 +76,7 @@ class EarmarkListener : NotificationListenerService() {
         session = s
         graph.listener.value = ListenerState(connected = true)
         log.add("listener connected")
+        KeepAliveService.start(this)
         s.receivers.start()
         s.pause.start()
         s.scope.launch {
@@ -134,8 +135,8 @@ class EarmarkListener : NotificationListenerService() {
             s.navigating = false
             dispatch(Event.BlockerChanged(Blocker.Navigation, false))
         }
+        // The engine forgets the notification's intents and text, unless an open chat still needs them for the reply strip.
         dispatch(Event.NotificationRemoved(sbn.key, NotificationReader.reasonOf(reason)))
-        s.reader.forget(sbn.key)
     }
 
     override fun onInterruptionFilterChanged(interruptionFilter: Int) {

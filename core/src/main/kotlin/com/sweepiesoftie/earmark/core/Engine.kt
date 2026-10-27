@@ -31,7 +31,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         is Event.NotificationPosted -> onPosted(event.signal, now)
         is Event.NotificationRemoved -> onRemoved(event, now)
         Event.Unlocked -> onUnlocked(now)
-        Event.ScreenOff -> onScreenOff()
+        Event.ScreenOff -> onScreenOff(now)
         is Event.ForegroundChanged -> onForeground(event, now)
         is Event.PlaybackChanged -> stepDrift(DriftInput.Media(event.playback), now)
         is Event.BlockerChanged -> stepDrift(DriftInput.Block(event.blocker, event.active), now)
@@ -81,8 +81,30 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         }
 
     private fun onRemoved(event: Event.NotificationRemoved, now: Instant): List<Effect> {
-        val tracked = book.byNotificationKey(event.key) ?: return emptyList()
-        return close(tracked.loop.id, CloseRules.onRemoved(event.reason), now, "notification removed (${event.reason})")
+        val tracked = book.byNotificationKey(event.key) ?: return listOf(Effect.Forget(event.key))
+        if (!opensChat(tracked, event.reason)) {
+            return close(tracked.loop.id, CloseRules.onRemoved(event.reason), now, "notification removed (${event.reason})")
+        }
+        // Chat apps clear the notification as the chat opens. Keep the loop, its reply action and its
+        // message text, so the reply strip can show and send; it closes when you reply or leave.
+        val loop = tracked.loop
+        val handedBack = drift.phase == Phase.HandedBack
+        book.update(loop.id) { it.copy(chatOpen = true) }
+        drift = drift.copy(phase = Phase.HandedBack)
+        val effects = mutableListOf<Effect>(Effect.Log("${loop.id.value}: chat opened and ${loop.packageName} cleared its notification (${event.reason}); closes when you reply or leave"))
+        if (!handedBack && loop.notificationKey != null) effects += Effect.SuggestReplies(loop.id, loop.notificationKey)
+        return effects
+    }
+
+    /** The guessed reply's notification went because you opened its chat: through Earmark, from the notification, or in its app. */
+    private fun opensChat(tracked: Tracked, reason: RemovalReason): Boolean {
+        val loop = tracked.loop
+        if (loop.kind != LoopKind.Reply || !loop.canReply || tracked.chatOpen || drift.loopId != loop.id) return false
+        return when (reason) {
+            RemovalReason.Click -> true
+            RemovalReason.AppCancel -> drift.phase == Phase.HandedBack || foreground?.packageName == loop.packageName
+            RemovalReason.UserDismiss, RemovalReason.Other -> false
+        }
     }
 
     private fun onUnlocked(now: Instant): List<Effect> {
@@ -129,10 +151,11 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun resumeForeground(now: Instant): List<Effect> =
         foreground?.let { stepDrift(DriftInput.Foreground(it.packageName), now) }.orEmpty()
 
-    private fun onScreenOff(): List<Effect> {
+    private fun onScreenOff(now: Instant): List<Effect> {
+        val left = book.all.filter { it.chatOpen }.map { it.loop.id }.flatMap { close(it, Outcome.Done, now, "screen off with the chat open") }
         drift = DriftMachine.end(drift)
         foreground = null
-        return hideAll()
+        return left + hideAll()
     }
 
     private fun onForeground(event: Event.ForegroundChanged, now: Instant): List<Effect> {
@@ -145,7 +168,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         if (guess != null && drift.phase == Phase.HandedBack && event.packageName != guess.loop.packageName &&
             event.packageName != settings.ownPackage
         ) {
-            effects += Effect.HideOverlay(Overlay.ReplyStrip)
+            effects += if (guess.chatOpen) close(guess.loop.id, Outcome.Done, now, "left the chat") else listOf(Effect.HideOverlay(Overlay.ReplyStrip))
         }
         if (guess?.loop?.kind == LoopKind.LeaveBy && guess.loop.leaveBy?.isMeeting == true && event.packageName in meetingApps) {
             effects += close(guess.loop.id, Outcome.Done, now, "meeting app opened")

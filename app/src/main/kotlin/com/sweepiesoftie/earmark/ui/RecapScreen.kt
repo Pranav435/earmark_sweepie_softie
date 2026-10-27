@@ -55,6 +55,8 @@ data class RecapState(
     /** Notification access is on, but Android hasn't connected the listener. */
     val notListening: Boolean = false,
     val openLoops: Int = 0,
+    /** Battery optimisation is on, so some phones freeze Earmark in the background. */
+    val batteryRestricted: Boolean = false,
     val demoMode: Boolean = false,
     val canPostNotifications: Boolean = true,
 ) {
@@ -68,6 +70,7 @@ class RecapActions(
     val onResume: () -> Unit,
     val onFixPermissions: () -> Unit,
     val onNotificationAccess: () -> Unit,
+    val onBattery: () -> Unit,
     val onDemoRahul: () -> Unit,
     val onDemoAisha: () -> Unit,
     val onAllowNotifications: () -> Unit,
@@ -86,6 +89,7 @@ fun RecapScreen(state: RecapState, actions: RecapActions) {
             }
         }
         if (state.missingPermission) item { Banner(stringResource(R.string.recap_missing), stringResource(R.string.recap_fix), actions.onFixPermissions) }
+        if (state.batteryRestricted) item { Banner(stringResource(R.string.recap_battery), stringResource(R.string.recap_battery_allow), actions.onBattery) }
         if (state.notListening) item { Banner(stringResource(R.string.recap_not_listening), stringResource(R.string.onboarding_open_settings), actions.onNotificationAccess) }
         if (state.paused) item { Banner(stringResource(R.string.recap_paused), stringResource(R.string.recap_resume), actions.onResume) }
         item { Headline(state) }

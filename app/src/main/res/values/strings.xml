@@ -42,6 +42,8 @@
     <string name="recap_resume">Resume</string>
     <string name="recap_missing">Earmark is missing a permission, so it can\'t guess yet.</string>
     <string name="recap_fix">Fix it</string>
+    <string name="recap_battery">Your phone may pause Earmark while you\'re in other apps, so chips and pills would only show when you open it. Let it run in the background.</string>
+    <string name="recap_battery_allow">Allow</string>
     <string name="recap_not_listening">Notification access is on, but Android hasn\'t connected Earmark yet, so it can\'t see new messages. Turn Earmark\'s notification access off and on again.</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_log">Log</string>
@@ -70,6 +72,11 @@
     <string name="demo_pay_note">Dinner at Nori</string>
     <string name="demo_pay_button">Pay $12.00</string>
     <string name="demo_paid">$12.00\nPaid to Aisha</string>
+
+    <!-- Running notification (ADR 0018) -->
+    <string name="keep_alive_channel">Earmark running</string>
+    <string name="keep_alive_title">Earmark is on</string>
+    <string name="keep_alive_body">Running in the background so it can guess when you unlock.</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
@@ -108,8 +115,10 @@
     <string name="onboarding_overlay_body">To show the chip and the pill on top of any app.</string>
     <string name="onboarding_calendar">Calendar (optional)</string>
     <string name="onboarding_calendar_body">For Leave-by loops: when to set off for an event or join a call.</string>
-    <string name="onboarding_post">Notifications (demo mode only)</string>
-    <string name="onboarding_post_body">Lets demo mode post sample messages.</string>
+    <string name="onboarding_battery">Battery: unrestricted</string>
+    <string name="onboarding_battery_body">So the phone doesn\'t pause Earmark while you\'re in other apps. Samsung phones need this.</string>
+    <string name="onboarding_post">Notifications (optional)</string>
+    <string name="onboarding_post_body">Shows that Earmark is running, and lets demo mode post sample messages.</string>
     <string name="onboarding_allow">Allow</string>
     <string name="onboarding_open_settings">Open settings</string>
     <string name="onboarding_granted">Allowed</string>

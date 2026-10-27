@@ -33,11 +33,18 @@ object DemoNotifier {
         notifyRahul(context, alert = true)
     }
 
+    /** Like WhatsApp and Messages, opening the chat clears its notification. */
+    fun chatOpened(context: Context) {
+        NotificationManagerCompat.from(context).cancel(ID_RAHUL)
+    }
+
     /** A reply from the strip or the chat: the conversation updates with your message, which closes the loop. */
     fun reply(context: Context, text: String) {
         val demo = AppGraph.demo
         demo.add(ChatLine(text, fromUser = true, atMillis = System.currentTimeMillis()))
-        notifyRahul(context, alert = false)
+        // A chat app only updates a notification that is still showing.
+        val showing = context.getSystemService(NotificationManager::class.java).activeNotifications.any { it.id == ID_RAHUL }
+        if (showing) notifyRahul(context, alert = false)
         handler.postDelayed({
             NotificationManagerCompat.from(context).cancel(ID_RAHUL)
             demo.add(ChatLine("perfect, see you there", fromUser = false, atMillis = System.currentTimeMillis()))

@@ -163,6 +163,7 @@ data class PermissionState(
     val overlay: Boolean = false,
     val calendar: Boolean = false,
     val postNotifications: Boolean = false,
+    val battery: Boolean = false,
 ) {
     val required: Boolean get() = notifications && usage && overlay
 }
@@ -171,6 +172,7 @@ class OnboardingActions(
     val onNotificationAccess: () -> Unit,
     val onUsageAccess: () -> Unit,
     val onOverlay: () -> Unit,
+    val onBattery: () -> Unit,
     val onCalendar: () -> Unit,
     val onPostNotifications: () -> Unit,
     val onAppInfo: () -> Unit,
@@ -194,8 +196,9 @@ fun OnboardingScreen(state: PermissionState, actions: OnboardingActions) {
         item { PermissionRow(1, stringResource(R.string.onboarding_notifications), stringResource(R.string.onboarding_notifications_body), state.notifications, stringResource(R.string.onboarding_open_settings), actions.onNotificationAccess) }
         item { PermissionRow(2, stringResource(R.string.onboarding_usage), stringResource(R.string.onboarding_usage_body), state.usage, stringResource(R.string.onboarding_open_settings), actions.onUsageAccess) }
         item { PermissionRow(3, stringResource(R.string.onboarding_overlay), stringResource(R.string.onboarding_overlay_body), state.overlay, stringResource(R.string.onboarding_open_settings), actions.onOverlay) }
-        item { PermissionRow(4, stringResource(R.string.onboarding_calendar), stringResource(R.string.onboarding_calendar_body), state.calendar, stringResource(R.string.onboarding_allow), actions.onCalendar) }
-        item { PermissionRow(5, stringResource(R.string.onboarding_post), stringResource(R.string.onboarding_post_body), state.postNotifications, stringResource(R.string.onboarding_allow), actions.onPostNotifications) }
+        item { PermissionRow(4, stringResource(R.string.onboarding_battery), stringResource(R.string.onboarding_battery_body), state.battery, stringResource(R.string.onboarding_allow), actions.onBattery) }
+        item { PermissionRow(5, stringResource(R.string.onboarding_calendar), stringResource(R.string.onboarding_calendar_body), state.calendar, stringResource(R.string.onboarding_allow), actions.onCalendar) }
+        item { PermissionRow(6, stringResource(R.string.onboarding_post), stringResource(R.string.onboarding_post_body), state.postNotifications, stringResource(R.string.onboarding_allow), actions.onPostNotifications) }
         if (!state.notifications && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             item {
                 Column(

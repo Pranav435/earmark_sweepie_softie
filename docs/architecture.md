@@ -13,7 +13,7 @@ Earmark is an Android app (Kotlin, Compose, minSdk 29, targetSdk 36) that turns 
  OverlayHost         taps / swipes ──────┘                                          └─▶ DebugLog      ring buffer of decisions
 ```
 
-- **One process, one anchor.** `EarmarkListener` (a `NotificationListenerService`) hosts everything. The system keeps it bound while notification access is on, so Earmark needs no foreground service and no persistent notification. It registers the runtime-only broadcasts (`USER_PRESENT`, `SCREEN_ON/OFF`, `NEXT_ALARM_CLOCK_CHANGED`), owns the overlay windows and calls `requestRebind` if it is disconnected.
+- **One process, one anchor.** `EarmarkListener` (a `NotificationListenerService`) hosts everything. The system keeps it bound while notification access is on. `KeepAliveService`, a foreground service that does no work, holds the same process at foreground priority, because One UI freezes background apps without one (ADR 0018). It registers the runtime-only broadcasts (`USER_PRESENT`, `SCREEN_ON/OFF`, `NEXT_ALARM_CLOCK_CHANGED`), owns the overlay windows and calls `requestRebind` if it is disconnected.
 - **Functional core, imperative shell.** Adapters translate Android callbacks into plain `Event`s. The engine returns `Effect`s, and adapters carry them out. `:core` is a Kotlin JVM module with no Android imports, so the module boundary enforces the seam and every behaviour is testable on the JVM with a fake clock.
 - **Single-threaded engine.** All events are processed one at a time on a single dispatcher, so the engine needs no locks. Adapters do their I/O on `Dispatchers.IO`, post results back as events, and never block the main thread.
 
@@ -59,12 +59,12 @@ ADR 0017 changed `due` and the boost after the first real-phone test, where a pl
 ## Hand-back and close
 
 - **Do it now** calls `wayBack.send()` with `ActivityOptions` that allow the background start (`MODE_BACKGROUND_ACTIVITY_START_ALLOW_ALWAYS` on API 36, `..._ALLOWED` on 34–35). It must run while the pill window is still attached: since Android 15, an overlay app may only start activities from the background while one of its overlays is visible. If the intent was cancelled or is missing, Earmark opens the app's launch intent instead.
-- **Reply strip:** Smart Reply reads the last ≤ 10 `MessagingStyle` messages and offers up to 3 replies. A tap sends through `RemoteInput.addResultsToIntent` + `action.actionIntent.send(...)`.
+- **Reply strip:** Smart Reply reads the last ≤ 10 `MessagingStyle` messages and offers up to 3 replies. A tap sends through `RemoteInput.addResultsToIntent` + `action.actionIntent.send(...)`. If the chat app clears its notification as the chat opens, the loop stays open until you reply, leave the app or turn the screen off, so the strip can still send (ADR 0019).
 - **Loops close on evidence:** the app clears or updates the conversation with a message from you, `NEXT_ALARM_CLOCK_CHANGED` fires, a "booked/ordered" notification arrives, or the payment request is removed. Each outcome is logged as done, dismissed or expired.
 
 ## Persistence and privacy
 
-Message text, `PendingIntent`s and Smart Reply input stay in memory until the loop closes. Room stores `loop_log` (kind, times, outcome, brought-back flag, and a label kept for 24 h for the recap), `contact_stats` (a hashed conversation key, reply count and median reply latency) and `kind_stats` (confirms, ignores, muted). After a process restart, `onListenerConnected` rebuilds loops from `getActiveNotifications()` with fresh intents. Permissions: the notification listener binding, `PACKAGE_USAGE_STATS`, `SYSTEM_ALERT_WINDOW`, `READ_CALENDAR` (optional), `POST_NOTIFICATIONS` (demo mode only) and `SET_ALARM` (a normal permission that `ACTION_SET_ALARM` requires for the alarm routine's way back).
+Message text, `PendingIntent`s and Smart Reply input stay in memory until the loop closes. Room stores `loop_log` (kind, times, outcome, brought-back flag, and a label kept for 24 h for the recap), `contact_stats` (a hashed conversation key, reply count and median reply latency) and `kind_stats` (confirms, ignores, muted). After a process restart, `onListenerConnected` rebuilds loops from `getActiveNotifications()` with fresh intents. Permissions: the notification listener binding, `PACKAGE_USAGE_STATS`, `SYSTEM_ALERT_WINDOW`, `READ_CALENDAR` (optional), `POST_NOTIFICATIONS` (the "Earmark is on" notification and demo mode), `FOREGROUND_SERVICE` and `FOREGROUND_SERVICE_SPECIAL_USE`, `RECEIVE_BOOT_COMPLETED`, `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` and `SET_ALARM` (a normal permission that `ACTION_SET_ALARM` requires for the alarm routine's way back).
 
 ## Android constraints designed for
 
@@ -84,7 +84,7 @@ Message text, `PendingIntent`s and Smart Reply input stay in memory until the lo
 
 ## Build
 
-Gradle Kotlin DSL with a version catalog. `:core` is a Kotlin JVM module, and `:app` uses Compose Material 3 and Room via KSP. Dependencies are wired by hand in one `AppGraph`. The release build is minified with R8, signed with the debug key and checked with `aapt2 dump permissions`.
+Gradle Kotlin DSL with a version catalog. `:core` is a Kotlin JVM module, and `:app` uses Compose Material 3 and Room via KSP. Dependencies are wired by hand in one `AppGraph`. The release build is minified with R8, signed with the Sweepie Softie release key (ADR 0016) and checked with `aapt2 dump permissions`.
 
 ## Verification and limits
 

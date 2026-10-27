@@ -7,8 +7,16 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
-    <!-- Only demo mode posts notifications (ADR 0006). -->
+    <!-- Shows that Earmark is running (ADR 0018), and demo mode's sample messages (ADR 0006). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- A foreground service stops One UI and others from freezing the listener's process (ADR 0018). -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Earmark is sideloaded, not on Play, and must keep running to see unlocks, so it asks once. -->
+    <uses-permission
+        android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"
+        tools:ignore="BatteryLife" />
     <!-- Needed for the alarm routine's way back, ACTION_SET_ALARM. Granted at install. -->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
@@ -60,6 +68,25 @@
         <receiver
             android:name=".demo.DemoReplyReceiver"
             android:exported="false" />
+
+        <service
+            android:name=".listener.KeepAliveService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Keeps the notification listener's process from being frozen, so the unlock-time guess and the in-feed reminder can show over other apps." />
+        </service>
+
+        <!-- System broadcasts reach a receiver that isn't exported. -->
+        <receiver
+            android:name=".listener.KeepAliveService$Restarter"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
 
         <service
             android:name=".listener.EarmarkListener"

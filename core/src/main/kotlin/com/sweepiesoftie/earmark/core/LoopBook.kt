@@ -14,6 +14,8 @@ internal data class Tracked(
     val handedBack: Boolean = false,
     /** The chip was swiped this session: don't track drift for it until the next unlock. */
     val ignored: Boolean = false,
+    /** Its app cleared the notification because you opened the chat; it closes when you reply or leave. */
+    val chatOpen: Boolean = false,
 )
 
 /** The open loops. Opening a loop with an existing id updates its evidence but keeps its history. */

@@ -137,6 +137,71 @@ class EngineTest {
     }
 
     @Test
+    fun `when the chat app clears its notification on open, the reply strip stays and still sends`() = with(Script()) {
+        val key = Fixtures.rahul(at(16, 11)).key
+        at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+        val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
+        assertTrue(at(at(16, 12, 2), Event.ChipActed(chip.loopId)).any { it is Effect.SuggestReplies })
+        at(at(16, 12, 3), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))
+
+        // WhatsApp and Messages clear the notification as soon as the chat opens.
+        val cleared = at(at(16, 12, 4), Event.NotificationRemoved(key, RemovalReason.AppCancel))
+        assertTrue(cleared.toString(), cleared.none { it is Effect.HideOverlay || it is Effect.Forget || it is Effect.RecordLoop })
+
+        assertEquals(key, at(at(16, 12, 10), Event.ReplyChosen(chip.loopId, "Yes, 5 works!")).one<Effect.SendReply>().notificationKey)
+        val sent = at(at(16, 12, 11), Event.ReplySent(chip.loopId))
+        assertEquals(Outcome.Done, sent.one<Effect.RecordLoop>().entry.outcome)
+        assertTrue(Effect.Forget(key) in sent)
+    }
+
+    @Test
+    fun `opening the guessed chat from its notification shows the strip, and leaving the app closes the loop`() = with(Script()) {
+        val key = Fixtures.rahul(at(16, 11)).key
+        at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+        val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
+        at(at(16, 12, 3), Event.ChipHeld(chip.loopId))
+
+        val tapped = at(at(16, 12, 20), Event.NotificationRemoved(key, RemovalReason.Click))
+        assertEquals(Effect.SuggestReplies(chip.loopId, key), tapped.one<Effect.SuggestReplies>())
+        assertTrue(tapped.none { it is Effect.RecordLoop || it is Effect.Forget })
+        at(at(16, 12, 21), Event.ForegroundChanged(Fixtures.CHATS, "Chats"))
+
+        val left = at(at(16, 13), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        assertEquals(Outcome.Done, left.one<Effect.RecordLoop>().entry.outcome)
+        assertTrue(Effect.HideOverlay(Overlay.ReplyStrip) in left)
+        assertTrue(Effect.Forget(key) in left)
+        assertTrue("no pill for a chat you just left", at(at(16, 20), Event.Tick).none { it is Effect.ShowPill })
+    }
+
+    @Test
+    fun `turning the screen off with the chat open closes the loop`() = with(Script()) {
+        val key = Fixtures.rahul(at(16, 11)).key
+        at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+        val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip
+        at(at(16, 12, 2), Event.ChipActed(chip.loopId))
+        at(at(16, 12, 4), Event.NotificationRemoved(key, RemovalReason.AppCancel))
+        assertEquals(Outcome.Done, at(at(16, 14), Event.ScreenOff).one<Effect.RecordLoop>().entry.outcome)
+        assertTrue(at(at(16, 30), Event.Unlocked).none { it is Effect.ShowChip })
+    }
+
+    @Test
+    fun `an app clearing the guessed notification while you are elsewhere still closes it`() = with(Script()) {
+        val key = Fixtures.rahul(at(16, 11)).key
+        at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
+        at(at(16, 12), Event.Unlocked)
+        at(at(16, 12, 5), Event.ForegroundChanged(Fixtures.FEED, "Instagram"))
+        // Read on another device, say: the chat app clears it, but you never opened the chat here.
+        val cleared = at(at(16, 13), Event.NotificationRemoved(key, RemovalReason.AppCancel))
+        assertEquals(Outcome.Done, cleared.one<Effect.RecordLoop>().entry.outcome)
+        assertTrue(cleared.none { it is Effect.SuggestReplies })
+    }
+
+    @Test
+    fun `a removed notification Earmark never tracked is forgotten`() = with(Script()) {
+        assertEquals(listOf<Effect>(Effect.Forget("k-unknown")), at(at(16, 0), Event.NotificationRemoved("k-unknown", RemovalReason.AppCancel)))
+    }
+
+    @Test
     fun `tapping the chip counts as a hold`() = with(Script()) {
         at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
         val chip = at(at(16, 12), Event.Unlocked).one<Effect.ShowChip>().chip

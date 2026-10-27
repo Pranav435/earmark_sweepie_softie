@@ -1,6 +1,7 @@
 package com.sweepiesoftie.earmark.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
@@ -38,6 +39,7 @@ import com.sweepiesoftie.earmark.core.Event
 import com.sweepiesoftie.earmark.demo.DemoNotifier
 import com.sweepiesoftie.earmark.listener.Permissions
 import com.sweepiesoftie.earmark.listener.EarmarkListener
+import com.sweepiesoftie.earmark.listener.KeepAliveService
 import com.sweepiesoftie.earmark.store.Store
 import com.sweepiesoftie.earmark.ui.theme.EarmarkTheme
 import kotlinx.coroutines.Dispatchers
@@ -61,6 +63,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    /** Android's own "let this app run in the background?" prompt; it switches battery optimisation off for Earmark. */
+    @SuppressLint("BatteryLife")
+    fun askBatteryUnrestricted(): Unit = openSettings(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, withPackage = true)
+
     /** Opens a system settings page, falling back to the general list when an OEM has moved it. */
     fun openSettings(action: String, withPackage: Boolean = false) {
         val intent = Intent(action).apply { if (withPackage) data = Uri.fromParts("package", packageName, null) }
@@ -83,6 +89,8 @@ private fun Root() {
     var permissions by remember { mutableStateOf(readPermissions(activity)) }
     LifecycleResumeEffect(Unit) {
         permissions = readPermissions(activity)
+        // An open app may always start it, so a start Android refused in the background recovers here.
+        if (permissions.notifications) KeepAliveService.start(activity) else KeepAliveService.stop(activity)
         onPauseOrDispose { }
     }
     var screen by rememberSaveable { mutableStateOf(if (readPermissions(activity).required) Screen.Recap else Screen.Onboarding) }
@@ -116,6 +124,7 @@ private fun Root() {
                     onNotificationAccess = { activity.openSettings(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS) },
                     onUsageAccess = { activity.openSettings(Settings.ACTION_USAGE_ACCESS_SETTINGS) },
                     onOverlay = { activity.openSettings(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, withPackage = true) },
+                    onBattery = activity::askBatteryUnrestricted,
                     onCalendar = { requestCalendar.launch(Manifest.permission.READ_CALENDAR) },
                     onPostNotifications = { requestPostNotifications(requestPost::launch) },
                     onAppInfo = { activity.openSettings(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, withPackage = true) },
@@ -131,6 +140,7 @@ private fun Root() {
                         missingPermission = !permissions.required,
                         notListening = permissions.notifications && !listener.connected && bindWaitOver,
                         openLoops = listener.openLoops,
+                        batteryRestricted = permissions.required && !permissions.battery,
                         demoMode = user.demoMode,
                         canPostNotifications = permissions.postNotifications,
                     ),
@@ -140,6 +150,7 @@ private fun Root() {
                         onResume = { graph.settings.setPaused(false) },
                         onFixPermissions = { screen = Screen.Onboarding },
                         onNotificationAccess = { activity.openSettings(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS) },
+                        onBattery = activity::askBatteryUnrestricted,
                         onDemoRahul = { DemoNotifier.postRahul(activity) },
                         onDemoAisha = { DemoNotifier.postAisha(activity) },
                         onAllowNotifications = { requestPostNotifications(requestPost::launch) },
@@ -228,4 +239,5 @@ private fun readPermissions(activity: MainActivity) = PermissionState(
     overlay = Permissions.overlay(activity),
     calendar = Permissions.calendar(activity),
     postNotifications = Permissions.postNotifications(activity),
+    battery = Permissions.batteryUnrestricted(activity),
 )
