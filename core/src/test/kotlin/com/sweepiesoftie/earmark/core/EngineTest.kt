@@ -77,6 +77,16 @@ class EngineTest {
     }
 
     @Test
+    fun `a bank's text that you paid someone else doesn't close a bill texted to the same app, and paying the bill does`() = with(Script()) {
+        at(at(13, 0), Event.NotificationPosted(Fixtures.airtel(at(13, 0))))
+        val bank = { text: String, key: String -> Fixtures.airtel(at(13, 5), text).copy(key = key, title = "AX-HDFCBK", messages = listOf(Message("AX-HDFCBK", text, at(13, 5))), conversationKey = "hash-hdfc") }
+        assertTrue(at(at(13, 5), Event.NotificationPosted(bank("Sent Rs.450.00 From HDFC Bank A/C *4521 To ISHAAN GUPTA", "bank-1"))).none { it is Effect.RecordLoop })
+        assertEquals(1, engine.openLoops)
+        val done = at(at(13, 6), Event.NotificationPosted(bank("Rs.499.00 debited from A/C *4521 to AIRTEL via UPI", "bank-2"))).one<Effect.RecordLoop>()
+        assertEquals(Outcome.Done, done.entry.outcome)
+    }
+
+    @Test
     fun `paused Earmark shows nothing`() = with(Script(Fixtures.settings.copy(paused = true))) {
         at(at(16, 11), Event.NotificationPosted(Fixtures.rahul(at(16, 11))))
         assertTrue(at(at(16, 12), Event.Unlocked).none { it is Effect.ShowChip })
@@ -611,6 +621,24 @@ class EngineTest {
         at(at(16, 5), Event.NotificationPosted(Fixtures.zoya(at(16, 5), "call me asap")))
         at(at(16, 8), Event.NotificationPosted(Fixtures.rahul(at(16, 8), "that was fun")))
         // Zoya: 0.35*exp(-5/30) + 0.125 + 0.25*1.0 + 0.075 + 0.15 = 0.8963; Rahul, newer but plain: 0.8024
+        assertEquals("Here to reply to Zoya?", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+    }
+
+    @Test
+    fun `a question from hours ago still gets the chip at the first unlock after it, and old chatter doesn't`() = with(Script()) {
+        at(at(12, 0), Event.ScreenOff)
+        at(at(12, 30), Event.NotificationPosted(Fixtures.zoya(at(12, 30), "did you book the tickets for saturday")))
+        at(at(15, 0), Event.NotificationPosted(Fixtures.rahul(at(15, 0), "that was fun")))
+        // Zoya: 0.35*exp(-220/360) + 0.125 + 0.25*0.75 + 0.075 + 0.15 = 0.7273; Rahul's chatter fades in half an hour: 0.4807
+        assertEquals("Here to reply to Zoya?", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.title)
+    }
+
+    @Test
+    fun `an urgent message that clears the bar comes before a fresher question`() = with(Script()) {
+        at(at(16, 0), Event.ScreenOff)
+        at(at(16, 1), Event.NotificationPosted(Fixtures.zoya(at(16, 1), "ज़रूरी बात है")))
+        at(at(16, 9), Event.NotificationPosted(Fixtures.rahul(at(16, 9), "free at 5?")))
+        // Both are fully due and owed; Rahul's scores a little higher for being newer, but Zoya's is urgent.
         assertEquals("Here to reply to Zoya?", at(at(16, 10), Event.Unlocked).one<Effect.ShowChip>().chip.title)
     }
 

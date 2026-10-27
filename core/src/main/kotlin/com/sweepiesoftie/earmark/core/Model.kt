@@ -64,6 +64,8 @@ public data class Loop(
     val started: Boolean = false,
     /** A Payment for a bill that is due rather than a person asking: "Pay your Airtel bill ₹499" (ADR 0029). */
     val bill: Boolean = false,
+    /** What a Payment is for, so paying someone else a different amount doesn't close it (ADR 0031). */
+    val amount: Money? = null,
     /** Ride ("Book") or meeting ("Join") for Leave-by loops. */
     val leaveBy: LeaveByDetail? = null,
 )

@@ -1,0 +1,6911 @@
+[
+  {
+    "text": "जल्दी जवाब दे, कहाँ है तू",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ईद मुबारक!",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai tu call utha lena shaam ko",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "😅",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "main nikal chuka hoon bas 10 min",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "jab free ho to mujhe call karna",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai tu theek hai na? pick up!",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "gaana bhej na wo wala",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai wo project ka deadline kya hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "क्या तुम मेरा काम कर दोगे",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "આવતા દૂધ લેતો આવજે",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "प्रोजेक्ट का क्या हुआ",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "હું પહોંચી ગયો",
+    "language": "gu",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aaj hi paise bhej warna kal flat khali karna padega",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अच्छा एक बार कॉल कर लेना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kab tak pahunchoge bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai bike slip ho gayi haath se khoon aa raha hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "హాహా",
+    "language": "te",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "abhi call kar bhai, bahut zaroori hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ಓಕೆ",
+    "language": "kn",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "r u coming na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kahan mar gaya 10 baar call kiya",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "हम्म्म",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "mera internship confirm ho gaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ki kar reha",
+    "language": "pa",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "great",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "haan theek hai bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "emergency hai, jaldi",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai kuch ho gaya hai, baat karni hai abhi",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Rohan bol raha tha tu kal aa raha hai? sach me?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कब से इंतज़ार कर रहा हूँ, कब आओगे",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मम्मी पूछ रही हैं, खाना खाने आओगे?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "jaldi reply kar na, dar lag raha hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu bhi chal raha hai kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ठीक",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ok noted bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "बैग कहाँ रखा है मेरा 😅",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hmm ok",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai mere liye ek charger khareed de please",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कहाँ हो आप",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hahaha sahi hai yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "भाई प्रोजेक्ट का क्या हुआ",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal ki shopping chalega?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu itna chup kyun hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal ke liye time bata",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yaar charger lana mat bhulna",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "PG ka rent kab dega, owner pooch raha hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आज बहुत ट्रैफ़िक था",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "जल्दी बता, डॉक्टर को बुलाऊँ क्या?",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Rahul ne bola wo kal nahi aayega",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "are tu aaya kya wahan",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "तेरे लिए एक सरप्राइज़ है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kab tak pahunchoge?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "நாளைக்கு வருவியா?",
+    "language": "ta",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya hua? tu theek hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya yaar aisa bhi koi karta hai kya na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "माँ को अस्पताल ले जा रहे हैं",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kal ghar gaya tha, sabne yaad kiya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "arre kitna paisa dena hai mujhe",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "jaldi bol, ambulance bulau kya",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "হাহা",
+    "language": "bn",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "building me aag lag gayi, hum bahar nikal gaye",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "सुन, आज दोपहर कहाँ खाया",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ধন্যবাদ",
+    "language": "bn",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "कैसा लगा गाना?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "खाना खाया?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "यार मेरी किताब वापस कर दो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਕੀ ਕਰਦਾ ਪਿਆ",
+    "language": "pa",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mere liye ek parcel collect kar lena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "flat me paani bhar gaya hai, sab kuch kharab",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "padhai ho nahi rahi, sab mobile me ghus jata hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "welcome bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "exam ke liye kitna padh liya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "प्लीज़ फ़ोटो भेज दो?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ok bhai done",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "kya zamana aa gaya hai, sab ghar baithe order karte hain",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "tu kahan hai, sab pareshan ho gaye hain",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "क्या तूने मेरा मैसेज देखा 🙏",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कोई जल्दी नहीं है, जब फ्री हो तब बता देना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj bohot traffic tha yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "நாளைக்கு சென்னை போறேன்",
+    "language": "ta",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "नींद आ रही है यार",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "acha batao kitne bacche aaye",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "enu madtidiya",
+    "language": "kn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kab aa raha hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਸ਼ੁਕਰੀਆ",
+    "language": "pa",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "abhi abhi mere saath bohot bura hua hai bhai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "अभी जवाब दो प्लीज़ ज़रूरी है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ಅಪ್ಪನಿಗೆ ತಲೆ ಸುತ್ತಿ ಬಿದ್ದರು",
+    "language": "kn",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "आज जिम चलेगा?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai Rs 300 UPI kar de, chai ka",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal tak report bhej dena please",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bro saaman pack kar liya kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "तू इतना चुप क्यों है",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "train 2 ghante late hai, kuch nahi kar sakte",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ओके",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai kab milega bata",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਹਾਂ",
+    "language": "pa",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "भाई जल्दी आ, मकान मालिक चिल्ला रहा है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आज रात क्या खाओगे",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "भाई मुझे बहुत डर लग रहा है",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "चलो ठीक है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "क्या तूने मेरा मैसेज देखा",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "एम्बुलेंस बुलाओ जल्दी",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "বাবার মাথা ঘুরে পড়ে গেছে",
+    "language": "bn",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kaha jaa rahe ho aaj",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਫ਼ੋਨ ਕਿਉਂ ਨੀ ਚੱਕਦਾ",
+    "language": "pa",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ghar pe sab theek hain na bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ಫೋನ್ ಯಾಕೆ ಎತ್ತಲ್ಲ",
+    "language": "kn",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मैंने अपना असाइनमेंट कल ही कर लिया था",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "वाईफाई का पासवर्ड क्या है",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਜਲਦੀ ਹਸਪਤਾਲ ਆ",
+    "language": "pa",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बहुत बहुत धन्यवाद",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ye lo, forwarded: Free Netflix for 1 month, click here",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "dude kal college aa raha hai ya nahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "result kal aayega, dua karna",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "dosti me sorry thank you nahi hota na bhai? bata",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya aaj bhi late aayega",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "asap कॉल करो",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "کیا کر رہے ہو",
+    "language": "ur",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "తిన్నావా",
+    "language": "te",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "nice one",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "koi hai? koi hai? reply karo please emergency hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "aaj ka din hi kharab tha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "हम 6 बजे पहुँचे",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "chal bhai bata kya karna hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ekhuni bari aay, jaldi",
+    "language": "bn",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "जी",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "party me kaun kaun aa raha hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "theek hai bhai jaan",
+    "language": "ur",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "कल क्या प्लान है",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आज शाम को कॉल करना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal tak ka time hai assignment ke liye",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ghar pahunch ke message karta hoon",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "metro me kisi ne mera bag kheench liya, dar gaya hoon",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "please mera form fill kar dena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "building ki lift me phans gaya hoon",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "आज खूप पाऊस आहे",
+    "language": "mr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "क्या आज गिटार क्लास है",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ok done",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "तुम ठीक हो ना?? अभी बताओ",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "roti khadi",
+    "language": "pa",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "acha ye bata, tu Goa jayega ya nahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai dawai le li ya nahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Swiggy se kuch order kar de na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "दूध ले आना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "eppudu vastunnav",
+    "language": "te",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "acha tu mere liye ek favour kar sakta hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कब तक फ्री हो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "🙏",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "कल सोमवार है, फिर ऑफ़िस",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ఎక్కడ ఉన్నావ్? అందరూ వెయిట్ చేస్తున్నారు, త్వరగా రా",
+    "language": "te",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yaar kya khaya aaj",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ये देखो, फ़ॉरवर्ड: एक महीने मुफ़्त नेटफ़्लिक्स, यहाँ क्लिक करें",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bye bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "एक काम करना, टिकट बुक कर देना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "abhi kidhar hai bata",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Dadaji ko hospital me admit kiya hai, serious hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "pehla paper achha gaya, ab agla kal hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "\"कल आ रहे हो?\" को पसंद किया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "भाई प्लीज़ अभी रिप्लाई कर",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आज का मैच देखा? क्या खेला कोहली ने",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "आज क्लास आए थे क्या",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai meri tabiyat bahut kharab ho rahi hai, ghar pe koi nahi hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "அம்மாவுக்கு உடம்பு ரொம்ப சரியில்லை",
+    "language": "ta",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Reacted ❤️ to a message",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "यार मेरे लिए कॉफ़ी ले आना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Rohit aur Neha ka breakup ho gaya, news hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aaj raat ko call karna",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Liked \"kal aa raha hai?\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "main station pe akela hoon, last train chhut gayi, bahut dar lag raha hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "noted",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "क्या कर रहे हो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "घर कब आओगे दिवाली पर",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hostel me ragging ho rahi hai, mujhe bachao",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "जल्दी अस्पताल आ जा",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ok done 👍",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai sunn na, kal Sunday ko free hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "koi jaldi nahi, jab free ho tab bata dena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yaar yaar sunn, ek baat puchni thi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "call utha na yaar, kab se ring ja rahi hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "wo log aa gaye hain",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "पापा ICU में हैं",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "बाढ़ का पानी घर में आ गया है",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "बिल कितना आया",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu theek hai na?? reply kar abhi",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अर्जेंट शब्द से मुझे हँसी आती है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "haha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "rent ka transfer kar diya kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai abhi ke abhi ghar aa, mummy ko chest pain hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dopahar ko khana khaya kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "एकदम सही",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "भाई बाइक फिसल गई, ख़ून निकल रहा है",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "tera kya plan hai Diwali ka",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ambulance bolav lavkar, kuthe ahes tu",
+    "language": "mr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai professor ka mail aaya kya check karna",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav kahan ho? sab log tumhara wait kar rahe hain, jaldi aao",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "\"ठीक है\" पर 👍 प्रतिक्रिया दी",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "tu kab se wait kar raha hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mehrbani",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "kidhar hai tu",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "जी धन्यवाद",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ekdum zabardast 🔥",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ज़रूरी नहीं है बस पूछ रहा था, कल आओगे?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कोणी येणार आहे का पार्टीला",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਆਉਂਦੇ ਹੋਏ ਦੁੱਧ ਲੈ ਆਈਂ",
+    "language": "pa",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "abhi bus me hoon, network kam hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "भाई क्या तुम भी चल रहे हो?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yaar aate waqt doodh le aana",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "امی گر گئیں",
+    "language": "ur",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "apne ghar ka address bhej",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "maine bhi wahi kiya tha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "જલ્દી હોસ્પિટલ આવ",
+    "language": "gu",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu aaj raat ghar aayega ya nahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आत्ताच्या आत्ता घरी ये",
+    "language": "mr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "फोन का उचलत नाहीयेस",
+    "language": "mr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कब से फोन कर रही हूँ, उठाओ",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "🥳",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "अभी तुरंत फ़ोन करो",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "दवाई ले आना?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu ghar pahunch gaya kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai UPI pe 1500 bhej dena, bahut zaroorat hai thodi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "arre koi urgency nahi hai, bas free ho to call kar lena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal aa rha h?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अरे कितने बजे मिलना है",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai ghar pe chor aaye the, kab aayega",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "सब ख़त्म हो गया, मुझे अभी बात करनी है",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kitne baje milna hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kaun sa train pakadna h",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "barr",
+    "language": "mr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "फिर कॉल करो, बहुत ज़रूरी है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਮੇਰਾ ਐਕਸੀਡੈਂਟ ਹੋ ਗਿਆ",
+    "language": "pa",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "बारिश रुक ही नहीं रही",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aaj kal bohot busy hoon",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "OK 👍",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "मैं पहुँच गया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ye kaun hai, pehchana?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अभी के अभी बताओ तुम कहाँ हो",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "rent kab tak dega bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai tu legend hai 😂",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "जी ठीक है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "okie",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "dinner ke liye kya banau",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hospital se phone aaya hai, jaldi pahuncho",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "lmao",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "भाई फोन उठा ना जल्दी",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "IPL ka final kal hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aaj ki class ki recording bhej dena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ekdum sahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "tera bhai bike se gir gaya, khoon beh raha hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "yaar pls send me the notes",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मदद!!",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "हा हा हा",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "tickets ka screenshot bhej bro",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pehle ye bata exam kab hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कोई जल्दी नहीं है, मैं कल देख लूँगा",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "tera kya scene hai placements ka",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ippude intiki ra, jaldi",
+    "language": "te",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ki korchis",
+    "language": "bn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "کھانا کھایا",
+    "language": "ur",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "👍 से प्रतिक्रिया दी",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "wah bhai wah",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "maine apna assignment kal hi kar diya tha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "मुझे पैसे भेज दो प्लीज़",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "दोस्त, एक बात बताओ",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ನಾಳೆ ಬರ್ತೀಯಾ?",
+    "language": "kn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "हम्म ठीक है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ನನಗೆ ಅಪಘಾತ ಆಗಿದೆ",
+    "language": "kn",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ghar me chori ho gayi, police aa gayi hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "भाई मुझे बचाओ यार",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "वाह",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "location share kar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कितनी देर और लगेगी",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मेरी बात सुनो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bilkul",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "घर कब आओगे दिवाली पर?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya hua bhai kidhar hai tu, reply kyu nahi kar raha",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "oho",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "मेरी ट्रेन 6 बजे की है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ஏன் போன் எடுக்க மாட்டேங்குற",
+    "language": "ta",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "server down hai, client chilla raha hai, abhi dekh",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "nani ko admit kiya hai, abhi aa sakta hai?",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "तुम्हें क्या लगता है?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kidhar hai tu, exam shuru ho gaya",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "thanks bro 🙏",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "tera internet chal raha hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "నోట్స్ పంపు రా",
+    "language": "te",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बहुत बुरा हो गया यार",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "nandri",
+    "language": "ta",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ہاں",
+    "language": "ur",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "phone utha yaar pls",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mera dost Delhi se aaya hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "pappa ICU me hain",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai wo bag kidhar hai mera na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "हहह",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ফোন ধরছিস না কেন",
+    "language": "bn",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "दवाई ले ली क्या भाई",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "वाह भाई वाह",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "oye kaisa tha paper",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai kal ka plan kya hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "main kal Pune ja raha hoon",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "help!! kahan hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मेरी बात सुनो?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "new Marvel movie ka trailer aaya hai, mast hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "बहुत बढ़िया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "मम्मी की तबीयत बहुत ख़राब है, क्या तू आ सकता है?",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tere liye ek surprise hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "वाईफाई का पासवर्ड क्या है?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "फ़ोन उठा भाई",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ek minute baat karni hai kya time hai 🙏",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tera dhyaan kidhar hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "તું ક્યાં છે? બધા રાહ જુએ છે, જલ્દી આવ",
+    "language": "gu",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "माझा अपघात झाला आहे",
+    "language": "mr",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "क्या मैं कल रूम पर आ सकता हूँ",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अपना आधार कार्ड भेज दो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कहाँ गुम हो गया है यार 😅",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बच्चा गिर गया सीढ़ी से, ख़ून आ रहा है",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai bhai wo gana ka naam kya tha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ज़रूर",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "फ़ोन उठा 😅",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Emphasized \"ok\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ghar kab tak pahunchega, mummy bahut tension me hain, call karo",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਠੀਕ ਆ",
+    "language": "pa",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "अरे जल्दी!!",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ok cool 👍",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "haan haan theek hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "theek",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "kal dopahar ko aa jana",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "क्या आप कल घर पर होंगे",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਓਕੇ",
+    "language": "pa",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "अरे उठ भाई, परीक्षा शुरू हो गई, कहाँ है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "फोन क्यों नहीं उठा रहा",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kitna paisa dena hai mujhe",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ரிசல்ட் வந்துடுச்சு, பாஸ் ஆயிட்டேன்",
+    "language": "ta",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "papa ko chakkar aa gaya, kahan hai tu?",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "❤️",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "scene kya hai aaj ka",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "तू कहाँ है? सब इंतज़ार कर रहे हैं, जल्दी आ",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अभी ऑनलाइन आ, एमरजेंसी है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "चहा घ्यायला जायचं का",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bahut mast",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "IPL me aaj RCB jeet gayi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Happy birthday bhai 🎉🎂",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Forwarded: Good morning! Aaj ka din shubh ho 🌞",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "अरे कैसा लगा गाना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कितने बजे मिलना है",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Sachin ka new job lag gaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai bhaDu kyare aapish",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj pizza khayenge?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai jaate waqt bijli ka bill bhar dena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yep",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "भाई मुझे बचाओ",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "सुन, कब से इंतज़ार कर रहा हूँ, कब आओगे",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कल सुबह 6 बजे उठा देना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "boss ne aaj phir daant diya, bohot irritating hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aaj ka cricket match mast tha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "काय करतोयस",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बता दो कितने लोग आएँगे",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kay kartoys",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "arre bhai tu aa ja na Bandra, chai peete hain",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj kuch bhi khaane ka mood nahi hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai wo gana ka naam kya tha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bro kal aa raha hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya hua result ka yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "जेवलास का",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "हाँ ठीक है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "શું કરે છે",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dadu nahi rahe",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "mera phone bandh hone wala hai, jaldi bol",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "wo wala link bhejna 😅",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "فون کیوں نہیں اٹھا رہے",
+    "language": "ur",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मम्मी गिर गई",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "तुम कहाँ हो भाई",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ok kal milte hain",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "arre jaldi aa, baba ko saans nahi aa rahi",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "haha sahi pakde hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "assignment complete hua kya tera",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "BHAI KAHAN HAI TU",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "wo kitab wapas kab karega",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj hi fees bharni hai, kya kar raha hai tu, abhi bata",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai tune bike ki service karwai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਮੰਮੀ ਡਿੱਗ ਪਈ",
+    "language": "pa",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "BHAI PICK UP THE PHONE",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal urgent tha ab sorted hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "तेरे पापा का फ़ोन आया था, घर आ जा बेटा, अभी",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tune dekha kya mera message",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अचानक बेहोश हो गई मम्मी",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bas abhi nikla hoon college se",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "saaman pack kar liya kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "சீக்கிரம் ஹாஸ்பிடல் வா",
+    "language": "ta",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कल आओगे क्या?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu apna dhyan rakh",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "फ़ोन उठा?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "কোথায় তুই? সবাই অপেক্ষা করছে, তাড়াতাড়ি আয়",
+    "language": "bn",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "urgent nahi hai bas puch raha tha, kal aayega?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "batao kitne bacche aaye",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya hua result ka jaldi nahi hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "r u there?? need u rn",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pranav kahan hai tu, mummy ro rahi hain call kar",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mera laptop kharab ho gaya yaar, service center me hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "రిజల్ట్ వచ్చింది, పాస్ అయ్యాను",
+    "language": "te",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai tera exam kab hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "नीचे आ जा",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "arre kahan tak pahuncha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ye urgent nahi hai, bas bata raha hoon, kal exam hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "urgent kaam tha, ho gaya ab free hoon",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "क्या आज भी देर से आओगे",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dadi ki tabiyat kharab hai jaldi ghar aa",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kitne baje tak aayega",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai ye mera naya phone hai, kaisa lag raha hai? haha pehle pata tha ki tu bolega costly hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "thanks bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "हो गया, धन्यवाद",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "😍",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "oye reply kar abhi, important hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "कहाँ हो आप? कब से कॉल कर रहे हैं",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tune jo gaana bheja tha wo sunna, bohot accha hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "आज दोपहर कहाँ खाया",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "खाना खाया क्या",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बढ़िया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "अच्छा ओके",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai abhi kidhar hai bata",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आज मेरा जन्मदिन है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "are bhai kitne paise lagenge",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "exam ki date aa gayi kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai notes bhej de",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal sham ko cricket khelne chalega?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कल क्या प्लान है 😅",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "photo group me daal de",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "क्या तूने असाइनमेंट जमा किया",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pls send me the notes",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal urgent tha ab sorted hai, tu bata kab free hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "क्या मैं तुम्हारा चार्जर ले लूँ",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai kidhar ho, 2 ghante se wait kar raha hoon, jaldi aa",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "abhi online aa, kuch bohot galat ho gaya hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मेरी बात सुनो यार",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "पापा ने हाथ उठाया आज, मैं घर से निकल आई",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "हाहाहा",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "थैंक्स यार",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "भाडं कधी देणार आहेस",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal society meeting me aana",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "meri bahan ki shaadi fix ho gayi pls",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "office ka kaam kal tak khatam ho jayega",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "अभी कॉल कर, बहुत ज़रूरी है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu ghar jaa raha hai kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "सुनो, आज दोपहर कहाँ खाया",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kitne paise lagenge",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yaar kab tak pahunchoge?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "दादी की तबीयत ख़राब है, जल्दी घर आओ",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya hua result ka",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "क्या तूने असाइनमेंट जमा किया?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "r u coming",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai kahan ho, class me kab aaoge, sir pooch rahe hain jaldi",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अच्छा",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai sir ne abhi bulaya hai, 2 min me aa",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "[sticker]",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "कब आ रहे हो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "કાલે આવીશ?",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आज वाढदिवस आहे माझा",
+    "language": "mr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "😭😭",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "सुप्रभात 🌞 आज का दिन शुभ हो",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "पापा पूछ रहे थे कि तुम कब आ रहे हो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "chalo kal milte hain",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "exam ke din kya pehenna hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ठीक है भाई",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai tu aa ja na Bandra, chai peete hain",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yaar mujhe Mumbai pasand hai but rent bohot hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "चलो चाय पीने चलें यार",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "तुरंत मदद चाहिए",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai main khatre me hoon",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kal aa raha hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "arre sir ne kal chutti de di",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "வாடகை எப்போ தருவ",
+    "language": "ta",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sahi hai yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "જમ્યો કે નહિ",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj kal sab expensive ho gaya hai yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "papa ko chakkar aa gaya",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kal tu free hai kya 😅",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "రేపు వస్తావా?",
+    "language": "te",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "جی",
+    "language": "ur",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ऑफ़िस से कब निकलोगे",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ابو کو چکر آ گیا",
+    "language": "ur",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "💯",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "कल आओगे क्या यार",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ज़रा गेट खोल दे",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "thanks a lot yaar ❤️",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "आते वक़्त दूध ले आना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कुठे आहेस रे? सगळे वाट बघतायत, लवकर ये",
+    "language": "mr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कृपया किराया भेज दीजिए",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "நோட்ஸ் அனுப்பு டா",
+    "language": "ta",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj ka match dekha? kya khela Kohli ne",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "hehehe",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "haha ye toh sahi tha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai sunn na, kal Sunday ko free hai yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अरे बता तो सही क्या हुआ भाई",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Happy Diwali yaar, mithai khana",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kisse baat kar raha tha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "shukriya dost",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "कब आ रहे हो 🙏",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "usne puchha tha tu kal aayega ya nahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "chalo ok",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "tu kab se wait kar rha h",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "કાલે અમદાવાદ જાઉં છું",
+    "language": "gu",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "हाँ ओके",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted ❤️ to \"thanks\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "call kar abhi emergency hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "पहला पेपर अच्छा गया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "मैंने तुम्हारा काम कर दिया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "बहुत शुक्रिया दोस्त",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "kadhi yetoys ghari",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bilkul sahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "सुनो, मेरी बात सुनो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "baad me bata dena, koi jaldi nahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ये कैसे करते हैं बताओ",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "haha mast",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "kya yaar aisa bhi koi karta hai kya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "चलो बढ़िया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "धन्यवाद",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "घर कब आओगे दिवाली पर 🙏",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "are bhai kal ki shopping chalega?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dukaan se bread aur anda le aana",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mera Zomato order aa gaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai call kar, baat karni hai (urgent nahi)",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अरे वाह",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "kal 5 baje milte hain Starbucks me",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Eid Mubarak bhai!",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ओके ठीक है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "dikha de na photo",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "just ek joke suno, bahut hasi aayi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai bahar aa, gate pe hoon",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बाबांना हॉस्पिटलमध्ये नेलंय",
+    "language": "mr",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "mujhe wo book wapas de dena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yaar sunn, ek baat puchni thi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "नोट्स पाठव ना",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "जल्दी आओ, बच्चे को चोट लगी है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "হ্যাঁ",
+    "language": "bn",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "کرایہ کب دو گے",
+    "language": "ur",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "arre kya yaar aisa bhi koi karta hai kya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mujhe kal jaldi uthna hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai ek help kar de, laptop ka charger de dega kal?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਨੋਟਸ ਭੇਜ ਦੇ",
+    "language": "pa",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "khana khaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Urgent! Fees ka last date aaj hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "jaldi se mera photo bhej, form abhi band hone wala hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yaar Mumbai me kab aayega",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sticker sent",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "मैंने पैसे भेज दिए",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "હા",
+    "language": "gu",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ಬರುವಾಗ ಹಾಲು ತಗೊಂಡು ಬಾ",
+    "language": "kn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bas jhoot bol raha hai wo, sab jaante hain",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kado auna",
+    "language": "pa",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "chhotu ko bukhar 104 hai, bohot ghabrahat ho rahi hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "मीटिंग कब है",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "पापा को चक्कर आ गया, कहाँ है तू?",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ठीक है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "mujhe Mumbai pasand hai but rent bohot hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "मेरी किताब वापस कर दो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "main pahunch gaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "कौन सी फ़िल्म देखनी है आज",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ek dum mast",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "आज ऑफ़िस में मुफ़्त लंच था",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "अरे बहुत बुरा हो गया यार",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kaun sa train pakadna hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "पेपर कैसा गया",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कल 5 बजे स्टारबक्स में मिलते हैं 🙏",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "कैसे हो भाई",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "दवाई ले आना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मेरा एक्सीडेंट हो गया है",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai maine tera kaam kar diya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "घर में आग लग गई है",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "త్వరగా హాస్పిటల్‌కి రా",
+    "language": "te",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "भाई सचिन की नई नौकरी लग गई",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "meri bahan ki shaadi fix ho gayi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ఫోన్ ఎందుకు ఎత్తట్లేదు",
+    "language": "te",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "urgent hai bhai call kar",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kaun karta hai aisa bhai, tu bata na kya hua",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "jee",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "good night yaar, kal baat karte hain",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "एक संदेश को पसंद किया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "shukriya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ok bhai gn",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "🤝",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Pranav tum aaj aa rahe ho na?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "oye batao kitne bacche aaye",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "eppo varra",
+    "language": "ta",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "usne puchha tha tu kal aayega ya nahi na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अभी कहाँ पहुँचे",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "jaldi nahi hai, mai kal dekh lunga",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "theek hai bhai chalta hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "tu kab tak free hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "வரும்போது பால் வாங்கிட்டு வா",
+    "language": "ta",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "क्या कल कॉलेज आ रहे हो 🙏",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "दादाजी नहीं रहे",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "कौन आ रहा है पार्टी में",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "آتے ہوئے دودھ لے آنا",
+    "language": "ur",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "jaldi se nikal, late ho jayega (koi tension nahi, bas bol raha hoon)",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai Rahul ka number bhej",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "फोन उचल रे",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Laughed at \"ye kya bakwaas hai\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "कौन सी ट्रेन से आ रहे हो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कल जो अर्जेंट था अब हो गया, तुम कब आ रहे हो?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mere pass 200 rupay hain bas",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "badiya bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai ambulance bula na jaldi",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai wo bag kidhar hai mera",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बहुत ज़रूरी है",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "वो लोग आ गए हैं",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "उद्या येणार आहेस का?",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ఎప్పుడు వస్తున్నావ్",
+    "language": "te",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "दरवाज़ा खोलो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "chai peene chalein?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कल अर्जेंट था अब सब ठीक है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "papa ka BP bohot high hai, doctor ko bulaya",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "thk",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "pappa ko kya dawai deni hai, jaldi bata",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ghar kab aa raha hai Diwali pe yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dekh ye video, hasi nahi ruk rahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "তাড়াতাড়ি হাসপাতালে আয়",
+    "language": "bn",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai Wi-Fi ka password kya hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "acha kaun sa train pakadna hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मैं निकल चुका हूँ बस 10 मिनट",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kal presentation hai, bohot tension hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ohk",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "নোটসগুলো পাঠিয়ে দে",
+    "language": "bn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai sab khatam ho gaya, mujhe tere saath baat karni hai abhi",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "कहाँ गुम हो गया है यार",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hum 6 baje pahunche",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "yaar mera ek kaam kar de, form pe sign kar dena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "क्या तुम भी चल रहे हो?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yup",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "बरं",
+    "language": "mr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai bhai bhai suno, ek kaam hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "آج بہت بارش ہے",
+    "language": "ur",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "wowww",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "दीदी को लेबर पेन हो रहा है, अस्पताल ले गए",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai teri bike ka accident ho gaya, tu theek hai?? ruk main aa raha hoon",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "😆",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ok anna",
+    "language": "te",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "अभी के अभी घर आओ",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अच्छा ठीक है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "asap call me",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ye wala question samajh aaya kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mom ne poocha kal dinner pe aa raha hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बढ़िया है यार",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "han thik",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "नानी की हालत गंभीर है",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "nice 👌",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "pappa kaha gaye? sab dhoondh rahe hain, koi khabar nahi hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "phone utha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "theek hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai kya main tera pen le lu?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "done",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "फ़ोन उठा प्लीज़",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "सुनो, आज जिम चलेगा?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "મમ્મી પડી ગઈ",
+    "language": "gu",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "thank you so much bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "tera interview kaisa gaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आईला चक्कर आली",
+    "language": "mr",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai tu jaldi aa, hum sab fas gaye hain lift me",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ఏం చేస్తున్నావ్",
+    "language": "te",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "thnx",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ಯಾವಾಗ ಬರ್ತೀಯ",
+    "language": "kn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "थैंक्यू",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "कृपया किराया भेज दीजिए 😅",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tera phone switched off kyun hai? call me asap",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ઓકે",
+    "language": "gu",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai wo gana ka naam kya tha 😅",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pehle bata tu aaya kyun nahi kal bro",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "got it bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ghar pe sab theek hain na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "achha hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bol na bhai kya soch raha hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "કાલે મળીએ? ક્યાં મળીશું",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mera phone chori ho gaya, ye mere dost ka number hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "जल्दी निकलो ट्रेन छूट जाएगी",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आप खाना खा लीजिए",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal wala assignment submit kar diya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "दौड़ के आ, पड़ोस में आग लगी है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "awesome",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "abhi abhi news aayi, uncle nahi rahe",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "जन्मदिन मुबारक हो भाई 🎂",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "تم کہاں ہو؟ سب انتظار کر رہے ہیں، جلدی آؤ",
+    "language": "ur",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj to Mumbai ki baarish ne sab band kar diya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "कॉल कर तुरंत, मम्मी रो रही हैं",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "આભાર",
+    "language": "gu",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "कधी येतोयस",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "तू इतना चुप क्यों है?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai ghar aa jaa, mummy pareshan hain",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ਕੱਲ੍ਹ ਆਉਣਾ?",
+    "language": "pa",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "शुक्रिया 🙏",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "کل آؤ گے؟",
+    "language": "ur",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hmm",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "done bhai 👍",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ट्रेन दो घंटे लेट है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai uthh jaa 12 baj gaye abhi tak soya hai? class chhut gayi, call kar",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आज जिम चलेगा भाई",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बैग कहाँ रखा है मेरा",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "क्या कल कॉलेज आ रहे हो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mumma ka phone lagao jaldi",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj kitni class hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "wifi kab theek hoga bata na landlord se",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kuch toh bol bhai, sunn raha hai?? emergency hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal subah 6 baje uthana mujhe",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Reacted 👍 to \"ok\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hn",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "jaldi aa bhai police ne pakad liya hai hume",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kaun sa colour acha lagega, red ya blue",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "nice",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "प्लीज़ फ़ोटो भेज दो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आज मम्मी ने पनीर बनाया है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "वो पूछ रहा था तुम कल आओगे या नहीं",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mera wallet chori ho gaya station pe bahut tension hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ਨਤੀਜਾ ਆ ਗਿਆ, ਪਾਸ ਹੋ ਗਿਆ",
+    "language": "pa",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "आईपीएल का फ़ाइनल कल है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ओके भाई",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "क्या हुआ? तू ठीक है?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "सुन, सुप्रभात 🌞 आज का दिन शुभ हो",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ASAP wala scene nahi hai, weekend tak bhej dena bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अभी लेक्चर ख़त्म हुआ",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ओके धन्यवाद",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "meri maa ko heart attack aaya hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "রেজাল্ট বেরিয়েছে, পাস করেছি",
+    "language": "bn",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "भाई दादाजी नहीं रहे",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "कितना पैसा देना है",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "wo wala link bhejna",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mera phone gir gaya nala me, tu jaldi aa kahin se",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai 500 bhej dena please",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai CV update karke mail kar de",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अच्छा अच्छा",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "પપ્પાને ચક્કર આવી ગયા",
+    "language": "gu",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "খেয়েছিস",
+    "language": "bn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai mausam kitna ganda hai aaj, baarish ruk hi nahi rahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "کب آ رہے ہو",
+    "language": "ur",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "भाई मेरा लैपटॉप ख़राब हो गया है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "plz call me now",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mummy ki tabiyat bohot kharab hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ghar aaja jaldi",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਪਾਪਾ ਨੂੰ ਚੱਕਰ ਆ ਗਿਆ",
+    "language": "pa",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "कैसा लगा गाना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai mera accident ho gaya, ambulance aa rahi hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "मैं कल पुणे जा रहा हूँ",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "কাল কলকাতা যাচ্ছি",
+    "language": "bn",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "sun, result aa gaya, pass ho gaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai koi jaldi nahi hai, tension mat le",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ओके जी",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "नेहा और रोहित का ब्रेकअप हो गया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ohh achha achha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "बॉस ने आज फिर डाँटा",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "gaana bhej na wo wala pls",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ruk main aa raha hoon, tu wahin rehna na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "किसी ने मेरा पीछा किया, बहुत घबराई हुई हूँ",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bro PG ka rent kab dega, owner pooch raha hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai tickets book kar dena please",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ఈ రోజు చాలా వర్షం",
+    "language": "te",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "doctor ka appointment kab hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hum kab milenge bhai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "दिवाली की शुभकामनाएँ!",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Liked a message",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai tera paisa kab dega Aman",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tickets ka screenshot bhej",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "నాన్నకి కళ్ళు తిరిగి పడిపోయారు",
+    "language": "te",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "mujhe samajh nahi aaya, dobara samjha na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "எப்போ வர",
+    "language": "ta",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya yaar tu bhi, kab tak sota rahega",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मेरा बटुआ चोरी हो गया, बहुत परेशान हूँ",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "નોટ્સ મોકલને",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "हाँ हाँ ठीक है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "acha dinner ke liye kya banau",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj lecture attend kiya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "jevlas ka",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "तुरंत घर आ जाओ, पापा गुस्से में हैं",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ಎಲ್ಲಿದ್ದೀಯ? ಎಲ್ಲರೂ ಕಾಯ್ತಿದ್ದಾರೆ, ಬೇಗ ಬಾ",
+    "language": "kn",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ek minute baat karni hai kya time hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अभी कहाँ पहुँचे प्लीज़",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "लोकेशन भेज",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "शुभ रात्रि, कल बात करते हैं",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "chalo theek hai fir",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "movie chalega?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "जन्मदिन मुबारक हो भाई 🎂?",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "jaldi nahi hai bhai, aaram se notes bhej dena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ಊಟ ಆಯ್ತಾ",
+    "language": "kn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ನೋಟ್ಸ್ ಕಳಿಸು",
+    "language": "kn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ye thanda mausam mujhe pasand hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Reacted 😂 to \"bhai tu bhi na\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai kidhar hai, kuch hua hai kya, sab call kar rahe hain",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aaj 8 baje tak pahunch jana please",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai mujhe darr lag raha hai, koi follow kar raha hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ये क्या बात हुई? कौन करता है ऐसा",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "আচ্ছা",
+    "language": "bn",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai papa ko pehle hospital le ja, main aa raha hoon, jaldi",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "main bahut ghabra gaya hoon yaar",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "sahi hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "abhi bhi office me hai kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ye form kaise bharte hn bata do",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "जल्दी आ यार, सब लोग गेट पर खड़े हैं",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "क्या कर रहा है तू? जल्दी रिप्लाई कर, बात सीरियस है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "office me aaj free lunch tha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai kahaan hai, mai bahar khada hoon jaldi gate khol",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "एक बार कॉल कर लेना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "abhi ke abhi ghar aao",
+    "language": "ur",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "chalo bye",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "నాకు యాక్సిడెంట్ అయింది",
+    "language": "te",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ghar kab aa raha hai Diwali pe",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "समझ गया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 👍 to a message",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "আজ খুব বৃষ্টি হচ্ছে",
+    "language": "bn",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "abhi to shuru hua hai match",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ಏನು ಮಾಡ್ತಿದ್ದೀಯ",
+    "language": "kn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਕਦੋਂ ਆਉਣਾ",
+    "language": "pa",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "घर पहुँच के मैसेज करता हूँ",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "आज का दिन ही ख़राब था",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "acha thik",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "abhi abhi lecture khatam hua",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai apna Aadhar ki copy bhej dena bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "oye mom ne poocha kal dinner pe aa raha hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu mere liye ek favour kar sakta hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बिजली का बिल कब भरोगे",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal 9 baje library aana",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "रिज़ल्ट आ गया, मैं पास हो गया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "क्या मैं तुम्हारा चार्जर ले लूँ?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "acha Pranav tum aaj aa rahe ho na?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मी उद्या पुण्याला जातोय",
+    "language": "mr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "चलो कल मिलते हैं",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "jaldi bol kidhar hai tu, hum sab gate pe khade hain",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu bata maine kya galat kiya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir ne kal chutti de di",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aaj raat kya plan hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai exam ka syllabus bohot lamba hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "sahi hai bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ye form kaise bharte hain bata do",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मेरी इंटर्नशिप पक्की हो गई",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ok bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "अभी कॉलेज से निकला हूँ",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "இன்னைக்கு செம மழை",
+    "language": "ta",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "हाँ",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "neend aa rahi hai yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "HELP",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai apna Aadhar ki copy bhej dena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ਰੋਟੀ ਖਾਧੀ",
+    "language": "pa",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "doctor ne kaha abhi operation karna padega",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "कोई जल्दी नहीं, आराम से नोट्स भेज देना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मुझे मुंबई पसंद है पर किराया बहुत है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "நன்றி",
+    "language": "ta",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "थैंक यू भाई 🙏",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "शुक्रिया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "aaj hi submit kar bhai, deadline abhi khatam hone wali hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "abhi bhi office me hai kya na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ruk, call karta hoon utha lena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mujhe wo book wapas de dena na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "भाई कब से इंतज़ार कर रहा हूँ, कब आओगे",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "हम्म",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "kab aa rahe ho",
+    "language": "ur",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Whatsapp pe aa jaa",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "jaldi karo bhai bus nikal jayegi",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "तुम्हारा इंटरव्यू कैसा रहा",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ok thanks",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "kahan tak pahuncha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "thank you 🙏",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "lol",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "किराया कब दोगे",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "મારો અકસ્માત થયો છે",
+    "language": "gu",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "अच्छा जी",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ye kaise karte hain yaar, samjha de",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya main tere saath aa sakta hoon?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "exam hall ke bahar khada hoon, hall ticket nahi hai, kuch kar",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "कल 5 बजे स्टारबक्स में मिलते हैं",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai mujhe help chahiye abhi",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aaj mummy ne paneer banaya hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "abhi bata bhai, paisa bhej raha hai ya nahi, hospital me bill bharna hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ok",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "reply to kar yaar, tension ho rahi hai kahan hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "achha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "जी बिल्कुल",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "कौन करता है ऐसा यार 🙄",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मेरे पास बस 200 रुपये हैं",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ye link kholke dekh zara",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "gn",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ज़रा लिंक खोलकर देखना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai accident ho gaya, kahan hai tu",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj mera birthday hai 🎂",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "मस्त है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hmm achha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "arre bhai maine tujhe 2000 bheje the mile kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai tu abhi free hai kya? thoda baat karni thi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "maine paise bhej diye",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "इमरजेंसी है, जल्दी कॉल करो",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "okk",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "sir ne kya bola tha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "baarish ki wajah se local band hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "भाई क्या मैं कल रूम पर आ सकता हूँ",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "chal na jaldi nikal, late ho rahe hain",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ghar pe aag lag gayi hai bhai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "🙏🏻",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "सचिन की नई नौकरी लग गई",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "আসার সময় দুধ নিয়ে আসিস",
+    "language": "bn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bro tu bhi chal raha hai kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hune hi ghar aaja veere",
+    "language": "pa",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ओहो",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "thanks yaar bahut",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "tysm",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "pehle bata tu aaya kyun nahi kal",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "लोल",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "पापा को हार्ट अटैक आया है",
+    "language": "hi",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ek kaam kar, project ka PPT bhej de",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "shukriya bhai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ho gaya, thanks",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "mummy ko hospital le ja rahe hain",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "check kar liya? reply do",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "jaldi!!!",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "abhi turant call kar papa gusse me hain",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ஹாஹா",
+    "language": "ta",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai dhyaan se, dawai le li?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "result aa gaya, pass ho gaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "dinner ke liye kia banau",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "👌",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hamna ne hamna ghare aav",
+    "language": "gu",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dhanyawad",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "हाँ भाई",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "दवाई ले ली क्या?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ರಿಸಲ್ಟ್ ಬಂತು, ಪಾಸ್ ಆದೆ",
+    "language": "kn",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai abhi tak kyu nahi aaya, sab wait kar rahe hain",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dost, tune kal jo kiya na, bohot accha laga",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ठीक है धन्यवाद",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "aaj ka match dekha? kia khela Kohli ne",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "कौन है ये लड़का",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal ka lecture miss hua, notes dega",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "screenshot bhej",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav tum aaj aa rahe ho na na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Kya main kal aa sakta hoon room pe",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai urgent hai abhi online aa",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aate waqt doodh le aana",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "हाहा बढ़िया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "tu bhi chal raha hai kya 😅",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kobe aschis",
+    "language": "bn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आते वक़्त दूध ले आना 😅",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "என்ன பண்ற",
+    "language": "ta",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mera train 6 baje ki hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "sari guru",
+    "language": "kn",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai ye kaisa scene hai, tu reply kyu nahi karta",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "didi labour me hai, hospital le gaye",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "यार कल जो अर्जेंट था अब हो गया, तुम कब आ रहे हो?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "phone kyu nahi utha raha",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "👏",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bata do kitna bill aaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "नोट्स भेज दो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "chhote ko chot lag gayi, jaldi hospital pahunch",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya tune wo movie dekhi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai gas ka smell aa raha hai, kya karu",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "thik h",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "কী করছিস",
+    "language": "bn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kaisa tha paper",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "फ़ोन उठा",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai fast aa landlord neeche khada hai chilla raha hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "चलो चाय पीने चलें",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "येताना दूध आण",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "😂",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai tu bhi na, pagal hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kal tu free hai kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "نوٹس بھیج دو",
+    "language": "ur",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mere liye ek coffee le aana",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "रिज़ल्ट कब आएगा",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "نتیجہ آ گیا، میں پاس ہو گیا",
+    "language": "ur",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "अरे बता तो सही क्या हुआ",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya kar raha hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yaar Whatsapp pe aa jaa",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ভাড়া কবে দিবি",
+    "language": "bn",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "😂 सही है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "IP address kya hai tere system ka",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bata na kya hua",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "urgent word se mujhe hasi aati hai, school me sab urgent urgent bolte the",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "please ek baar call kar lena fursat me",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj gym chalega?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "अरे कल सोमवार है, फिर ऑफ़िस",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "बिल्कुल",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhai wo project ka deadline kia h",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai khaane me kya hai aaj",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj lecture cancel ho gaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai maine tujhe 2000 bheje the mile kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai mummy ko stroke aaya hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "subah subah gym gaya tha, body dukh rahi hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "எனக்கு ஆக்சிடென்ட் ஆயிடுச்சு",
+    "language": "ta",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "सही है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "oye kidhar hai tu",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मेरा लैपटॉप ख़राब हो गया है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai jaldi aa hospital",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj ghar pe kuch laana hai kya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  }
+]

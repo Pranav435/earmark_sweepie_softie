@@ -18,6 +18,10 @@ internal object Ranker {
     private const val UNLOCK_BOOST = 0.15
     private const val RECENT_HALF_LIFE_MINUTES = 30.0
 
+    /** Something you owe that came in while the phone was down is still owed hours later (ADR 0031). */
+    private const val OWED_HALF_LIFE_MINUTES = 360.0
+    private val owedKinds = setOf(LoopKind.CallBack, LoopKind.Payment, LoopKind.Reminder)
+
     /**
      * [unseen] is true when this is your first chance to act on the loop's latest message or request: it came in
      * while the phone was put down and this is the first unlock since, however long after, or it is arriving now.
@@ -25,8 +29,9 @@ internal object Ranker {
     fun score(loop: Loop, now: Instant, stats: Stats, unseen: Boolean = true): Score {
         val ageMinutes = Duration.between(loop.updatedAt, now).toMillis().coerceAtLeast(0) / 60_000.0
         // Alarms and events are about now, not about when Earmark noticed them.
-        val recent = when (loop.kind) {
-            LoopKind.Routine, LoopKind.LeaveBy -> 1.0
+        val recent = when {
+            loop.kind == LoopKind.Routine || loop.kind == LoopKind.LeaveBy -> 1.0
+            unseen && owes(loop) -> exp(-ageMinutes / OWED_HALF_LIFE_MINUTES)
             else -> exp(-ageMinutes / RECENT_HALF_LIFE_MINUTES)
         }
         // Your first chance to act on a message, call, reminder or request is the one most likely to be for it.
@@ -41,6 +46,13 @@ internal object Ranker {
             whoFrom = who.from,
         )
     }
+
+    /** A missed call, a request for money, a bill, a reminder, or a message or email that asks or is urgent. Not chatter, and not a calendar event, which is over once its time has passed. */
+    fun owes(loop: Loop): Boolean = (loop.kind in owedKinds && "event" !in loop.why) || loop.urgent || "asks" in loop.why
+
+    /** At an unlock, an urgent loop that clears the bar comes before one that isn't urgent (ADR 0027), then the higher score. */
+    val unlockOrder: Comparator<Pair<Loop, Score>> =
+        compareBy<Pair<Loop, Score>> { (loop, score) -> loop.urgent && score.total > CHIP_THRESHOLD }.thenBy { it.second.total }
 
     /** Confirm rate with one smoothing hold and ignore, so a kind with no history scores 0.5. */
     private fun history(stat: KindStat?): Double {

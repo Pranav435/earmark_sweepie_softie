@@ -34,7 +34,7 @@ class ClassifierTest {
     @Test
     fun `a message to you is half due, and a question and a time word add a quarter each`() {
         assertEquals(1.0, open(Fixtures.rahul(now, "free at 5?")).due, 1e-9)
-        assertEquals(0.75, open(Fixtures.rahul(now, "free tonight")).due, 1e-9)
+        assertEquals(0.75, open(Fixtures.rahul(now, "back home tonight")).due, 1e-9)
         assertEquals(0.75, open(Fixtures.rahul(now, "free?")).due, 1e-9)
         assertEquals(0.5, open(Fixtures.rahul(now, "that was fun")).due, 1e-9)
     }
@@ -168,7 +168,9 @@ class ClassifierTest {
 
     @Test
     fun `a paid receipt is evidence, not a new request`() {
-        assertEquals(Classification.Paid("com.venmo"), Classifier.classify(note("com.venmo", "Venmo", "You paid Aisha Khan \$12.00"), Fixtures.settings))
+        val paid = Classifier.classify(note("com.venmo", "Venmo", "You paid Aisha Khan \$12.00"), Fixtures.settings) as Classification.Paid
+        assertEquals("com.venmo", paid.packageName)
+        assertEquals("\$12.00", paid.amount?.full)
     }
 
     @Test
@@ -289,5 +291,104 @@ class ClassifierTest {
         assertEquals("text from a business", skipReason(Fixtures.airtel(now, "Payment of Rs 499 received towards your bill due on 30-Oct. Thank you!")))
         val shortCode = Fixtures.airtel(now, "Reply YES to confirm?").let { it.copy(title = "56767", messages = listOf(Message("56767", it.text!!, now))) }
         assertEquals("text from a business", skipReason(shortCode))
+    }
+
+    @Test
+    fun `bills in Hindi, Marathi and Hinglish, fees, maintenance and card dues`() {
+        assertEquals("Pay your AIRTEL bill ₹1,099", open(Fixtures.airtel(now, "आपके पोस्टपेड नंबर का ₹1,099 का बिल 08-11-2026 तक देय है।")).task)
+        assertTrue(open(Fixtures.airtel(now, "महावितरण: आपले वीज बिल रु. 860.00 असून देय दिनांक 09-11-2026 आहे.")).bill)
+        assertTrue(open(Fixtures.airtel(now, "Aapka Rs 349 ka bill 06-11 tak due hai. Abhi pay karein.")).bill)
+        assertTrue(open(Fixtures.airtel(now, "Hostel fee of Rs. 38,000 is due by 20-Nov.")).bill)
+        assertTrue(open(Fixtures.airtel(now, "Maintenance of ₹3,200 for Flat C-104 is due by 12-Nov.")).bill)
+        assertTrue(open(note("com.csam.icici.bank.imobile", "Payment due", "Total amount due ₹6,410.00 on your Credit Card XX1122 is due on 02-Nov.")).bill)
+    }
+
+    @Test
+    fun `a failed payment is still owed, and a statement with nothing due isn't`() {
+        assertTrue(open(note("com.spotify.music", "Payment failed", "We couldn't process your ₹59 payment for Premium.")).bill)
+        assertTrue(open(note("com.hdfcbank", "EMI not debited", "EMI of ₹4,800 could not be debited due to insufficient balance.")).bill)
+        assertTrue(open(note("com.ubercab", "Payment pending", "Your last trip couldn't be charged. Pay ₹180 to ride again.")).bill)
+        assertEquals("text from a business", skipReason(Fixtures.airtel(now, "Card XX4521 statement: Total Amount Due Rs 0.00. No payment required.")))
+    }
+
+    @Test
+    fun `a bank's debit text, or an app's receipt, says you paid`() {
+        val bank = { text: String -> Fixtures.airtel(now, text).copy(title = "AX-HDFCBK", messages = listOf(Message("AX-HDFCBK", text, now))) }
+        assertEquals(Classification.Paid(Fixtures.SMS, Money("₹", "300.00".toBigDecimal())), Classifier.classify(bank("Sent Rs.300.00 From HDFC Bank A/C *4521 To RIYA SHAH On 27/10/26 Ref 6301"), Fixtures.settings))
+        assertEquals(Classification.Paid(Fixtures.SMS), Classifier.classify(bank("A/C X1234 debited by 250.0 on date 27Oct26 trf to PAPA Refno 6301"), Fixtures.settings))
+        assertEquals("net.one97.paytm", (Classifier.classify(note("net.one97.paytm", "Paid ₹120 to Riya Shah", "Paid via UPI"), Fixtures.settings) as Classification.Paid).packageName)
+        assertEquals("text from a business", skipReason(bank("Your A/c XX1234 is credited with Rs.5,000.00 by NEFT from ACME")))
+    }
+
+    @Test
+    fun `ride and food confirmations count as booked, even with a ride code, and delivery tracking doesn't`() {
+        assertEquals(Classification.Booked("com.olacabs.customer"), Classifier.classify(note("com.olacabs.customer", "Booking confirmed", "Ravi is on the way. Share OTP 5521 to start your ride."), Fixtures.settings))
+        assertEquals(Classification.Booked("com.application.zomato"), Classifier.classify(note("com.application.zomato", "Order confirm ho gaya!", "Delivery in 30 min"), Fixtures.settings))
+        assertEquals(Classification.Booked("com.ubercab"), Classifier.classify(note("com.ubercab", "Reservation confirmed", "Pickup Thu 6:00 AM"), Fixtures.settings))
+        assertEquals("not a loop", skipReason(note("in.amazon.mShop.android.shopping", "Out for delivery", "Your package will arrive today by 9 PM.")))
+        assertEquals("one-time code", skipReason(note("com.olacabs.customer", "Ola", "Your login OTP is 448812")))
+    }
+
+    @Test
+    fun `payment requests worded as a request from someone, or a reminder to pay`() {
+        assertEquals("Pay Riya Shah back ₹300", open(note("com.google.android.apps.nbu.paisa.user", "Payment request from Riya Shah", "₹300 · Lunch")).task)
+        assertEquals("Pay Dev back ₹200", open(note("com.google.android.apps.nbu.paisa.user", "Payment reminder", "Dev sent you a reminder to pay ₹200")).task)
+        assertEquals("Pay Kabir Rao back ₹900", open(note("com.phonepe.app", "Request expiring", "Pay ₹900 requested by Kabir Rao before it expires")).task)
+    }
+
+    @Test
+    fun `spam calls are skipped, and a carrier's missed-call text names the caller`() {
+        assertEquals("spam call", skipReason(note("com.truecaller", "Likely spam", "Missed call from +91 140 222 3333")))
+        val alert = Fixtures.airtel(now, "Missed Call Alert: 9820011223 tried to call you 3 times. Last call at 9:10 AM.")
+        assertEquals("Call 9820011223 back", open(alert).task)
+    }
+
+    @Test
+    fun `phishing from an unknown number and business bots on WhatsApp aren't people waiting on you`() {
+        val stranger = { text: String -> Fixtures.priya(now, text).copy(title = "+91 70000 12345", messages = listOf(Message("+91 70000 12345", text, now))) }
+        assertEquals("looks like a scam", skipReason(stranger("Dear Customer, your bank account will be BLOCKED today. Update KYC: http://x.co/kyc")))
+        assertEquals(LoopKind.Reply, open(stranger("hi this is Ravi from the hostel, can you call me?")).kind)
+        // As Google Messages names an unsaved sender.
+        val bracketed = Fixtures.priya(now, "Your account will be BLOCKED today. Update KYC: http://x.co").let { it.copy(title = "(987) 650-0044", messages = listOf(Message("(987) 650-0044", it.text!!, now))) }
+        assertEquals("looks like a scam", skipReason(bracketed))
+        val bank = Fixtures.priya(now, "Your balance is ₹4,210.50. Reply 'Menu' to see more options.").copy(title = "Axis Bank")
+        assertEquals("text from a business", skipReason(bank.copy(messages = listOf(Message("Axis Bank", bank.text!!, now)))))
+    }
+
+    @Test
+    fun `a reminder you set, delivered by a bot`() {
+        val slack = Fixtures.priya(now, "Reminder: send the invoice.").let { it.copy(title = "Slackbot", messages = listOf(Message("Slackbot", it.text!!, now, isBot = true))) }
+        assertEquals("send the invoice", open(slack).task)
+    }
+
+    @Test
+    fun `an email's quoted reply and forwarded message aren't its sender asking`() {
+        val thanks = Fixtures.email(now, body = "Got it, thanks.\n\nOn Mon, 26 Oct 2026, Pranav Savla wrote:\n> Could you please check my draft?")
+        assertEquals("email asks nothing", skipReason(thanks))
+        val forward = Fixtures.email(now, body = "Bhai ye form bhar dena aaj raat tak\n---------- Forwarded message ---------\nFrom: Events Team\nRegister now!")
+        assertEquals(LoopKind.Email, open(forward).kind)
+    }
+
+    @Test
+    fun `calendar invitations, doc comments, newsletters and sales pitches aren't people asking`() {
+        assertEquals("automated email", skipReason(Fixtures.email(now, from = "Google Calendar", subject = "Invitation: Sync @ Thu", body = "Riya invited you to this event. Going?")))
+        assertEquals("automated email", skipReason(Fixtures.email(now, from = "Riya Shah (Google Docs)", body = "Riya mentioned you in a comment: can you fix the table?")))
+        assertEquals("automated email", skipReason(Fixtures.email(now, from = "Upgrad", body = "Join our free webinar on ML this Sunday. Will you be there?")))
+        assertEquals("automated email", skipReason(Fixtures.email(now, from = "Karan Bose", body = "Hi Pranav, would you be open to a 15-minute call to see how Acme could help your team?")))
+    }
+
+    @Test
+    fun `a bill that comes by email is a bill, and a booking confirmation is booked`() {
+        val bill = open(Fixtures.email(now, from = "Tata Power", subject = "Your Tata Power bill for October", body = "Amount due: ₹2,310.40\nDue date: 05 Nov 2026"))
+        assertTrue(bill.bill)
+        assertEquals(Classification.Booked(Fixtures.MAIL), Classifier.classify(Fixtures.email(now, from = "IndiGo", subject = "Booking confirmed: BOM to BLR", body = "Your booking is confirmed."), Fixtures.settings))
+    }
+
+    @Test
+    fun `your name in an Indian script counts as a mention, and someone else with your first name doesn't`() {
+        assertEquals("Reply to Papa in Family", open(Fixtures.family(now, "Papa" to "प्रणव, कल सुबह जल्दी उठना"), withName).task)
+        assertEquals("Reply to Ba in Family", open(Fixtures.family(now, "Ba" to "પ્રણવ, જમવા આવ"), withName).task)
+        assertEquals(Classification.Quiet("hash-family"), Classifier.classify(Fixtures.family(now, "Riya" to "Pranav K and Isha, submit the sheet"), withName))
+        assertEquals("Reply to Riya in Family", open(Fixtures.family(now, "Riya" to "Pranav I need the sheet"), withName).task)
     }
 }

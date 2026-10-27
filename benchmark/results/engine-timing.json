@@ -1,0 +1,36 @@
+{
+  "note": "Engine.handle timed by the :bench app (debug build) over benchmark/data: every notification, then every message as a WhatsApp chat. Mean of the runs.",
+  "v0.1.14": "git 35ba2bc",
+  "byDevice": {
+    "Galaxy A34": {
+      "v2": {
+        "coldFirstNotificationMillis": 20.1,
+        "microsecondsPerNotification": 1117.8,
+        "microsecondsPerMessage": 710.5,
+        "runs": 2
+      },
+      "device": "samsung SM-A346E",
+      "v1": {
+        "coldFirstNotificationMillis": 11.4,
+        "microsecondsPerNotification": 583.3,
+        "microsecondsPerMessage": 279.0,
+        "runs": 2
+      }
+    },
+    "Android 16 emulator": {
+      "v2": {
+        "coldFirstNotificationMillis": 18.7,
+        "microsecondsPerNotification": 796.9,
+        "microsecondsPerMessage": 477.8,
+        "runs": 2
+      },
+      "device": "Google sdk_gphone64_arm64",
+      "v1": {
+        "coldFirstNotificationMillis": 11.6,
+        "microsecondsPerNotification": 325.9,
+        "microsecondsPerMessage": 164.6,
+        "runs": 2
+      }
+    }
+  }
+}

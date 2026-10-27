@@ -1,0 +1,134 @@
+{
+  "urgent": {
+    "rulesCrossValidated": {
+      "tp": 281,
+      "fp": 54,
+      "fn": 192,
+      "tn": 2117,
+      "precision": 0.839,
+      "recall": 0.594,
+      "accuracy": 0.907
+    },
+    "withModelCrossValidated": {
+      "tp": 355,
+      "fp": 61,
+      "fn": 118,
+      "tn": 2110,
+      "precision": 0.853,
+      "recall": 0.751,
+      "accuracy": 0.932
+    },
+    "ifRule": 0.02,
+    "otherwise": 0.55
+  },
+  "asks": {
+    "rulesCrossValidated": {
+      "tp": 1135,
+      "fp": 76,
+      "fn": 247,
+      "tn": 1186,
+      "precision": 0.937,
+      "recall": 0.821,
+      "accuracy": 0.878
+    },
+    "withModelCrossValidated": {
+      "tp": 1230,
+      "fp": 86,
+      "fn": 152,
+      "tn": 1176,
+      "precision": 0.935,
+      "recall": 0.89,
+      "accuracy": 0.91
+    },
+    "ifRule": 0.08,
+    "otherwise": 0.83
+  },
+  "ack": {
+    "rulesCrossValidated": {
+      "tp": 347,
+      "fp": 5,
+      "fn": 184,
+      "tn": 2108,
+      "precision": 0.986,
+      "recall": 0.653,
+      "accuracy": 0.929
+    },
+    "withModelCrossValidated": {
+      "tp": 422,
+      "fp": 8,
+      "fn": 109,
+      "tn": 2105,
+      "precision": 0.981,
+      "recall": 0.795,
+      "accuracy": 0.956
+    },
+    "ifRule": 0.04,
+    "otherwise": 0.72
+  },
+  "benchmarkMessages": {
+    "urgent": {
+      "rules": {
+        "tp": 56,
+        "fp": 1,
+        "fn": 8,
+        "tn": 235,
+        "precision": 0.982,
+        "recall": 0.875,
+        "accuracy": 0.97
+      },
+      "withModel": {
+        "tp": 58,
+        "fp": 1,
+        "fn": 6,
+        "tn": 235,
+        "precision": 0.983,
+        "recall": 0.906,
+        "accuracy": 0.977
+      }
+    },
+    "asks": {
+      "rules": {
+        "tp": 164,
+        "fp": 9,
+        "fn": 5,
+        "tn": 122,
+        "precision": 0.948,
+        "recall": 0.97,
+        "accuracy": 0.953
+      },
+      "withModel": {
+        "tp": 165,
+        "fp": 7,
+        "fn": 4,
+        "tn": 124,
+        "precision": 0.959,
+        "recall": 0.976,
+        "accuracy": 0.963
+      }
+    },
+    "ack": {
+      "rules": {
+        "tp": 55,
+        "fp": 0,
+        "fn": 4,
+        "tn": 241,
+        "precision": 1.0,
+        "recall": 0.932,
+        "accuracy": 0.987
+      },
+      "withModel": {
+        "tp": 56,
+        "fp": 0,
+        "fn": 3,
+        "tn": 241,
+        "precision": 1.0,
+        "recall": 0.949,
+        "accuracy": 0.99
+      }
+    }
+  },
+  "messages": 2644,
+  "buckets": 32768,
+  "bytes": 98360,
+  "microsecondsPerMessageOnLaptop": 43
+}

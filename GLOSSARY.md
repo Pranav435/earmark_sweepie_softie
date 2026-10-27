@@ -76,8 +76,15 @@ A message or request that comes in while you are using the phone. Its heads-up a
 _Avoid_: mid-session message
 
 **Urgent**:
-A message that says it can't wait, such as "call me asap", "hospital" or "jaldi". It is fully due, and as an arrival it can take over a guess you came for, which comes back after.
+A message that says it can't wait, such as "call me asap", "hospital" or "jaldi", unless it says it isn't ("koi jaldi nahi"), is over, or is a joke. It is fully due; at unlock an urgent loop above the bar comes first, and as an arrival it can take over a guess you came for, which comes back after.
 _Avoid_: important, priority
+
+**Owed**:
+A loop still owed hours later: a call back, a payment or bill, a reminder, or a message or email that asks or is urgent. At the first unlock after it came in it fades over six hours instead of half an hour. Chatter is never owed.
+
+**Message model**:
+The small text model that reads each message beside the word lists, for urgent, asks and acknowledgement. It learned from labelled messages, runs on the phone, and only overrules the lists when it is sure.
+_Avoid_: AI, classifier
 
 **Acknowledgement**:
 A message that only answers or reacts, such as "ok", "thanks", 👍 or a reaction. It owes nothing, so it opens no loop.
@@ -93,7 +100,7 @@ _Avoid_: relevant
 Group messages that aren't for you. They open no loop; only a tap or swipe on their notification is learned.
 
 **Mention**:
-Your name, first name or a nickname from your own contact card in a group message, or the app's @name for you.
+Your name, first name or a nickname from your own contact card in a group message, in Latin letters or an Indian script ("प्रणव"), or the app's @name for you.
 
 **Chip**:
 The small card that shows the guess right after unlock.

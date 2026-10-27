@@ -1,0 +1,610 @@
+{
+  "classifier": {
+    "all": {
+      "right": 272,
+      "total": 300,
+      "rate": 0.907
+    },
+    "byDifficulty": {
+      "everyday": {
+        "right": 185,
+        "total": 195,
+        "rate": 0.949
+      },
+      "tricky": {
+        "right": 87,
+        "total": 105,
+        "rate": 0.829
+      }
+    },
+    "byLanguage": {
+      "en": {
+        "right": 154,
+        "total": 171,
+        "rate": 0.901
+      },
+      "hi": {
+        "right": 30,
+        "total": 33,
+        "rate": 0.909
+      },
+      "hinglish": {
+        "right": 68,
+        "total": 75,
+        "rate": 0.907
+      },
+      "other": {
+        "right": 20,
+        "total": 21,
+        "rate": 0.952
+      }
+    },
+    "isLoop": {
+      "accuracy": {
+        "right": 281,
+        "total": 300,
+        "rate": 0.937
+      },
+      "precision": {
+        "right": 175,
+        "total": 184,
+        "rate": 0.951
+      },
+      "recall": {
+        "right": 175,
+        "total": 185,
+        "rate": 0.946
+      },
+      "specificity": {
+        "right": 106,
+        "total": 115,
+        "rate": 0.922
+      }
+    },
+    "byLabel": {
+      "reply": {
+        "accuracy": {
+          "right": 290,
+          "total": 300,
+          "rate": 0.967
+        },
+        "precision": {
+          "right": 68,
+          "total": 76,
+          "rate": 0.895
+        },
+        "recall": {
+          "right": 68,
+          "total": 70,
+          "rate": 0.971
+        },
+        "specificity": {
+          "right": 222,
+          "total": 230,
+          "rate": 0.965
+        }
+      },
+      "callback": {
+        "accuracy": {
+          "right": 300,
+          "total": 300,
+          "rate": 1.0
+        },
+        "precision": {
+          "right": 20,
+          "total": 20,
+          "rate": 1.0
+        },
+        "recall": {
+          "right": 20,
+          "total": 20,
+          "rate": 1.0
+        },
+        "specificity": {
+          "right": 280,
+          "total": 280,
+          "rate": 1.0
+        }
+      },
+      "email": {
+        "accuracy": {
+          "right": 295,
+          "total": 300,
+          "rate": 0.983
+        },
+        "precision": {
+          "right": 27,
+          "total": 29,
+          "rate": 0.931
+        },
+        "recall": {
+          "right": 27,
+          "total": 30,
+          "rate": 0.9
+        },
+        "specificity": {
+          "right": 268,
+          "total": 270,
+          "rate": 0.993
+        }
+      },
+      "reminder": {
+        "accuracy": {
+          "right": 298,
+          "total": 300,
+          "rate": 0.993
+        },
+        "precision": {
+          "right": 20,
+          "total": 22,
+          "rate": 0.909
+        },
+        "recall": {
+          "right": 20,
+          "total": 20,
+          "rate": 1.0
+        },
+        "specificity": {
+          "right": 278,
+          "total": 280,
+          "rate": 0.993
+        }
+      },
+      "payment_request": {
+        "accuracy": {
+          "right": 297,
+          "total": 300,
+          "rate": 0.99
+        },
+        "precision": {
+          "right": 17,
+          "total": 17,
+          "rate": 1.0
+        },
+        "recall": {
+          "right": 17,
+          "total": 20,
+          "rate": 0.85
+        },
+        "specificity": {
+          "right": 280,
+          "total": 280,
+          "rate": 1.0
+        }
+      },
+      "bill": {
+        "accuracy": {
+          "right": 295,
+          "total": 300,
+          "rate": 0.983
+        },
+        "precision": {
+          "right": 20,
+          "total": 20,
+          "rate": 1.0
+        },
+        "recall": {
+          "right": 20,
+          "total": 25,
+          "rate": 0.8
+        },
+        "specificity": {
+          "right": 275,
+          "total": 275,
+          "rate": 1.0
+        }
+      },
+      "paid": {
+        "accuracy": {
+          "right": 298,
+          "total": 300,
+          "rate": 0.993
+        },
+        "precision": {
+          "right": 14,
+          "total": 14,
+          "rate": 1.0
+        },
+        "recall": {
+          "right": 14,
+          "total": 16,
+          "rate": 0.875
+        },
+        "specificity": {
+          "right": 284,
+          "total": 284,
+          "rate": 1.0
+        }
+      },
+      "booked": {
+        "accuracy": {
+          "right": 295,
+          "total": 300,
+          "rate": 0.983
+        },
+        "precision": {
+          "right": 12,
+          "total": 13,
+          "rate": 0.923
+        },
+        "recall": {
+          "right": 12,
+          "total": 16,
+          "rate": 0.75
+        },
+        "specificity": {
+          "right": 283,
+          "total": 284,
+          "rate": 0.996
+        }
+      },
+      "replied": {
+        "accuracy": {
+          "right": 300,
+          "total": 300,
+          "rate": 1.0
+        },
+        "precision": {
+          "right": 15,
+          "total": 15,
+          "rate": 1.0
+        },
+        "recall": {
+          "right": 15,
+          "total": 15,
+          "rate": 1.0
+        },
+        "specificity": {
+          "right": 285,
+          "total": 285,
+          "rate": 1.0
+        }
+      },
+      "none": {
+        "accuracy": {
+          "right": 276,
+          "total": 300,
+          "rate": 0.92
+        },
+        "precision": {
+          "right": 59,
+          "total": 74,
+          "rate": 0.797
+        },
+        "recall": {
+          "right": 59,
+          "total": 68,
+          "rate": 0.868
+        },
+        "specificity": {
+          "right": 217,
+          "total": 232,
+          "rate": 0.935
+        }
+      }
+    },
+    "confusion": {
+      "reply": {
+        "reply": 68,
+        "none": 2
+      },
+      "callback": {
+        "callback": 20
+      },
+      "email": {
+        "email": 27,
+        "none": 3
+      },
+      "reminder": {
+        "reminder": 20
+      },
+      "payment_request": {
+        "payment_request": 17,
+        "none": 3
+      },
+      "bill": {
+        "bill": 20,
+        "reply": 3,
+        "none": 2
+      },
+      "paid": {
+        "paid": 14,
+        "none": 2
+      },
+      "booked": {
+        "booked": 12,
+        "none": 3,
+        "reply": 1
+      },
+      "replied": {
+        "replied": 15
+      },
+      "none": {
+        "none": 59,
+        "reply": 4,
+        "email": 2,
+        "reminder": 2,
+        "booked": 1
+      }
+    },
+    "who": {
+      "right": 131,
+      "total": 132,
+      "rate": 0.992
+    },
+    "amount": {
+      "right": 37,
+      "total": 37,
+      "rate": 1.0
+    },
+    "microsecondsPerNotification": 111.2
+  },
+  "urgency": {
+    "urgent": {
+      "accuracy": {
+        "right": 272,
+        "total": 300,
+        "rate": 0.907
+      },
+      "precision": {
+        "right": 42,
+        "total": 53,
+        "rate": 0.792
+      },
+      "recall": {
+        "right": 42,
+        "total": 59,
+        "rate": 0.712
+      },
+      "specificity": {
+        "right": 230,
+        "total": 241,
+        "rate": 0.954
+      },
+      "byDifficulty": {
+        "everyday": {
+          "right": 188,
+          "total": 200,
+          "rate": 0.94
+        },
+        "tricky": {
+          "right": 84,
+          "total": 100,
+          "rate": 0.84
+        }
+      },
+      "byLanguage": {
+        "en": {
+          "right": 134,
+          "total": 150,
+          "rate": 0.893
+        },
+        "hi": {
+          "right": 36,
+          "total": 36,
+          "rate": 1.0
+        },
+        "hinglish": {
+          "right": 80,
+          "total": 90,
+          "rate": 0.889
+        },
+        "other": {
+          "right": 22,
+          "total": 24,
+          "rate": 0.917
+        }
+      }
+    },
+    "asks": {
+      "accuracy": {
+        "right": 272,
+        "total": 300,
+        "rate": 0.907
+      },
+      "precision": {
+        "right": 149,
+        "total": 156,
+        "rate": 0.955
+      },
+      "recall": {
+        "right": 149,
+        "total": 170,
+        "rate": 0.876
+      },
+      "specificity": {
+        "right": 123,
+        "total": 130,
+        "rate": 0.946
+      },
+      "byDifficulty": {
+        "everyday": {
+          "right": 193,
+          "total": 200,
+          "rate": 0.965
+        },
+        "tricky": {
+          "right": 79,
+          "total": 100,
+          "rate": 0.79
+        }
+      },
+      "byLanguage": {
+        "en": {
+          "right": 135,
+          "total": 150,
+          "rate": 0.9
+        },
+        "hi": {
+          "right": 34,
+          "total": 36,
+          "rate": 0.944
+        },
+        "hinglish": {
+          "right": 84,
+          "total": 90,
+          "rate": 0.933
+        },
+        "other": {
+          "right": 19,
+          "total": 24,
+          "rate": 0.792
+        }
+      }
+    },
+    "ack": {
+      "accuracy": {
+        "right": 293,
+        "total": 300,
+        "rate": 0.977
+      },
+      "precision": {
+        "right": 53,
+        "total": 53,
+        "rate": 1.0
+      },
+      "recall": {
+        "right": 53,
+        "total": 60,
+        "rate": 0.883
+      },
+      "specificity": {
+        "right": 240,
+        "total": 240,
+        "rate": 1.0
+      },
+      "byDifficulty": {
+        "everyday": {
+          "right": 193,
+          "total": 200,
+          "rate": 0.965
+        },
+        "tricky": {
+          "right": 100,
+          "total": 100,
+          "rate": 1.0
+        }
+      },
+      "byLanguage": {
+        "en": {
+          "right": 148,
+          "total": 150,
+          "rate": 0.987
+        },
+        "hi": {
+          "right": 35,
+          "total": 36,
+          "rate": 0.972
+        },
+        "hinglish": {
+          "right": 86,
+          "total": 90,
+          "rate": 0.956
+        },
+        "other": {
+          "right": 24,
+          "total": 24,
+          "rate": 1.0
+        }
+      }
+    },
+    "microsecondsPerMessage": 59.8
+  },
+  "money": {
+    "all": {
+      "right": 69,
+      "total": 80,
+      "rate": 0.863
+    },
+    "byDifficulty": {
+      "everyday": {
+        "right": 40,
+        "total": 40,
+        "rate": 1.0
+      },
+      "tricky": {
+        "right": 29,
+        "total": 40,
+        "rate": 0.725
+      }
+    },
+    "found": 56,
+    "wrongAmount": 0,
+    "missed": 11,
+    "invented": 0,
+    "rightlyNone": 13
+  },
+  "guess": {
+    "best": {
+      "right": 65,
+      "total": 70,
+      "rate": 0.929
+    },
+    "fine": {
+      "right": 66,
+      "total": 70,
+      "rate": 0.943
+    },
+    "byDifficulty": {
+      "everyday": {
+        "right": 45,
+        "total": 46,
+        "rate": 0.978
+      },
+      "tricky": {
+        "right": 21,
+        "total": 24,
+        "rate": 0.875
+      }
+    },
+    "byLanguage": {
+      "en": {
+        "right": 39,
+        "total": 41,
+        "rate": 0.951
+      },
+      "hi": {
+        "right": 6,
+        "total": 7,
+        "rate": 0.857
+      },
+      "hinglish": {
+        "right": 17,
+        "total": 18,
+        "rate": 0.944
+      },
+      "other": {
+        "right": 4,
+        "total": 4,
+        "rate": 1.0
+      }
+    },
+    "showsChip": {
+      "accuracy": {
+        "right": 67,
+        "total": 70,
+        "rate": 0.957
+      },
+      "precision": {
+        "right": 55,
+        "total": 56,
+        "rate": 0.982
+      },
+      "recall": {
+        "right": 55,
+        "total": 57,
+        "rate": 0.965
+      },
+      "specificity": {
+        "right": 12,
+        "total": 13,
+        "rate": 0.923
+      }
+    },
+    "rightItemWhenShown": {
+      "right": 54,
+      "total": 55,
+      "rate": 0.982
+    }
+  }
+}

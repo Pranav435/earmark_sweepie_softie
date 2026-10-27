@@ -1,0 +1,388 @@
+# Benchmark misses
+
+Every case the rules got wrong. Written by `./gradlew :core:benchmark`; the cases are in `benchmark/data`.
+
+## Classifier
+
+Each line: case id, difficulty and language; expected → got; what the case was.
+
+- **h-n007** (tricky, hinglish) `none` → `reply` (opened “Reply to +91 70423 18856”: urgent, time). Messages · [msg] · +91 70423 18856 · Priya grahak, aapka bijli connection aaj raat 9:30 baje kaat diya jayega kyunki pichhle mahine ka bill update nahi hua hai. Turant electricity officer se 9832145076 pe sampark karein. Note: power-cut scam from a mobile number
+- **h-n030** (tricky, en) `bill` → `none` (skip: not a loop). Spotify · Your payment didn't go through · We couldn't charge ₹119 for Premium Individual. Update your payment details to keep listening ad-free. Note: failed subscription charge, so the amount is still owed
+- **h-n034** (tricky, en) `bill` → `reply` (opened “Reply to ACT Fibernet”: time). WhatsApp · [msg] · ACT Fibernet · Hi Pranav, your ACT Fibernet bill of ₹ 1,178.82 for November is generated. Due date: 05-Nov-2026. Pay now to avoid service interruption. Note: company bill arriving over WhatsApp with a reply box
+- **h-n035** (everyday, hi) `payment_request` → `none` (skip: not a loop). Google Pay · Payment request from Neelam Bua · ₹1,100 · मंदिर के प्रसाद का हिस्सा
+- **h-n038** (tricky, en) `booked` → `none` (skip: one-time code). Ola · Your ride is confirmed · Suresh (4.8★) is arriving in 4 mins in a White WagonR MH 47 AB 1290. Share OTP 4821 to start your ride. Note: contains an OTP but is a ride confirmation
+- **h-n040** (tricky, en) `payment_request` → `none` (skip: not a loop). Google Pay · Reminder: Nidhi Kapoor's request · ₹300 for Uber to airport is still pending. Pay now Note: payment-app nudge about an older request
+- **h-n045** (tricky, en) `none` → `email` (opened “Reply to Internshala's email”: asks). Gmail · [email] · Internshala · Pranav, are you ready for your dream internship? Note: marketing email that uses his name and asks a question
+- **h-n047** (everyday, mr) `bill` → `none` (skip: text from a business). Messages · [msg] · VM-MSEDCL · प्रिय ग्राहक, आपले ऑक्टोबर 2026 चे वीज बिल रु. 1,230.00 असून देय दिनांक 10-11-2026 आहे. ग्राहक क्र. 1700XXXX4521. - महावितरण
+- **h-n050** (tricky, en) `none` → `email` (opened “Reply to Ravi Iyer's email”: urgent, asks). Outlook · [email] · Ravi Iyer · Automatic reply: Lab access for weekend Note: auto-reply from a person's address
+- **h-n058** (tricky, en) `paid` → `none` (skip: text from a business). Messages · [msg] · VM-SBIUPI · Dear UPI user A/C X4521 debited by 389.0 on date 27Oct26 trf to Swiggy Limited Refno 630012345678. If not u? call 1800111109. -SBI Note: terse bank debit text with no currency symbol
+- **h-n061** (everyday, hi) `bill` → `none` (skip: text from a business). Messages · [msg] · JX-JIOPAY · प्रिय ग्राहक, आपके Jio Postpaid नंबर 98XXXXX210 का ₹599 का बिल 07-11-2026 तक देय है। MyJio ऐप से अभी भुगतान करें।
+- **h-n064** (everyday, en) `none` → `booked` (booked). Amazon · Out for delivery · Your package with "Classmate Notebook (Pack of 6)" will be delivered today by 9 PM
+- **h-n068** (everyday, en) `payment_request` → `none` (skip: not a loop). Google Pay · Payment request from Aisha Khan · ₹500 · Dinner at Bastian 🍝
+- **h-n073** (everyday, en) `booked` → `none` (skip: ongoing). Uber · [status] · Ramesh is on the way · White Maruti Swift Dzire · MH 02 FG 4821 · Arriving in 4 min
+- **h-n080** (everyday, hinglish) `payment_request` → `none` (skip: not a loop). Google Pay · Payment request from Meera · ₹180 · chai sutta ka hisaab ☕
+- **h-n082** (everyday, en) `booked` → `reply` (opened “Reply to VM-IRCTCi”: time). Messages · [msg] · VM-IRCTCi · PNR:4521876390,TRN:12951,DOJ:14-11-26,SL,MMCT-NDLS,DP:16:35,Boarding at MMCT,PRANAV SAVLA,S6 52,Fare:785.00,SC:17.70+PG CHGS. Download ticket from IRCTC app.
+- **h-n089** (tricky, en) `payment_request` → `none` (skip: not a loop). Splitwise · Aditi Joshi sent you a reminder · You owe Aditi Joshi ₹1,240.50 for “Lonavala villa”. Settle up? Note: settle-up reminder from an expense-splitting app
+- **h-n092** (tricky, hi) `none` → `reply` (opened “Reply to Papa”). WhatsApp · [msg] · Papa · धन्यवाद बेटा 🙏 Note: Hindi thank-you only
+- **h-n093** (everyday, en) `paid` → `none` (skip: text from a business). Messages · [msg] · VM-ICICIT · ICICI Bank Acct XX704 debited for Rs 2,500.00 on 27-Oct-26; AISHA KHAN credited. UPI:629812345678. Call 18002662 for dispute. SMS BLOCK 704 to 9215676766.
+- **h-n094** (everyday, hinglish) `bill` → `reply` (opened “Reply to VM-ViCARE”). Messages · [msg] · VM-ViCARE · Aapka Vi postpaid bill Rs 499 ka 09-Nov tak due hai. Late fee se bachne ke liye abhi pay karein: vi.app/pay
+- **h-n099** (everyday, hi) `paid` → `none` (skip: not a loop). Paytm · भुगतान सफल · ₹200 का भुगतान Sharma General Store को सफलतापूर्वक किया गया
+- **h-n103** (tricky, en) `none` → `email` (opened “Reply to Ankit Jain via LinkedIn's email”: asks). Gmail · [email] · Ankit Jain via LinkedIn · Ankit sent you a message Note: a person's question relayed by a no-reply notification email
+- **h-n104** (tricky, en) `none` → `bill` (opened “Pay your ICICIT bill ₹0”: bill). Messages · [msg] · AX-ICICIT · ICICI Bank Credit Card XX9006 Statement: Total Amount Due INR 0.00, Minimum Amount Due INR 0.00. No payment is required this month. Note: card statement with nothing due
+- **h-n116** (tricky, en) `none` → `reminder` (opened “Your streak is in danger! 🔥”: reminder). Duolingo · [reminder] · Your streak is in danger! 🔥 · Hi Pranav, it's Duo. Just 5 minutes keeps your 212-day streak alive. Note: app nudge in the reminder category, not his reminder
+- **h-n136** (tricky, en) `reply` → `none` (group chatter, not for you). Telegram · [msg] · GDSC Core Team · Shreya: @pranavsavla can you take the 4pm Flutter session? Rohit is down with fever Note: group mention by username handle
+- **h-n139** (everyday, en) `booked` → `none` (skip: not a loop). Rapido · Captain assigned! · Sunil is coming to pick you up · MH 03 DK 7712 · 3 mins away
+- **h-n151** (everyday, en) `none` → `reply` (opened “Reply to Placement Updates 2027”: time). Telegram · [msg] · Placement Updates 2027 · 📢 Amazon SDE Intern drive: registrations close tonight 11:59 PM. Link in the pinned message.
+- **h-n156** (tricky, hinglish) `none` → `reply` (opened “Reply to Neha”). WhatsApp · [msg] · Neha · nvm ho gaya, Ishaan ne help kar di. thanks! Note: later message cancels the ask
+- **h-n178** (tricky, hinglish) `booked` → `none` (skip: one-time code). Rapido · Captain mil gaya! 🏍️ · Ramesh 3 min mein pickup karega · MH 04 KL 2210 · Ride OTP 4821 Note: contains an OTP but confirms a ride
+- **h-n180** (tricky, en) `bill` → `none` (skip: text from a business). Messages · [msg] · VM-ACTFBR · ACT Fibernet: Bill amt INR 1,178.82 for A/c 1009XX56 due 03Nov. Avoid disconnection, pay at act.ly/pay Note: terse, INR prefix with paise
+- **h-n182** (everyday, en) `paid` → `none` (skip: text from a business). Messages · [msg] · AX-HDFCBK · Sent Rs.850.00 From HDFC Bank A/C *4821 To Aisha Khan On 27/10/26 Ref 630298114523 Not You? Call 18002586161/SMS BLOCK UPI to 7308080808
+- **h-n184** (everyday, hinglish) `none` → `reply` (opened “Reply to Aditi”). WhatsApp · [msg] · Aditi · got it, thank you yaar 🙏
+- **h-n192** (everyday, hi) `email` → `none` (skip: email asks nothing). Gmail · [email] · Vinod Shah · किराया एग्रीमेंट की कॉपी
+- **h-n196** (tricky, en) `booked` → `none` (skip: text from a business). Messages · [msg] · AD-IRCTCI · PNR:4521873390,TRN:12951,DOJ:14-11-26,3A,BCT-NDLS,DP:16:35,Pranav Savla+1,B3 21,B3 24,Fare:4510,SC:35.4+PG CHGS Note: terse PNR SMS with a fare, not a bill
+- **h-n207** (everyday, hinglish) `none` → `booked` (booked). Zomato · Order on the way 🛵 · Ravi aapka order leke nikal chuke hain. 12 min mein pahunchenge.
+- **h-n210** (tricky, hi) `reply` → `none` (group chatter, not for you). WhatsApp · [msg] · कॉलेज के यार · अमित: प्रणव भाई, तुम्हारे पास एक्स्ट्रा हेलमेट है क्या? Note: his name in Devanagari inside a group
+- **h-n212** (everyday, en) `booked` → `none` (skip: ongoing). Uber · Suresh is on the way · White Swift Dzire · MH02 FG 4471 · arriving in 4 min
+- **h-n213** (tricky, en) `none` → `bill` (opened “Pay your ICICIB bill ₹0”: bill). Messages · [msg] · AX-ICICIB · ICICI Bank Credit Card XX9012 statement for Oct-26: Total Amount Due INR 0.00, Minimum Amount Due INR 0.00. No payment is required. Note: statement with nothing due
+- **h-n215** (tricky, hinglish) `bill` → `reply` (opened “Reply to VM-ViCARE”). Messages · [msg] · VM-ViCARE · Vi: Aapka postpaid bill Rs 499 ka hai, 01/11 tak pay karein: vi.app/pay. Agar pay kar diya hai to ignore karein. Note: Hinglish bill with an 'ignore if paid' line
+- **h-n229** (tricky, en) `none` → `callback` (opened “Call Likely Spam back”: missed call). Truecaller · [missed_call] · Missed call from Likely Spam · +91 14062 18832 · Telemarketer · reported by 1,204 people Note: missed call flagged as telemarketer spam
+- **h-n233** (tricky, hi) `none` → `reply` (opened “Reply to +91 70219 88341”: urgent). Messages · [msg] · +91 70219 88341 · प्रिय ग्राहक, आपका SBI YONO खाता आज बंद हो जाएगा। तुरंत PAN अपडेट करें: sbi-yono-kyc.in/upd Note: phishing text from a mobile number
+- **h-n235** (everyday, en) `payment_request` → `none` (skip: not a loop). PhonePe · Payment request from Rohan Gupta · ₹1,250 for Goa trip stay. Pay now
+- **h-n241** (tricky, hinglish) `none` → `email` (opened “Reply to Ritika from Swiggy One's email”: asks). Gmail · [email] · Ritika from Swiggy One · Pranav, Diwali ki taiyaari ho gayi? 🪔 Note: marketing email signed by a person, asks a question
+- **h-n245** (tricky, hinglish) `none` → `reply` (opened “Reply to Ajay in Cricket Sunday 🏏”: mentions you). WhatsApp · [msg] · Cricket Sunday 🏏 · Ajay: @Pranav Mhatre tu kal keeper hai, 7 baje ground pe aa jaana Note: a different Pranav is tagged
+- **h-n253** (everyday, en) `payment_request` → `none` (skip: not a loop). Splitwise · Meera Iyer sent you a reminder · You owe Meera ₹1,240.00 for "Lonavala trip". Settle up now?
+- **h-n256** (tricky, hi) `paid` → `none` (skip: text from a business). Messages · [msg] · VM-SBIUPI · प्रिय यूज़र, आपके खाते XX2290 से ₹1,500 UPI द्वारा राहुल शर्मा को भेजे गए (संदर्भ 630211458812)। यदि आपने नहीं भेजे तो 1800111109 पर कॉल करें -SBI Note: Hindi bank debit alert
+- **h-n261** (tricky, hinglish) `email` → `none` (skip: email asks nothing). Gmail · [email] · Papa · Fwd: LIC Premium Due Notice – Policy 9XXXX5312 Note: forwarded company bill, but Papa is asking him
+- **h-n262** (everyday, hi) `bill` → `none` (skip: text from a business). Messages · [msg] · JM-SBICRD · प्रिय कार्डधारक, आपके SBI कार्ड XX6631 का कुल बकाया ₹6,720 है। भुगतान की अंतिम तिथि 08-11-2026 है।
+- **h-n265** (tricky, mr) `bill` → `none` (skip: text from a business). Messages · [msg] · VM-MSEDCL · महावितरण: ग्राहक क्र. 0001XXXX72, आपले वीज बिल रु. 1040 असून देय दिनांक 31-10-2026 आहे. ऑनलाइन भरा: wss.mahadiscom.in Note: electricity bill in Marathi
+- **h-n269** (tricky, en) `none` → `reminder` (opened “Diwali”: reminder). Calendar · [event] · Diwali · All day · Holidays in India Note: subscribed holiday calendar, not his own event
+- **h-n273** (tricky, en) `email` → `none` (skip: email asks nothing). Gmail · [email] · Prof. Mehta · Re: Project extension request Note: Re: thread that quotes his own earlier mail
+- **h-n278** (everyday, en) `bill` → `none` (skip: not a loop). MyGate · Maintenance due · Society maintenance of ₹4,850 for November is due by 10 Nov. Pay on MyGate to avoid a late fee.
+- **h-n285** (tricky, en) `reply` → `none` (group chatter, not for you). Telegram · [msg] · ML Study Circle · Devansh: does your code handle the case where the batch is empty? Note: app flags a reply to his message as a mention; no name in text
+- **h-n299** (everyday, de) `email` → `none` (skip: email asks nothing). Gmail · [email] · Lena Hoffmann · Ihre Bewerbung – fehlende Unterlagen
+
+## Classifier names and amounts
+
+Each line: case id, difficulty and language; expected → got; what the case was.
+
+- **h-n199** (tricky, en) who “Kunal Joshi” → “Kunal Joshi via CS 2027”. Gmail · [email] · Kunal Joshi via CS 2027 · Lab slot clash – Pranav, Isha Note: mailing-list email that names him
+- **h-n237** (tricky, en) who “Vikram Singh” → “Google Pay”. Google Pay · Reminder: pay Vikram Singh · Vikram Singh's request for ₹1,099.50 expires today Note: reminder of an open request; paise
+
+## Urgency
+
+Each line: case id, difficulty and language; expected → got; what the case was.
+
+- **h-m014** (tricky, en) urgent: true → false. dude pick up. pick up. PICK UP Note: urgency without the word, call request as an order
+- **h-m017** (tricky, en) urgent: false → true. URGENT: which charger did u borrow, mine's missing lol no rush Note: says urgent but isn't
+- **h-m021** (tricky, en) urgent: true → false. im at the ER with dad. he collapsed at home. i cant think Note: distress with no explicit ask
+- **h-m035** (tricky, hinglish) urgent: false → true. urgent nahi hai but jab free ho toh ek baar call karna Note: says it is not urgent, still asks
+- **h-m049** (everyday, ta) urgent: true → false. உடனே கால் பண்ணு, அம்மா ஆஸ்பத்திரில இருக்காங்க
+- **h-m064** (everyday, en) urgent: true → false. my car broke down on the highway near lonavala and my phone is at 3%. can you come or send someone
+- **h-m066** (tricky, en) urgent: false → true. Forwarded many times URGENT NEWS: Petrol prices to rise by ₹10 from midnight tonight Note: forwarded rumour labelled urgent
+- **h-m073** (everyday, en) urgent: true → false. theres a guy following me rn, can u stay on call with me till i get home
+- **h-m084** (tricky, hinglish) urgent: false → true. urgent mein maggi bana raha tha aur gas khatam ho gaya 😭😂 Note: "urgent" in a joke
+- **h-m086** (everyday, hinglish) urgent: true → false. phone kyu nahi utha raha??? 5 baar call kiya
+- **h-m094** (tricky, hi) urgent: true → false. पापा का एक्सीडेंट हो गया है, हम अस्पताल में हैं Note: emergency news, no explicit ask
+- **h-m096** (tricky, hi) urgent: false → true. ज़रूरी नहीं है, पर समय मिले तो फ़ोन करना Note: says not urgent, still asks
+- **h-m103** (tricky, en) urgent: false → true. Urgent!! need ur netflix password before the episode drops 😂 Note: says urgent, only a joke
+- **h-m106** (everyday, en) urgent: true → false. Can you come to the hostel right now? Aditi fainted and we don't know what to do
+- **h-m111** (tricky, en) urgent: true → false. flight got cancelled, stuck at the airport, no hotels anywhere, i'm literally freaking out Note: distress with no explicit ask
+- **h-m116** (everyday, en) urgent: true → false. come downstairs fast the cab is leaving in 2 min
+- **h-m123** (tricky, en) urgent: true → false. is this still your number? its ananya. theres been a fire in our building and i need a place to stay tonight Note: starts like small talk, then an emergency
+- **h-m126** (everyday, hinglish) urgent: true → false. bhai abhi ke abhi call kar, mummy ro rahi hai
+- **h-m130** (tricky, hinglish) urgent: false → true. aaj prof ne urgent urgent bolke assignment diya aur khud hi leave pe chale gaye 🤡 Note: "urgent" in a story
+- **h-m147** (everyday, mr) urgent: true → false. लवकर घरी ये, आजोबा पडले आहेत
+- **h-m152** (tricky, en) urgent: false → true. where are you rn, want to grab chai? Note: "where are you" but casual, not urgent
+- **h-m154** (everyday, en) urgent: true → false. need u to come to the police station in andheri, they wont let me go without someone
+- **h-m155** (tricky, en) urgent: false → true. Not urgent!! just wanted to ask if you're coming sat Note: says not urgent, still asks
+- **h-m157** (tricky, en) urgent: true → false. 911 911 911 call me Note: slang for emergency
+- **h-m162** (tricky, en) urgent: true → false. i know ur in class but this cant wait. call me the second u see this Note: pressing without the word urgent
+- **h-m170** (tricky, en) urgent: false → true. omg URGENT update: the cat knocked over my coffee again 😾 Note: says urgent, only a joke
+- **h-m175** (everyday, en) urgent: true → false. The landlord is here and says he's changing the locks today unless we pay. Can you come home now?
+- **h-m180** (tricky, hinglish) urgent: true → false. nani nahi rahi 😭 Note: bad news and distress, no explicit ask
+- **h-m184** (everyday, hinglish) urgent: true → false. bhai location bhej abhi, gaadi kharab ho gayi hai highway pe
+- **h-m186** (tricky, hinglish) urgent: false → true. urgent wala kaam ho gaya, ab tension nahi 😌 Note: "urgent" for something already done
+- **h-m189** (everyday, hinglish) urgent: false → true. aaj office se jaldi nikal gaya, ghar pe hi hu
+- **h-m198** (everyday, bn) urgent: true → false. এক্ষুনি ফোন কর, বাবা পড়ে গেছে
+- **h-m214** (tricky, en) urgent: true → false. the doctor just said they need to operate on mom tonight Note: emergency news, no explicit ask
+- **h-m217** (everyday, en) urgent: true → false. pls pick up its about grandma
+- **h-m218** (tricky, en) urgent: false → true. URGENT 🚨🚨 zara sale is live, 70% off on everything Note: says urgent about a sale
+- **h-m224** (everyday, en) urgent: true → false. im lost on the trail near the fort, battery dying, sending location, please call the forest office
+- **h-m232** (everyday, hinglish) urgent: true → false. bhai sun mera phone band hone wala hai, mujhe dadar station se pick kar le please
+- **h-m233** (tricky, hinglish) urgent: false → true. Forwarded URGENT: kal se sab bank 5 din band rahenge 😱 Note: forwarded rumour labelled urgent
+- **h-m237** (tricky, hinglish) urgent: true → false. mummy ko chakkar aa gaya, doctor ke paas le ja rahe Note: emergency news, no explicit ask
+- **h-m239** (tricky, hinglish) urgent: false → true. urgent kuch nahi hai bas yaad dilana tha ki kal mummy ka birthday hai, cake order kar dena Note: "urgent" denied, request at the end
+- **h-m248** (everyday, gu) urgent: true → false. જલ્દી ફોન કર, પપ્પાની તબિયત બગડી છે
+- **h-m257** (tricky, en) urgent: false → true. Not urgent at all lol, just saw a dog that looks exactly like yours 🐶 Note: mentions urgency, asks nothing
+- **h-m262** (tricky, en) urgent: true → false. Someone just hit my scooter and drove off. I'm bleeding a bit, people are helping me Note: emergency news, no explicit ask
+- **h-m273** (everyday, en) urgent: false → true. On my way to the hospital for my shift, talk later
+- **h-m275** (tricky, en) urgent: false → true. Is it urgent? Nah. Is it important? Kinda. Read the doc I sent before tmrw's meeting Note: rhetorical questions, denies urgency, then a request
+- **h-m281** (everyday, hinglish) urgent: true → false. bhai mere result mein kuch gadbad hai, fail dikha raha hai, abhi call kar please
+- **h-m286** (tricky, hinglish) urgent: true → false. bhai flat mein aag lag gayi, sab bahar aa gaye hain Note: emergency news, no explicit ask
+- **h-m287** (tricky, hinglish) urgent: false → true. bhai tu kab free hoga, urgent nahi hai par important baat karni hai Note: says not urgent, still asks
+- **h-m295** (tricky, hi) urgent: false → true. जब फ़्री हो तब बात करना, कोई जल्दी नहीं Note: says no hurry, still asks
+- **h-m298** (everyday, es) urgent: true → false. contesta porfa!!! mi abuela está en urgencias
+- **h-m002** (everyday, en) asks: true → false. are u free thursday evening
+- **h-m006** (everyday, en) asks: true → false. did u eat
+- **h-m008** (everyday, en) asks: true → false. what time does the movie start
+- **h-m014** (tricky, en) asks: true → false. dude pick up. pick up. PICK UP Note: urgency without the word, call request as an order
+- **h-m016** (tricky, en) asks: false → true. she literally asked me "are you free this weekend?" and i just froze lol Note: the only question is quoted from someone else
+- **h-m017** (tricky, en) asks: true → false. URGENT: which charger did u borrow, mine's missing lol no rush Note: says urgent but isn't
+- **h-m018** (tricky, en) asks: true → false. ok but what time Note: starts like an ack but asks
+- **h-m026** (everyday, hinglish) asks: true → false. bhai kal ka plan kya hai
+- **h-m032** (everyday, hinglish) asks: true → false. kitne baje aa raha hai
+- **h-m035** (tricky, hinglish) asks: true → false. urgent nahi hai but jab free ho toh ek baar call karna Note: says it is not urgent, still asks
+- **h-m038** (tricky, hinglish) asks: false → true. teacher ne pucha "homework kahan hai?" maine bola kutta kha gaya 😂😂 Note: quoted question, not to him
+- **h-m043** (everyday, hi) asks: true → false. जल्दी घर आओ, दादी की तबीयत बहुत खराब है
+- **h-m045** (tricky, hi) asks: true → false. वो फाइल मुझे शाम तक भेज देना Note: request as an instruction, no question mark
+- **h-m049** (everyday, ta) asks: true → false. உடனே கால் பண்ணு, அம்மா ஆஸ்பத்திரில இருக்காங்க
+- **h-m050** (tricky, es) asks: true → false. oye mándame la foto del grupo cuando puedas Note: request without a question mark
+- **h-m051** (everyday, en) asks: true → false. hey did u submit the assignment yet
+- **h-m055** (everyday, en) asks: true → false. Pranav where r u, mom's been trying to reach you for an hour, call home NOW
+- **h-m057** (everyday, en) asks: true → false. whats ur address again, ordering u something 👀
+- **h-m059** (everyday, en) asks: true → false. 📷 which one should i wear tonight 1 or 2
+- **h-m065** (tricky, en) asks: true → false. thanks!! also do u still have the calc textbook Note: starts with thanks but asks
+- **h-m067** (tricky, en) asks: true → false. you coming or not Note: question without a question mark
+- **h-m068** (tricky, en) asks: false → true. who even schedules an exam on a saturday?? like seriously Note: rhetorical question
+- **h-m070** (everyday, en) asks: true → false. what did prof say about the deadline
+- **h-m075** (tricky, en) asks: false → true. lmao the prof asked "any questions?" and nobody said anything for 5 whole minutes Note: quoted question, not to him
+- **h-m079** (everyday, hinglish) asks: true → false. bhai jaldi aa hostel, rohit ka accident ho gaya
+- **h-m081** (everyday, hinglish) asks: true → false. ghar kab aa raha hai beta
+- **h-m088** (tricky, hinglish) asks: true → false. acha thanks, aur haan kal 10 baje tak aa jana Note: thanks first, then a request
+- **h-m095** (everyday, hi) asks: true → false. शाम को सब्ज़ी लेते आना
+- **h-m096** (tricky, hi) asks: true → false. ज़रूरी नहीं है, पर समय मिले तो फ़ोन करना Note: says not urgent, still asks
+- **h-m099** (everyday, fr) asks: true → false. Réponds-moi stp, c'est grave, Léa a eu un accident
+- **h-m100** (everyday, pt) asks: true → false. me manda o link da aula de hoje
+- **h-m101** (tricky, en) asks: true → false. PRANAV. ANSWER YOUR PHONE. Note: all caps, no urgent word
+- **h-m102** (everyday, en) asks: true → false. r u done with the lab report
+- **h-m103** (tricky, en) asks: true → false. Urgent!! need ur netflix password before the episode drops 😂 Note: says urgent, only a joke
+- **h-m105** (tricky, en) asks: false → true. my mom keeps asking "did you eat?" every 10 mins lol i'm 22 Note: quoted question, not to him
+- **h-m115** (tricky, en) asks: true → false. Missed you at the party! When are we catching up Note: question without a question mark after an exclamation
+- **h-m116** (everyday, en) asks: true → false. come downstairs fast the cab is leaving in 2 min
+- **h-m118** (tricky, en) asks: true → false. k but did u book the tickets or not Note: starts like an ack but asks
+- **h-m122** (tricky, en) asks: true → false. Happy birthday!! 🎂 party tonight or what Note: birthday wish that also asks
+- **h-m124** (everyday, en) asks: true → false. what's the plan for diwali
+- **h-m134** (everyday, hinglish) asks: true → false. aaj shaam ko free hai kya
+- **h-m137** (tricky, hinglish) asks: true → false. dekh le ek baar bas Note: short instruction, no question
+- **h-m138** (everyday, hinglish) asks: true → false. jaldi neeche aa, ambulance aa gayi hai dadaji ke liye
+- **h-m140** (tricky, hinglish) asks: false → true. usne mujhse pucha "tu pranav ko jaanta hai?" maine bola haan obviously Note: quoted question that names him
+- **h-m143** (everyday, hi) asks: true → false. तुरंत अस्पताल आ जाओ, नानी को ICU में ले गए हैं
+- **h-m145** (tricky, hi) asks: true → false. मम्मी पूछ रही थीं कि तुम दिवाली पर आओगे या नहीं Note: reported question that is meant for him
+- **h-m146** (everyday, hi) asks: true → false. रात को खाने पर आ जाना
+- **h-m147** (everyday, mr) asks: true → false. लवकर घरी ये, आजोबा पडले आहेत
+- **h-m155** (tricky, en) asks: true → false. Not urgent!! just wanted to ask if you're coming sat Note: says not urgent, still asks
+- **h-m156** (everyday, en) asks: true → false. can i borrow ur bike for an hour
+- **h-m163** (everyday, en) asks: true → false. what r u wearing to the wedding
+- **h-m164** (tricky, en) asks: false → true. sorry long msg but i need to rant. my flatmate ate my food again, didnt clean the kitchen again, and then had the audacity to complain that im too loud on calls. like?? im so done. anyway dont worry about it lol Note: long rant; its "like??" is not a question to him
+- **h-m168** (tricky, en) asks: true → false. you have the keys right Note: question shaped as a statement
+- **h-m172** (tricky, en) asks: false → true. Reacted 👍 to "can you send it by 5?" Note: reaction quoting his own question
+- **h-m174** (tricky, en) asks: true → false. Mom says call her Note: relayed request
+- **h-m179** (everyday, hinglish) asks: true → false. kal 7 baje station pe milna, late mat hona
+- **h-m182** (tricky, hinglish) asks: false → true. maine use bola "kya tu pagal hai?" aur woh hasne laga 😂 Note: quoted question, not to him
+- **h-m185** (everyday, hinglish) asks: true → false. mujhe bhi le chal na kal
+- **h-m190** (tricky, hinglish) asks: true → false. PRANAV PHONE UTHA Note: all caps order, no question
+- **h-m192** (everyday, hi) asks: true → false. घर में पानी भर गया है, जल्दी आकर सामान ऊपर रखने में मदद करो
+- **h-m194** (tricky, hi) asks: false → true. उसने पूछा "तुम्हारा नाम क्या है?" और मैं अपना ही नाम भूल गया 😂 Note: quoted question, not to him
+- **h-m198** (everyday, bn) asks: true → false. এক্ষুনি ফোন কর, বাবা পড়ে গেছে
+- **h-m200** (tricky, fr) asks: false → true. Le prof m'a demandé « vous avez lu le chapitre ? » et j'ai menti mdr Note: quoted question, not to him
+- **h-m201** (tricky, en) asks: true → false. u up Note: two-word question, no question mark
+- **h-m205** (everyday, en) asks: true → false. remind me the name of that cafe we went to last week
+- **h-m207** (tricky, en) asks: true → false. lemme know Note: two-word request
+- **h-m219** (everyday, en) asks: true → false. what time's ur flight
+- **h-m221** (tricky, en) asks: true → false. I need the 2000 back by friday, rent's due Note: statement of need that asks for money back
+- **h-m223** (everyday, en) asks: true → false. how'd the interview go
+- **h-m226** (everyday, hinglish) asks: true → false. jaldi ghar aa, lagta hai gas leak ho raha hai
+- **h-m234** (everyday, hinglish) asks: true → false. beta kitne baje aayega dinner pe
+- **h-m238** (everyday, hinglish) asks: true → false. kya scene hai aaj raat ka
+- **h-m241** (everyday, hi) asks: true → false. फ़ोन उठाओ, बहुत ज़रूरी बात है
+- **h-m243** (everyday, hi) asks: true → false. आते वक़्त दूध और ब्रेड ले आना
+- **h-m244** (tricky, hi) asks: false → true. कौन इतनी गर्मी में शादी रखता है? 🥵 Note: rhetorical question
+- **h-m248** (everyday, gu) asks: true → false. જલ્દી ફોન કર, પપ્પાની તબિયત બગડી છે
+- **h-m249** (tricky, de) asks: true → false. Kannst du mir kurz Bescheid geben, ob du Samstag kommst Note: question without a question mark
+- **h-m250** (tricky, pt) asks: false → true. Minha mãe perguntou "você vai casar quando?" de novo kkkkk Note: quoted question, not to him
+- **h-m263** (everyday, en) asks: true → false. what's ur size, getting matching tshirts for the trip
+- **h-m264** (everyday, en) asks: true → false. ping me when ur free
+- **h-m270** (tricky, en) asks: false → true. so i asked him "do you even like me?" and he said "idk" 😭😭 Note: quoted question, not to him
+- **h-m272** (tricky, en) asks: true → false. Your turn to book the court this week 🏸 Note: statement that means he must act
+- **h-m277** (everyday, hinglish) asks: true → false. jaldi se ghar aa, police aayi hai
+- **h-m279** (tricky, hinglish) asks: true → false. sun na, ek kaam hai tujhse Note: announces a request
+- **h-m280** (tricky, hinglish) asks: true → false. yaar aaj ka din itna bekaar tha, subah alarm nahi baja, phir auto wale ne 200 maange, office mein boss ne daanta aur ab ghar aake dekha toh light nahi hai 😩 tu free hai toh shaam ko chai pe chal Note: long vent ending in an invitation
+- **h-m284** (tricky, hinglish) asks: true → false. arey koi baat nahi, bas kal tak de dena Note: starts like an ack but asks
+- **h-m287** (tricky, hinglish) asks: true → false. bhai tu kab free hoga, urgent nahi hai par important baat karni hai Note: says not urgent, still asks
+- **h-m288** (tricky, hinglish) asks: true → false. mummy pooch rahi hai tu kab aayega Note: relayed question meant for him
+- **h-m291** (everyday, hi) asks: true → false. भैया जल्दी आओ, मम्मी बेहोश हो गई हैं
+- **h-m293** (tricky, hi) asks: false → true. मैंने उससे पूछा "चाय पियोगे?" और वो भाग गया 😂 Note: quoted question, not to him
+- **h-m295** (tricky, hi) asks: true → false. जब फ़्री हो तब बात करना, कोई जल्दी नहीं Note: says no hurry, still asks
+- **h-m298** (everyday, es) asks: true → false. contesta porfa!!! mi abuela está en urgencias
+- **h-m300** (tricky, mr) asks: true → false. उद्या येताना माझं पुस्तक घेऊन ये Note: request as an instruction
+- **h-m005** (everyday, en) ack: true → false. thanks man!!
+- **h-m012** (everyday, en) ack: true → false. Liked "see you at 7"
+- **h-m034** (everyday, hinglish) ack: true → false. hahaha sahi hai
+- **h-m039** (everyday, hinglish) ack: true → false. chal thik hai kal milte
+- **h-m042** (everyday, hi) ack: true → false. ठीक है
+- **h-m046** (everyday, hi) ack: true → false. धन्यवाद बेटा 🙏
+- **h-m048** (everyday, gu) ack: true → false. સારું, આભાર
+- **h-m058** (everyday, en) ack: true → false. Loved "happy birthday!! 🎂"
+- **h-m077** (everyday, hinglish) ack: true → false. ok bhai
+- **h-m082** (everyday, hinglish) ack: true → false. hahaha bhai 😂😂😂
+- **h-m092** (everyday, hi) ack: true → false. 👍🏻 ठीक है बेटा
+- **h-m098** (everyday, ar) ack: true → false. تمام، شكراً
+- **h-m108** (everyday, en) ack: true → false. Laughed at "i swear the dog ate it"
+- **h-m113** (everyday, en) ack: true → false. thank u so much, means a lot 🥹
+- **h-m132** (everyday, hinglish) ack: true → false. haha pagal hai tu
+- **h-m139** (everyday, hinglish) ack: true → false. chal koi na
+- **h-m142** (everyday, hi) ack: true → false. हाहा 😂
+- **h-m149** (everyday, de) ack: true → false. Haha ok, alles klar 👍
+- **h-m153** (everyday, en) ack: true → false. Okay thank youuu
+- **h-m161** (everyday, en) ack: true → false. Liked an image
+- **h-m172** (tricky, en) ack: true → false. Reacted 👍 to "can you send it by 5?" Note: reaction quoting his own question
+- **h-m183** (everyday, hinglish) ack: true → false. sahi hai bhai 👌
+- **h-m191** (everyday, hi) ack: true → false. ओके 👌
+- **h-m206** (everyday, en) ack: true → false. Emphasized "I passed!!!"
+- **h-m228** (everyday, hinglish) ack: true → false. thik hai bhai, thanks
+- **h-m230** (everyday, hinglish) ack: true → false. Liked "kal 8 baje pakka"
+- **h-m236** (everyday, hinglish) ack: true → false. 😂😂 sahi
+- **h-m242** (everyday, hi) ack: true → false. हाँ ठीक है
+- **h-m246** (everyday, hi) ack: true → false. हाहाहा सही है 😂
+- **h-m259** (everyday, en) ack: true → false. thanks for the help today man, really appreciate it 🙏
+- **h-m278** (everyday, hinglish) ack: true → false. okk bhai done
+- **h-m283** (everyday, hinglish) ack: true → false. arey koi baat nahi
+- **h-m294** (everyday, hi) ack: true → false. बहुत अच्छा बेटा, खुश रहो
+- **h-m297** (everyday, ta) ack: true → false. சரி, நன்றி 🙏
+
+## MoneyParser
+
+Each line: case id, difficulty and language; expected → got; what the case was.
+
+- **h-a005** (everyday, en) INR 125000.0 → ₹1.00. INR 1,25,000.00 credited to a/c XX9087 by NEFT-ACME TECH PAYROLL
+- **h-a018** (everyday, en) INR 2340.0 → ₹234.00. Electricity bill Amt Rs 2340.00 due by 30-Oct-2026
+- **h-a031** (everyday, hinglish) INR 2000.0 → no amount. mummy ne bola 2000 rupaye bhej dena kal
+- **h-a041** (tricky, hinglish) INR 300.0 → no amount. bhai 300 bhej de kal ka auto ka Note: bare number, rupees implied
+- **h-a042** (tricky, en) INR 1000000.0 → ₹10.00. Congrats! Rs 10,00,000 loan sanctioned. First EMI Rs 9,120 Note: Indian lakh grouping, two amounts
+- **h-a043** (tricky, en) INR 2400.0 → ₹240.00. Dinner was ₹2400 total, so ₹600 each Note: first of two amounts
+- **h-a046** (tricky, hinglish) INR 150000.0 → no amount. 1.5 lakh ka laptop le liya usne 😳 Note: lakh in words
+- **h-a047** (tricky, en) INR 2000.0 → no amount. ok send 2k for the trip Note: k suffix, no currency
+- **h-a051** (tricky, en) USD 100.0 → no amount. 100 USD = 8,412.50 INR today Note: code after the number, two currencies
+- **h-a052** (tricky, en) INR 1250.0 → no amount. Paid 1,250/- for the cab Note: /- suffix means rupees
+- **h-a053** (tricky, hi) INR 500.0 → no amount. मुझे पाँच सौ रुपये चाहिए कल तक Note: amount in Hindi words
+- **h-a054** (tricky, hi) INR 1250.0 → no amount. ₹१,२५० का बिल आया है Note: Devanagari digits
+- **h-a057** (tricky, en) USD 15.0 → no amount. Sent you 15 dollars on Venmo for the movie Note: currency in words
+- **h-a058** (tricky, de) EUR 49.99 → no amount. Ihre Zahlung von 49,99 € wurde bestätigt Note: decimal comma, symbol after
+- **h-a059** (tricky, fr) EUR 20.0 → no amount. Tu me dois 20 € pour le resto Note: symbol after with a space
+- **h-a060** (tricky, es) EUR 35.0 → no amount. Te mando los 35€ mañana Note: symbol glued after the number
+- **h-a061** (tricky, en) GBP 1000.0 → no amount. Faster Payment: GBP1000.00 received from J SMITH ref 448812 Note: code glued to number, reference after
+- **h-a062** (tricky, hinglish) INR 500.0 → no amount. 500 rs bhej de yaar, kal lauta dunga Note: "rs" after the number
+- **h-a064** (tricky, en) INR 2500.0 → ₹250.00. Amount: INR2500.00 Note: code glued to number, no grouping
+- **h-a067** (tricky, hinglish) INR 200.0 → no amount. kal 5 baje milte hai, 200 ka recharge karwa dena mera Note: time number before the amount
+- **h-a070** (tricky, hinglish) INR 2.0E7 → no amount. 2 crore ka flat hai bhai, EMI hi 1.5 lakh mahina Note: crore in words, two amounts
+- **h-a072** (tricky, en) INR 1000000.0 → ₹10.00. Win up to ₹10 lakh in our Diwali contest! Note: symbol plus lakh
+- **h-a073** (tricky, mr) INR 500.0 → no amount. मला ५०० रुपये पाठव ना Note: Marathi, Devanagari digits
+- **h-a074** (tricky, gu) INR 200.0 → no amount. મને ₹૨૦૦ મોકલ Note: Gujarati digits
+- **h-a076** (tricky, ar) USD 200.0 → no amount. حولتلك 200 دولار Note: currency in Arabic words
+- **h-a077** (tricky, pt) EUR 30.0 → no amount. Paguei 30 euros pelo jantar Note: currency word after the number
+- **h-a079** (tricky, en) INR 120000.0 → ₹1.20. Pre-approved loan of Rs 1.2L ready for you Note: L for lakh
+
+## Guess at unlock
+
+Each line: case id, difficulty and language; expected → got; what the case was.
+
+- **h-g002** (everyday, en) `a` → `none`; a, 25 min: Phone · [missed_call] · Missed call · Mom | b, 10 min: YouTube · [recommendation] · Kurzgesagt – In a Nutshell · New video: What happens if you fall into a black hole?. unlock: no chip, best call:com.samsung.android.dialer|Missed call scored 0.69 (recent 0.43 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g005** (everyday, en) `a` → `none`; a, 180 min: Messages · [msg] · AX-AIRTEL · Dear Customer, your Airtel Postpaid bill of Rs.799.00 for 98XXXXXX21 is due on 29-Oct-26. Pay now via Airtel Thanks app: https://i.airtel.in/pay to avoid late fee. | b, 2 min: Spotify · [transport] · Kesariya · Arijit Singh · Brahmastra | c, 20 min: Flipkart · [promo] · Big Diwali Sale is LIVE 🪔 · Up to 80% off on electronics. Ends tonight!. unlock: no chip, best payment:com.google.android.apps.messaging|AX-AIRTEL scored 0.54 (recent 0.00 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g008** (everyday, hinglish) `a` → `none`; a, 70 min: WhatsApp · [msg] · Mom · Free ho toh call karna, Diwali ki shopping ka discuss karna hai | b, 30 min: WhatsApp · [msg] · Savla Parivar 🙏 · Hetal Masi: 🙏🙏. unlock: no chip, best reply:com.whatsapp|Mom scored 0.57 (recent 0.10 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g009** (everyday, en) `a` → `none`; a, 45 min: Gmail · [email] · Prof. Anjali Mehta · Re: Thesis draft – chapter 3 | b, 20 min: Gmail · [email] · Medium Daily Digest · How I built a second brain in Notion. unlock: no chip, best email:com.google.android.gm|Prof. Anjali Mehta scored 0.62 (recent 0.22 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g010** (everyday, hi) `a` → `none`; a, 120 min: WhatsApp · [msg] · Dadi · टिकट हो गई हो तो बता देना, पापा लेने आएंगे | b, 15 min: Paytm · [promo] · ₹100 cashback is waiting! 🎁 · Pay your electricity bill with Paytm UPI and win up to ₹100 cashback.. unlock: no chip, best reply:com.whatsapp|Dadi scored 0.54 (recent 0.02 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g012** (tricky, en) `b` → `a` “Here to reply to Kabir?”; a, 2 min: WhatsApp · [msg] · Kabir · lol | b, 50 min: Phone · [missed_call] · Missed call · Papa · Papa: Missed call. unlock: chip for reply:com.whatsapp|Kabir, score 0.80 (recent 0.94 · who 0.50 from new · due 0.50 · history 0.50 · boost 0.15) of 2 open Note: fresh laughter vs an older missed call from Papa
+- **h-g013** (everyday, hinglish) `a` → `none`; a, 30 min: WhatsApp · [msg] · Flat 4B 🏠 · Siddharth: @Pranav is mahine ka bijli bill tera turn hai, ₹2,340. Kal last date hai, aaj pay kar dena pls | b, 12 min: Swiggy · [promo] · Groceries in 10 minutes ⚡ · Instamart: fresh fruits & veggies at up to 40% off. unlock: no chip, best reply:com.whatsapp|Flat 4B 🏠 scored 0.64 (recent 0.37 · who 0.40 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g014** (everyday, hinglish) `a` → `none`; a, 240 min: PhonePe · Payment request from Rohan Shah · ₹1,250 · Goa wala petrol ka hissa · Pay now | b, 30 min: Rapido · [promo] · Beat the traffic 🏍️ · Bike taxi rides starting at ₹29. Book now!. unlock: no chip, no open loops
+- **h-g018** (everyday, hinglish) `a` → `none`; a, 55 min: Messages · [msg] · Bhaiya · Bata de, lene aa jaunga | b, 100 min: Ola · Thanks for riding with Ola · Ride receipt: ₹214 paid via UPI. Rate your driver Suresh.. unlock: no chip, best reply:com.google.android.apps.messaging|Bhaiya scored 0.59 (recent 0.16 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g021** (tricky, hi) `a` → `b` “Here to reply to Kunal?”; a, 40 min: WhatsApp · [msg] · Chacha · जल्दी फ़ोन करो | b, 1 min: WhatsApp · [msg] · Kunal · bro match dekh raha? 😂. unlock: chip for reply:com.whatsapp|Kunal, score 0.88 (recent 0.97 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15) of 2 open Note: urgent Hindi message older than a fresh casual one
+- **h-g024** (tricky, en) `a` → `none`; a, 360 min: Messages · [msg] · VM-HDFCBK · Payment of Rs.12,430.00 is due on HDFC Bank Credit Card ending 4521 on 28-OCT-26. Minimum amount due Rs.620.00. Pay now: hdfcbk.io/cc. Ignore if paid. | b, 3 min: WhatsApp · [msg] · Varun · hahaha 😂 | c, 9 min: WhatsApp · [msg] · Football 5s ⚽ · Arnav: 🔥🔥. unlock: no chip, no open loops Note: 6-hour-old card bill due tomorrow vs fresh laughter and group chatter
+- **h-g026** (everyday, hinglish) `a` → `none`; a, 25 min: WhatsApp · [msg] · Karan TA · tune upload kiya? tera naam list mein nahi dikh raha | b, 60 min: YouTube · [recommendation] · Kurzgesagt – In a Nutshell · New video: What happens if you fall into a black hole?. unlock: no chip, best reply:com.whatsapp|Karan TA scored 0.69 (recent 0.43 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g028** (everyday, en) `b or c` → `none`; a, 25 min: WhatsApp · [msg] · Savla Parivar 🙏 · Hetal Masi: Good morning 🌞 Jai Jinendra 🙏 | b, 60 min: Tasks · [reminder] · Pay hostel fees – last day · ₹42,500 via ERP portal before 5 PM | c, 430 min: Phone · [missed_call] · Missed call · Arjun | d, 432 min: WhatsApp · [msg] · Arjun · you up?. unlock: no chip, best reminder:com.google.android.apps.tasks|k-h-g028-b scored 0.65 (recent 0.14 · who 0.50 from new · due 1.00 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g029** (tricky, en) `none` → `a` “Here to reply to +91 73849 22106?”; a, 12 min: Messages · [msg] · +91 73849 22106 · Dear Customer, your SBI YONO account will be BLOCKED today. Update your PAN immediately: http://sbi-yono-kyc.in/upd | b, 30 min: Instagram · [social] · Instagram · Suggested for you: see new reels from mumbaifoodie. unlock: chip for reply:com.google.android.apps.messaging|+91 73849 22106, score 0.83 (recent 0.67 · who 0.50 from new · due 1.00 · history 0.50 · boost 0.15) of 1 open Note: KYC scam text from a mobile number
+- **h-g030** (tricky, hinglish) `a` → `none`; a, 20 min: WhatsApp · [msg] · College Gang 🤙 · Mehul: Pranav tu aa raha hai na? confirm kar, gaadi book karni hai | b, 2 min: WhatsApp · [msg] · Sid · 👍. unlock: no chip, best reply:com.whatsapp|College Gang 🤙 scored 0.69 (recent 0.51 · who 0.40 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7 Note: group names him in the text without a mention flag; fresh 👍
+- **h-g031** (everyday, en) `a` → `none`; a, 300 min: Venmo · Jake Miller requests $24.00 · 🍕 pizza night | b, 1 min: Spotify · [transport] · Blinding Lights · The Weeknd · After Hours. unlock: no chip, best payment:com.venmo|k-h-g031-a scored 0.60 (recent 0.00 · who 0.50 from new · due 1.00 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g032** (everyday, en) `b` → `none`; a, 30 min: Gmail · [email] · Coursera · Pranav, ready to finish your course? | b, 50 min: Gmail · [email] · Rhea Fernandes · Volunteers for Saturday's blood donation camp | c, 80 min: Outlook · [email] · IEEE Spectrum · This week: chips that think in analog. unlock: no chip, best email:com.google.android.gm|Coursera scored 0.67 (recent 0.37 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g034** (tricky, mr) `a` → `none`; a, 35 min: WhatsApp · [msg] · Aai · लवकर फोन कर. | b, 2 min: WhatsApp · [msg] · CSE 2027 🎓 · Simran: anyone has the OS notes? | c, 1 min: Instagram · [social] · Instagram · arnav.d liked your comment: "this is so true 😭". unlock: no chip, best reply:com.whatsapp|Aai scored 0.58 (recent 0.31 · who 0.50 from new · due 0.50 · history 0.50 · boost 0.15), needs > 0.7 Note: urgent Marathi message older than fresh chatter
+- **h-g039** (everyday, hi) `a` → `none`; a, 200 min: Messages · [msg] · Papa · शाम तक बिजली का बिल भर देना, आज आखिरी तारीख है। | b, 30 min: Messages · [msg] · VM-HDFCBK · OTP is 771204 for txn of INR 349.00 at SWIGGY on HDFC Bank card ending 4521. Valid till 18:05. Do not share OTP for security reasons.. unlock: no chip, best reply:com.google.android.apps.messaging|Papa scored 0.48 (recent 0.00 · who 0.50 from new · due 0.50 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g043** (everyday, en) `a` → `none`; a, 50 min: Paytm · Kunal Mehta has requested ₹180 · For: auto to Andheri · Tap to pay | b, 70 min: Rapido · Ride completed · You paid ₹62 for your ride with Sunil. Rate your ride.. unlock: no chip, best payment:net.one97.paytm|k-h-g043-a scored 0.67 (recent 0.19 · who 0.50 from new · due 1.00 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g044** (everyday, ta) `a` → `none`; a, 30 min: WhatsApp · [msg] · Karthik · உன் part முடிச்சியா? reply பண்ணு | b, 15 min: Swiggy · [promo] · Hungry, Pranav? 🍕 · Flat 60% off on pizzas till 4 PM. Order now!. unlock: no chip, best reply:com.whatsapp|Karthik scored 0.67 (recent 0.37 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g045** (tricky, en) `b` → `none`; a, 60 min: Messages · [msg] · VM-HDFCBK · HDFC Bank Credit Card XX4521 statement for Oct-26: Total Amount Due Rs.0.00. No payment is required. Thank you for banking with us. | b, 240 min: Messages · [msg] · AD-ICICIT · ICICI Bank Credit Card XX7712: Total amount due INR 6,212.40, minimum due INR 310.00, payment due by 30-Oct-26. Pay via iMobile Pay to avoid late charges. | c, 30 min: Amazon Shopping · Delivered · Your package was left at the front door.. unlock: no chip, best payment:com.google.android.apps.messaging|VM-HDFCBK scored 0.58 (recent 0.14 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7 Note: one card statement owes nothing, the other is due
+- **h-g046** (everyday, en) `a` → `none`; a, 300 min: Messages · [msg] · VM-LICIND · Dear Customer, premium of Rs.8,450/- for Policy No.9123XXXX is due on 02/11/2026. Pay online at licindia.in or via LIC Pay Direct. | b, 10 min: WhatsApp · [msg] · Dhruv · ok. unlock: no chip, best payment:com.google.android.apps.messaging|VM-LICIND scored 0.54 (recent 0.00 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g047** (everyday, hinglish) `a` → `b` “Here to reply to Tech News India?”; a, 14 min: Telegram · [msg] · Dev Patel · 4 baje se pehle chahiye, model train karna hai | b, 5 min: Telegram · [msg] · Tech News India · Apple confirms iPhone 18 exports from its Bengaluru plant. unlock: chip for reply:org.telegram.messenger|Tech News India, score 0.77 (recent 0.85 · who 0.50 from new · due 0.50 · history 0.50 · boost 0.15) of 2 open
+- **h-g048** (everyday, gu) `a` → `none`; a, 110 min: WhatsApp · [msg] · Masi · ટિકિટ બુક કરવી છે, જલ્દી કહેજે. | b, 40 min: Flipkart · [promo] · Big Diwali Sale is LIVE 🪔 · Up to 80% off on electronics. Ends tonight!. unlock: no chip, best reply:com.whatsapp|Masi scored 0.55 (recent 0.03 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g052** (tricky, hinglish) `b` → `a` “Here to call +91 140 456 7890 back?”; a, 2 min: Phone · [missed_call] · Missed call · Suspected spam caller · +91 140 456 7890 · +91 140 456 7890: Missed call | b, 40 min: WhatsApp · [msg] · Mom · Bata jaldi, Papa ko bolna hai. unlock: chip for call:com.google.android.dialer|+91 140 456 7890, score 0.86 (recent 0.94 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15) of 2 open Note: fresh spam missed call vs an older family question
+- **h-g053** (tricky, hi) `a` → `none`; a, 45 min: WhatsApp · [msg] · परिवार ❤️ · Chacha: प्रणव, तुम छोड़ने जाओगे एयरपोर्ट? बता दो | b, 2 min: WhatsApp · [msg] · Varun · ok. unlock: no chip, no open loops Note: family group names him in Devanagari; fresh 'ok'
+- **h-g055** (tricky, es) `a` → `b` “Here to reply to Rahul?”; a, 70 min: WhatsApp · [msg] · Lucía · Es urgente, perdí mi pasaporte en el aeropuerto 😰 | b, 3 min: WhatsApp · [msg] · Rahul · sup. unlock: chip for reply:com.whatsapp|Rahul, score 0.79 (recent 0.90 · who 0.50 from new · due 0.50 · history 0.50 · boost 0.15) of 2 open Note: urgent Spanish message older than a fresh 'sup'
+- **h-g056** (everyday, en) `a` → `none`; a, 40 min: Gmail · [email] · Meghna Iyer · Interview slot – please confirm by 6 PM | b, 10 min: Gmail · [email] · LinkedIn · Pranav, 12 new jobs for you. unlock: no chip, best email:com.google.android.gm|Meghna Iyer scored 0.69 (recent 0.26 · who 0.50 from new · due 1.00 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g057** (everyday, hinglish) `a` → `none`; a, 100 min: Messages · [msg] · Society Secretary · Kab tak de doge? Bata dena. | b, 20 min: Zomato · [promo] · Craving biryani? 🍛 · Get 50% off up to ₹100 on your next order. Use code TRYNEW. unlock: no chip, best reply:com.google.android.apps.messaging|Society Secretary scored 0.55 (recent 0.04 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g059** (tricky, hinglish) `b` → `a` “Here to reply to Kabir?”; a, 1 min: WhatsApp · [msg] · Kabir · bhai ye reel dekh 😂😂 instagram.com/reel/C9xk2Lp | b, 180 min: Google Pay · Mihir Joshi requested ₹2,400 · PVR + khana, tera share · Tap to pay. unlock: chip for reply:com.whatsapp|Kabir, score 0.81 (recent 0.97 · who 0.50 from new · due 0.50 · history 0.50 · boost 0.15) of 2 open Note: fresh meme vs a 3-hour-old payment request
+- **h-g061** (everyday, hi) `a or b` → `none`; a, 400 min: Phone · [missed_call] · Missed call · Papa | b, 395 min: WhatsApp · [msg] · Papa · उठते ही फ़ोन करना, ज़रूरी बात है। | c, 5 min: Swiggy · [promo] · Breakfast is served ☕ · Poha, upma & more from ₹49. Order now! | d, 20 min: WhatsApp · [msg] · Savla Parivar 🙏 · Bhavesh Kaka: Good morning 🌞🙏. unlock: no chip, best reply:com.whatsapp|Papa scored 0.60 (recent 0.00 · who 0.50 from new · due 1.00 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g062** (everyday, en) `a` → `none`; a, 50 min: Outlook · [email] · Prof. S. Kulkarni · Re: Lab extension request | b, 30 min: Outlook · [email] · University Notices · Central library closed on 31 Oct. unlock: no chip, best email:com.microsoft.office.outlook|University Notices scored 0.67 (recent 0.37 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g063** (tricky, hinglish) `b or a` → `none`; a, 60 min: WhatsApp · [msg] · Goa Trip 2026 🌴 · Riya: @Pranav tera share ₹4,200 hai, aaj GPay kar de pls | b, 59 min: Google Pay · Riya Desai requested ₹4,200 · Goa trip share 🌴 · Tap to pay. unlock: no chip, best payment:com.google.android.apps.nbu.paisa.user|k-h-g063-b scored 0.65 (recent 0.14 · who 0.50 from new · due 1.00 · history 0.50 · boost 0.15), needs > 0.7 Note: same debt as a group mention and an app request
+- **h-g064** (everyday, en) `a` → `none`; a, 130 min: WhatsApp · [msg] · Mr. Desai (Landlord) · Also the plumber is coming Thursday 11 AM, will someone be home? | b, 20 min: Instagram · [social] · Instagram · kabir.sethi and 3 others liked your post.. unlock: no chip, best reply:com.whatsapp|Mr. Desai (Landlord) scored 0.60 (recent 0.01 · who 0.50 from new · due 1.00 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g065** (everyday, hi) `a` → `none`; a, 80 min: WhatsApp · [msg] · Mama · प्रणव, शाम को फ़ोन करना। ज़रूरी बात करनी है। | b, 15 min: YouTube · [recommendation] · Kurzgesagt – In a Nutshell · New video: What happens if you fall into a black hole?. unlock: no chip, best reply:com.whatsapp|Mama scored 0.62 (recent 0.07 · who 0.50 from new · due 1.00 · history 0.50 · boost 0.15), needs > 0.7
+- **h-g067** (tricky, en) `b` → `none`; a, 3 min: Messages · [msg] · JM-BAJAJF · Hi Pranav! You're pre-approved for a personal loan of Rs.2,00,000 at 10.99%. Reply YES to get a call back. T&C apply. | b, 40 min: Messages · [msg] · Arjun · text me once you're back, it's pouring here. unlock: no chip, best reply:com.google.android.apps.messaging|Arjun scored 0.63 (recent 0.26 · who 0.50 from new · due 0.75 · history 0.50 · boost 0.15), needs > 0.7 Note: business text uses his name and asks for a reply
+- **h-g070** (tricky, hi) `none` → `a` “Here to reply to +91 87654 32109?”; a, 25 min: Messages · [msg] · +91 87654 32109 · प्रिय उपभोक्ता, आपका बिजली कनेक्शन आज रात 9:30 बजे काट दिया जाएगा क्योंकि पिछले महीने का बिल अपडेट नहीं है। तुरंत बिजली अधिकारी से संपर्क करें 9876543210 | b, 50 min: Paytm · [promo] · ₹100 cashback is waiting! 🎁 · Pay your electricity bill with Paytm UPI and win up to ₹100 cashback.. unlock: chip for reply:com.google.android.apps.messaging|+91 87654 32109, score 0.75 (recent 0.43 · who 0.50 from new · due 1.00 · history 0.50 · boost 0.15) of 1 open Note: Hindi electricity-cut scam from a mobile number
+
+## Reply strip
+
+Each line: case id, difficulty and language; where nothing on the strip makes sense; what the case was.
+
+- **h-m017** (tricky, en) “Haha” / “Hahaha” / “😟”. URGENT: which charger did u borrow, mine's missing lol no rush Note: says urgent but isn't
+- **h-m021** (tricky, en) “😟” / “😞” / “Okay”. im at the ER with dad. he collapsed at home. i cant think Note: distress with no explicit ask
+- **h-m024** (everyday, en) “Okay” / “Yes” / “I did”. remind me what we decided for the presentation slides?
+- **h-m026** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. bhai kal ka plan kya hai
+- **h-m032** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. kitne baje aa raha hai
+- **h-m038** (tricky, hinglish) “Yes” / “No” / “Let me check”. teacher ne pucha "homework kahan hai?" maine bola kutta kha gaya 😂😂 Note: quoted question, not to him
+- **h-m040** (everyday, hinglish) “Yes” / “No” / “Let me check”. bhai kahan hai tu??? 20 min se wait kar raha hu station pe, phone utha
+- **h-m057** (everyday, en) “😊” / “Okay” / “No”. whats ur address again, ordering u something 👀
+- **h-m081** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. ghar kab aa raha hai beta
+- **h-m084** (tricky, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. urgent mein maggi bana raha tha aur gas khatam ho gaya 😭😂 Note: "urgent" in a joke
+- **h-m086** (everyday, hinglish) “Yes” / “No” / “Let me check”. phone kyu nahi utha raha??? 5 baar call kiya
+- **h-m089** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. result aa gaya, pass ho gaya 🎉
+- **h-m090** (tricky, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. sir ne pucha "assignment kisne nahi diya" and sab chup 😂 Note: quoted question, not to him
+- **h-m093** (everyday, hi) “Got it” / “Will reply soon” / “Can I call you?”. आज यहाँ बहुत बारिश हो रही है
+- **h-m111** (tricky, en) no strip (no confident reply). flight got cancelled, stuck at the airport, no hotels anywhere, i'm literally freaking out Note: distress with no explicit ask
+- **h-m120** (tricky, en) no strip (no confident reply). https://www.instagram.com/reel/C9xYz12abQk/ 💀💀 Note: shared link, nothing asked
+- **h-m130** (tricky, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. aaj prof ne urgent urgent bolke assignment diya aur khud hi leave pe chale gaye 🤡 Note: "urgent" in a story
+- **h-m134** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. aaj shaam ko free hai kya
+- **h-m140** (tricky, hinglish) “Yes” / “No” / “Let me check”. usne mujhse pucha "tu pranav ko jaanta hai?" maine bola haan obviously Note: quoted question that names him
+- **h-m145** (tricky, hi) “Got it” / “Will reply soon” / “Can I call you?”. मम्मी पूछ रही थीं कि तुम दिवाली पर आओगे या नहीं Note: reported question that is meant for him
+- **h-m157** (tricky, en) no strip (no confident reply). 911 911 911 call me Note: slang for emergency
+- **h-m160** (everyday, en) no strip (no confident reply). pls review my PR when u can https://github.com/aryan-k/notes-app/pull/14
+- **h-m164** (tricky, en) “Hahaha” / “lol” / “Haha”. sorry long msg but i need to rant. my flatmate ate my food again, didnt clean the kitchen again, and then had the audacity to complain that im too loud on calls. like?? im so done. anyway dont worry about it lol Note: long rant; its "like??" is not a question to him
+- **h-m165** (tricky, en) no strip (no confident reply). There's been an accident on the expressway. Rhea's car. She's in surgery now Note: emergency news, no explicit ask
+- **h-m176** (tricky, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. jaldi aa yaar please please please Note: pleading, no urgent word
+- **h-m182** (tricky, hinglish) “Yes” / “No” / “Let me check”. maine use bola "kya tu pagal hai?" aur woh hasne laga 😂 Note: quoted question, not to him
+- **h-m184** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. bhai location bhej abhi, gaadi kharab ho gayi hai highway pe
+- **h-m185** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. mujhe bhi le chal na kal
+- **h-m187** (everyday, hinglish) “Yes” / “No” / “Let me check”. aaj dinner mein kya banau?
+- **h-m188** (tricky, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. ok par pehle mujhe bata kitna kharcha hua Note: starts like an ack but asks
+- **h-m189** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. aaj office se jaldi nikal gaya, ghar pe hi hu
+- **h-m190** (tricky, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. PRANAV PHONE UTHA Note: all caps order, no question
+- **h-m192** (everyday, hi) “Got it” / “Will reply soon” / “Can I call you?”. घर में पानी भर गया है, जल्दी आकर सामान ऊपर रखने में मदद करो
+- **h-m194** (tricky, hi) “Yes” / “No” / “Let me check”. उसने पूछा "तुम्हारा नाम क्या है?" और मैं अपना ही नाम भूल गया 😂 Note: quoted question, not to him
+- **h-m196** (everyday, hi) “Got it” / “Will reply soon” / “Can I call you?”. परीक्षा अच्छी गई, सब ठीक है
+- **h-m198** (everyday, bn) “Got it” / “Will reply soon” / “Can I call you?”. এক্ষুনি ফোন কর, বাবা পড়ে গেছে
+- **h-m200** (tricky, fr) “Yes” / “No” / “Let me check”. Le prof m'a demandé « vous avez lu le chapitre ? » et j'ai menti mdr Note: quoted question, not to him
+- **h-m205** (everyday, en) “Okay” / “Oh, okay” / “Will do”. remind me the name of that cafe we went to last week
+- **h-m224** (everyday, en) no strip (no confident reply). im lost on the trail near the fort, battery dying, sending location, please call the forest office
+- **h-m226** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. jaldi ghar aa, lagta hai gas leak ho raha hai
+- **h-m231** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. aaj bahut maza aaya yaar
+- **h-m234** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. beta kitne baje aayega dinner pe
+- **h-m238** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. kya scene hai aaj raat ka
+- **h-m241** (everyday, hi) “Got it” / “Will reply soon” / “Can I call you?”. फ़ोन उठाओ, बहुत ज़रूरी बात है
+- **h-m244** (tricky, hi) “Yes” / “No” / “Let me check”. कौन इतनी गर्मी में शादी रखता है? 🥵 Note: rhetorical question
+- **h-m248** (everyday, gu) “Got it” / “Will reply soon” / “Can I call you?”. જલ્દી ફોન કર, પપ્પાની તબિયત બગડી છે
+- **h-m250** (tricky, pt) “Yes” / “No” / “Let me check”. Minha mãe perguntou "você vai casar quando?" de novo kkkkk Note: quoted question, not to him
+- **h-m252** (tricky, en) no strip (no confident reply). are you okay?? saw the news about the train accident on your line, PLEASE reply Note: worry pressing for a reply
+- **h-m262** (tricky, en) no strip (no confident reply). Someone just hit my scooter and drove off. I'm bleeding a bit, people are helping me Note: emergency news, no explicit ask
+- **h-m271** (everyday, en) no strip (no confident reply). my landlord just cut off the water and power. can i crash at urs tonight? need to know asap
+- **h-m272** (tricky, en) no strip (no confident reply). Your turn to book the court this week 🏸 Note: statement that means he must act
+- **h-m273** (everyday, en) no strip (no confident reply). On my way to the hospital for my shift, talk later
+- **h-m281** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. bhai mere result mein kuch gadbad hai, fail dikha raha hai, abhi call kar please
+- **h-m285** (everyday, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. aaj gym mein PR maara 💪
+- **h-m288** (tricky, hinglish) “Got it” / “Will reply soon” / “Can I call you?”. mummy pooch rahi hai tu kab aayega Note: relayed question meant for him
+- **h-m293** (tricky, hi) “Yes” / “No” / “Let me check”. मैंने उससे पूछा "चाय पियोगे?" और वो भाग गया 😂 Note: quoted question, not to him
+- **h-m296** (everyday, hi) “Got it” / “Will reply soon” / “Can I call you?”. आज शाम को मौसम बहुत अच्छा है

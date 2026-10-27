@@ -18,7 +18,9 @@ import java.time.ZonedDateTime
  */
 fun main(args: Array<String>) {
     val root = File(args.firstOrNull() ?: "benchmark")
-    val bench = Bench(File(root, "data"), File(root, "results").apply { mkdirs() })
+    // "rules" measures the word lists alone, without the message model (ADR 0031).
+    MessageModel.enabled = args.getOrNull(1) != "rules"
+    val bench = Bench(File(root, "data"), File(root, if (MessageModel.enabled) "results" else "results/rules-only").apply { mkdirs() })
     bench.classifier()
     bench.urgency()
     bench.money()
@@ -72,6 +74,9 @@ private class Bench(private val data: File, private val out: File) {
         part.add("who", hits(named.count { same(it.expected.str("who"), (it.result as Classification.Open).loop.who) }, named.size))
         val priced = rows.filter { it.right && it.result is Classification.Open && it.expected.maybe("amount") != null }
         part.add("amount", hits(priced.count { sameMoney(it.expected.obj("amount"), (it.result as Classification.Open).loop.detail?.let(MoneyParser::find)) }, priced.size))
+        // How long one notification takes to read, after the JIT has warmed up, on the machine running this.
+        val signals = read("notifications.json").map { signal(it.obj("notification"), "k-${it.str("id")}", base) }
+        part.addProperty("microsecondsPerNotification", micros(signals) { Classifier.classify(it, settings) })
         results.add("classifier", part)
 
         section("Classifier", "expected → got")
@@ -101,6 +106,7 @@ private class Bench(private val data: File, private val out: File) {
             })
             rows.filterNot { it.second }.forEach { (case, _) -> miss(case, "$name: ${case.bool(name)} → ${!case.bool(name)}", case.str("text")!!) }
         }
+        part.addProperty("microsecondsPerMessage", micros(cases.map { it.str("text")!! }) { Urgency.isUrgent(it); Urgency.asks(it); Urgency.acknowledges(it) })
         results.add("urgency", part)
     }
 
@@ -201,7 +207,13 @@ private class Bench(private val data: File, private val out: File) {
             JsonParser.parseString(file.readText()).asJsonArray.map { it.asJsonObject }.associate { it.str("id")!! to it.obj("sensible") }
         } ?: return
 
-        fun sensible(id: String, reply: String): Boolean = judged[id]?.get(reply)?.asBoolean ?: error("$id: “$reply” isn't judged")
+        val unjudged = toJudge.map { it.asJsonObject }.sumOf { m -> m.strings("replies").count { judged[m.str("id")]?.has(it) != true } }
+        if (unjudged > 0) {
+            println("replies: $unjudged replies aren't judged yet; judge results/replies-to-judge.json into data/reply-judgments.json")
+            return
+        }
+
+        fun sensible(id: String, reply: String): Boolean = judged.getValue(id).get(reply).asBoolean
         fun rate(sets: List<Pair<JsonObject, List<String>>>) = JsonObject().apply {
             add("anySensible", hits(sets.count { (m, r) -> r.any { sensible(m.str("id")!!, it) } }, sets.size))
             add("repliesSensible", hits(sets.sumOf { (m, r) -> r.count { sensible(m.str("id")!!, it) } }, sets.sumOf { it.second.size }))
@@ -353,6 +365,14 @@ private fun signal(n: JsonObject, key: String, postedAt: Instant): Signal {
         isGroupSummary = n.bool("isGroupSummary"),
         category = category,
     )
+}
+
+/** Average over five passes after three to warm up, on the machine running the benchmark. */
+private fun <T> micros(items: List<T>, run: (T) -> Unit): Double {
+    repeat(3) { items.forEach(run) }
+    val start = System.nanoTime()
+    repeat(5) { items.forEach(run) }
+    return Math.round((System.nanoTime() - start) / 1000.0 / (5 * items.size) * 10) / 10.0
 }
 
 private fun hits(right: Int, total: Int): JsonObject = JsonObject().apply {

@@ -27,5 +27,15 @@ tasks.register<JavaExec>("benchmark") {
     description = "Runs the rules over benchmark/data and writes benchmark/results."
     classpath = sourceSets["test"].runtimeClasspath
     mainClass.set("com.sweepiesoftie.earmark.core.BenchmarkKt")
-    args(rootProject.file("benchmark").path)
+    // -PbenchmarkRoot=benchmark/holdout runs the held-out cases; -PrulesOnly leaves the message model out.
+    args(rootProject.file(project.findProperty("benchmarkRoot")?.toString() ?: "benchmark").path, if (project.hasProperty("rulesOnly")) "rules" else "all")
+}
+
+// Trains MessageModel on model/data and writes its weights to src/main/resources (model/README.md). Not the benchmark's data.
+tasks.register<JavaExec>("trainModel") {
+    group = "build"
+    description = "Trains the message model on model/data and writes message-model.bin."
+    classpath = sourceSets["test"].runtimeClasspath
+    mainClass.set("com.sweepiesoftie.earmark.core.TrainModelKt")
+    args(rootProject.projectDir.path)
 }

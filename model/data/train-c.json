@@ -1,0 +1,5644 @@
+[
+  {
+    "text": "@Pranav can you share the ppt",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav did you submit the form yet",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, send me the notes from Monday's lecture",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hey Pranav are you coming to the farewell planning meeting",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav please add your part to the doc by tonight",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav what time are you reaching",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "can someone share the assignment pdf",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "who all are coming for the trip on Saturday",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Poll: lunch at canteen or outside? vote please",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Reminder that the lab is closed tomorrow",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "lol that meme is too accurate",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "haha nice one",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Liked \"see you all at 5\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 👍 to \"ppt is uploaded\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 😂 to \"Pranav fell asleep in class again\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Loved \"I'll bring snacks\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Pranav can you check if the room is booked",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav what is the deadline for the project report",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "anyone has the Maths 2 textbook pdf",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, please confirm your attendance",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Share your availability for the mock interview slots",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav you were supposed to book the tickets, did you",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav already sent the file earlier, thanks everyone",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav is bringing the speakers, sorted",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "we asked Pranav yesterday and he said yes",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "why would anyone ask Pranav to do that lol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav pls reply to the email from the dean",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "someone please upload the attendance sheet",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav join the call, we are waiting",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav where are you?? the presentation starts in 2 mins",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav pick up the phone, it's urgent",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav need the file right now, submission closing in 5 min",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav please respond ASAP, the professor is asking for you",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "anyone near the main gate? Rahul fainted, please come quickly",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav call me right now it's about the hostel issue",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "the submission was urgent but it's done now",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "earlier it was an emergency but everything is fine now",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav bhai tu aa raha?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav bhai kal ka plan confirm hai na?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav ppt bhej de yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav tune assignment submit kiya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kaun kaun aa raha hai aaj match dekhne?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav kal canteen mein milte hain, aayega?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sab log apna photo bhejo id card ke liye",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav notes kab bhejega",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai koi mujhe kal ka lecture ka link de dega?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav tu group call join kar na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal exam postpone ho gaya hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "haha ye toh pagal hai yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "haha sahi hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 👍 to \"kal 10 baje milte hain\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Liked \"ok done\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted ❤️ to \"Pranav ne treat di\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Pranav chai peene chalein?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav bhai tera part kab tak ready hoga",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, sir ne tujhe bulaya hai, ja ke mil le",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav bro tera reply nahi aaya, tu kal aayega ya nahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav jaldi aa, sir ne attendance le li",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav abhi call kar, urgent hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav bhai kahan hai tu?? sab wait kar rahe hain",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "koi hai? Aman ko accident ho gaya hai, jaldi aao",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav fauran reply kar yaar, deadline khatam ho rahi hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav ko pehle hi bata diya tha, tension mat lo",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "urgent tha lekin ab ho gaya, thanks sabko",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "प्रणव, कल की मीटिंग का क्या हुआ?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "प्रणव, कल कॉलेज आओगे?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav फाइल भेज दो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कौन कौन आ रहा है कल पिकनिक पर?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "प्रणव भाई, नोट्स मिल सकते हैं क्या",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "प्रणव अपना नाम लिस्ट में जोड़ दो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कल कक्षा नहीं होगी",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "बहुत मज़ेदार था यार",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "हाहा बढ़िया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ठीक है सब लोग",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "प्रणव तुरंत फोन उठाओ, ज़रूरी है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कोई है? जल्दी आओ, यहाँ एक्सीडेंट हो गया है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav are you free for a quick call about the project",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, could you review my pull request when you get a chance",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav can you bring the extra charger",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav do you have the lab key",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav have you eaten, we are ordering pizza",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "everyone please send your PRN numbers",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "please fill the form by Friday, link below",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Form link: forms.gle/abc123",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Happy birthday Aditi!! 🎂",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "thanks everyone!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted ❤️ to \"Pranav you're the best\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Laughed at \"bhai you snore so loud\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "@Pranav is the 8am bus still running",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, which hostel are you in again",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav share your location, we are near Dadar station",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav wanna join our team for the hackathon",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav sign up here for the volunteer shift",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Anyone up for badminton at 6?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav what's your t-shirt size",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav remind me to bring the tickets tomorrow",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav's turn to pick the movie btw",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav said he'd be late",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "tell Pranav to check his email",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav, tell me your answer for Q4",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav send the minutes of the meeting",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav drop the Google Meet link here",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Hey Pranav, when are you free this weekend",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav mera charger leke aana please",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav tu kal practical file laayega na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai saturday ko kaun free hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav apna roll number bhej",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav kitne baje nikal raha hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav bhai paise bhej de, canteen ka bill",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav tera vote chahiye poll mein",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ye kaun sa chapter padhna hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav doc mein apna part edit karde",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav ka naam list mein hai, dekh liya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aaj ka lecture cancel hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "mujhe lagta hai Pranav ko pata hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "accha theek hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "haha lol",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 🔥 to \"Pranav ka ppt\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Pranav bhai wo wala video bhej na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal ki trip pe Pranav aa raha hai ya nahi, bata de",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav send karo jaldi, kal tak dena hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav please unmute and speak",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav! Your turn to present",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav wake up, class started",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, reply NOW, the prof is calling your name",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav your bag is on fire?? come fast",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav where r u, the bus is leaving right now",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "everyone please check on Pranav, he's not answering since morning",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav answer the call, it's an emergency",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "The earlier panic was a false alarm",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "no worries Pranav, take your time, no hurry at all",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "not urgent Pranav, whenever you see this",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav, no rush, but can you send it by evening",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Does anyone know if the library is open on Sunday?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Who has the scanned copy of the ID?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Is Pranav joining?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Has Pranav confirmed?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav confirmed already",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav, Aman, Riya will be in group B",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Group B: Pranav, Aman, Riya",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ok",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "got it",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "noted, thanks",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "👍",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 😮 to \"we won the hackathon!!\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "प्रणव तुम कहाँ हो?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "क्या कोई बता सकता है कल का समय क्या है",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "प्रणव कृपया अपना प्रोजेक्ट जमा कर दो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "प्रणव कल पार्टी में आ रहे हो?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आज बारिश बहुत हो रही है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "धन्यवाद सभी का",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "अच्छा ठीक है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "वाह क्या बात है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "प्रणव, उद्या येणार आहेस का?",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "प्रणव नोट्स पाठव ना",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "उद्या सुट्टी आहे",
+    "language": "mr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ठीक आहे",
+    "language": "mr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "પ્રણવ, કાલે આવીશ ને?",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "પ્રણવ ફાઈલ મોકલ ને",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "સારું",
+    "language": "gu",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Pranav, nalaiku varuviya?",
+    "language": "ta",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, ¿puedes enviarme el archivo?",
+    "language": "es",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, tu peux m'envoyer les notes ?",
+    "language": "fr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, kannst du mir die Datei schicken?",
+    "language": "de",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav Please fill in the feedback form",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, did you get my last message?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav can you vote on the poll please",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "team, Pranav, Riya: standup in 5, join the call",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Reminder to Pranav: your presentation slot is 3:15",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav pls pay 250 for the cake",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Guys who's got the key to the club room?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Anybody coming to the library?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, tell me what to order for you",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "can you all share your Aadhaar copy",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav send me the screenshot",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "@Pranav did the cab get booked?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Cab booked, will be there at 6",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "What a day. So tired.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "The meeting was so boring honestly",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav how could you do this to us lol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav tu kal late mat aana please",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai kisi ke paas spare pen hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav sunn, ek kaam kar de",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav ka kya scene hai kal ka?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kisne kisne fees bhari? Pranav tune?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav mujhe wo link bhej do",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai kal toh maza aayega",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav sahi mein champion hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "badhiya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 😂 to \"Pranav ka reaction\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Liked \"सब ठीक है\"",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Loved \"Pranav ne treat di\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "beta khana khaya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta, khana kha liya ki nahi?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta kal ghar aa raha hai na?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta phone kyun nahi utha raha, sab theek hai na?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav beta, dawai li subah?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta thoda paani zyada piya kar, aur samay pe so ja",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta Diwali pe kab aayega, ticket book kar le",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta mama ko call kar de, wo yaad kar rahe the",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta paise bhej du kya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta exam kaisa gaya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta tera khayal rakhna, bhagwan tera bhala kare",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Beta khush rehna, mehnat karte rehna",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aaj tere papa ne tere liye mandir mein pooja ki",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "tera bhai ghar pahunch gaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "beta jaldi call kar, papa ki tabiyat kharab hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav abhi ghar aa jao, dadi ko hospital le ja rahe hain",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta phone utha, bahut zaroori baat hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta kahan hai tu?? kab se call kar rahi hoon",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "papa hospital mein hai, turant aa",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tension mat le beta, papa ab theek hain",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ghabrane ki baat nahi hai, doctor ne bola sab normal hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "pehle darr gayi thi par ab sab theek hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "beta BP check karwaya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta mausi ke yahan shaadi hai, aayega na?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu theek hai na beta? kuch bol hi nahi raha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta ye forward dekh ke bata kya ye sach hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta WhatsApp pe payment kaise karte hain, sikha de",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta bijli ka bill bhar diya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, rakhi pe kya chahiye tujhe?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal subah jaldi uthna, mandir chalenge",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Beta passport ka kaam hua kya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "theek hai beta",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "accha beta",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ok beta, take care",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Liked \"ghar pahunch gaya\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted ❤️ to \"love you mummy\"",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "बेटा, खाना खाया?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बेटा, कल घर कब आओगे?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बेटा, तबीयत कैसी है अब?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बेटा, दवाई ले ली?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "प्रणव बेटा, फोन क्यों नहीं उठा रहे हो?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बेटा, कृपया अपने दादाजी को फोन कर लेना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कल पूजा में ज़रूर आना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बेटा समय पर सो जाया करो और सुबह जल्दी उठो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आपको और आपके परिवार को दीपावली की हार्दिक शुभकामनाएं",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "जन्मदिन की हार्दिक शुभकामनाएं बेटा, ईश्वर तुम्हें लंबी उम्र दे",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "भगवान तुम्हें सदा खुश रखे",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "आज तुम्हारे पापा की रिपोर्ट आ गई, सब सामान्य है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "सुप्रभात, आज का दिन शुभ हो",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "होली की ढेर सारी शुभकामनाएँ",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "आशीर्वाद बेटा",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "बेटा, जल्दी घर आओ, माँ की तबीयत बहुत ख़राब है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "प्रणव तुरंत फोन करो, बहुत ज़रूरी है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बेटा कहाँ हो, जवाब दो, हम बहुत घबरा रहे हैं",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "दादी की हालत गंभीर है, अभी निकलो",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "चिंता मत करो, अब सब ठीक है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ठीक है बेटा",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "जी, धन्यवाद",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "शुभ रात्रि बेटा",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Beta, did you eat?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, please call your mother when you are free",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Have you taken your medicines today?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Dear Pranav, kindly let us know when you will reach home",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, are you coming for Diwali?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Did you pay the college fees?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Beta, how are your exams going?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please send your bank account details for the scholarship",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, can you book a ticket for your grandfather?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Call me when you reach",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Take care of your health beta. God bless you.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Happy Diwali to you and your family. May Lakshmi bless you.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Wishing you a very happy birthday, Pranav. God bless.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Good morning. Have a blessed day.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "We reached Pune safely.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Your mausi called, she was asking about you",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav call home immediately, your father had a fall",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Beta please answer, we are very worried",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Dadaji is in ICU, come right now",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Where are you? Call me urgently",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "No need to worry, your father is fine now",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "We were scared earlier but it was nothing serious",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "[Voice note] beta, main bol rahi thi ki kal ghar aa jao, kuch kaam hai, call karna",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "[Voice message transcript] Haan Pranav, suno, tumhare kaka ka phone aaya tha, tum unhe ek baar phone kar lena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "[Voice note] beta aaj maine dal banayi thi, tumhari bahut yaad aayi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "[Voice note] Pranav beta, listen, your uncle is coming tomorrow, so please come home early",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "[Voice message] We are on the highway, will reach in an hour",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "[वॉइस नोट] बेटा, तुम्हारे मामा आ रहे हैं, उन्हें स्टेशन से ले आना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "[वॉइस नोट] आज बहुत बारिश हुई यहाँ, मौसम अच्छा है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Forwarded: Good morning! Zindagi mein khush rehna seekho, har din ek naya tohfa hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Forwarded: Drink warm water with lemon every morning to stay healthy. Please share with all your loved ones.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Forwarded many times: Do not eat this fruit, it is spreading a new virus. Forward to everyone you know!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Forwarded: Ye message 10 logon ko bhejo, aaj shaam tak acchi khabar milegi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Forwarded: Today is Ekadashi. May Lord Vishnu bless your family.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "फॉरवर्ड: ॐ नमः शिवाय। इस संदेश को आगे भेजें, शुभ फल मिलेगा",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "फॉरवर्ड: आज का पंचांग, मंगलवार, शुभ मुहूर्त सुबह 9 बजे",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "beta, ye message kisne bheja? tu dekh ke bata, mujhe darr lag raha hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, ye link khol ke dekh na kya hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai ka rishta aaya hai, tu photo dekh le aur bata",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tere papa pooch rahe hain tera result kab aayega",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tumhare naam se courier aaya hai, kya order kiya tha?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu ne Aarti ko wish kiya kya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Mausi ne kaha tu fone nahi uthata, kya baat hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "teri naani ko dawai ka naam bhej de",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta online ration card kaise banega, bata na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tera train kitne baje hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta WhatsApp pe wo green wala tick kya hota hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal kaun sa train hai, number bhej de",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Happy Birthday beta! 🎂🙏",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "jai shri krishna 🙏",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "good night beta, so ja",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "shubh ratri",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Ok beta",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "God bless",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bahut accha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "जय श्री राम 🙏",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "बाळा, जेवलास का?",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "प्रणव, उद्या घरी येणार आहेस ना?",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "देव तुझं भलं करो बाळा",
+    "language": "mr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ठीक आहे बेटा",
+    "language": "mr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "બેટા, જમ્યો કે નહીં?",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "પ્રણવ, કાલે ઘરે આવીશ ને?",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ભગવાન તારું ભલું કરે",
+    "language": "gu",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Kanna, saptiya?",
+    "language": "ta",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Dheepavali vazhthukkal kanna",
+    "language": "ta",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "beta kal raat ko tu theek se soya? neend aayi?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tera sugar level kaisa hai ab",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dadu ko raat mein chakkar aa rahe hain, doctor ko dikhana chahiye kya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, mere liye ek kaam kar, ye form bhar de",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta thoda online bank mein paisa dekh ke bata, aaya ki nahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu kab free hoga, video call karni hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, when will you be home? Your aunt wants to meet you.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Beta, did you buy the medicine for dada?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Is the food at hostel good? Tell me honestly.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Have you started studying for the finals?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Kindly confirm your presence at the wedding",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please do not forget to touch elders' feet at the function",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Send me a photo of your room",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Do you need money? Tell me",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Your cousin got engaged today!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Papa is better now, discharged from hospital",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "It's so cold here, don't forget to wear a sweater",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Mumbai mein baarish ho rahi hai, dhyan rakhna, bheeg mat jana",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aaj kal bahut garmi hai, loo lag jaati hai, bahar mat nikal",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "tera chacha aaj aaya tha, tujhe yaad kiya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai tera accident hua kya?? ghar pe news aayi hai, abhi call kar",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav abhi ke abhi papa se baat kar le, wo bahut gusse mein hain",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beta Mummy ko chest pain hai, jaldi aa ja",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Mom fainted, come home fast",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "पापा गिर गए हैं, जल्दी फोन करो",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बेटा, पैसे भेजूं क्या?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "तुम्हारी परीक्षा कब से शुरू हो रही है?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कृपया अपना पता भेज दो, कुछ सामान भेजना है",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "क्या तुमने मौसी को बधाई दी?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "हम सुरक्षित पहुँच गए",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "माँ अब ठीक हैं, चिंता मत करना",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "sir location bhejo",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir aap kahan ho, main gate pe hoon",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir OTP bata dijiye",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhaiya aap ghar pe ho? parcel dena hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir pickup address confirm karo",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir main aa gaya hoon, aap neeche aao",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir call utha lijiye, delivery hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir gate kholo please, main bahar khada hoon",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir kitne minute mein aayenge",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir jaldi aao, driver wait kar raha hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir abhi neeche aao, main ruk nahi sakta",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir phone uthao, 5 minute se call kar raha hoon",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir aapka parcel guard ke paas rakh diya hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "sir aapka order deliver ho gaya hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "sir main 10 minute mein pahunch jaunga",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "sir rent ka receipt WhatsApp kar diya hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I'm at gate 2, come down",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "I'm at the main gate. Please come down to collect your parcel.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Your parcel is with the guard",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please share your live location",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Where should I drop the order?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please confirm your delivery address",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Are you at home? I'm outside your building.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Sir, please share the OTP to complete delivery",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Can you come down? The lift is not working for me.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Sir I'm waiting outside, please come immediately",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pickup in 2 minutes, please be ready. Driver cannot wait.",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please come down right now or I will cancel the ride",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "I have arrived at your pickup location.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Your parcel has been delivered to the reception.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Driver is 3 minutes away",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I'm on my way, reaching in 5 minutes",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Order dropped at the door, enjoy your meal",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Rent receipt for October attached",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Hi Pranav, please submit the assignment by Friday 5 PM.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, please see me in my office tomorrow at 10.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please send me your project proposal by tomorrow",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, why were you absent yesterday? Please explain.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Dear Pranav, kindly reply with your availability for the interview",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please confirm receipt of this message",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Submit your lab record before the viva",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Can you meet at 3 pm?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Could you share your resume",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Hi, I'm a recruiter at TechNova. Are you open to a quick chat?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Hi Pranav, we reviewed your application. Can you attend an interview on Thursday?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Kindly send your updated CV and expected CTC",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, the interview has started, please join the link now",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please respond immediately, the form closes in 10 minutes",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Professor needs your attendance sheet urgently, send it now",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Your interview is scheduled for Monday at 11 am.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Class cancelled today.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "The exam will be held on 12th November.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Marks have been uploaded on the portal",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Thank you for attending the session.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "We have received your application.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Sorry, we cannot proceed with your application at this time.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Your assignment has been received.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Lab timings changed to 2 pm",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav, did you push your changes to the branch?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Can you review the PR before standup?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please update the Jira ticket",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Are you available for a quick sync?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Which one should I pick, option A or B?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Send the report to me when ready",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please join the meeting, we are waiting for you",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Hey, any update on the task?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please merge the PR",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "The build is broken in production, call me ASAP",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Server is down, need you on call right now",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "I merged the PR, thanks",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "The meeting is moved to 4 PM",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Deployment finished successfully",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Standup notes: everything is on track",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Thanks sir",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Noted, thank you",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Okay sir",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Received",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Sure, thank you",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Will do",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Thank you for the update",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Got it, thanks",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 👍 to \"I'll send it by evening\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Liked \"Please check the attachment\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ok sir, thik hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "theek hai sir, dhanyawad",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "accha sir",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "thanks bhaiya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Pranav, sir ne bola report kal tak dena hai, confirm karo",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, project ka status batao",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "team meeting mein aa rahe ho?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, tumhara viva kal hai, ready ho?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai code ka link share karo",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "rent kab tak denge aap?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhaiya is mahine ka rent transfer kar do",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Kal subah 8 baje tak room khaali kar dena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal se paani ka bill bhi dena hoga, ok?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir aapka order ready hai, aaj lene aayenge ya kal?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sir kaunsa gate? main yahan pahunch gaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhaiya wo agreement sign karke bhej do",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aaj lecture 11 baje ki jagah 12 baje hoga",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kal holiday hai, college band rahega",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aapka admit card download kar sakte hain",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "interview ke liye shortlist hue ho, details email pe bheji hain",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "कृपया अपना असाइनमेंट कल तक जमा करें",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "प्रणव, कृपया मेरे ऑफिस में आकर मिलें",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "साहब, आप कहाँ हैं? मैं गेट पर हूँ",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कृपया अपना पता भेजें",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "सर, पार्सल लेने नीचे आ जाइए",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आपका पार्सल सुरक्षा गार्ड के पास रखा है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "कक्षा आज रद्द कर दी गई है",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "आपका आवेदन प्राप्त हुआ",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "साहब जल्दी आइए, गाड़ी रुकी हुई है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "जी सर, धन्यवाद",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ठीक है सर",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "सर, तुमचा पत्ता पाठवा",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "उद्या वर्ग रद्द आहे",
+    "language": "mr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "સાહેબ, તમારું લોકેશન મોકલો",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Sir, location anuppunga",
+    "language": "ta",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please send your documents: marksheet, ID and photo",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Can you update the group on the status of your module?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Hi, this is Neha from HR. Please share your joining date.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please call me back regarding the offer",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Do you want to extend the lease for another year?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "The plumber is coming at 5, will you be home?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please clear the pending maintenance dues",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Is anyone at the flat? The gas delivery is here",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Hello sir, this is the courier. Please come to collect.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please accept the calendar invite",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please take a look at the attached slides and give feedback",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Return the library book by Friday",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Is this your bike parked in front of my gate? Please move it.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Move your car now, you are blocking the gate and an ambulance needs to pass",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Sir, your flat door is open and I can see smoke. Come right now!",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Fire alarm in the building, evacuate immediately",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Your bike was towed yesterday. Collect it from the yard.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Water supply will be off from 10 to 2 tomorrow",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Lift is under maintenance today",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Electricity bill for this month is 2300 rupees",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Thanks for informing, we will look into it",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Please note the lab will be closed during Diwali holidays",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I think we should break up.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Can we talk? I need to explain what happened.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "I'm so sorry for what I said yesterday",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Please forgive me. Can you at least reply?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please pick up the phone, I need to talk to you right now",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "I can't do this anymore. Please call me.",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "I'm scared, please come, someone is following me",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "I lost my wallet and phone, I'm at Dadar station, please help",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "I had an accident, please come to Lilavati hospital",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav help!! my bike skidded, I'm bleeding",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please call me now, I'm stuck and have no money",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Something happened to dad, come home now",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "We're being chased, call the police",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Where are you?? I've been calling you for an hour",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Reply right now, I'm really worried about you",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "We're all safe now",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Don't worry, I'm okay. The fall looked worse than it was.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Found my wallet, it was in the cab. All good.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "The accident was minor, nobody is hurt",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Everything is fine now, the doctors say it's nothing serious",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Phew. Just reached home safely.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "The fire was put out. Everyone is fine.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I got the job!! Can't believe it",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "My grandfather passed away this morning.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I failed the exam. I don't know what to do.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "It's over between us. I don't want to talk about it.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I'm so stressed I can't sleep",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I feel so alone these days",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I'm really proud of you",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "You hurt me a lot, Pranav",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I'm sorry, I was wrong",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Sorry I missed your call, was in a meeting",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I'm really sorry for your loss. Thinking of you.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I miss you so much",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Thank you for being there for me today. It meant a lot.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "We broke up. Not in the mood to talk.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Mom and dad had a huge fight, I'm at Riya's place",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "My laptop got stolen, all my project is gone",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I got scammed of 20k. I'm shaking.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I didn't clear the interview",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "What the hell, why did you tell her??",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Why did you tell her? You had no right.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Are we still friends or not?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Do you even care about me?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Can you please come over? I don't want to be alone tonight.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Could you lend me some money? It's an emergency",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Will you come to the hospital with me tomorrow",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Are you okay? You sounded off on the call",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Did you reach safely? Text me when you do.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Why aren't you replying to me?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please don't ignore me",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Please talk to me, I'm begging you",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Are you mad at me?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Say something, anything",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "why aren't you answering?? is everything ok?",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "reply please, just tell me you're alive",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Not urgent, but I want to talk sometime",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "It's not an emergency, just wanted to hear your voice",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "It was urgent last night but it's sorted now",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav help karo, mera wallet kho gaya hai, Andheri station pe hoon",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai mera accident ho gaya hai, jaldi aa",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yaar please call kar, mujhe tension ho rahi hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "abhi aa jao yaar, mujhe akela darr lag raha hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav fauran reply kar, bohot zaroori hai",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dad ko heart attack aaya hai, hospital pahuncho",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai kahan hai tu?? phone kyun band hai?",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "police ne pakad liya hai yaar, please aa",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ladai ho gayi hai hostel mein, jaldi aao",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bahut tabiyat kharab hai, koi nahi hai yahan, aa ja",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ab sab theek hai yaar, tension mat le",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ghar pahunch gaye, sab safe hain",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "wallet mil gaya, kisi ne wapas kar diya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "doctor ne kaha chinta ki baat nahi hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "accident chhota tha, kuch nahi hua mujhe",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai mera breakup ho gaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "dil bahut dukhi hai yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "mujhe maaf kar de yaar, galti ho gayi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "mera result kharab aaya, sab khatam lag raha hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai tune toh dil jeet liya aaj",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bahut dino baad achha laga tujhse baat karke",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kal raat se neend nahi aa rahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai naukri chali gayi meri",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Nani nahi rahi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "mujhe tujhse bahut gussa hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "tu mujhse naraz hai kya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tune ye sab kyun kiya?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya tu mere saath hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai ek baar baat kar le please",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ghar aa sakta hai? akela feel ho raha hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pehle mujhe sorry bol",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai thoda paisa udhaar mil sakta hai, emergency hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "reply to kar de yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kal hospital chalega mere saath?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu theek hai na? awaaz alag lag rahi thi",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pahunch gaya? bata dena",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sab theek hai na?? jaldi reply kar",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मदद करो! मेरा एक्सीडेंट हो गया है, जल्दी आओ",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मेरा बटुआ खो गया है, मैं स्टेशन पर फंसा हूँ, कृपया मदद करो",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "तुरंत फोन करो, पापा की हालत बहुत खराब है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कहाँ हो तुम? मैं बहुत डर गया हूँ, जल्दी आओ",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "जल्दी आओ, यहाँ झगड़ा हो गया है",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "हम सब सुरक्षित हैं",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "अब सब ठीक है, चिंता मत करो",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "हमारा ब्रेकअप हो गया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "मैं बहुत अकेला महसूस कर रहा हूँ",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "दादाजी नहीं रहे",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "तुम पर गर्व है मुझे",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "मुझे माफ़ कर दो, मेरी गलती थी",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "मेरी नौकरी लग गई!",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "क्या तुम मुझसे नाराज़ हो?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "क्या तुम मेरे साथ चल सकते हो अस्पताल?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "प्लीज़ मुझसे बात करो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "क्या तुम आज रात आ सकते हो? मुझे अकेले डर लग रहा है",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मुझे कुछ पैसे उधार दे सकते हो? ज़रूरी है",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ज़रा बात कर लो ना",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कोई बात नहीं",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "koi baat nahi yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "chal theek hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "It's okay, no problem",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "I understand",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 😢 to \"I failed the exam\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted ❤️ to \"We're all safe now\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Liked \"I'm sorry\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Sent a heart",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Estoy bien, no te preocupes",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "¿Podemos hablar? Es importante",
+    "language": "es",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Ayúdame, tuve un accidente",
+    "language": "es",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Peux-tu m'appeler ce soir ?",
+    "language": "fr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Je suis arrivée, tout va bien",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Appelle-moi tout de suite, c'est urgent",
+    "language": "fr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Kannst du mich bitte anrufen?",
+    "language": "de",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Mir geht es gut, danke",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "माझा ब्रेकअप झाला",
+    "language": "mr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "लवकर ये, अपघात झाला आहे",
+    "language": "mr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "બધું બરાબર છે, ચિંતા ના કરતો",
+    "language": "gu",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "જલ્દી આવ, પપ્પાની તબિયત બગડી છે",
+    "language": "gu",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Seekiram vaa da, accident aayiduchu",
+    "language": "ta",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Naan nalla irukken, kavalai padathe",
+    "language": "ta",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Remember the promise you made? Are you going to keep it?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Was it you who told them? Just say yes or no.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Seriously? You want me to just forget all that?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "How could you? After everything I did for you.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "You always say \"I'll call you back\" and you never do.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "She said \"are you even listening?\" and I just walked out.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "What was I thinking, honestly",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Why does this always happen to me",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Who even does that",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Dad just asked \"kab aa raha hai\" and I didn't know what to say",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Thank god it's over",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Finally some good news today",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "u up?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "call karo",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ready hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "gm",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "help!",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "NOW",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "भेजो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "समझ गया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "pata hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hbd!!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ના",
+    "language": "gu",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ho gaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "सुनो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dhanyavaad",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "so?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kk.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "jaldi bol",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "come now",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "तुरंत",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "😂",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "suno",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "☎️",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आओ",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pick up!!",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mast",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "happy birthday!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "danke",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hello??",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bye bye",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "jai shree krishna",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "yo",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "हाँ",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hey!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "सुनिए",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "acha ok",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "jaldi aa",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "📞📞📞",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "😍",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "क्या?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "जय हिंद",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "fine",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ready?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ping me",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ty",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "sure",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "u there",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "शुक्रिया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hey",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "क्या हुआ",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ok bye",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "where r u??",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "🥳",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "come",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "achha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hahaha",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "sahi hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "👌",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "SOS",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "🙄?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "आ जाओ",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "free hai?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "wow",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "no",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "अभी आओ",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yep",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hahaha yaar",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "obrigado",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hi?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kab aa raha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hello 👀",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "come fast",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Hallo?",
+    "language": "de",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "thank you",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "kahan?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कहाँ हैं आप",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "haa",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "अरे वाह",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Oi?",
+    "language": "pt",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "jai hind",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "अच्छा जी",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "jaldi!",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "🤣",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "👍🏽",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "help me",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "बहुत बढ़िया",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "감사합니다",
+    "language": "ko",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "k",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "lol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "हेलो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "theek hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "❤️",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "हो",
+    "language": "mr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "oye",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "d'accord",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "cya",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ક્યાં છે?",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "same",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "भेज दो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "nah",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "you there?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "okie",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "haan",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "theek",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "fauran call kar",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "khana?",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कहाँ हो?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "🙏",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "हैलो?",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kaun",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mil gaya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "😮",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "???",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "🆘",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "कुठे आहेस?",
+    "language": "mr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "😭",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hurry",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kaise ho",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bas",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "alright",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "🤝",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "why",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "madad!",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dekh liya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "kahan hai",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bye",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "right",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "नमस्कार",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "arre wah",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Enga?",
+    "language": "ta",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "जवाब दो",
+    "language": "hi",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "🫡",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "हां जी",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "please come quick",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "હા",
+    "language": "gu",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "jaldi jaldi",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "where?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hello",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "oh ok",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "શું થયું?",
+    "language": "gu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "😭😭",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "abhi call kar",
+    "language": "hinglish",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "😅",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "badhai ho",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhej",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "मदद करो",
+    "language": "hi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yeah",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "reply",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ठीक",
+    "language": "hi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hehe",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "URGENT!!",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "where",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "了解",
+    "language": "ja",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "haha",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bhej de",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhaiya",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "jaja",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "call?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bol",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "na",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "¿Hola?",
+    "language": "es",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "chalo",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "🙌",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ouch",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "u up",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya hua",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sun",
+    "language": "hinglish",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  }
+]

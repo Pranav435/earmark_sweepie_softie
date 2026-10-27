@@ -1,0 +1,3002 @@
+[
+  {
+    "id": "h-m001",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "pls call me asap its about the flat",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m002",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "are u free thursday evening",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m003",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "ok cool",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m004",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "send me the notes from todays lecture when u get a chance",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m005",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "thanks man!!",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m006",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "did u eat",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m007",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "omw be there in 10",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m008",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "what time does the movie start",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m009",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "haha",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m010",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "where are you?? everyone's waiting at the gate",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m011",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "can u pick up milk on ur way back",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m012",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Liked \"see you at 7\"",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m013",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "just landed in delhi, will call later",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m014",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "urgency without the word, call request as an order",
+    "text": "dude pick up. pick up. PICK UP",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m015",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "lmk if ur coming tmrw",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m016",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "the only question is quoted from someone else",
+    "text": "she literally asked me \"are you free this weekend?\" and i just froze lol",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m017",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "says urgent but isn't",
+    "text": "URGENT: which charger did u borrow, mine's missing lol no rush",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m018",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "starts like an ack but asks",
+    "text": "ok but what time",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m019",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Reacted 😂 to \"i fell asleep in the exam hall\"",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m020",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "I GOT THE INTERNSHIP!!!! 🎉🎉",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m021",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "distress with no explicit ask",
+    "text": "im at the ER with dad. he collapsed at home. i cant think",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m022",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Can you share the wifi password again",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m023",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "👍",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m024",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "remind me what we decided for the presentation slides?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m025",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "long vent, nothing asked",
+    "text": "ugh today was the worst. prof yelled at me in front of everyone, then my bike got a flat, then i missed the bus and it started pouring. just needed to tell someone",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m026",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "bhai kal ka plan kya hai",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m027",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "theek hai",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m028",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "jaldi call kar, bahut zaroori hai",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m029",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "notes bhej de yaar",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m030",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "haan done 👍",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m031",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "main ghar pahunch gaya",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m032",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "kitne baje aa raha hai",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m033",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "emergency news, no explicit ask",
+    "text": "papa ko hospital le ja rahe hain, BP bahut high hai",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m034",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "hahaha sahi hai",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m035",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "says it is not urgent, still asks",
+    "text": "urgent nahi hai but jab free ho toh ek baar call karna",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m036",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "khana khaya?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m037",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "mere liye ek samosa le aana pls",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m038",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "quoted question, not to him",
+    "text": "teacher ne pucha \"homework kahan hai?\" maine bola kutta kha gaya 😂😂",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m039",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "chal thik hai kal milte",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m040",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "bhai kahan hai tu??? 20 min se wait kar raha hu station pe, phone utha",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m041",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "कल कॉलेज आ रहे हो?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m042",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "ठीक है",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m043",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "जल्दी घर आओ, दादी की तबीयत बहुत खराब है",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m044",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "मैं पहुँच गया हूँ",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m045",
+    "difficulty": "tricky",
+    "language": "hi",
+    "note": "request as an instruction, no question mark",
+    "text": "वो फाइल मुझे शाम तक भेज देना",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m046",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "धन्यवाद बेटा 🙏",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m047",
+    "difficulty": "everyday",
+    "language": "mr",
+    "note": null,
+    "text": "उद्या संध्याकाळी भेटूया का?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m048",
+    "difficulty": "everyday",
+    "language": "gu",
+    "note": null,
+    "text": "સારું, આભાર",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m049",
+    "difficulty": "everyday",
+    "language": "ta",
+    "note": null,
+    "text": "உடனே கால் பண்ணு, அம்மா ஆஸ்பத்திரில இருக்காங்க",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m050",
+    "difficulty": "tricky",
+    "language": "es",
+    "note": "request without a question mark",
+    "text": "oye mándame la foto del grupo cuando puedas",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m051",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "hey did u submit the assignment yet",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m052",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "sounds good",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m053",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Pls bring my charger tmrw",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m054",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "lol",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m055",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Pranav where r u, mom's been trying to reach you for an hour, call home NOW",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m056",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "the match got postponed to sunday btw",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m057",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "whats ur address again, ordering u something 👀",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m058",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Loved \"happy birthday!! 🎂\"",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m059",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "📷 which one should i wear tonight 1 or 2",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m060",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "bare photo, nothing asked, not a reaction",
+    "text": "📷 Photo",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m061",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "a sticker on its own",
+    "text": "Sticker",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m062",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "can you cover for me in the 9am lab, ill owe you",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m063",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "voice-note-style run-on, ask buried in the middle",
+    "text": "ok so basically what happened was i was going to the library right and then i realised i left my id card at ur place so like can u bring it tmrw or whenever ur coming this side",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m064",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "my car broke down on the highway near lonavala and my phone is at 3%. can you come or send someone",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m065",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "starts with thanks but asks",
+    "text": "thanks!! also do u still have the calc textbook",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m066",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "forwarded rumour labelled urgent",
+    "text": "Forwarded many times\nURGENT NEWS: Petrol prices to rise by ₹10 from midnight tonight",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m067",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "question without a question mark",
+    "text": "you coming or not",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m068",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "rhetorical question",
+    "text": "who even schedules an exam on a saturday?? like seriously",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m069",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "np!",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m070",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "what did prof say about the deadline",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m071",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "ok",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m072",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "\"ok?\" with a question mark asks",
+    "text": "ok?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m073",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "theres a guy following me rn, can u stay on call with me till i get home",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m074",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Did you get my email about the club meeting?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m075",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "quoted question, not to him",
+    "text": "lmao the prof asked \"any questions?\" and nobody said anything for 5 whole minutes",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m076",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "kal ka lecture hai kya?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m077",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "ok bhai",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m078",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "mujhe 500 bhej de kal wapas karta hu",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m079",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "bhai jaldi aa hostel, rohit ka accident ho gaya",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m080",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "aaj bahut thak gaya yaar, so raha hu",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m081",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "ghar kab aa raha hai beta",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m082",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "hahaha bhai 😂😂😂",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m083",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "achha sun, woh pdf bhejna jo kal dikhaya tha",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m084",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "\"urgent\" in a joke",
+    "text": "urgent mein maggi bana raha tha aur gas khatam ho gaya 😭😂",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m085",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "tu aaj gym aayega?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m086",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "phone kyu nahi utha raha??? 5 baar call kiya",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m087",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "haan haan thik hai",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m088",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "thanks first, then a request",
+    "text": "acha thanks, aur haan kal 10 baje tak aa jana",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m089",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "result aa gaya, pass ho gaya 🎉",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m090",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "quoted question, not to him",
+    "text": "sir ne pucha \"assignment kisne nahi diya\" and sab chup 😂",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m091",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "खाना खाया या नहीं?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m092",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "👍🏻 ठीक है बेटा",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m093",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "आज यहाँ बहुत बारिश हो रही है",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m094",
+    "difficulty": "tricky",
+    "language": "hi",
+    "note": "emergency news, no explicit ask",
+    "text": "पापा का एक्सीडेंट हो गया है, हम अस्पताल में हैं",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m095",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "शाम को सब्ज़ी लेते आना",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m096",
+    "difficulty": "tricky",
+    "language": "hi",
+    "note": "says not urgent, still asks",
+    "text": "ज़रूरी नहीं है, पर समय मिले तो फ़ोन करना",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m097",
+    "difficulty": "everyday",
+    "language": "bn",
+    "note": null,
+    "text": "কাল তুই কলেজে আসবি?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m098",
+    "difficulty": "everyday",
+    "language": "ar",
+    "note": null,
+    "text": "تمام، شكراً",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m099",
+    "difficulty": "everyday",
+    "language": "fr",
+    "note": null,
+    "text": "Réponds-moi stp, c'est grave, Léa a eu un accident",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m100",
+    "difficulty": "everyday",
+    "language": "pt",
+    "note": null,
+    "text": "me manda o link da aula de hoje",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m101",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "all caps, no urgent word",
+    "text": "PRANAV. ANSWER YOUR PHONE.",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m102",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "r u done with the lab report",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m103",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "says urgent, only a joke",
+    "text": "Urgent!! need ur netflix password before the episode drops 😂",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m104",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "cool cool",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m105",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "quoted question, not to him",
+    "text": "my mom keeps asking \"did you eat?\" every 10 mins lol i'm 22",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m106",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Can you come to the hostel right now? Aditi fainted and we don't know what to do",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m107",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "send the zoom link pls",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m108",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Laughed at \"i swear the dog ate it\"",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m109",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Btw I'm moving to Pune next month",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m110",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "conditional request, no question",
+    "text": "if ur awake text me",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m111",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "distress with no explicit ask",
+    "text": "flight got cancelled, stuck at the airport, no hotels anywhere, i'm literally freaking out",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m112",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Which room is the viva in?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m113",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "thank u so much, means a lot 🥹",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m114",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "vent that says it asks nothing",
+    "text": "Not asking you to do anything, just venting. My manager took credit for my work AGAIN and I'm so done with this place",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m115",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "question without a question mark after an exclamation",
+    "text": "Missed you at the party! When are we catching up",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m116",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "come downstairs fast the cab is leaving in 2 min",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m117",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "k",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m118",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "starts like an ack but asks",
+    "text": "k but did u book the tickets or not",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m119",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Could you drop me at the station tomorrow at 6?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m120",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "shared link, nothing asked",
+    "text": "https://www.instagram.com/reel/C9xYz12abQk/ 💀💀",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m121",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Happy birthday Pranav!!! Have the best year ahead 🎂🎉",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m122",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "birthday wish that also asks",
+    "text": "Happy birthday!! 🎂 party tonight or what",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m123",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "starts like small talk, then an emergency",
+    "text": "is this still your number? its ananya. theres been a fire in our building and i need a place to stay tonight",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m124",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "what's the plan for diwali",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m125",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "rhetorical question",
+    "text": "why is it that every time i clean my room it gets messier the next day 😭",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m126",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "bhai abhi ke abhi call kar, mummy ro rahi hai",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m127",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "kal movie chalein?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m128",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "okk",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m129",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "jab ghar pahunche toh msg kar dena",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m130",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "\"urgent\" in a story",
+    "text": "aaj prof ne urgent urgent bolke assignment diya aur khud hi leave pe chale gaye 🤡",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m131",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "bro tera laptop charger mere paas reh gaya, kab lega?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m132",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "haha pagal hai tu",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m133",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "emergency from someone else's phone",
+    "text": "bhai mera wallet phone sab chori ho gaya, dost ke phone se msg kar raha hu, is number pe call kar jaldi",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m134",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "aaj shaam ko free hai kya",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m135",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "Reacted ❤️ to \"mummy ke liye cake le aaya\"",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m136",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "main nikal gaya, 15 min mein pahunchunga",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m137",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "short instruction, no question",
+    "text": "dekh le ek baar bas",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m138",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "jaldi neeche aa, ambulance aa gayi hai dadaji ke liye",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m139",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "chal koi na",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m140",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "quoted question that names him",
+    "text": "usne mujhse pucha \"tu pranav ko jaanta hai?\" maine bola haan obviously",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m141",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "बेटा दवाई ले ली?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m142",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "हाहा 😂",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m143",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "तुरंत अस्पताल आ जाओ, नानी को ICU में ले गए हैं",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m144",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "आज ऑफिस में बहुत काम था, अब घर जा रहा हूँ",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m145",
+    "difficulty": "tricky",
+    "language": "hi",
+    "note": "reported question that is meant for him",
+    "text": "मम्मी पूछ रही थीं कि तुम दिवाली पर आओगे या नहीं",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m146",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "रात को खाने पर आ जाना",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m147",
+    "difficulty": "everyday",
+    "language": "mr",
+    "note": null,
+    "text": "लवकर घरी ये, आजोबा पडले आहेत",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m148",
+    "difficulty": "everyday",
+    "language": "gu",
+    "note": null,
+    "text": "કાલે કેટલા વાગે મળવાનું છે?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m149",
+    "difficulty": "everyday",
+    "language": "de",
+    "note": null,
+    "text": "Haha ok, alles klar 👍",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m150",
+    "difficulty": "everyday",
+    "language": "es",
+    "note": null,
+    "text": "Ya llegué a casa 🙌",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m151",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "hello?? where are u?? its been an hour",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m152",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "\"where are you\" but casual, not urgent",
+    "text": "where are you rn, want to grab chai?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m153",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Okay thank youuu",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m154",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "need u to come to the police station in andheri, they wont let me go without someone",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m155",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "says not urgent, still asks",
+    "text": "Not urgent!! just wanted to ask if you're coming sat",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m156",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "can i borrow ur bike for an hour",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m157",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "slang for emergency",
+    "text": "911 911 911 call me",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m158",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "finally finished my thesis draft 😮‍💨",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m159",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "quoted question, not to him",
+    "text": "the bank guy asked \"sir do you want a credit card\" for the 5th time today 💀",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m160",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "pls review my PR when u can https://github.com/aryan-k/notes-app/pull/14",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m161",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Liked an image",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m162",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "pressing without the word urgent",
+    "text": "i know ur in class but this cant wait. call me the second u see this",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m163",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "what r u wearing to the wedding",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m164",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "long rant; its \"like??\" is not a question to him",
+    "text": "sorry long msg but i need to rant. my flatmate ate my food again, didnt clean the kitchen again, and then had the audacity to complain that im too loud on calls. like?? im so done. anyway dont worry about it lol",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m165",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "emergency news, no explicit ask",
+    "text": "There's been an accident on the expressway. Rhea's car. She's in surgery now",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m166",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "hahahaha",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m167",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Send me the pics from last night",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m168",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "question shaped as a statement",
+    "text": "you have the keys right",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m169",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Bro my mom's not answering and her phone's off, can you go check on her? you're 5 min away",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m170",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "says urgent, only a joke",
+    "text": "omg URGENT update: the cat knocked over my coffee again 😾",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m171",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Do you know any good dentist near Bandra?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m172",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "reaction quoting his own question",
+    "text": "Reacted 👍 to \"can you send it by 5?\"",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m173",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Reached Mumbai safe, will call tomorrow",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m174",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "relayed request",
+    "text": "Mom says call her",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m175",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "The landlord is here and says he's changing the locks today unless we pay. Can you come home now?",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m176",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "pleading, no urgent word",
+    "text": "jaldi aa yaar please please please",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m177",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "bhai tune assignment submit kiya?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m178",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "accha ok",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m179",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "kal 7 baje station pe milna, late mat hona",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m180",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "bad news and distress, no explicit ask",
+    "text": "nani nahi rahi 😭",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m181",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "tera exam kab hai?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m182",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "quoted question, not to him",
+    "text": "maine use bola \"kya tu pagal hai?\" aur woh hasne laga 😂",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m183",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "sahi hai bhai 👌",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m184",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "bhai location bhej abhi, gaadi kharab ho gayi hai highway pe",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m185",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "mujhe bhi le chal na kal",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m186",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "\"urgent\" for something already done",
+    "text": "urgent wala kaam ho gaya, ab tension nahi 😌",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m187",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "aaj dinner mein kya banau?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m188",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "starts like an ack but asks",
+    "text": "ok par pehle mujhe bata kitna kharcha hua",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m189",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "aaj office se jaldi nikal gaya, ghar pe hi hu",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m190",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "all caps order, no question",
+    "text": "PRANAV PHONE UTHA",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m191",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "ओके 👌",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m192",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "घर में पानी भर गया है, जल्दी आकर सामान ऊपर रखने में मदद करो",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m193",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "कल कितने बजे निकलना है?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m194",
+    "difficulty": "tricky",
+    "language": "hi",
+    "note": "quoted question, not to him",
+    "text": "उसने पूछा \"तुम्हारा नाम क्या है?\" और मैं अपना ही नाम भूल गया 😂",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m195",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "मुझे अपना नया पता भेज दो",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m196",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "परीक्षा अच्छी गई, सब ठीक है",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m197",
+    "difficulty": "everyday",
+    "language": "ta",
+    "note": null,
+    "text": "நாளைக்கு எப்போ வருவே?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m198",
+    "difficulty": "everyday",
+    "language": "bn",
+    "note": null,
+    "text": "এক্ষুনি ফোন কর, বাবা পড়ে গেছে",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m199",
+    "difficulty": "everyday",
+    "language": "ar",
+    "note": null,
+    "text": "وينك؟ نتغدى سوا اليوم؟",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m200",
+    "difficulty": "tricky",
+    "language": "fr",
+    "note": "quoted question, not to him",
+    "text": "Le prof m'a demandé « vous avez lu le chapitre ? » et j'ai menti mdr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m201",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "two-word question, no question mark",
+    "text": "u up",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m202",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Great, thanks!",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m203",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Dad's having chest pain, I'm calling the ambulance. Can you meet us at Lilavati?",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m204",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "quoted question, not to him",
+    "text": "\"are we there yet\" - my little brother every 5 mins on this road trip 🙃",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m205",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "remind me the name of that cafe we went to last week",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m206",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Emphasized \"I passed!!!\"",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m207",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "two-word request",
+    "text": "lemme know",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m208",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "watching the match at rahul's, it's insane",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m209",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "\"urgent\" that really is urgent",
+    "text": "ok this is actually urgent, prof moved the exam to TODAY 2pm, are you coming??",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m210",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "can u send me 200 for the cab, will return tmrw",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m211",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "rhetorical question",
+    "text": "cant believe its almost november. where did this year even go",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m212",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "yep",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m213",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "ok ok ok 😂😂",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m214",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "emergency news, no explicit ask",
+    "text": "the doctor just said they need to operate on mom tonight",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m215",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Are you coming to the reunion on the 14th?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m216",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "soft polite request ending in a period",
+    "text": "Hey sorry to bother, would you mind sharing the slides from today. Totally fine if not",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m217",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "pls pick up its about grandma",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m218",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "says urgent about a sale",
+    "text": "URGENT 🚨🚨 zara sale is live, 70% off on everything",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m219",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "what time's ur flight",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m220",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "haha yeah",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m221",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "statement of need that asks for money back",
+    "text": "I need the 2000 back by friday, rent's due",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m222",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Missed you today! Hope the interview went well",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m223",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "how'd the interview go",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m224",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "im lost on the trail near the fort, battery dying, sending location, please call the forest office",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m225",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "reported question, not to him",
+    "text": "lol my cousin just asked me if pune is in mumbai 😭",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m226",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "jaldi ghar aa, lagta hai gas leak ho raha hai",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m227",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "bhai notes bhej na",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m228",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "thik hai bhai, thanks",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m229",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "short deferred request",
+    "text": "kal bata dena",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m230",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "Liked \"kal 8 baje pakka\"",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m231",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "aaj bahut maza aaya yaar",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m232",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "bhai sun mera phone band hone wala hai, mujhe dadar station se pick kar le please",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m233",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "forwarded rumour labelled urgent",
+    "text": "Forwarded\nURGENT: kal se sab bank 5 din band rahenge 😱",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m234",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "beta kitne baje aayega dinner pe",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m235",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "request phrased as \"tu bata\"",
+    "text": "acha woh sab chhod, tu bata tera kya scene hai",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m236",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "😂😂 sahi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m237",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "emergency news, no explicit ask",
+    "text": "mummy ko chakkar aa gaya, doctor ke paas le ja rahe",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m238",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "kya scene hai aaj raat ka",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m239",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "\"urgent\" denied, request at the end",
+    "text": "urgent kuch nahi hai bas yaad dilana tha ki kal mummy ka birthday hai, cake order kar dena",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m240",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "train 1 ghanta late hai",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m241",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "फ़ोन उठाओ, बहुत ज़रूरी बात है",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m242",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "हाँ ठीक है",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m243",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "आते वक़्त दूध और ब्रेड ले आना",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m244",
+    "difficulty": "tricky",
+    "language": "hi",
+    "note": "rhetorical question",
+    "text": "कौन इतनी गर्मी में शादी रखता है? 🥵",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m245",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "तुम्हारा रिज़ल्ट कब आएगा?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m246",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "हाहाहा सही है 😂",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m247",
+    "difficulty": "everyday",
+    "language": "mr",
+    "note": null,
+    "text": "आज जेवायला घरी येतोस का?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m248",
+    "difficulty": "everyday",
+    "language": "gu",
+    "note": null,
+    "text": "જલ્દી ફોન કર, પપ્પાની તબિયત બગડી છે",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m249",
+    "difficulty": "tricky",
+    "language": "de",
+    "note": "question without a question mark",
+    "text": "Kannst du mir kurz Bescheid geben, ob du Samstag kommst",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m250",
+    "difficulty": "tricky",
+    "language": "pt",
+    "note": "quoted question, not to him",
+    "text": "Minha mãe perguntou \"você vai casar quando?\" de novo kkkkk",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m251",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "you good?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m252",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "worry pressing for a reply",
+    "text": "are you okay?? saw the news about the train accident on your line, PLEASE reply",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m253",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Reacted ❤️ to \"got home safe\"",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m254",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "one-word ask",
+    "text": "thoughts?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m255",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "quoted question, not to him",
+    "text": "my roommate keeps asking \"whose turn is it to do dishes\" like she doesn't know 🙄",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m256",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Can you send me your passport number for the booking",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m257",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "mentions urgency, asks nothing",
+    "text": "Not urgent at all lol, just saw a dog that looks exactly like yours 🐶",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m258",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Call me back right away, it's about your scholarship, the deadline is in an hour",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m259",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "thanks for the help today man, really appreciate it 🙏",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m260",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "thanks first, then a request",
+    "text": "thanks for the help today man. one more thing, can u check if i filled the form right",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m261",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Just saw your post, congrats on the award!!",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m262",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "emergency news, no explicit ask",
+    "text": "Someone just hit my scooter and drove off. I'm bleeding a bit, people are helping me",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m263",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "what's ur size, getting matching tshirts for the trip",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m264",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "ping me when ur free",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m265",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "sure",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m266",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "starts like an ack but asks",
+    "text": "sure, but which day works for you?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m267",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "forwarded greeting, neither ask nor ack",
+    "text": "Forwarded\nGood morning 🌅 Have a blessed day! 🙏",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m268",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "polite tone, real worry",
+    "text": "hey sorry to bother u this late, my sister's not home yet and she's not picking up. is she with u guys?",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m269",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Do you want to split an uber to the airport tomorrow?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m270",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "quoted question, not to him",
+    "text": "so i asked him \"do you even like me?\" and he said \"idk\" 😭😭",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m271",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "my landlord just cut off the water and power. can i crash at urs tonight? need to know asap",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m272",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "statement that means he must act",
+    "text": "Your turn to book the court this week 🏸",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m273",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "On my way to the hospital for my shift, talk later",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m274",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "🙏",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m275",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "rhetorical questions, denies urgency, then a request",
+    "text": "Is it urgent? Nah. Is it important? Kinda. Read the doc I sent before tmrw's meeting",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m276",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "kal college aa raha hai?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m277",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "jaldi se ghar aa, police aayi hai",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m278",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "okk bhai done",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m279",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "announces a request",
+    "text": "sun na, ek kaam hai tujhse",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m280",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "long vent ending in an invitation",
+    "text": "yaar aaj ka din itna bekaar tha, subah alarm nahi baja, phir auto wale ne 200 maange, office mein boss ne daanta aur ab ghar aake dekha toh light nahi hai 😩 tu free hai toh shaam ko chai pe chal",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m281",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "bhai mere result mein kuch gadbad hai, fail dikha raha hai, abhi call kar please",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m282",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "paise bhej diye kya?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m283",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "arey koi baat nahi",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m284",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "starts like an ack but asks",
+    "text": "arey koi baat nahi, bas kal tak de dena",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m285",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "aaj gym mein PR maara 💪",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m286",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "emergency news, no explicit ask",
+    "text": "bhai flat mein aag lag gayi, sab bahar aa gaye hain",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m287",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "says not urgent, still asks",
+    "text": "bhai tu kab free hoga, urgent nahi hai par important baat karni hai",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m288",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "relayed question meant for him",
+    "text": "mummy pooch rahi hai tu kab aayega",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m289",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "hmm ok",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m290",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "kal party mein kaun kaun aa raha hai?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m291",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "भैया जल्दी आओ, मम्मी बेहोश हो गई हैं",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m292",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "कल मंदिर चलोगे?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m293",
+    "difficulty": "tricky",
+    "language": "hi",
+    "note": "quoted question, not to him",
+    "text": "मैंने उससे पूछा \"चाय पियोगे?\" और वो भाग गया 😂",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m294",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "बहुत अच्छा बेटा, खुश रहो",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m295",
+    "difficulty": "tricky",
+    "language": "hi",
+    "note": "says no hurry, still asks",
+    "text": "जब फ़्री हो तब बात करना, कोई जल्दी नहीं",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m296",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "आज शाम को मौसम बहुत अच्छा है",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "id": "h-m297",
+    "difficulty": "everyday",
+    "language": "ta",
+    "note": null,
+    "text": "சரி, நன்றி 🙏",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "id": "h-m298",
+    "difficulty": "everyday",
+    "language": "es",
+    "note": null,
+    "text": "contesta porfa!!! mi abuela está en urgencias",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m299",
+    "difficulty": "everyday",
+    "language": "pt",
+    "note": null,
+    "text": "Você vem pra festa sábado?",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "id": "h-m300",
+    "difficulty": "tricky",
+    "language": "mr",
+    "note": "request as an instruction",
+    "text": "उद्या येताना माझं पुस्तक घेऊन ये",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  }
+]

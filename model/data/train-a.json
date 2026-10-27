@@ -1,0 +1,6351 @@
+[
+  {
+    "text": "CALL ME",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pick up pick up pick up",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mom collapsed",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "where are u everyone's waiting",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "need u here now",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "call me asap pls",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav where are you??",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "there's been an accident. dad is in the hospital",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "plz answer the phone its important",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "come down, cab's here",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bro are u alive?? 15 missed calls",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "I'm stuck outside the station and my phone is at 2%",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "HELP me, I locked myself out and its raining",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "reply right now please",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "fire in the building, we're evacuating",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "where r u?? the exam hall is closing in 5 min",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "u there? need to talk NOW",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "she's not breathing properly, ambulance on the way",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "call me back immediately",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pls pls pls call me",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "not urgent but whenever you see this, the notes are in the drive",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "no rush, can you send me the slides sometime this week?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "that was urgent yesterday lol, all sorted now",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "the emergency is sorted now, thanks for being on standby",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "lol my \"urgent\" email was just a meme",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "not urgent, but could u check my resume when free?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "asap is my least favourite word ever",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "u coming",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "what time is the train",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "wondering if ur free sat",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pick up milk on the way",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "send the notes",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "can u send me the assignment pdf",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "did you eat?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "which room is the lab in",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "how much do I owe u for the pizza",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bring ur charger pls",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tell me when ur free to talk",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "lemme know if ur joining tmrw",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "are you free at 5?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "u up for chai later?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "do you have the prof's number",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "share the location please",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "wanna grab lunch?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "can you check if the form is submitted",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "any idea when results come out",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Hey, could you review my code before tonight?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "remind me to buy tickets tomorrow",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav can you proofread my essay? it's 800 words only",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "whats the wifi password at ur place",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "did u finish the lab report",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pls forward the mail from sir",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "will you be at college tomorrow",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "is the match tonight or tomorrow",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "plz help me with the maths question 4",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "she asked me \"are you free?\" lol I said ask him yourself",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "who even does that?",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "why do people say \"let's catch up\" and never actually do",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "my mom keeps asking \"when are you coming home\" every single day",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "how is this even legal lol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "he literally asked \"u coming?\" and then left without me",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Liked \"are you coming?\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 😂 to \"can you send the notes?\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Loved \"where are you\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 👍 to \"pick up milk\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Liked an image",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Sticker",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "GIF",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ok see u then",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "cool cool",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "thank you so much!!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "perfect thanks",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "haha yes",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "👍🏽",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "🙏",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "noted, thanks",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "sure thing",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "np",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ty!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "okayyy",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "lol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hahaha that's hilarious",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "got it",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "k",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Thanks bro",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "alright works for me",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "😂😂😂",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "will do 👍",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "aww thank you ❤️",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "yep yep",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "sounds good!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Emoji reaction: 😭",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bet",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "I reached home",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "exam went badly :(",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "forwarded: Your OTP-free scholarship list is now out, check the portal",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "got the internship!!! 🎉🎉",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "failed the viva, I want to disappear",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "train is 40 mins late again",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "just saw the new Dune trailer, wow",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I'll be at the library till 6",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "my laptop died mid presentation. worst day. I prepped for two weeks and the projector wouldn't even detect HDMI and then sir said just explain it verbally and I froze completely",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Rain in Andheri is insane today",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "dinner at 8 at Social, bringing Riya",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Check this out https://t.co/abc123",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bhai got 9.1 CGPA, still can't believe",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bus stuck near Dadar, traffic is crazy",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Done with the assignment, submitted at 11:58 lol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "my cousin's wedding is next month so I'll be out of town",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Prof Mehta cancelled tomorrow's lecture",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "im so tired of this semester honestly",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Leaving in 10",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "new phone arrived, camera is nuts",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I won't be able to make it to the trip, sorry",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ugh the canteen ran out of vada pav again",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Sent the money btw",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "good morning!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Happy birthday in advance, party at mine on sunday",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Just landed in Dubai",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "it's so hot today, 38 degrees at 9am",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I think I left my umbrella at your place",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Hostel mess food poisoning scare, but I'm fine now",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav ANSWER ME",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dude where are you, the interview started and they're calling your name",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "my bike skidded, bleeding, I need someone",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "call me. it's about dad. please",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "are u safe? saw the news about the blast near ur college",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "wake up wake up!! train leaves in 10",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "I NEED YOU TO CALL ME RIGHT NOW",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hey where did u go?? come back online!!",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "please come to the hospital fast",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "reply!!!!",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dude send me ur address",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "plz call when free",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "r u at home",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Can you drop me a text once you reach?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Who is taking the bus tomorrow, you or me",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "what's the deadline for the project submission",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hmm ok so are you in or not?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav pick up the phone its me",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bhai emergency!! call me",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "I got robbed. they took my phone, borrowing someone else's",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "are you ignoring me?? this is serious",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "come to gate 3 right now security is calling",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Nani is critical, we are rushing to Lilavati",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "SOS call me",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "u need to reply to the prof in the next 5 mins or we lose the slot",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hello??? HELLO",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "answer pls I'm panicking",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "power cut and I'm stuck in the lift",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "where the hell are you, we're all waiting at the airport",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "quick!! send the file, they're about to start",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "call me now, don't text",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "i think someone's following me, I'm scared",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "please pick up, it's an emergency",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "are you there?? respond pls",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "need your help urgently, please call",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "come fast he is not waking up",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "my account got hacked and money is leaving as we speak",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "talk to me right now",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "URGENT: need the form copy within the hour, can you send?",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ping me the moment u see this",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "u have to come now, mom is asking for you",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "BRO WHERE ARE YOU",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "not urgent at all but I found your pen",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "no rush on the money btw",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "lol the \"emergency\" was my cat on the fridge",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "asap = as slowly as possible, my manager's definition haha",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "no hurry, but can you return my book next week?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "not urgent, did u get a chance to look at the doc?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "that urgent call yesterday turned out to be nothing, all good",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "it was an emergency before, now fine. thanks for asking earlier",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "you free later this week? no rush on answering",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "haha \"URGENT: pizza is here\" he texted me",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "how r u",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "did u reach",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "r u coming to class",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "which bus do I take for Powai",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "what did sir say about the test",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "have u seen my charger anywhere",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "can u join the call at 4",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Could you share the zoom link?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "need the notes from yesterday's class",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "buy 2 samosas for me too",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "call your mom she's been trying to reach you",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "open the door I'm outside",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "please upload it before midnight",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dont forget to bring the id card",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "turn off the geyser before u leave",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "check ur mail",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "text me when you're home",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tell Riya I said hi and ask her about Saturday",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "u have the keys?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "do we have class tmrw or is it holiday",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Hey are you around this weekend? thinking of a movie",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "how do I reset the wifi router",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "wat time shud we meet",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Do u know any good dentist near Bandra?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "can you lend me 500 till tomorrow",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pls pay me back for the cab when u can",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Hi Pranav, I'm Aman from your batch. Could you add me to the study group?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "so are we doing this or not",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "any updates??",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav, would you mind taking a look at my project report and telling me what you think? I'm especially unsure about the conclusion section",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hey! can u tell me the syllabus for unit 3",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yo what's the plan tonight",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "u coming for the farewell?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "where do I submit the fee receipt",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "did you get the OTP I sent by mistake? pls delete and dont share",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pls dont tell anyone ok",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yaar help me with this python error",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sendd me the pic from yesterday",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "who asked lol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "so he goes \"wanna hang out?\" and I'm like... no??",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ma asked \"kab aa raha hai\" again, I swear",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "guess who texted \"u free?\" at 3am. my ex. lmao",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "what is wrong with people honestly",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "then she said \"can you help me\" and I just laughed",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "the sign said \"are you lost?\" and yes, yes I was",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "isn't it funny how everyone is a genius after the exam",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Liked \"can you call me?\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted ❤️ to \"wanna grab lunch?\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 😂 to \"where r u\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Laughed at \"u coming?\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Disliked a message",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Emphasized \"send me the notes\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Liked a photo",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Sticker 😂",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Voice message reaction 👍",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ok",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "okk",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "oki doki",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "kk",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "yup",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "yes 👍",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ya sure",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "thx",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "thanks a lot!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "thank u so much, really appreciate it",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "tysm 🥹",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Perfect, thank you!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "great, thanks",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "cheers mate",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "no worries",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "all good",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "lmao",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "LOL 😂",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "haha nice",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hehe",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ahaha okay",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "omg yes",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "noted",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "understood, thanks!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "cool",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "nice one",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "👌",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "❤️",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "😊",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "🔥🔥",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ok cool see you",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Alright, talk later",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "yeah same here",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "welcome!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "I reached the venue",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "result is out and I passed barely",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "dentist appointment went fine",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "heads up, I'm taking the 7:45 local",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "The wifi at the hostel is down again",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Got the tickets for Saturday",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "just finished my run, 5k in 31 min",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "brother's engagement was beautiful, will send pics",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "My dog is sick, been at the vet all morning. they say it might be nothing but I can't stop worrying and I haven't eaten anything since morning",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "https://github.com/openai/whisper",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Bro look at this meme lmao https://instagram.com/reel/xyz",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Nobody told me the lab was cancelled, I walked 2km for nothing",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Mom made paneer today, you'd love it",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I think I'm coming down with a fever",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "got rejected from the hackathon team :/",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "reading week begins tomorrow, finally",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Switching off my phone till evening, studying",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I'll pay u back on Monday",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "messed up my presentation badly",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Priya is getting married!!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Be there in 5",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Currently at the airport, flight delayed by 2 hours",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Bought new shoes today, 40% off",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "just woke up",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Fees due date extended till 30th",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "PRANAV!!! PICK UP",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "where are you, the bus is leaving without you",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dadu had a heart attack",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "call me back its really really important",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "please just respond, I am freaking out",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "need u at the hospital asap",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "come out of the room NOW, fire alarm",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hey r u there? urgent",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bro cops stopped us, call me",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "im in the ambulance with Rohan",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "pick up the damn phone",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "did u see my texts?? call urgently",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "where u at, the principal is asking for u right now",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "help I fell down the stairs, can't move my leg",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "tell me u are ok, please reply",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "MOM WANTS YOU TO CALL HER NOW",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "can you come right now? please. it's bad",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "answer your phone!!",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "my flight got cancelled and I have no money, stuck in Delhi",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "quick quick, the form closes in 2 minutes!! send the photo",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "call me back asap pls pls",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "house is flooded, water up to the knees",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav?? are you there?? ive been calling for an hour",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "emergency, where are you",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "reply immediately plz",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "not urgent: the library moved to the 3rd floor",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "no rush no pressure, just fyi the party moved",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "urgent? nah just wanted to say hi lol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "funny how \"urgent\" mails are always about parking",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "emergency over, the power is back",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "asap isn't needed, tomorrow is fine, can u send the pic?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "take your time, but can u tell me which book to buy",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "when's the next class",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "can u call me in ten",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "whats ur roll number",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "what are you wearing tonight",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "are you vegetarian or can i order chicken",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "did u get my message",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "who's coming on sunday, any idea",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "how many people are coming for dinner",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "you got a pen?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Does the 5:40 train stop at Vile Parle?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "r u still up",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Do you wanna split an Uber?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "are u mad at me",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "can i borrow your laptop for the weekend",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "please write to me when you're done with the exam",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "submit the attendance sheet to sir",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bring the extension board, mine broke",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "save me a seat pls",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "come to the canteen",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "text me the address of the cafe",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "wake me up at 7",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "take a screenshot of the timetable and send",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "go check the notice board and tell me what it says",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "drop me at the station na",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "help me carry this stuff?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "explain me the last question pls",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "PLEASE reply when you see this",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Which one looks better, red or blue?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "btw do u know if sir extended the deadline",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "let me know your thoughts on the logo",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hey long time! how have you been?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "I was thinking, maybe you could join us at the hackathon? We need a backend guy.",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "u free to talk? it's about my sister",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "would u be able to tutor me for 2 sessions",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "r u gonna eat in the mess today",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "anything u want from the market",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "When should I come over?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Is there anything I should know before the interview?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dude did you pay the registration fee",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "she texted \"are you okay?\" and I had no clue what to say",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "someone in the group asked \"who has the notes\" and nobody replied lmao",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "my sister: \"can you come home early?\" me: \"no\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "you know how he is, always \"what's the plan\" and then no plan",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ugh why do profs always ask \"any questions?\" and then get annoyed when you do",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "do you ever wonder why the monsoon always starts on exam day",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "how do these people sleep at night, honestly",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Liked \"are you free tonight?\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 👍 to \"did u eat?\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 😮 to \"I got the job\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Loved an image",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Liked a video",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 🙏 to \"thank you\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Photo reaction ❤️",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "👍",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "👍👍",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "🙏🙏",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "😂",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "😭😭😭",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "🥰",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "🤝",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ok sure",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "okie",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ok thanks",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "okay got it, thanks!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "yes sir",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "alrighty",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "thank youuu",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "thnx",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Thanks!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "many thanks 🙏",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Awesome, thank you",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Appreciate it bro",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "that's great",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "same lol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hahah true",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "LMFAOOO",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "dead 💀",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "wow",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ahh okay",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "oh nice",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "mm hmm",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "right right",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "fair enough",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "makes sense",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Will do, thanks",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "sweet",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "cheers",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ty ty",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "reached college, where's everyone",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I'm in the lab, door's locked",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bro this song is so good https://open.spotify.com/track/abc",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Forwarded: Reminder - mid-sem exams start 3rd Nov",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "made it to the finals!!! 🏆",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "my phone fell in water, using dad's old phone",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Flat tyre again. ugh.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "anyway that's how the day went, I'm just exhausted",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "My internship starts Monday. super nervous",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "saw ur brother at the mall",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "honestly this city is too expensive",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "It's been a long week and I'm completely drained, the project, the viva, the fees thing, my landlord raising rent, and mom's tests. Just needed to say it somewhere",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "got the seat in IIT Bombay's summer program",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Rohit's birthday cake was so good",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "taking a nap, don't disturb haha",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "updated the doc with my part",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "trip to Goa is confirmed for 14th",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "my team lost 3-0",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "will reach by 9",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "It's finally raining",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Already ate, you guys carry on",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "so I finally watched Oppenheimer",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "nvm figured it out",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Running late, start without me",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "lecture was boring af",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I called mom, she's fine",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "he's taking the 9 am flight",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Hey, do you know what the answer to question 5 is?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Reply when you can please",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "call me when you wake up",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "are u dead",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "show me the photos na",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "CALL ME NOW",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "PICK UP!!!",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Papa's BP is very high, doctor says admit him now",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "hellooo where are you, we're at your door and nobody opens",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "u need to log in right now, the exam link is live",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Pranav seriously pls call me, I have no one else",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "I can't breathe properly, asthma attack",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "come immediately!",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "emergency: need blood, A negative, can you help?",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "call now please, it can't wait",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hurry up they're closing the gate",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "answer me. now.",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "someone broke into our hostel room",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "tell me where you are, I'm worried sick",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "can you talk right now? it's urgent urgent",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "oh god please see this message and call",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "where are u?? I've been standing here for 40 min",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ring me asap its about the money",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "auto driver is refusing to stop and taking me somewhere else",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "we need you in the lab immediately, the sample is ruined",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "DUDE ANSWER",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "get here fast",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "It's urgent. Mom fell in the bathroom",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "missed 9 calls from u, what happened?? call back",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "r u ok?? pls respond immediately",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "nothing urgent, just checking in",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "its not an emergency but my wifi is down again lol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "no worries, no rush at all",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "urgent = my phone battery is at 1% lol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "\"asap\" he said, 3 weeks ago. still nothing",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "that was an emergency drill, everyone's fine",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "not urgent but pls check your inbox when you can",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ASAP not needed, just curious, did u watch the finale?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "was it you who took my umbrella?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Are the lectures online now?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ok but what time",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "whats ur plan for diwali",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "r u going to the fest",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Hey Pranav, did you get my application link?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Where are you staying in Pune?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "do u want me to bring anything",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "should i wait or leave",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "got any good recs for a laptop under 50k",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "so what's the verdict",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "can you not do that",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "why didn't you tell me",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "how long will it take you?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "let me know once the transfer is done",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "please share ur GPay number",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bring snacks for the trip",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ask sir about the extension",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "print this for me tomorrow",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "get me a coffee while u are there",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "return the book to Meera",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "talk to him, he'll listen to you",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Try restarting it and tell me if it works",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "look at this and tell me if it's right",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "come with me to the bank tomorrow",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "swing by my room after dinner",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "PLEASE accept my request on LinkedIn",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "just tell me yes or no",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pls vote for my project in the poll",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "what do u think about the new policy",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kya hua? why r u not replying",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Hi! I saw your post about the old bike. Is it still available?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "r u free for a quick call this evening? need advice on something",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "wats the hw",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "which movie should we watch",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "someone literally asked me \"do you even lift\" at the library",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "she's like \"can we talk?\" and I'm like uh oh",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "my teacher: \"why are you late?\" me: *internal screaming*",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "you won't believe it, he said \"u there?\" after leaving me on read for 3 days",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ok but who needs 4 chargers",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "what even is a \"quick sync\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Liked \"r u coming?\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 👍 to \"send the notes\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted 😂 to \"where are you??\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Loved \"call me\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reacted ❤️ to a photo",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Liked a sticker",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Voice reaction 😂",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "👍🏻",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "🫡",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "😅",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "🙌",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ok boss",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "okay cool",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "cool thanks bro",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "got it 👍",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ok will check",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "yepp",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ya ok",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "thank u!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "thanks man, you're a lifesaver",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "thank you very much",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "thanks buddy",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "oh ok thanks",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "perfect",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "brilliant, thanks",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "haha that's so true",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "lolol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bahaha",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "rofl",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "lmaoo yes",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "lol ok",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "oh wow",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hmm okay",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "noice",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "good one",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "no problem!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "anytime",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "aight",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Sounds like a plan",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ok no issues",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "boarded the train",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Hey, my number changed, this is my new one",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "You were right about the placement drive",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "He's been in the ICU for 2 days but stable now",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "tbh I'm not feeling the course anymore",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "my parents are visiting next week",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Nobody is replying in the group, so I'm telling you: the seminar is at 10 not 11",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Got my visa approved!!!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "the café near campus shut down :(",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I scored 98 in DSA, can't stop smiling",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "just booked the tickets to Jaipur",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "attaching the pdf in next msg",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "please see attached receipt",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "updated my resume, uploaded on drive",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bad news, grandma passed away this morning",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "spent all day in bed lol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Currently in the metro, signal is poor",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "I miss college already tbh",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Aman won the quiz",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "here's the link to the form: https://forms.gle/xyz987",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "So the plan: leave at 7, reach Lonavala by 10, lunch, trek, back by 8.",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "just landed safe",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "waiting for the bus since 40 mins, lol",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Cleaned my room finally",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "can't believe it's already november",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Today I met the professor and he approved my topic",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Rain stopped, finally",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "dad bought a new car",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "your name came up in the meeting, good things",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "slept through my alarm, missed the 8am",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Pranav pls call, Riya is in the ER",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hey!! answer!! we're leaving without you in 2 min",
+    "language": "en",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "there's smoke coming from the kitchen, I'm outside",
+    "language": "en",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Do u have a spare umbrella?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "lmk if you need anything from home",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Check the group, I posted the schedule",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "how was the exam",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "r u serious rn?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "write the address down for me",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Why did you leave early?",
+    "language": "en",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "Reacted 🔥 to \"got the internship\"",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "aww",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "yay!",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Hmm ok",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "battery's dying, will charge and text",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Found my keys, they were in the fridge",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "The cafeteria has biryani today",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Visiting Nashik this weekend",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "can't sleep",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "Meeting got postponed to Thursday",
+    "language": "en",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "¿me ayudas con la mudanza el domingo?",
+    "language": "es",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "llego en diez minutos",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ok 😊",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ja, vale",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "tu peux me rappeler ce soir ?",
+    "language": "fr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "je prends le métro maintenant",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "d'accord 👍",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "kannst du mir morgen helfen?",
+    "language": "de",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ich bin gleich da",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "me empresta o carregador?",
+    "language": "pt",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tô saindo agora",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ممكن تساعدني بالواجب؟",
+    "language": "ar",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "سأصل بعد قليل",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "mi presti il caricatore?",
+    "language": "it",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sto uscendo ora",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bisa bantu aku pindahan hari Minggu?",
+    "language": "id",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aku berangkat sekarang",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "yarın bana yardım edebilir misin?",
+    "language": "tr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "birazdan oradayım",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "можешь помочь мне завтра?",
+    "language": "ru",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "я скоро буду",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ладно, окей",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "olur 👍",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "¡LLÁMAME YA!",
+    "language": "es",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "contesta el teléfono por favor, es urgente",
+    "language": "es",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mi mamá se desmayó, estamos en el hospital",
+    "language": "es",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "¿dónde estás? todos te estamos esperando",
+    "language": "es",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ven ahora mismo, te necesito",
+    "language": "es",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "¿vienes?",
+    "language": "es",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "¿a qué hora sale el tren?",
+    "language": "es",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "me pregunto si estás libre el sábado",
+    "language": "es",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "trae pan en el camino",
+    "language": "es",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mándame los apuntes porfa",
+    "language": "es",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "¿ya comiste?",
+    "language": "es",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "¿puedes revisar mi trabajo antes de mañana?",
+    "language": "es",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dime cuando estés libre para hablar",
+    "language": "es",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "no hay prisa, pero ¿me pasas el enlace?",
+    "language": "es",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "no es urgente, solo quería saludarte",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ya se arregló la emergencia, gracias",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ella me preguntó \"¿estás libre?\" jaja",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "¿quién hace eso, de verdad?",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "vale, nos vemos",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "¡muchas gracias!",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "jajaja sí",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "perfecto, gracias",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "de nada",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Me gusta \"¿vienes?\"",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reaccionó con 😂 a \"¿dónde estás?\"",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "entendido",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ya llegué a casa",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "el examen me salió fatal",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aprobé el curso!! 🎉",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "mañana no hay clase, el profe canceló",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "este calor es insoportable hoy",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "https://www.youtube.com/watch?v=abc123xyz",
+    "language": "es",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "APPELLE-MOI MAINTENANT",
+    "language": "fr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "décroche s'il te plaît, c'est urgent",
+    "language": "fr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ma mère a fait un malaise, on est aux urgences",
+    "language": "fr",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "t'es où ?? tout le monde t'attend",
+    "language": "fr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "viens vite, j'ai besoin de toi",
+    "language": "fr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu viens ?",
+    "language": "fr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "c'est à quelle heure le train",
+    "language": "fr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "je me demande si t'es libre samedi",
+    "language": "fr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "prends du lait en venant",
+    "language": "fr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "envoie-moi les cours stp",
+    "language": "fr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "t'as mangé ?",
+    "language": "fr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tu peux relire mon rapport avant demain ?",
+    "language": "fr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dis-moi quand tu es dispo pour parler",
+    "language": "fr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pas pressé, mais tu peux m'envoyer le lien ?",
+    "language": "fr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "pas urgent, je voulais juste te dire bonjour",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "l'urgence est réglée maintenant, merci",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "elle m'a demandé « t'es libre ? » mdr",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "qui fait ça sérieusement ?",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ok à tout à l'heure",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "merci beaucoup !!",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "haha oui",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "parfait merci",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "de rien",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "A aimé « tu viens ? »",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Réaction 😂 à « t'es où ? »",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "compris",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "je suis rentré",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "l'examen s'est très mal passé",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "j'ai eu mon stage !! 🎉",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "le prof a annulé le cours de demain",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "il fait trop chaud aujourd'hui",
+    "language": "fr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "RUF MICH AN, SOFORT",
+    "language": "de",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "geh bitte ans Telefon, es ist dringend",
+    "language": "de",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "meine Mutter ist zusammengebrochen, wir sind im Krankenhaus",
+    "language": "de",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "wo bist du?? alle warten auf dich",
+    "language": "de",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "komm sofort, ich brauche dich",
+    "language": "de",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kommst du?",
+    "language": "de",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "wann fährt der Zug?",
+    "language": "de",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ich frage mich, ob du Samstag Zeit hast",
+    "language": "de",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bring Milch mit",
+    "language": "de",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "schick mir bitte die Notizen",
+    "language": "de",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hast du schon gegessen?",
+    "language": "de",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kannst du meine Arbeit vor morgen durchsehen?",
+    "language": "de",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sag Bescheid, wenn du Zeit zum Reden hast",
+    "language": "de",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "keine Eile, aber kannst du mir den Link schicken?",
+    "language": "de",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "nicht dringend, wollte nur Hallo sagen",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "der Notfall ist erledigt, danke",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "sie hat mich gefragt „hast du Zeit?“ lol",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "wer macht denn sowas bitte?",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ok bis dann",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "vielen Dank!!",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "haha ja",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "perfekt, danke",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "gern geschehen",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Gefällt „kommst du?“",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reaktion 😂 auf „wo bist du?“",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "verstanden",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "bin zu Hause angekommen",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "die Prüfung lief schlecht",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ich hab das Praktikum bekommen!! 🎉",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "der Kurs morgen fällt aus",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "heute ist es viel zu heiß",
+    "language": "de",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ME LIGA AGORA",
+    "language": "pt",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "atende o telefone por favor, é urgente",
+    "language": "pt",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "minha mãe desmaiou, estamos no hospital",
+    "language": "pt",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "cadê você?? todo mundo tá esperando",
+    "language": "pt",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "vem agora, preciso de você",
+    "language": "pt",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "você vem?",
+    "language": "pt",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "que horas sai o trem?",
+    "language": "pt",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "será que você tá livre sábado?",
+    "language": "pt",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "traz leite no caminho",
+    "language": "pt",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "manda as anotações aí",
+    "language": "pt",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "já almoçou?",
+    "language": "pt",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dá pra revisar meu trabalho antes de amanhã?",
+    "language": "pt",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "me avisa quando puder conversar",
+    "language": "pt",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "sem pressa, mas pode me mandar o link?",
+    "language": "pt",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "não é urgente, só queria dar um oi",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "a emergência já foi resolvida, valeu",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ela me perguntou \"você tá livre?\" kkk",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "quem faz isso, gente?",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "beleza, até lá",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "muito obrigado!!",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "kkkk sim",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "perfeito, obrigada",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Curtiu \"você vem?\"",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Reagiu com 😂 a \"cadê você?\"",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "entendi",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "cheguei em casa",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "a prova foi péssima",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "consegui o estágio!! 🎉",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "o professor cancelou a aula de amanhã",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "tá um calor absurdo hoje",
+    "language": "pt",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "اتصل بي حالاً",
+    "language": "ar",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "رد على الهاتف من فضلك، الأمر عاجل",
+    "language": "ar",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "أمي أغمي عليها، نحن في المستشفى",
+    "language": "ar",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "أين أنت؟ الجميع ينتظرك",
+    "language": "ar",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "تعال الآن، أحتاجك",
+    "language": "ar",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "هل ستأتي؟",
+    "language": "ar",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "متى يغادر القطار؟",
+    "language": "ar",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "أتساءل إن كنت متفرغاً يوم السبت",
+    "language": "ar",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "أحضر الحليب في طريقك",
+    "language": "ar",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "أرسل لي الملاحظات من فضلك",
+    "language": "ar",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "هل أكلت؟",
+    "language": "ar",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ممكن تراجع بحثي قبل بكرة؟",
+    "language": "ar",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "قل لي متى تكون متفرغاً للكلام",
+    "language": "ar",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "لا مشكلة في التأخير، بس ممكن ترسل لي الرابط؟",
+    "language": "ar",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ليس عاجلاً، أردت فقط أن أسلم عليك",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "الطوارئ انتهت، شكراً",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "سألتني \"هل أنت متفرغ؟\" هههه",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "مين يعمل كده أصلاً؟",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "حسناً، أراك لاحقاً",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "شكراً جزيلاً!!",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "هههه نعم",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ممتاز شكراً",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "عفواً",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "أعجبه \"هل ستأتي؟\"",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "تفاعل 😂 مع \"أين أنت؟\"",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "تمام",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "وصلت البيت",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "الامتحان كان سيئاً",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "حصلت على التدريب!! 🎉",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "الدكتور ألغى محاضرة بكرة",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "الجو حار جداً اليوم",
+    "language": "ar",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "CHIAMAMI SUBITO",
+    "language": "it",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "rispondi al telefono per favore, è urgente",
+    "language": "it",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mia madre è svenuta, siamo in ospedale",
+    "language": "it",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "dove sei?? ti stanno aspettando tutti",
+    "language": "it",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "vieni subito, ho bisogno di te",
+    "language": "it",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "vieni?",
+    "language": "it",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "a che ora parte il treno?",
+    "language": "it",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mi chiedevo se sei libero sabato",
+    "language": "it",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "prendi il latte mentre torni",
+    "language": "it",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "mandami gli appunti",
+    "language": "it",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hai già mangiato?",
+    "language": "it",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "puoi controllare la mia tesina prima di domani?",
+    "language": "it",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "dimmi quando sei libero per parlare",
+    "language": "it",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "nessuna fretta, ma mi mandi il link?",
+    "language": "it",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "non è urgente, volevo solo salutarti",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "l'emergenza è rientrata, grazie",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "mi ha chiesto \"sei libero?\" ahah",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ma chi fa una cosa del genere?",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ok a dopo",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "grazie mille!!",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ahah sì",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "perfetto, grazie",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "di niente",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Piace \"vieni?\"",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Ha reagito con 😂 a \"dove sei?\"",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "capito",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "sono arrivato a casa",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "l'esame è andato malissimo",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ho avuto lo stage!! 🎉",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "il prof ha annullato la lezione di domani",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "oggi fa troppo caldo",
+    "language": "it",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "TELEPON AKU SEKARANG",
+    "language": "id",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "angkat teleponnya dong, penting banget",
+    "language": "id",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ibu pingsan, kami di rumah sakit",
+    "language": "id",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kamu di mana?? semua orang nungguin",
+    "language": "id",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ke sini sekarang, aku butuh kamu",
+    "language": "id",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kamu jadi datang?",
+    "language": "id",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kereta berangkat jam berapa?",
+    "language": "id",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "aku penasaran kamu kosong hari Sabtu nggak",
+    "language": "id",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "beliin susu sekalian ya",
+    "language": "id",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kirim catatannya dong",
+    "language": "id",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "udah makan belum?",
+    "language": "id",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "bisa cek tugasku sebelum besok?",
+    "language": "id",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "kabarin kalau kamu udah bisa ngobrol",
+    "language": "id",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "santai aja, tapi bisa kirim linknya?",
+    "language": "id",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "nggak urgent kok, cuma mau nyapa",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "daruratnya sudah beres, makasih",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "dia nanya \"kamu kosong?\" wkwk",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "siapa sih yang kayak gitu?",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "oke, sampai ketemu",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "makasih banyak!!",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "wkwk iya",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "sip, makasih",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "sama-sama",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Menyukai \"kamu jadi datang?\"",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Bereaksi 😂 pada \"kamu di mana?\"",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "paham",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "aku sudah sampai rumah",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ujiannya jelek banget",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "aku diterima magang!! 🎉",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "dosennya batalin kelas besok",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "panas banget hari ini",
+    "language": "id",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "BENİ HEMEN ARA",
+    "language": "tr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "telefonu aç lütfen, acil",
+    "language": "tr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "annem bayıldı, hastanedeyiz",
+    "language": "tr",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "neredesin?? herkes seni bekliyor",
+    "language": "tr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "hemen gel, sana ihtiyacım var",
+    "language": "tr",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "geliyor musun?",
+    "language": "tr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "tren kaçta kalkıyor?",
+    "language": "tr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "cumartesi müsait misin acaba",
+    "language": "tr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "gelirken süt al",
+    "language": "tr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "notları gönder bana",
+    "language": "tr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yemek yedin mi?",
+    "language": "tr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "yarından önce ödevime bakabilir misin?",
+    "language": "tr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "konuşmaya müsait olunca haber ver",
+    "language": "tr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "acelesi yok ama linki atar mısın?",
+    "language": "tr",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "acil değil, sadece selam vermek istedim",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "acil durum halloldu, sağ ol",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bana \"müsait misin?\" diye sormuş hahah",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "kim yapar ki böyle bir şey?",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "tamam, görüşürüz",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "çok teşekkürler!!",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "hahaha evet",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "süper, sağ ol",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "rica ederim",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "\"geliyor musun?\" beğenildi",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "\"neredesin?\" mesajına 😂 tepkisi verildi",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "anladım",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "eve vardım",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "sınav çok kötü geçti",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "staja kabul edildim!! 🎉",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "hoca yarınki dersi iptal etti",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "bugün hava çok sıcak",
+    "language": "tr",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ПОЗВОНИ МНЕ СЕЙЧАС",
+    "language": "ru",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "возьми трубку, пожалуйста, это срочно",
+    "language": "ru",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "маме стало плохо, мы в больнице",
+    "language": "ru",
+    "urgent": true,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ты где?? все тебя ждут",
+    "language": "ru",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "приезжай сейчас, ты мне нужен",
+    "language": "ru",
+    "urgent": true,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ты придёшь?",
+    "language": "ru",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "во сколько поезд?",
+    "language": "ru",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "интересно, ты свободен в субботу",
+    "language": "ru",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "купи молоко по дороге",
+    "language": "ru",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "скинь конспекты",
+    "language": "ru",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "ты уже поел?",
+    "language": "ru",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "можешь проверить мою работу до завтра?",
+    "language": "ru",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "напиши, когда сможешь поговорить",
+    "language": "ru",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "не горит, но можешь скинуть ссылку?",
+    "language": "ru",
+    "urgent": false,
+    "asks": true,
+    "ack": false
+  },
+  {
+    "text": "не срочно, просто хотел поздороваться",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "с ЧП всё решили, спасибо",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "она спросила «ты свободен?» ахах",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "кто вообще так делает?",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "ок, до встречи",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "большое спасибо!!",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "ахаха да",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "отлично, спасибо",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "пожалуйста",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Нравится «ты придёшь?»",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "Реакция 😂 на «ты где?»",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "понял",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": true
+  },
+  {
+    "text": "я дома",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "экзамен прошёл ужасно",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "меня взяли на стажировку!! 🎉",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "препод отменил завтрашнюю пару",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  },
+  {
+    "text": "сегодня жуткая жара",
+    "language": "ru",
+    "urgent": false,
+    "asks": false,
+    "ack": false
+  }
+]

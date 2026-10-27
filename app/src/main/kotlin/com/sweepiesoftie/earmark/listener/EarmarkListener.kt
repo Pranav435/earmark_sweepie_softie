@@ -91,6 +91,8 @@ class EarmarkListener : NotificationListenerService() {
             dispatch(Event.StatsLoaded(graph.store.stats()))
             graph.store.trim(System.currentTimeMillis())
         }
+        // Loads the weights off the main thread, before the first message needs them.
+        s.scope.launch(s.engineDispatcher) { log.add(if (s.engine.messageModel) "message model loaded" else "message model missing; word lists only") }
         s.scope.launch {
             graph.settings.state.drop(1).collect { user ->
                 s.settings = withContext(Dispatchers.IO) { s.withCard(graph.apps.engineSettings(user)) }

@@ -9,6 +9,7 @@ export JAVA_HOME=/opt/homebrew/opt/openjdk@21        # JDK 21 is not on PATH
 ./gradlew :core:test                                   # fast loop: all product logic lives here
 ./gradlew :core:test :app:assembleRelease lint         # ship gate: tests, minified APK, lint 0 errors
 ./gradlew :core:benchmark                              # accuracy on labelled cases; compare benchmark/results/results.json
+./gradlew :core:trainModel                             # retrains the message model from model/data (model/README.md)
 ```
 
 The release APK lands in `app/build/outputs/apk/release/`. Copy it to `dist/earmark-v<versionName>.apk`, which is committed so testers can download it from GitHub, and `git rm` the previous one. Then check that `aapt2 dump permissions` shows no `INTERNET`, and that `apksigner verify --print-certs` shows the Sweepie Softie key. Bump `versionCode` for every release so it installs as an update, and update the APK name in README.md and `scripts/setup-phone.sh`.
@@ -42,4 +43,6 @@ The release APK lands in `app/build/outputs/apk/release/`. Copy it to `dist/earm
 - **Missed calls and business texts on the emulator:** `adb emu gsm call 5559876`, then `adb emu gsm cancel 5559876`, makes Google's dialer post a real missed call (a MessagingStyle "Missed call" in the `missed_call` category). `adb emu sms send AX-AIRTEL "…"` sends a text from a business sender ID. Shell notifications can't set a category, so emails and reminders run only in core tests (ADR 0029).
 - **Device setup:** `scripts/setup-phone.sh` installs the APK and grants every permission adb can grant, on a phone or the emulator.
 - **On-device check:** `scripts/check-pill.sh` (phone unlocked; `ANDROID_SERIAL` when the emulator is also attached) runs a message during use through a feed to a drawn pill and fails with the step that broke. Run it on the A34 after any change to the listener, the foreground poll, drift or the overlays. A scenario test can't catch an overlay that is attached but never drawn.
+- **Message model:** `Urgency` reads a message into named clues, and `MessageModel` reads the words and those clue names (ADR 0031). Renaming or adding a clue changes the model's features, so run `:core:trainModel` after it, then the tests. A test that pins a borderline reading ("free tonight", "hey") can flip on a retrain: pin readings with plain cases. The weights ship as a Java resource from `:core`; the Log's "message model loaded" line, right after the listener connects, says they reached the phone.
+- **Benchmark cases are for checking, not tuning:** never train the model on `benchmark/data` or `benchmark/holdout/data`, and write new rules from what a miss shows in general, not for the case.
 - **Some project-folder files are iCloud placeholders** (`ls -lO` shows `dataless`), and reading one hangs.

@@ -1,0 +1,2673 @@
+[
+  {
+    "id": "h-m001",
+    "sensible": {
+      "Can I call you?": false,
+      "Okay": true,
+      "Will reply soon": false,
+      "Give me 5 min": true,
+      "Got it": true,
+      "Can't talk, text me?": true,
+      "Sure": true,
+      "Calling you now": true,
+      "Yes": false
+    }
+  },
+  {
+    "id": "h-m002",
+    "sensible": {
+      "No": true,
+      "Let me check": true,
+      "I think so": true,
+      "Yes": true,
+      "Sure": true
+    }
+  },
+  {
+    "id": "h-m004",
+    "sensible": {
+      "Will tell you soon": false,
+      "Will reply soon": false,
+      "Got it": true,
+      "Let me check": true,
+      "Can I call you?": false,
+      "Sure": true,
+      "Okay": true,
+      "Not sure": false,
+      "Will do": true
+    }
+  },
+  {
+    "id": "h-m006",
+    "sensible": {
+      "Yes": true,
+      "No": true,
+      "Let me check": false,
+      "Yeah": true
+    }
+  },
+  {
+    "id": "h-m007",
+    "sensible": {
+      "Got it": true,
+      "Cool": true,
+      "Okay": true,
+      "Here": true,
+      "Will reply soon": false,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m008",
+    "sensible": {
+      "Not sure": true,
+      "Let me check": true,
+      "Yes": false,
+      "Will tell you soon": true,
+      "No": false,
+      "I'm not sure": true,
+      "I don't know": true
+    }
+  },
+  {
+    "id": "h-m010",
+    "sensible": {
+      "Let me check": false,
+      "Yes": false,
+      "Okay": false,
+      "Will call you": true,
+      "I'm here": true,
+      "Here": true,
+      "5 min away": true,
+      "On my way": true,
+      "No": false
+    }
+  },
+  {
+    "id": "h-m011",
+    "sensible": {
+      "Let me check": false,
+      "Yes": true,
+      "No": true,
+      "Okay": true
+    }
+  },
+  {
+    "id": "h-m013",
+    "sensible": {
+      "Cool": true,
+      "Got it": true,
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Great!": true,
+      "Okay": true
+    }
+  },
+  {
+    "id": "h-m014",
+    "sensible": {
+      "Got it": false,
+      "Can I call you?": false,
+      "Okay": false,
+      "Calling you now": true,
+      "No": false,
+      "Will reply soon": false,
+      "Can't talk, text me?": true,
+      "Give me 5 min": true,
+      "What?": true
+    }
+  },
+  {
+    "id": "h-m015",
+    "sensible": {
+      "Okay": true,
+      "Can't right now": false,
+      "Can I call you?": false,
+      "Got it": true,
+      "Will reply soon": true,
+      "Okay, will do": true,
+      "I will": true,
+      "Yeah": true,
+      "Done": false
+    }
+  },
+  {
+    "id": "h-m016",
+    "sensible": {
+      "Hahaha": true,
+      "Haha": true,
+      "lol": true,
+      "No": false,
+      "Yes": false,
+      "Let me check": false
+    }
+  },
+  {
+    "id": "h-m017",
+    "sensible": {
+      "Let me check": true,
+      "Haha": false,
+      "Got it": false,
+      "Will reply soon": false,
+      "😟": false,
+      "Not sure": true,
+      "Can I call you?": false,
+      "Hahaha": false,
+      "Will tell you soon": true
+    }
+  },
+  {
+    "id": "h-m018",
+    "sensible": {
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Okay": false,
+      "Will tell you soon": true,
+      "Any time": true,
+      "Not sure": true,
+      "Got it": false,
+      "I don't know": true,
+      "Let me check": true
+    }
+  },
+  {
+    "id": "h-m020",
+    "sensible": {
+      "Yay!": true,
+      "Can I call you?": false,
+      "Congrats!": true,
+      "Got it": false,
+      "Congratulations!": true,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m021",
+    "sensible": {
+      "Okay": false,
+      "Can I call you?": true,
+      "😟": false,
+      "😞": false,
+      "Will reply soon": false,
+      "Got it": false
+    }
+  },
+  {
+    "id": "h-m022",
+    "sensible": {
+      "No": false,
+      "Let me check": true,
+      "Okay": true,
+      "Yes": true
+    }
+  },
+  {
+    "id": "h-m024",
+    "sensible": {
+      "Yes": false,
+      "Okay": false,
+      "Will tell you soon": true,
+      "No": false,
+      "Let me check": true,
+      "Not sure": true,
+      "I did": false
+    }
+  },
+  {
+    "id": "h-m025",
+    "sensible": {
+      "😞": true,
+      "Got it": false,
+      "Will reply soon": false,
+      "Ugh": true,
+      "Can I call you?": true,
+      "😟": true
+    }
+  },
+  {
+    "id": "h-m026",
+    "sensible": {
+      "Got it": false,
+      "Will reply soon": false,
+      "Thodi der mein bolte hain": true,
+      "Pata nahi": true,
+      "Ek min, check karna padega": true,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m028",
+    "sensible": {
+      "Abhi baat nahi ho sakti, text karo": true,
+      "5 min do": true,
+      "Will reply soon": false,
+      "Calling now": true,
+      "Got it": true,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m029",
+    "sensible": {
+      "Done": true,
+      "Theek hai, ho jayega": true,
+      "Can I call you?": false,
+      "Got it": true,
+      "Abhi nahi ho payega": true,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m031",
+    "sensible": {
+      "Baad mein baat karte hain": true,
+      "Call karoon?": false,
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Got it": true,
+      "Accha": true
+    }
+  },
+  {
+    "id": "h-m032",
+    "sensible": {
+      "Ek min, check karna padega": true,
+      "Got it": false,
+      "Will reply soon": false,
+      "Thodi der mein bolte hain": true,
+      "Pata nahi": true,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m033",
+    "sensible": {
+      "Got it": false,
+      "Accha": false,
+      "Baad mein baat karte hain": false,
+      "Will reply soon": false,
+      "Can I call you?": true,
+      "Call karoon?": true
+    }
+  },
+  {
+    "id": "h-m035",
+    "sensible": {
+      "Will reply soon": false,
+      "Done": false,
+      "Can I call you?": true,
+      "Got it": true,
+      "Abhi nahi ho payega": true,
+      "Theek hai, ho jayega": true
+    }
+  },
+  {
+    "id": "h-m036",
+    "sensible": {
+      "Yes": true,
+      "No": true,
+      "Let me check": false
+    }
+  },
+  {
+    "id": "h-m037",
+    "sensible": {
+      "Can I call you?": false,
+      "Will reply soon": false,
+      "Got it": true,
+      "Can't right now": true,
+      "Done": true,
+      "Okay, will do": true
+    }
+  },
+  {
+    "id": "h-m038",
+    "sensible": {
+      "Raste mein hoon": false,
+      "No": false,
+      "Bas 5 min": false,
+      "Let me check": false,
+      "Yes": false,
+      "Thodi der mein": false
+    }
+  },
+  {
+    "id": "h-m040",
+    "sensible": {
+      "Thodi der mein": true,
+      "Let me check": false,
+      "Bas 5 min": true,
+      "Yes": false,
+      "Raste mein hoon": true,
+      "No": false
+    }
+  },
+  {
+    "id": "h-m041",
+    "sensible": {
+      "नहीं": true,
+      "हाँ": true,
+      "एक मिनट, देखना पड़ेगा": true,
+      "No": true,
+      "Let me check": true,
+      "Yes": true
+    }
+  },
+  {
+    "id": "h-m043",
+    "sensible": {
+      "Can I call you?": true,
+      "Will reply soon": false,
+      "अभी नहीं हो पाएगा": false,
+      "हो गया": false,
+      "Got it": true,
+      "ठीक है, हो जाएगा": false
+    }
+  },
+  {
+    "id": "h-m044",
+    "sensible": {
+      "कॉल करूँ?": false,
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Got it": true,
+      "अच्छा": true,
+      "बाद में बात करते हैं": true
+    }
+  },
+  {
+    "id": "h-m045",
+    "sensible": {
+      "Got it": true,
+      "अभी नहीं हो पाएगा": true,
+      "ठीक है, हो जाएगा": true,
+      "Can I call you?": false,
+      "Will reply soon": false,
+      "हो गया": true
+    }
+  },
+  {
+    "id": "h-m047",
+    "sensible": {
+      "Yes": true,
+      "No": true,
+      "नहीं": true,
+      "एक मिनट, देखना पड़ेगा": true,
+      "हाँ": true,
+      "Let me check": true
+    }
+  },
+  {
+    "id": "h-m049",
+    "sensible": {
+      "Got it": true,
+      "Done": false,
+      "Can I call you?": false,
+      "Will reply soon": false,
+      "Okay, will do": true,
+      "Can't right now": false
+    }
+  },
+  {
+    "id": "h-m050",
+    "sensible": {
+      "Will reply soon": false,
+      "Got it": true,
+      "Okay, will do": true,
+      "Can I call you?": false,
+      "Can't right now": true,
+      "Done": true
+    }
+  },
+  {
+    "id": "h-m051",
+    "sensible": {
+      "Hi! What's up?": false,
+      "Nope": true,
+      "No": true,
+      "Give me a minute": false,
+      "Hey!": false,
+      "Not yet": true
+    }
+  },
+  {
+    "id": "h-m053",
+    "sensible": {
+      "Can't right now": false,
+      "Got it": true,
+      "Can I call you?": false,
+      "Done": true,
+      "Okay, will do": true,
+      "Sure": true,
+      "Will reply soon": false,
+      "I will": true,
+      "Okay": true
+    }
+  },
+  {
+    "id": "h-m055",
+    "sensible": {
+      "Can I call you?": false,
+      "Will reply soon": false,
+      "No": false,
+      "Got it": true,
+      "On my way": true,
+      "Okay": true,
+      "5 min away": true,
+      "Will call you": true,
+      "Yes": false
+    }
+  },
+  {
+    "id": "h-m056",
+    "sensible": {
+      "Okay": true,
+      "Can I call you?": false,
+      "Got it": true,
+      "Oh": true,
+      "I know": true,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m057",
+    "sensible": {
+      "Got it": false,
+      "Not sure": false,
+      "Let me check": false,
+      "Will reply soon": false,
+      "😊": false,
+      "Can I call you?": false,
+      "Will tell you soon": false,
+      "No": false,
+      "Okay": false
+    }
+  },
+  {
+    "id": "h-m059",
+    "sensible": {
+      "Will reply soon": false,
+      "Either": true,
+      "Can't, sorry": false,
+      "Got it": false,
+      "😟": false,
+      "Let me check": true,
+      "Can I call you?": false,
+      "Works for me": false,
+      "Whatever you want": true
+    }
+  },
+  {
+    "id": "h-m060",
+    "sensible": {
+      "Can't right now": false,
+      "Can I call you?": false,
+      "Got it": true,
+      "😊": true,
+      "No": false,
+      "Okay": true,
+      "Okay, will do": false,
+      "Will reply soon": false,
+      "Done": false
+    }
+  },
+  {
+    "id": "h-m062",
+    "sensible": {
+      "Of course": true,
+      "Sure": true,
+      "Can't, sorry": true,
+      "Sure thing": true,
+      "Works for me": true,
+      "Let me check": true
+    }
+  },
+  {
+    "id": "h-m063",
+    "sensible": {
+      "Yeah": true,
+      "Okay": true,
+      "Will tell you soon": true,
+      "Can I call you?": false,
+      "Oh": false,
+      "Will reply soon": false,
+      "Got it": true,
+      "Not sure": false,
+      "Let me check": true
+    }
+  },
+  {
+    "id": "h-m064",
+    "sensible": {
+      "Okay, will do": true,
+      "Will reply soon": false,
+      "Got it": true,
+      "I'm here": false,
+      "Can't right now": false,
+      "Done": false,
+      "Can I call you?": false,
+      "Okay": true,
+      "Sure": true
+    }
+  },
+  {
+    "id": "h-m065",
+    "sensible": {
+      "No": true,
+      "Yeah": true,
+      "I think so": true,
+      "Of course": true,
+      "You're welcome!": false,
+      "Anytime": false
+    }
+  },
+  {
+    "id": "h-m066",
+    "sensible": {
+      "Okay": true,
+      "😟": true,
+      "Got it": true,
+      "Will reply soon": false,
+      "Nice": false,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m067",
+    "sensible": {
+      "Will reply soon": false,
+      "Yeah": true,
+      "Okay, will do": false,
+      "Can't right now": true,
+      "Done": false,
+      "Yes": true,
+      "Got it": false,
+      "Can I call you?": false,
+      "No": true
+    }
+  },
+  {
+    "id": "h-m068",
+    "sensible": {
+      "I have no idea": true,
+      "No": false,
+      "Let me check": false,
+      "I know": true,
+      "Will tell you soon": false,
+      "I know!": true,
+      "Yes": false,
+      "Not sure": false
+    }
+  },
+  {
+    "id": "h-m070",
+    "sensible": {
+      "Not sure": true,
+      "Will tell you soon": true,
+      "Yes": false,
+      "I'm not sure": true,
+      "No": false,
+      "I don't know": true,
+      "Let me check": true
+    }
+  },
+  {
+    "id": "h-m072",
+    "sensible": {
+      "No": true,
+      "Let me check": false,
+      "Yes": true
+    }
+  },
+  {
+    "id": "h-m073",
+    "sensible": {
+      "Done": false,
+      "Got it": true,
+      "Sure": true,
+      "Okay": true,
+      "Okay, will do": true,
+      "No": false,
+      "Will reply soon": false,
+      "Can't right now": false,
+      "Can I call you?": true
+    }
+  },
+  {
+    "id": "h-m074",
+    "sensible": {
+      "No": true,
+      "No, I didn't": true,
+      "Let me check": true,
+      "Yes": true
+    }
+  },
+  {
+    "id": "h-m075",
+    "sensible": {
+      "Let me check": false,
+      "Yes": false,
+      "😟": false,
+      "No": false,
+      "lol": true,
+      "Hahaha": true
+    }
+  },
+  {
+    "id": "h-m076",
+    "sensible": {
+      "Yes": true,
+      "Haan": true,
+      "Nahi": true,
+      "Let me check": true,
+      "Ek min, check karna padega": true,
+      "No": true
+    }
+  },
+  {
+    "id": "h-m078",
+    "sensible": {
+      "Abhi nahi ho payega": true,
+      "Will reply soon": false,
+      "Done": true,
+      "Can I call you?": false,
+      "Got it": true,
+      "Theek hai, ho jayega": true
+    }
+  },
+  {
+    "id": "h-m079",
+    "sensible": {
+      "Done": false,
+      "Abhi nahi ho payega": false,
+      "Got it": true,
+      "Will reply soon": false,
+      "Theek hai, ho jayega": false,
+      "Can I call you?": true
+    }
+  },
+  {
+    "id": "h-m080",
+    "sensible": {
+      "Got it": true,
+      "Call karoon?": false,
+      "Accha": true,
+      "Baad mein baat karte hain": true,
+      "Can I call you?": false,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m081",
+    "sensible": {
+      "Got it": false,
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Ek min, check karna padega": true,
+      "Pata nahi": true,
+      "Thodi der mein bolte hain": true
+    }
+  },
+  {
+    "id": "h-m083",
+    "sensible": {
+      "Got it": true,
+      "Done": true,
+      "Abhi nahi ho payega": true,
+      "Theek hai, ho jayega": true,
+      "Will reply soon": false,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m084",
+    "sensible": {
+      "Accha": false,
+      "Call karoon?": false,
+      "Will reply soon": false,
+      "Got it": false,
+      "Can I call you?": false,
+      "Baad mein baat karte hain": false
+    }
+  },
+  {
+    "id": "h-m085",
+    "sensible": {
+      "Let me check": true,
+      "Nahi": true,
+      "No": true,
+      "Yes": true,
+      "Haan": true,
+      "Ek min, check karna padega": true
+    }
+  },
+  {
+    "id": "h-m086",
+    "sensible": {
+      "Thodi der mein bolte hain": true,
+      "Let me check": false,
+      "Yes": false,
+      "No": false,
+      "Ek min, check karna padega": false,
+      "Pata nahi": false
+    }
+  },
+  {
+    "id": "h-m088",
+    "sensible": {
+      "Of course": true,
+      "Welcome!": true,
+      "Anytime": true,
+      "Koi baat nahi": true,
+      "You're welcome!": true
+    }
+  },
+  {
+    "id": "h-m089",
+    "sensible": {
+      "Baad mein baat karte hain": false,
+      "Call karoon?": false,
+      "Can I call you?": false,
+      "Accha": false,
+      "Will reply soon": false,
+      "Got it": false
+    }
+  },
+  {
+    "id": "h-m090",
+    "sensible": {
+      "Call karoon?": false,
+      "Baad mein baat karte hain": false,
+      "Can I call you?": false,
+      "Got it": false,
+      "Will reply soon": false,
+      "Accha": false
+    }
+  },
+  {
+    "id": "h-m091",
+    "sensible": {
+      "Yes": true,
+      "हाँ": true,
+      "नहीं": true,
+      "Let me check": false,
+      "No": true,
+      "एक मिनट, देखना पड़ेगा": false
+    }
+  },
+  {
+    "id": "h-m093",
+    "sensible": {
+      "Got it": false,
+      "कॉल करूँ?": false,
+      "बाद में बात करते हैं": false,
+      "अच्छा": true,
+      "Can I call you?": false,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m094",
+    "sensible": {
+      "अच्छा": false,
+      "बाद में बात करते हैं": false,
+      "कॉल करूँ?": true,
+      "Will reply soon": false,
+      "Got it": false,
+      "Can I call you?": true
+    }
+  },
+  {
+    "id": "h-m095",
+    "sensible": {
+      "ठीक है, हो जाएगा": true,
+      "हो गया": false,
+      "Got it": true,
+      "Will reply soon": false,
+      "अभी नहीं हो पाएगा": true,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m096",
+    "sensible": {
+      "अभी बात नहीं हो सकती": true,
+      "5 मिनट दो": true,
+      "अभी कॉल करते हैं": true,
+      "Can I call you?": true,
+      "Got it": true,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m097",
+    "sensible": {
+      "No": true,
+      "Let me check": true,
+      "Yes": true
+    }
+  },
+  {
+    "id": "h-m099",
+    "sensible": {
+      "Will reply soon": false,
+      "Done": false,
+      "Got it": false,
+      "Can't right now": false,
+      "Can I call you?": true,
+      "Okay, will do": false
+    }
+  },
+  {
+    "id": "h-m100",
+    "sensible": {
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Okay, will do": true,
+      "Got it": true,
+      "Done": true,
+      "Can't right now": true
+    }
+  },
+  {
+    "id": "h-m101",
+    "sensible": {
+      "Okay, will do": false,
+      "Can I call you?": false,
+      "Can't right now": true,
+      "Will reply soon": false,
+      "Okay": false,
+      "Done": false,
+      "Got it": false,
+      "No": false,
+      "What?": true
+    }
+  },
+  {
+    "id": "h-m102",
+    "sensible": {
+      "No": true,
+      "Yes": true,
+      "Yeah": true,
+      "Let me check": false
+    }
+  },
+  {
+    "id": "h-m103",
+    "sensible": {
+      "Haha": false,
+      "Got it": true,
+      "Okay": true,
+      "Why?": false,
+      "Will reply soon": false,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m105",
+    "sensible": {
+      "Yes": false,
+      "Hahaha": true,
+      "lol": true,
+      "Haha": true,
+      "Let me check": false,
+      "No": false
+    }
+  },
+  {
+    "id": "h-m106",
+    "sensible": {
+      "Can't, sorry": false,
+      "Works for me": false,
+      "Sure": true,
+      "Yes": true,
+      "Okay": true,
+      "Let me check": false
+    }
+  },
+  {
+    "id": "h-m107",
+    "sensible": {
+      "Done": true,
+      "No": false,
+      "Will reply soon": false,
+      "Okay, will do": true,
+      "Got it": true,
+      "Can't right now": true,
+      "Okay": true,
+      "I did": true,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m109",
+    "sensible": {
+      "Can I call you?": false,
+      "Congratulations!": false,
+      "Okay": true,
+      "Got it": false,
+      "Congrats!": false,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m110",
+    "sensible": {
+      "Can I call you?": true,
+      "Okay": false,
+      "Can't right now": false,
+      "Done": false,
+      "Okay, will do": false,
+      "I will": false,
+      "I am": true,
+      "Will reply soon": false,
+      "Got it": false
+    }
+  },
+  {
+    "id": "h-m111",
+    "sensible": {
+      "Will reply soon": false,
+      "Got it": false,
+      "Can I call you?": true
+    }
+  },
+  {
+    "id": "h-m112",
+    "sensible": {
+      "No": false,
+      "Will tell you soon": true,
+      "Yes": false,
+      "Not sure": true,
+      "Let me check": true,
+      "I'm not sure": true
+    }
+  },
+  {
+    "id": "h-m114",
+    "sensible": {
+      "😞": true,
+      "😟": true,
+      "Okay": false,
+      "Will reply soon": false,
+      "Got it": false,
+      "Can I call you?": true
+    }
+  },
+  {
+    "id": "h-m115",
+    "sensible": {
+      "Let me check": true,
+      "Will reply soon": false,
+      "I miss you, too": true,
+      "Will tell you soon": true,
+      "Got it": false,
+      "Miss you, too": true,
+      "Not sure": true,
+      "Can I call you?": false,
+      "Me too": true
+    }
+  },
+  {
+    "id": "h-m116",
+    "sensible": {
+      "Okay, will do": true,
+      "Okay": true,
+      "Can I call you?": false,
+      "Done": false,
+      "Will reply soon": false,
+      "Coming": true,
+      "Got it": true,
+      "Can't right now": true
+    }
+  },
+  {
+    "id": "h-m118",
+    "sensible": {
+      "Done": true,
+      "No": true,
+      "Can I call you?": false,
+      "Will reply soon": false,
+      "I did": true,
+      "Got it": false,
+      "Can't right now": false,
+      "Yes": true,
+      "Okay, will do": true
+    }
+  },
+  {
+    "id": "h-m119",
+    "sensible": {
+      "Okay": true,
+      "Can't, sorry": true,
+      "Let me check": true,
+      "Yes": true,
+      "Sure": true,
+      "Works for me": true
+    }
+  },
+  {
+    "id": "h-m120",
+    "sensible": {
+      "Got it": false,
+      "Will reply soon": false,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m121",
+    "sensible": {
+      "Thank you": true,
+      "Thanks!": true,
+      "Will reply soon": false,
+      "Thanks": true,
+      "Got it": false,
+      "Thanks a lot!": true,
+      "Can I call you?": false,
+      "Same to you!": false,
+      "Thank you!": true
+    }
+  },
+  {
+    "id": "h-m122",
+    "sensible": {
+      "Thank you": true,
+      "Got it": false,
+      "Thanks!": true,
+      "Can I call you?": false,
+      "Same to you!": false,
+      "Thank you!": true,
+      "Thanks a lot!": true,
+      "Will reply soon": false,
+      "Thanks": true
+    }
+  },
+  {
+    "id": "h-m123",
+    "sensible": {
+      "Let me check": true,
+      "Yeah": true,
+      "Works for me": false,
+      "Yes": true,
+      "Can't, sorry": false,
+      "Yes, it is": true
+    }
+  },
+  {
+    "id": "h-m124",
+    "sensible": {
+      "Let me check": true,
+      "Not sure": true,
+      "Yes": false,
+      "No": false,
+      "I don't know": true,
+      "No idea": true,
+      "Will tell you soon": true
+    }
+  },
+  {
+    "id": "h-m125",
+    "sensible": {
+      "Haha": true,
+      "Let me check": false,
+      "No": false,
+      "😟": false,
+      "Not sure": false,
+      "Yes": false,
+      "Will tell you soon": false,
+      "😞": false
+    }
+  },
+  {
+    "id": "h-m126",
+    "sensible": {
+      "Got it": true,
+      "Calling now": true,
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Abhi baat nahi ho sakti, text karo": false,
+      "5 min do": true
+    }
+  },
+  {
+    "id": "h-m127",
+    "sensible": {
+      "Let me check": true,
+      "Yes": true,
+      "No": true
+    }
+  },
+  {
+    "id": "h-m129",
+    "sensible": {
+      "Theek hai, ho jayega": true,
+      "Will reply soon": false,
+      "Abhi nahi ho payega": false,
+      "Got it": true,
+      "Can I call you?": false,
+      "Done": false
+    }
+  },
+  {
+    "id": "h-m130",
+    "sensible": {
+      "Accha": false,
+      "Will reply soon": false,
+      "Got it": false,
+      "Baad mein baat karte hain": false,
+      "Call karoon?": false,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m131",
+    "sensible": {
+      "No": false,
+      "Pata nahi": true,
+      "Ek min, check karna padega": true,
+      "Thodi der mein bolte hain": true,
+      "Let me check": true,
+      "Yes": false
+    }
+  },
+  {
+    "id": "h-m133",
+    "sensible": {
+      "5 min do": true,
+      "Got it": true,
+      "Will reply soon": false,
+      "Abhi baat nahi ho sakti, text karo": false,
+      "Calling now": true,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m134",
+    "sensible": {
+      "Nahi": true,
+      "Can I call you?": false,
+      "Ek min, check karna padega": true,
+      "Got it": false,
+      "Haan": true,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m136",
+    "sensible": {
+      "Call karoon?": false,
+      "Baad mein baat karte hain": false,
+      "Accha": true,
+      "Will reply soon": false,
+      "Got it": true,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m137",
+    "sensible": {
+      "Will reply soon": false,
+      "Done": true,
+      "Got it": true,
+      "Okay, will do": true,
+      "Can I call you?": false,
+      "Can't right now": true
+    }
+  },
+  {
+    "id": "h-m138",
+    "sensible": {
+      "Can I call you?": false,
+      "Abhi nahi ho payega": false,
+      "Will reply soon": false,
+      "Got it": true,
+      "Done": false,
+      "Theek hai, ho jayega": false
+    }
+  },
+  {
+    "id": "h-m140",
+    "sensible": {
+      "Nahi": false,
+      "No": false,
+      "Haan": false,
+      "Let me check": false,
+      "Yes": false,
+      "Ek min, check karna padega": false
+    }
+  },
+  {
+    "id": "h-m141",
+    "sensible": {
+      "नहीं": true,
+      "Yes": true,
+      "एक मिनट, देखना पड़ेगा": false,
+      "हाँ": true,
+      "Let me check": false,
+      "No": true
+    }
+  },
+  {
+    "id": "h-m143",
+    "sensible": {
+      "Got it": true,
+      "हो गया": false,
+      "अभी नहीं हो पाएगा": false,
+      "Can I call you?": true,
+      "ठीक है, हो जाएगा": false,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m144",
+    "sensible": {
+      "कॉल करूँ?": false,
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Got it": true,
+      "अच्छा": true,
+      "बाद में बात करते हैं": true
+    }
+  },
+  {
+    "id": "h-m145",
+    "sensible": {
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Got it": false,
+      "अभी नहीं हो पाएगा": false,
+      "हो गया": false,
+      "ठीक है, हो जाएगा": false
+    }
+  },
+  {
+    "id": "h-m146",
+    "sensible": {
+      "Can I call you?": false,
+      "Will reply soon": false,
+      "ठीक है, हो जाएगा": true,
+      "Got it": true,
+      "हो गया": false,
+      "अभी नहीं हो पाएगा": true
+    }
+  },
+  {
+    "id": "h-m147",
+    "sensible": {
+      "अभी नहीं हो पाएगा": false,
+      "Got it": true,
+      "ठीक है, हो जाएगा": false,
+      "हो गया": false,
+      "Can I call you?": true,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m148",
+    "sensible": {
+      "No": false,
+      "Yes": false,
+      "Let me check": true
+    }
+  },
+  {
+    "id": "h-m150",
+    "sensible": {
+      "Will reply soon": false,
+      "Got it": true,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m151",
+    "sensible": {
+      "5 min away": true,
+      "Yes": false,
+      "Sorry": true,
+      "Here": true,
+      "On my way": true,
+      "I'm here": true,
+      "No": false,
+      "Let me check": false,
+      "Will call you": true
+    }
+  },
+  {
+    "id": "h-m152",
+    "sensible": {
+      "Sure": true,
+      "5 min away": false,
+      "Yes": true,
+      "On my way": false,
+      "Will call you": false,
+      "Yeah": true,
+      "Let me check": true,
+      "No": true
+    }
+  },
+  {
+    "id": "h-m154",
+    "sensible": {
+      "Okay, will do": true,
+      "Okay": true,
+      "Can I call you?": true,
+      "Why?": true,
+      "Will reply soon": false,
+      "😟": false,
+      "Got it": true,
+      "Can't right now": false,
+      "Done": false
+    }
+  },
+  {
+    "id": "h-m155",
+    "sensible": {
+      "I am": true,
+      "Okay": false,
+      "I am!": true,
+      "Can I call you?": false,
+      "Will reply soon": false,
+      "Got it": false
+    }
+  },
+  {
+    "id": "h-m156",
+    "sensible": {
+      "Sure": true,
+      "Let me check": true,
+      "Yes": true,
+      "No": true
+    }
+  },
+  {
+    "id": "h-m157",
+    "sensible": {
+      "Got it": false,
+      "Give me 5 min": false,
+      "Can I call you?": false,
+      "Will reply soon": false,
+      "Calling you now": true,
+      "Can't talk, text me?": true
+    }
+  },
+  {
+    "id": "h-m158",
+    "sensible": {
+      "Got it": false,
+      "🙌": true,
+      "Will reply soon": false,
+      "Yay!": true,
+      "Can I call you?": false,
+      "Nice": true
+    }
+  },
+  {
+    "id": "h-m159",
+    "sensible": {
+      "😟": false,
+      "Can I call you?": false,
+      "Will reply soon": false,
+      "Got it": false,
+      "😮": false,
+      "Hahaha": true
+    }
+  },
+  {
+    "id": "h-m160",
+    "sensible": {
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Will tell you soon": false,
+      "Not sure": false,
+      "Let me check": true,
+      "Got it": true
+    }
+  },
+  {
+    "id": "h-m162",
+    "sensible": {
+      "Yeah": false,
+      "Okay": true,
+      "Calling you now": true,
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Can't talk, text me?": true,
+      "Give me 5 min": true,
+      "Yes": false,
+      "Got it": false
+    }
+  },
+  {
+    "id": "h-m163",
+    "sensible": {
+      "No idea": true,
+      "Will tell you soon": true,
+      "Not sure": true,
+      "I don't know": true,
+      "Let me check": true,
+      "Yes": false,
+      "No": false,
+      "I'm not sure": true
+    }
+  },
+  {
+    "id": "h-m164",
+    "sensible": {
+      "No": false,
+      "Haha": false,
+      "Yes": false,
+      "lol": false,
+      "Hahaha": false,
+      "Let me check": false
+    }
+  },
+  {
+    "id": "h-m165",
+    "sensible": {
+      "Can I call you?": true,
+      "Will reply soon": false,
+      "Got it": false
+    }
+  },
+  {
+    "id": "h-m167",
+    "sensible": {
+      "Will reply soon": false,
+      "Done": true,
+      "Okay": true,
+      "Can I call you?": false,
+      "Can't right now": true,
+      "No": false,
+      "I did": true,
+      "Okay, will do": true,
+      "Got it": true
+    }
+  },
+  {
+    "id": "h-m168",
+    "sensible": {
+      "I think so": true,
+      "Yeah": true,
+      "Yes": true,
+      "Will reply soon": false,
+      "Got it": false,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m169",
+    "sensible": {
+      "Let me check": true,
+      "Okay": true,
+      "No": false,
+      "I'm here": false,
+      "Here": false,
+      "Yes": true
+    }
+  },
+  {
+    "id": "h-m170",
+    "sensible": {
+      "Will reply soon": false,
+      "Got it": false,
+      "Can I call you?": false,
+      "😮": true,
+      "😞": false,
+      "😟": false
+    }
+  },
+  {
+    "id": "h-m171",
+    "sensible": {
+      "Nope": true,
+      "Yes": true,
+      "Let me check": true,
+      "No": true
+    }
+  },
+  {
+    "id": "h-m173",
+    "sensible": {
+      "Sure": true,
+      "Will reply soon": false,
+      "Okay": true,
+      "Can I call you?": false,
+      "Got it": true,
+      "Great!": true
+    }
+  },
+  {
+    "id": "h-m174",
+    "sensible": {
+      "No": false,
+      "Will reply soon": false,
+      "Got it": true,
+      "Okay": true,
+      "Can I call you?": false,
+      "I did": true
+    }
+  },
+  {
+    "id": "h-m175",
+    "sensible": {
+      "Leaving now": true,
+      "Let me check": true,
+      "Yes": true,
+      "Can't, sorry": true,
+      "Works for me": false,
+      "Sure": true
+    }
+  },
+  {
+    "id": "h-m176",
+    "sensible": {
+      "Will reply soon": false,
+      "Done": false,
+      "Theek hai, ho jayega": true,
+      "Can I call you?": false,
+      "Abhi nahi ho payega": true,
+      "Got it": false
+    }
+  },
+  {
+    "id": "h-m177",
+    "sensible": {
+      "Let me check": false,
+      "Yes": true,
+      "No": true
+    }
+  },
+  {
+    "id": "h-m179",
+    "sensible": {
+      "Got it": true,
+      "Can I call you?": false,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m180",
+    "sensible": {
+      "Call karoon?": true,
+      "Baad mein baat karte hain": false,
+      "Will reply soon": false,
+      "Accha": false,
+      "Got it": false,
+      "Can I call you?": true
+    }
+  },
+  {
+    "id": "h-m181",
+    "sensible": {
+      "No": false,
+      "Yes": false,
+      "Ek min, check karna padega": true,
+      "Let me check": true,
+      "Thodi der mein bolte hain": true,
+      "Pata nahi": true
+    }
+  },
+  {
+    "id": "h-m182",
+    "sensible": {
+      "Yes": false,
+      "Let me check": false,
+      "No": false,
+      "Haan": false,
+      "Nahi": false,
+      "Ek min, check karna padega": false
+    }
+  },
+  {
+    "id": "h-m184",
+    "sensible": {
+      "Done": true,
+      "Can I call you?": false,
+      "Abhi nahi ho payega": false,
+      "Theek hai, ho jayega": true,
+      "Will reply soon": false,
+      "Got it": false
+    }
+  },
+  {
+    "id": "h-m185",
+    "sensible": {
+      "Call karoon?": false,
+      "Got it": false,
+      "Baad mein baat karte hain": false,
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Accha": false
+    }
+  },
+  {
+    "id": "h-m186",
+    "sensible": {
+      "Call karoon?": false,
+      "Baad mein baat karte hain": false,
+      "Can I call you?": false,
+      "Will reply soon": false,
+      "Got it": true,
+      "Accha": true
+    }
+  },
+  {
+    "id": "h-m187",
+    "sensible": {
+      "No": false,
+      "Ek min, check karna padega": false,
+      "Pata nahi": true,
+      "Let me check": false,
+      "Thodi der mein bolte hain": true,
+      "Yes": false
+    }
+  },
+  {
+    "id": "h-m188",
+    "sensible": {
+      "Will reply soon": false,
+      "Thodi der mein bolte hain": true,
+      "Pata nahi": false,
+      "Can I call you?": false,
+      "Ek min, check karna padega": true,
+      "Got it": false
+    }
+  },
+  {
+    "id": "h-m189",
+    "sensible": {
+      "Baad mein baat karte hain": false,
+      "Will reply soon": false,
+      "Call karoon?": false,
+      "Got it": false,
+      "Accha": true,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m190",
+    "sensible": {
+      "Can I call you?": false,
+      "Got it": false,
+      "Can't talk, text me?": true,
+      "Will reply soon": false,
+      "Calling you now": true,
+      "Give me 5 min": true
+    }
+  },
+  {
+    "id": "h-m192",
+    "sensible": {
+      "Will reply soon": false,
+      "ठीक है, हो जाएगा": true,
+      "Can I call you?": false,
+      "हो गया": false,
+      "अभी नहीं हो पाएगा": true,
+      "Got it": false
+    }
+  },
+  {
+    "id": "h-m193",
+    "sensible": {
+      "Yes": false,
+      "No": false,
+      "एक मिनट, देखना पड़ेगा": true,
+      "पता नहीं": true,
+      "Let me check": true,
+      "थोड़ी देर में बताते हैं": true
+    }
+  },
+  {
+    "id": "h-m194",
+    "sensible": {
+      "पता नहीं": false,
+      "एक मिनट, देखना पड़ेगा": false,
+      "थोड़ी देर में बताते हैं": false,
+      "No": false,
+      "Yes": false,
+      "Let me check": false
+    }
+  },
+  {
+    "id": "h-m195",
+    "sensible": {
+      "हो गया": true,
+      "Can I call you?": false,
+      "अभी नहीं हो पाएगा": true,
+      "ठीक है, हो जाएगा": true,
+      "Got it": true,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m196",
+    "sensible": {
+      "अच्छा": true,
+      "Got it": false,
+      "बाद में बात करते हैं": false,
+      "कॉल करूँ?": false,
+      "Can I call you?": false,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m197",
+    "sensible": {
+      "Let me check": true,
+      "Yes": false,
+      "No": false
+    }
+  },
+  {
+    "id": "h-m198",
+    "sensible": {
+      "Got it": false,
+      "Okay, will do": true,
+      "Can I call you?": false,
+      "Done": false,
+      "Can't right now": false,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m199",
+    "sensible": {
+      "Yes": true,
+      "Let me check": true,
+      "No": true
+    }
+  },
+  {
+    "id": "h-m200",
+    "sensible": {
+      "No": false,
+      "Let me check": false,
+      "Yes": false
+    }
+  },
+  {
+    "id": "h-m201",
+    "sensible": {
+      "Will reply soon": false,
+      "Done": false,
+      "Can I call you?": true,
+      "Got it": false,
+      "Can't right now": false,
+      "Okay, will do": false
+    }
+  },
+  {
+    "id": "h-m203",
+    "sensible": {
+      "No": false,
+      "Of course": true,
+      "Sure": true,
+      "Yes": true,
+      "Let me check": false
+    }
+  },
+  {
+    "id": "h-m204",
+    "sensible": {
+      "Haha": true,
+      "Can I call you?": false,
+      "😟": false,
+      "Will reply soon": false,
+      "Got it": false,
+      "Hahaha": true
+    }
+  },
+  {
+    "id": "h-m205",
+    "sensible": {
+      "Will do": false,
+      "Got it": false,
+      "Can't right now": false,
+      "Oh, okay": false,
+      "Done": false,
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Okay": false,
+      "Okay, will do": false
+    }
+  },
+  {
+    "id": "h-m207",
+    "sensible": {
+      "Will do": true,
+      "Got it": true,
+      "Okay": true,
+      "I will": true,
+      "Can't right now": false,
+      "Will reply soon": true,
+      "Can I call you?": false,
+      "Okay, will do": true,
+      "Done": false
+    }
+  },
+  {
+    "id": "h-m208",
+    "sensible": {
+      "Can I call you?": false,
+      "Haha": true,
+      "Got it": false,
+      "Hahaha": false,
+      "I know": true,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m209",
+    "sensible": {
+      "Okay": false,
+      "Yes": true,
+      "No": true,
+      "Can't, sorry": true,
+      "Works for me": false,
+      "Let me check": true
+    }
+  },
+  {
+    "id": "h-m210",
+    "sensible": {
+      "Yes": true,
+      "Sure": true,
+      "Okay": true,
+      "No": true,
+      "Let me check": true
+    }
+  },
+  {
+    "id": "h-m211",
+    "sensible": {
+      "Will reply soon": false,
+      "Okay, will do": false,
+      "Can I call you?": false,
+      "I know!": true,
+      "I know": true,
+      "Done": false,
+      "Can't right now": false,
+      "I know, right?": true,
+      "Got it": false
+    }
+  },
+  {
+    "id": "h-m214",
+    "sensible": {
+      "Got it": false,
+      "😟": true,
+      "Will reply soon": false,
+      "Okay": false,
+      "Can I call you?": true,
+      "I know": false
+    }
+  },
+  {
+    "id": "h-m215",
+    "sensible": {
+      "Let me check": true,
+      "No": true,
+      "I think so": true,
+      "Yes": true
+    }
+  },
+  {
+    "id": "h-m216",
+    "sensible": {
+      "Hi! What's up?": false,
+      "Sure": true,
+      "Hey!": false,
+      "Sure thing": true,
+      "Give me a minute": true,
+      "Sure!": true
+    }
+  },
+  {
+    "id": "h-m217",
+    "sensible": {
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Can't talk, text me?": true,
+      "Got it": false,
+      "Okay": true,
+      "Calling you now": true,
+      "No": false,
+      "Give me 5 min": true,
+      "Yes": false
+    }
+  },
+  {
+    "id": "h-m218",
+    "sensible": {
+      "Okay": true,
+      "Got it": true,
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Yay!": true,
+      "Nice": true
+    }
+  },
+  {
+    "id": "h-m219",
+    "sensible": {
+      "Leaving now": false,
+      "Okay": false,
+      "Will tell you soon": true,
+      "No": false,
+      "Yes": false,
+      "Let me check": true,
+      "Not sure": true
+    }
+  },
+  {
+    "id": "h-m221",
+    "sensible": {
+      "Oh, okay": true,
+      "Can I call you?": false,
+      "I know": true,
+      "Will reply soon": false,
+      "Okay": true,
+      "Got it": true
+    }
+  },
+  {
+    "id": "h-m222",
+    "sensible": {
+      "Me too": true,
+      "Got it": false,
+      "It went well": true,
+      "Can I call you?": false,
+      "I miss you, too": true,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m223",
+    "sensible": {
+      "Great!": true,
+      "Yes": false,
+      "It went well": true,
+      "Let me check": false,
+      "No": false,
+      "Good": true
+    }
+  },
+  {
+    "id": "h-m224",
+    "sensible": {
+      "Will reply soon": false,
+      "Got it": true,
+      "Okay, will do": true,
+      "Can't right now": false,
+      "Done": false,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m225",
+    "sensible": {
+      "Got it": false,
+      "Can I call you?": false,
+      "Hahaha": true,
+      "Will reply soon": false,
+      "😞": false,
+      "😟": false
+    }
+  },
+  {
+    "id": "h-m226",
+    "sensible": {
+      "Got it": false,
+      "Abhi nahi ho payega": false,
+      "Will reply soon": false,
+      "Theek hai, ho jayega": true,
+      "Can I call you?": false,
+      "Done": false
+    }
+  },
+  {
+    "id": "h-m227",
+    "sensible": {
+      "Will reply soon": false,
+      "Haan": true,
+      "Got it": true,
+      "Ek min, check karna padega": true,
+      "Nahi": false,
+      "Can I call you?": false
+    }
+  },
+  {
+    "id": "h-m229",
+    "sensible": {
+      "Abhi nahi ho payega": false,
+      "Done": false,
+      "Got it": true,
+      "Can I call you?": false,
+      "Will reply soon": true,
+      "Theek hai, ho jayega": true
+    }
+  },
+  {
+    "id": "h-m231",
+    "sensible": {
+      "Baad mein baat karte hain": false,
+      "Can I call you?": false,
+      "Got it": false,
+      "Call karoon?": false,
+      "Accha": true,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m232",
+    "sensible": {
+      "Can I call you?": false,
+      "Theek hai, ho jayega": true,
+      "Got it": true,
+      "Abhi nahi ho payega": true,
+      "Done": false,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m233",
+    "sensible": {
+      "😟": true,
+      "Can I call you?": false,
+      "Baad mein baat karte hain": false,
+      "Got it": true,
+      "😊": false,
+      "Accha": true,
+      "Call karoon?": false,
+      "Will reply soon": false,
+      "Okay": true
+    }
+  },
+  {
+    "id": "h-m234",
+    "sensible": {
+      "Let me check": true,
+      "Will tell you soon": true,
+      "Not sure": true,
+      "Can I call you?": false,
+      "Will reply soon": false,
+      "Got it": false
+    }
+  },
+  {
+    "id": "h-m235",
+    "sensible": {
+      "Got it": false,
+      "Will reply soon": false,
+      "Can I call you?": true,
+      "Thodi der mein bolte hain": true,
+      "Pata nahi": false,
+      "Ek min, check karna padega": false
+    }
+  },
+  {
+    "id": "h-m237",
+    "sensible": {
+      "Can I call you?": true,
+      "Baad mein baat karte hain": false,
+      "Will reply soon": false,
+      "Call karoon?": true,
+      "Accha": false,
+      "Got it": false
+    }
+  },
+  {
+    "id": "h-m238",
+    "sensible": {
+      "Theek hai, ho jayega": false,
+      "Got it": false,
+      "Abhi nahi ho payega": false,
+      "Can I call you?": false,
+      "Will reply soon": false,
+      "Done": false
+    }
+  },
+  {
+    "id": "h-m239",
+    "sensible": {
+      "Got it": true,
+      "Can I call you?": false,
+      "Call karoon?": false,
+      "Accha": true,
+      "Baad mein baat karte hain": false,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m240",
+    "sensible": {
+      "Can I call you?": false,
+      "Okay": true,
+      "Will reply soon": false,
+      "😟": false,
+      "Got it": true,
+      "😞": true
+    }
+  },
+  {
+    "id": "h-m241",
+    "sensible": {
+      "अभी कॉल करते हैं": true,
+      "Got it": false,
+      "5 मिनट दो": true,
+      "Can I call you?": false,
+      "अभी बात नहीं हो सकती": true,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m243",
+    "sensible": {
+      "हो गया": false,
+      "Can I call you?": false,
+      "Got it": true,
+      "ठीक है, हो जाएगा": true,
+      "Will reply soon": false,
+      "अभी नहीं हो पाएगा": true
+    }
+  },
+  {
+    "id": "h-m244",
+    "sensible": {
+      "No": false,
+      "एक मिनट, देखना पड़ेगा": false,
+      "थोड़ी देर में बताते हैं": false,
+      "Yes": false,
+      "पता नहीं": false,
+      "Let me check": false
+    }
+  },
+  {
+    "id": "h-m245",
+    "sensible": {
+      "थोड़ी देर में बताते हैं": true,
+      "एक मिनट, देखना पड़ेगा": true,
+      "Let me check": true,
+      "No": false,
+      "Yes": false,
+      "पता नहीं": true
+    }
+  },
+  {
+    "id": "h-m247",
+    "sensible": {
+      "एक मिनट, देखना पड़ेगा": true,
+      "हाँ": true,
+      "Let me check": true,
+      "नहीं": true,
+      "Yes": true,
+      "No": true
+    }
+  },
+  {
+    "id": "h-m248",
+    "sensible": {
+      "Can't right now": false,
+      "Got it": false,
+      "Done": false,
+      "Okay, will do": true,
+      "Can I call you?": false,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m249",
+    "sensible": {
+      "Can I call you?": false,
+      "Got it": true,
+      "Will reply soon": true
+    }
+  },
+  {
+    "id": "h-m250",
+    "sensible": {
+      "Let me check": false,
+      "Yes": false,
+      "No": false
+    }
+  },
+  {
+    "id": "h-m251",
+    "sensible": {
+      "Yeah": true,
+      "Yep": true,
+      "No": true,
+      "Yes": true,
+      "Let me check": false
+    }
+  },
+  {
+    "id": "h-m252",
+    "sensible": {
+      "No": false,
+      "Yes": true,
+      "Let me check": false
+    }
+  },
+  {
+    "id": "h-m254",
+    "sensible": {
+      "Let me check": true,
+      "I like it": true,
+      "Yes": false,
+      "No": false,
+      "Okay": false,
+      "I don't know": true
+    }
+  },
+  {
+    "id": "h-m255",
+    "sensible": {
+      "Hahaha": true,
+      "😞": false,
+      "😟": false,
+      "Got it": false,
+      "Can I call you?": false,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m256",
+    "sensible": {
+      "No": false,
+      "Let me check": true,
+      "Sure": true,
+      "Okay": true,
+      "Yes": true
+    }
+  },
+  {
+    "id": "h-m257",
+    "sensible": {
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Got it": false,
+      "Hahaha": true,
+      "😊": true,
+      "😺": false
+    }
+  },
+  {
+    "id": "h-m258",
+    "sensible": {
+      "Okay": true,
+      "Oh, okay": false,
+      "I know": false,
+      "Give me 5 min": true,
+      "Will reply soon": false,
+      "Got it": false,
+      "Can I call you?": false,
+      "Calling you now": true,
+      "Can't talk, text me?": true
+    }
+  },
+  {
+    "id": "h-m260",
+    "sensible": {
+      "Of course": true,
+      "You're welcome!": true,
+      "No problem": true,
+      "Sure": true,
+      "Yes": true,
+      "Anytime": true
+    }
+  },
+  {
+    "id": "h-m261",
+    "sensible": {
+      "Thanks!": true,
+      "Can I call you?": false,
+      "Got it": false,
+      "Thanks": true,
+      "Will reply soon": false,
+      "Haha, thanks": true
+    }
+  },
+  {
+    "id": "h-m262",
+    "sensible": {
+      "Got it": false,
+      "Will reply soon": false,
+      "Can I call you?": true
+    }
+  },
+  {
+    "id": "h-m263",
+    "sensible": {
+      "No": false,
+      "I don't know": true,
+      "No idea": true,
+      "What size?": false,
+      "Let me check": true,
+      "Will tell you soon": true,
+      "Yes": false,
+      "Not sure": true
+    }
+  },
+  {
+    "id": "h-m264",
+    "sensible": {
+      "Let me check": false,
+      "Not sure": false,
+      "Got it": true,
+      "Will tell you soon": true,
+      "Sure": true,
+      "Yes": false,
+      "Can I call you?": true,
+      "Will reply soon": true,
+      "Okay": true
+    }
+  },
+  {
+    "id": "h-m266",
+    "sensible": {
+      "Either is fine": true,
+      "Will tell you soon": true,
+      "Not sure": true,
+      "Okay": false,
+      "No": false,
+      "Yes": false,
+      "Let me check": true,
+      "What day?": false
+    }
+  },
+  {
+    "id": "h-m267",
+    "sensible": {
+      "Got it": false,
+      "Okay": false,
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "You, too": true,
+      "😊": true
+    }
+  },
+  {
+    "id": "h-m268",
+    "sensible": {
+      "Nope": true,
+      "Yes": true,
+      "No": true,
+      "Let me check": true,
+      "Yeah": true
+    }
+  },
+  {
+    "id": "h-m269",
+    "sensible": {
+      "Sure": true,
+      "Can't, sorry": true,
+      "No": true,
+      "Sure!": true,
+      "Works for me": true,
+      "Let me check": true
+    }
+  },
+  {
+    "id": "h-m270",
+    "sensible": {
+      "Aw": true,
+      "Let me check": false,
+      "Yes": false,
+      "No": false,
+      "Wow": true,
+      "😟": true
+    }
+  },
+  {
+    "id": "h-m271",
+    "sensible": {
+      "Let me check": true,
+      "Can't, sorry": true,
+      "Works for me": true
+    }
+  },
+  {
+    "id": "h-m272",
+    "sensible": {
+      "Done": true,
+      "Will reply soon": false,
+      "Got it": true,
+      "Can I call you?": false,
+      "Can't right now": true,
+      "Okay, will do": true
+    }
+  },
+  {
+    "id": "h-m273",
+    "sensible": {
+      "Can I call you?": false,
+      "Got it": true,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m275",
+    "sensible": {
+      "No": false,
+      "Okay": true,
+      "Yeah": true,
+      "Yes": false,
+      "Let me check": true
+    }
+  },
+  {
+    "id": "h-m276",
+    "sensible": {
+      "Let me check": true,
+      "No": true,
+      "Nahi": true,
+      "Ek min, check karna padega": true,
+      "Haan": true,
+      "Yes": true
+    }
+  },
+  {
+    "id": "h-m277",
+    "sensible": {
+      "Can I call you?": true,
+      "Got it": false,
+      "Abhi nahi ho payega": false,
+      "Will reply soon": false,
+      "Theek hai, ho jayega": true,
+      "Done": false
+    }
+  },
+  {
+    "id": "h-m279",
+    "sensible": {
+      "Okay, will do": false,
+      "Can't right now": false,
+      "Done": false,
+      "Got it": false,
+      "Will reply soon": false,
+      "Can I call you?": true
+    }
+  },
+  {
+    "id": "h-m280",
+    "sensible": {
+      "Baad mein baat karte hain": false,
+      "Got it": false,
+      "Can I call you?": true,
+      "Call karoon?": true,
+      "Accha": false,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m281",
+    "sensible": {
+      "Will reply soon": false,
+      "Abhi baat nahi ho sakti, text karo": true,
+      "5 min do": true,
+      "Can I call you?": false,
+      "Got it": false,
+      "Calling now": true
+    }
+  },
+  {
+    "id": "h-m282",
+    "sensible": {
+      "Let me check": true,
+      "Nahi": true,
+      "Haan": true,
+      "Ek min, check karna padega": true,
+      "Yes": true,
+      "No": true
+    }
+  },
+  {
+    "id": "h-m284",
+    "sensible": {
+      "Can I call you?": false,
+      "Will reply soon": false,
+      "Got it": true,
+      "Theek hai, ho jayega": true,
+      "Done": false,
+      "Abhi nahi ho payega": false
+    }
+  },
+  {
+    "id": "h-m285",
+    "sensible": {
+      "Will reply soon": false,
+      "Got it": false,
+      "Abhi nahi ho payega": false,
+      "Can I call you?": false,
+      "Done": false,
+      "Theek hai, ho jayega": false
+    }
+  },
+  {
+    "id": "h-m286",
+    "sensible": {
+      "Baad mein baat karte hain": false,
+      "Will reply soon": false,
+      "Got it": false,
+      "Accha": false,
+      "Can I call you?": true,
+      "Call karoon?": true
+    }
+  },
+  {
+    "id": "h-m287",
+    "sensible": {
+      "Will reply soon": false,
+      "Ek min, check karna padega": true,
+      "Pata nahi": true,
+      "Thodi der mein bolte hain": true,
+      "Got it": false,
+      "Can I call you?": true
+    }
+  },
+  {
+    "id": "h-m288",
+    "sensible": {
+      "Ek min, check karna padega": true,
+      "Will reply soon": false,
+      "Can I call you?": false,
+      "Pata nahi": true,
+      "Got it": false,
+      "Thodi der mein bolte hain": true
+    }
+  },
+  {
+    "id": "h-m290",
+    "sensible": {
+      "Pata nahi": true,
+      "Yes": false,
+      "No": false,
+      "Let me check": true,
+      "Ek min, check karna padega": true,
+      "Thodi der mein bolte hain": true
+    }
+  },
+  {
+    "id": "h-m291",
+    "sensible": {
+      "ठीक है, हो जाएगा": true,
+      "अभी नहीं हो पाएगा": false,
+      "Can I call you?": true,
+      "Will reply soon": false,
+      "Got it": false,
+      "हो गया": false
+    }
+  },
+  {
+    "id": "h-m292",
+    "sensible": {
+      "एक मिनट, देखना पड़ेगा": true,
+      "नहीं": true,
+      "Yes": true,
+      "Let me check": true,
+      "No": true,
+      "हाँ": true
+    }
+  },
+  {
+    "id": "h-m293",
+    "sensible": {
+      "No": false,
+      "हाँ": false,
+      "Let me check": false,
+      "Yes": false,
+      "नहीं": false,
+      "एक मिनट, देखना पड़ेगा": false
+    }
+  },
+  {
+    "id": "h-m295",
+    "sensible": {
+      "Got it": true,
+      "Can I call you?": true,
+      "हो गया": false,
+      "अभी नहीं हो पाएगा": false,
+      "ठीक है, हो जाएगा": true,
+      "Will reply soon": true
+    }
+  },
+  {
+    "id": "h-m296",
+    "sensible": {
+      "बाद में बात करते हैं": false,
+      "Got it": false,
+      "अच्छा": true,
+      "Can I call you?": false,
+      "कॉल करूँ?": false,
+      "Will reply soon": false
+    }
+  },
+  {
+    "id": "h-m298",
+    "sensible": {
+      "Will reply soon": false,
+      "Got it": false,
+      "Can I call you?": true
+    }
+  },
+  {
+    "id": "h-m299",
+    "sensible": {
+      "No": true,
+      "Yes": true,
+      "Let me check": true
+    }
+  },
+  {
+    "id": "h-m300",
+    "sensible": {
+      "कॉल करूँ?": false,
+      "Will reply soon": false,
+      "अच्छा": true,
+      "बाद में बात करते हैं": false,
+      "Can I call you?": false,
+      "Got it": true
+    }
+  }
+]

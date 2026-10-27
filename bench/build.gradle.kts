@@ -1,4 +1,4 @@
-// Runs ML Kit Smart Reply on a phone over benchmark/data/messages.json, for `:core:benchmark` (benchmark/README.md).
+// Runs ML Kit Smart Reply on a phone over benchmark/data/messages.json, for `:core:benchmark` (benchmark/README.md), and times the engine there.
 // A debug-only app of its own, so it installs beside Earmark without touching it.
 plugins {
     alias(libs.plugins.android.application)
@@ -16,7 +16,8 @@ android {
         versionName = "1"
     }
 
-    sourceSets["main"].assets.srcDir(rootProject.file("benchmark/data"))
+    // -PbenchmarkRoot=benchmark/holdout runs the held-out messages.
+    sourceSets["main"].assets.srcDir(rootProject.file((project.findProperty("benchmarkRoot")?.toString() ?: "benchmark") + "/data"))
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -26,4 +27,5 @@ android {
 
 dependencies {
     implementation(libs.mlkit.smart.reply)
+    implementation(project(":core"))
 }

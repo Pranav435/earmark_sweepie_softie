@@ -1,0 +1,843 @@
+[
+  {
+    "id": "h-a001",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Aisha requested ₹500 for movie tickets",
+    "amount": {
+      "currency": "INR",
+      "value": 500.0
+    }
+  },
+  {
+    "id": "h-a002",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Rs. 1,499.00 debited from A/c XX4521 on 26-10-26 to VPA swiggy@icici. UPI Ref 629834512276",
+    "amount": {
+      "currency": "INR",
+      "value": 1499.0
+    }
+  },
+  {
+    "id": "h-a003",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "You paid ₹250 to Rahul Sharma",
+    "amount": {
+      "currency": "INR",
+      "value": 250.0
+    }
+  },
+  {
+    "id": "h-a004",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Your Airtel bill of Rs 799 is due on 05-Nov-2026. Pay now to avoid late fee",
+    "amount": {
+      "currency": "INR",
+      "value": 799.0
+    }
+  },
+  {
+    "id": "h-a005",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "INR 1,25,000.00 credited to a/c XX9087 by NEFT-ACME TECH PAYROLL",
+    "amount": {
+      "currency": "INR",
+      "value": 125000.0
+    }
+  },
+  {
+    "id": "h-a006",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Your OTP for login is 482913. Do not share it with anyone.",
+    "amount": null
+  },
+  {
+    "id": "h-a007",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Your order has been shipped and will arrive by Thursday",
+    "amount": null
+  },
+  {
+    "id": "h-a008",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Jake requested $23.50 - pizza 🍕",
+    "amount": {
+      "currency": "USD",
+      "value": 23.5
+    }
+  },
+  {
+    "id": "h-a009",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "You sent $40.00 USD to Maria Lopez",
+    "amount": {
+      "currency": "USD",
+      "value": 40.0
+    }
+  },
+  {
+    "id": "h-a010",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Thanks for riding with Uber. Total ₹312.45",
+    "amount": {
+      "currency": "INR",
+      "value": 312.45
+    }
+  },
+  {
+    "id": "h-a011",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Total amt due Rs.18,432.67, min amt due Rs.922.00 on your HDFC Card XX1234",
+    "amount": {
+      "currency": "INR",
+      "value": 18432.67
+    }
+  },
+  {
+    "id": "h-a012",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "Bhai ₹450 bhej de dinner ka",
+    "amount": {
+      "currency": "INR",
+      "value": 450.0
+    }
+  },
+  {
+    "id": "h-a013",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Your order of ₹389 from Burger King is confirmed",
+    "amount": {
+      "currency": "INR",
+      "value": 389.0
+    }
+  },
+  {
+    "id": "h-a014",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Premium of Rs 24,560 due for LIC policy 873456120",
+    "amount": {
+      "currency": "INR",
+      "value": 24560.0
+    }
+  },
+  {
+    "id": "h-a015",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Your Netflix payment of ₹649 was successful",
+    "amount": {
+      "currency": "INR",
+      "value": 649.0
+    }
+  },
+  {
+    "id": "h-a016",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Meeting moved to 4:30 pm tomorrow",
+    "amount": null
+  },
+  {
+    "id": "h-a017",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Refund of ₹1,299.00 initiated for your Amazon order",
+    "amount": {
+      "currency": "INR",
+      "value": 1299.0
+    }
+  },
+  {
+    "id": "h-a018",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Electricity bill Amt Rs 2340.00 due by 30-Oct-2026",
+    "amount": {
+      "currency": "INR",
+      "value": 2340.0
+    }
+  },
+  {
+    "id": "h-a019",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Priya paid you ₹1,000",
+    "amount": {
+      "currency": "INR",
+      "value": 1000.0
+    }
+  },
+  {
+    "id": "h-a020",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "€15 for the museum tickets, can you send it to my Revolut?",
+    "amount": {
+      "currency": "EUR",
+      "value": 15.0
+    }
+  },
+  {
+    "id": "h-a021",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Rent for November is £650, transfer by the 1st pls",
+    "amount": {
+      "currency": "GBP",
+      "value": 650.0
+    }
+  },
+  {
+    "id": "h-a022",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "text": "आपके खाते से ₹2,000 निकाले गए हैं",
+    "amount": {
+      "currency": "INR",
+      "value": 2000.0
+    }
+  },
+  {
+    "id": "h-a023",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Recharge of ₹299 successful for 98XXXXXX12",
+    "amount": {
+      "currency": "INR",
+      "value": 299.0
+    }
+  },
+  {
+    "id": "h-a024",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Hey are we still on for tonight?",
+    "amount": null
+  },
+  {
+    "id": "h-a025",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Total fare Rs 186 for your Ola ride with Ramesh",
+    "amount": {
+      "currency": "INR",
+      "value": 186.0
+    }
+  },
+  {
+    "id": "h-a026",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "₹45 cashback credited to your Zomato wallet",
+    "amount": {
+      "currency": "INR",
+      "value": 45.0
+    }
+  },
+  {
+    "id": "h-a027",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "SIP of Rs. 5,000 in Axis Bluechip Fund will be debited on 10-Nov",
+    "amount": {
+      "currency": "INR",
+      "value": 5000.0
+    }
+  },
+  {
+    "id": "h-a028",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Your Spotify Premium plan renews for ₹119",
+    "amount": {
+      "currency": "INR",
+      "value": 119.0
+    }
+  },
+  {
+    "id": "h-a029",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "You owe Karan ₹1,234.50",
+    "amount": {
+      "currency": "INR",
+      "value": 1234.5
+    }
+  },
+  {
+    "id": "h-a030",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "₹75 sent to Chaiwala Bhaiya",
+    "amount": {
+      "currency": "INR",
+      "value": 75.0
+    }
+  },
+  {
+    "id": "h-a031",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "text": "mummy ne bola 2000 rupaye bhej dena kal",
+    "amount": {
+      "currency": "INR",
+      "value": 2000.0
+    }
+  },
+  {
+    "id": "h-a032",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "USD 120.00 charged on your card at AMAZON WEB SERVICES",
+    "amount": {
+      "currency": "USD",
+      "value": 120.0
+    }
+  },
+  {
+    "id": "h-a033",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Order of ₹3,498 placed successfully",
+    "amount": {
+      "currency": "INR",
+      "value": 3498.0
+    }
+  },
+  {
+    "id": "h-a034",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Gas cylinder booking confirmed. Amount payable: Rs.903.50",
+    "amount": {
+      "currency": "INR",
+      "value": 903.5
+    }
+  },
+  {
+    "id": "h-a035",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Your Rapido captain is arriving in 3 mins. OTP 4521",
+    "amount": null
+  },
+  {
+    "id": "h-a036",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Can you pay me back the $15 for lunch?",
+    "amount": {
+      "currency": "USD",
+      "value": 15.0
+    }
+  },
+  {
+    "id": "h-a037",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "EMI of Rs 9,120 for loan A/c 7845XXXX is due",
+    "amount": {
+      "currency": "INR",
+      "value": 9120.0
+    }
+  },
+  {
+    "id": "h-a038",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Electricity bill paid: ₹1,150 via BHIM UPI",
+    "amount": {
+      "currency": "INR",
+      "value": 1150.0
+    }
+  },
+  {
+    "id": "h-a039",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "Happy Diwali! 🪔 Wishing you and your family joy and prosperity",
+    "amount": null
+  },
+  {
+    "id": "h-a040",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "text": "£12.99 has been charged for your Audible membership",
+    "amount": {
+      "currency": "GBP",
+      "value": 12.99
+    }
+  },
+  {
+    "id": "h-a041",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "bare number, rupees implied",
+    "text": "bhai 300 bhej de kal ka auto ka",
+    "amount": {
+      "currency": "INR",
+      "value": 300.0
+    }
+  },
+  {
+    "id": "h-a042",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "Indian lakh grouping, two amounts",
+    "text": "Congrats! Rs 10,00,000 loan sanctioned. First EMI Rs 9,120",
+    "amount": {
+      "currency": "INR",
+      "value": 1000000.0
+    }
+  },
+  {
+    "id": "h-a043",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "first of two amounts",
+    "text": "Dinner was ₹2400 total, so ₹600 each",
+    "amount": {
+      "currency": "INR",
+      "value": 2400.0
+    }
+  },
+  {
+    "id": "h-a044",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "phone number, no money",
+    "text": "Call me on 98201 45678 when you're free",
+    "amount": null
+  },
+  {
+    "id": "h-a045",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "OTP before the amount",
+    "text": "OTP 7842 for txn of Rs 1,500 at MYNTRA. Valid 10 min",
+    "amount": {
+      "currency": "INR",
+      "value": 1500.0
+    }
+  },
+  {
+    "id": "h-a046",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "lakh in words",
+    "text": "1.5 lakh ka laptop le liya usne 😳",
+    "amount": {
+      "currency": "INR",
+      "value": 150000.0
+    }
+  },
+  {
+    "id": "h-a047",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "k suffix, no currency",
+    "text": "ok send 2k for the trip",
+    "amount": {
+      "currency": "INR",
+      "value": 2000.0
+    }
+  },
+  {
+    "id": "h-a048",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "percentage and promo code, no money",
+    "text": "Get 50% off on your first order! Use code SAVE50",
+    "amount": null
+  },
+  {
+    "id": "h-a049",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "advert; the first amount is the discount",
+    "text": "Flat ₹100 off on orders above ₹499",
+    "amount": {
+      "currency": "INR",
+      "value": 100.0
+    }
+  },
+  {
+    "id": "h-a050",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "times and numbers, no money",
+    "text": "Meeting at 10:30, room 204, bring 3 copies",
+    "amount": null
+  },
+  {
+    "id": "h-a051",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "code after the number, two currencies",
+    "text": "100 USD = 8,412.50 INR today",
+    "amount": {
+      "currency": "USD",
+      "value": 100.0
+    }
+  },
+  {
+    "id": "h-a052",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "/- suffix means rupees",
+    "text": "Paid 1,250/- for the cab",
+    "amount": {
+      "currency": "INR",
+      "value": 1250.0
+    }
+  },
+  {
+    "id": "h-a053",
+    "difficulty": "tricky",
+    "language": "hi",
+    "note": "amount in Hindi words",
+    "text": "मुझे पाँच सौ रुपये चाहिए कल तक",
+    "amount": {
+      "currency": "INR",
+      "value": 500.0
+    }
+  },
+  {
+    "id": "h-a054",
+    "difficulty": "tricky",
+    "language": "hi",
+    "note": "Devanagari digits",
+    "text": "₹१,२५० का बिल आया है",
+    "amount": {
+      "currency": "INR",
+      "value": 1250.0
+    }
+  },
+  {
+    "id": "h-a055",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "year before the amount",
+    "text": "The 2026 batch fee is ₹45,000",
+    "amount": {
+      "currency": "INR",
+      "value": 45000.0
+    }
+  },
+  {
+    "id": "h-a056",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "order id and date, no money",
+    "text": "Order #ORD-50231 will arrive on 28 Oct",
+    "amount": null
+  },
+  {
+    "id": "h-a057",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "currency in words",
+    "text": "Sent you 15 dollars on Venmo for the movie",
+    "amount": {
+      "currency": "USD",
+      "value": 15.0
+    }
+  },
+  {
+    "id": "h-a058",
+    "difficulty": "tricky",
+    "language": "de",
+    "note": "decimal comma, symbol after",
+    "text": "Ihre Zahlung von 49,99 € wurde bestätigt",
+    "amount": {
+      "currency": "EUR",
+      "value": 49.99
+    }
+  },
+  {
+    "id": "h-a059",
+    "difficulty": "tricky",
+    "language": "fr",
+    "note": "symbol after with a space",
+    "text": "Tu me dois 20 € pour le resto",
+    "amount": {
+      "currency": "EUR",
+      "value": 20.0
+    }
+  },
+  {
+    "id": "h-a060",
+    "difficulty": "tricky",
+    "language": "es",
+    "note": "symbol glued after the number",
+    "text": "Te mando los 35€ mañana",
+    "amount": {
+      "currency": "EUR",
+      "value": 35.0
+    }
+  },
+  {
+    "id": "h-a061",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "code glued to number, reference after",
+    "text": "Faster Payment: GBP1000.00 received from J SMITH ref 448812",
+    "amount": {
+      "currency": "GBP",
+      "value": 1000.0
+    }
+  },
+  {
+    "id": "h-a062",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "\"rs\" after the number",
+    "text": "500 rs bhej de yaar, kal lauta dunga",
+    "amount": {
+      "currency": "INR",
+      "value": 500.0
+    }
+  },
+  {
+    "id": "h-a063",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "two amounts, masked account digits first",
+    "text": "A/c XX4521 credited INR 5,000.00. Avl Bal INR 23,456.78",
+    "amount": {
+      "currency": "INR",
+      "value": 5000.0
+    }
+  },
+  {
+    "id": "h-a064",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "code glued to number, no grouping",
+    "text": "Amount: INR2500.00",
+    "amount": {
+      "currency": "INR",
+      "value": 2500.0
+    }
+  },
+  {
+    "id": "h-a065",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "weight and time, no money",
+    "text": "Your package weighs 2.5 kg, delivery slot 2-4 pm",
+    "amount": null
+  },
+  {
+    "id": "h-a066",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "train number and time, no money",
+    "text": "Train 12951 departs at 16:35 from platform 3",
+    "amount": null
+  },
+  {
+    "id": "h-a067",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "time number before the amount",
+    "text": "kal 5 baje milte hai, 200 ka recharge karwa dena mera",
+    "amount": {
+      "currency": "INR",
+      "value": 200.0
+    }
+  },
+  {
+    "id": "h-a068",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "PNR before the fare",
+    "text": "PNR 4521367890, fare ₹1,845, coach B3",
+    "amount": {
+      "currency": "INR",
+      "value": 1845.0
+    }
+  },
+  {
+    "id": "h-a069",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "score, not money",
+    "text": "Your credit score is 782. Check what's changed",
+    "amount": null
+  },
+  {
+    "id": "h-a070",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "crore in words, two amounts",
+    "text": "2 crore ka flat hai bhai, EMI hi 1.5 lakh mahina",
+    "amount": {
+      "currency": "INR",
+      "value": 20000000.0
+    }
+  },
+  {
+    "id": "h-a071",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "percentage after the amount",
+    "text": "Rs 3,200 per night, plus 12% GST",
+    "amount": {
+      "currency": "INR",
+      "value": 3200.0
+    }
+  },
+  {
+    "id": "h-a072",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "symbol plus lakh",
+    "text": "Win up to ₹10 lakh in our Diwali contest!",
+    "amount": {
+      "currency": "INR",
+      "value": 1000000.0
+    }
+  },
+  {
+    "id": "h-a073",
+    "difficulty": "tricky",
+    "language": "mr",
+    "note": "Marathi, Devanagari digits",
+    "text": "मला ५०० रुपये पाठव ना",
+    "amount": {
+      "currency": "INR",
+      "value": 500.0
+    }
+  },
+  {
+    "id": "h-a074",
+    "difficulty": "tricky",
+    "language": "gu",
+    "note": "Gujarati digits",
+    "text": "મને ₹૨૦૦ મોકલ",
+    "amount": {
+      "currency": "INR",
+      "value": 200.0
+    }
+  },
+  {
+    "id": "h-a075",
+    "difficulty": "tricky",
+    "language": "ta",
+    "note": "Tamil text around the amount",
+    "text": "₹750 அனுப்பு, நாளைக்கு திருப்பி தரேன்",
+    "amount": {
+      "currency": "INR",
+      "value": 750.0
+    }
+  },
+  {
+    "id": "h-a076",
+    "difficulty": "tricky",
+    "language": "ar",
+    "note": "currency in Arabic words",
+    "text": "حولتلك 200 دولار",
+    "amount": {
+      "currency": "USD",
+      "value": 200.0
+    }
+  },
+  {
+    "id": "h-a077",
+    "difficulty": "tricky",
+    "language": "pt",
+    "note": "currency word after the number",
+    "text": "Paguei 30 euros pelo jantar",
+    "amount": {
+      "currency": "EUR",
+      "value": 30.0
+    }
+  },
+  {
+    "id": "h-a078",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "card digits before the amount",
+    "text": "Card ending 4417 used for $1,245.00 at Best Buy on 10/26",
+    "amount": {
+      "currency": "USD",
+      "value": 1245.0
+    }
+  },
+  {
+    "id": "h-a079",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "L for lakh",
+    "text": "Pre-approved loan of Rs 1.2L ready for you",
+    "amount": {
+      "currency": "INR",
+      "value": 120000.0
+    }
+  },
+  {
+    "id": "h-a080",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "price range",
+    "text": "Tickets are ₹500-700 depending on the seat",
+    "amount": {
+      "currency": "INR",
+      "value": 500.0
+    }
+  }
+]

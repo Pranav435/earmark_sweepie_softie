@@ -37,6 +37,9 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     /** How many loops are open, for the home screen. Read it on the engine's thread, like [handle]. */
     public val openLoops: Int get() = book.all.size
 
+    /** The message model's weights loaded, so it reads messages beside the word lists (ADR 0031). The first read loads them. */
+    public val messageModel: Boolean get() = MessageModel.loaded
+
     public fun handle(event: Event, now: Instant): List<Effect> = when (event) {
         is Event.NotificationPosted -> onPosted(event.signal, now)
         is Event.NotificationRemoved -> onRemoved(event, now)
@@ -115,7 +118,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
                 bookedAt[result.packageName] = now
                 closeWhere(now, "booked in ${result.packageName}") { CloseRules.closedByBooking(it.loop, result.packageName) }
             }
-            is Classification.Paid -> closeWhere(now, "paid in ${result.packageName}") { CloseRules.closedByPayment(it.loop, result.packageName) }
+            is Classification.Paid -> closeWhere(now, "paid in ${result.packageName}") { CloseRules.closedByPayment(it.loop, result.packageName, result.amount) }
             is Classification.Quiet -> {
                 if (book.byNotificationKey(signal.key) == null) quiet[signal.key] = result.conversation
                 skip(signal, "group chatter, not for you")
@@ -256,7 +259,8 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
 
         val candidates = book.all.filter { !kindStat(it.loop.kind).muted }
         val muted = book.all.size - candidates.size
-        val best = candidates.map { it to Ranker.score(it.loop, now, stats, unseen(it.loop)) }.maxByOrNull { it.second.total }
+        val best = candidates.map { it to Ranker.score(it.loop, now, stats, unseen(it.loop)) }
+            .maxWithOrNull { a, b -> Ranker.unlockOrder.compare(a.first.loop to a.second, b.first.loop to b.second) }
         if (best == null) {
             return effects + Effect.Log("unlock: no chip, no open loops" + if (muted > 0) " ($muted muted)" else "")
         }

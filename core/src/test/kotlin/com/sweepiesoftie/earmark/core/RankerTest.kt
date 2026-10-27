@@ -11,9 +11,9 @@ class RankerTest {
 
     @Test
     fun `Rahul's fresh question clears the bar with the unlock boost`() {
-        // recent = exp(-1/30) = 0.9672; 0.35*0.9672 + 0.25*0.5 + 0.25*1.0 + 0.15*0.5 + 0.15 = 0.9385
+        // A question is owed, so it fades over 6 h: recent = exp(-1/360) = 0.9972; 0.35*0.9972 + 0.125 + 0.25 + 0.075 + 0.15 = 0.9490
         val score = Ranker.score(reply(at(16, 11)), now = at(16, 12), stats = Stats())
-        assertEquals(0.9385, score.total, 0.0005)
+        assertEquals(0.9490, score.total, 0.0005)
         assertEquals(0.15, score.boost, 1e-9)
         assertTrue(score.total > Ranker.CHIP_THRESHOLD)
     }
@@ -24,6 +24,28 @@ class RankerTest {
         val score = Ranker.score(reply(at(14, 12), "that was fun"), now = at(16, 12), stats = Stats())
         assertEquals(0.4814, score.total, 0.0005)
         assertTrue(score.total <= Ranker.CHIP_THRESHOLD)
+    }
+
+    @Test
+    fun `something owed still clears the bar hours later at the first unlock after it, and fades fast once seen`() {
+        // A question from four hours ago: recent = exp(-240/360) = 0.5134; 0.35*0.5134 + 0.125 + 0.25*0.75 + 0.075 + 0.15 = 0.7172
+        val question = reply(at(12, 12), "kab tak aayega ghar")
+        assertEquals(0.7172, Ranker.score(question, at(16, 12), Stats(), unseen = true).total, 0.0005)
+        // Seen at an earlier unlock, it fades in half an hour like anything else.
+        assertTrue(Ranker.score(question, at(16, 12), Stats(), unseen = false).total <= Ranker.CHIP_THRESHOLD)
+        // Chatter from the same time doesn't come back.
+        assertTrue(Ranker.score(reply(at(12, 12), "that was fun"), at(16, 12), Stats(), unseen = true).total <= Ranker.CHIP_THRESHOLD)
+    }
+
+    @Test
+    fun `a missed call, a money request, a bill and a reminder are owed, and chatter isn't`() {
+        val chatter = reply(at(16, 0), "that was fun")
+        assertTrue(Ranker.owes(reply(at(16, 0), "call me asap")))
+        assertTrue(Ranker.owes(reply(at(16, 0), "did u eat")))
+        assertTrue(!Ranker.owes(chatter))
+        LoopKind.entries.filter { it in setOf(LoopKind.CallBack, LoopKind.Payment, LoopKind.Reminder) }.forEach {
+            assertTrue(it.name, Ranker.owes(chatter.copy(kind = it, why = emptyList())))
+        }
     }
 
     @Test

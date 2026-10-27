@@ -1,0 +1,4704 @@
+[
+  {
+    "id": "h-g001",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 6,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Rahul",
+          "text": "I'm saving you a seat near the window",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Rahul",
+              "text": "hey are you coming to the library today?",
+              "minutesAgo": 2
+            },
+            {
+              "sender": "Rahul",
+              "text": "I'm saving you a seat near the window",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "in.swiggy.android",
+          "appLabel": "Swiggy",
+          "category": "promo",
+          "title": "Hungry, Pranav? 🍕",
+          "text": "Flat 60% off on pizzas till 4 PM. Order now!",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 15,
+        "notification": {
+          "app": "com.instagram.android",
+          "appLabel": "Instagram",
+          "category": "social",
+          "title": "Instagram",
+          "text": "kabir.sethi and 3 others liked your post.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g002",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 25,
+        "notification": {
+          "app": "com.samsung.android.dialer",
+          "appLabel": "Phone",
+          "category": "missed_call",
+          "title": "Missed call",
+          "text": "Mom",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 10,
+        "notification": {
+          "app": "com.google.android.youtube",
+          "appLabel": "YouTube",
+          "category": "recommendation",
+          "title": "Kurzgesagt – In a Nutshell",
+          "text": "New video: What happens if you fall into a black hole?",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g003",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 12,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Aditya",
+          "text": "photo bhej de pls, kal quiz hai",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Aditya",
+              "text": "bhai kal ke DBMS lecture ke notes hai tere paas?",
+              "minutesAgo": 3
+            },
+            {
+              "sender": "Aditya",
+              "text": "photo bhej de pls, kal quiz hai",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 40,
+        "notification": {
+          "app": "in.amazon.mShop.android.shopping",
+          "appLabel": "Amazon Shopping",
+          "category": null,
+          "title": "Out for delivery",
+          "text": "Your package with boAt Airdopes 141 will be delivered today by 9 PM.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 50,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "JD-AMAZON",
+          "text": "418302 is your Amazon OTP to receive your delivery. Share it only with the delivery agent.",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "JD-AMAZON",
+              "text": "418302 is your Amazon OTP to receive your delivery. Share it only with the delivery agent.",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g004",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 35,
+        "notification": {
+          "app": "com.google.android.apps.nbu.paisa.user",
+          "appLabel": "Google Pay",
+          "category": null,
+          "title": "Sneha Iyer requested ₹450",
+          "text": "For dinner at Bombay Canteen · Tap to pay",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 5,
+        "notification": {
+          "app": "com.application.zomato",
+          "appLabel": "Zomato",
+          "category": "promo",
+          "title": "Craving biryani? 🍛",
+          "text": "Get 50% off up to ₹100 on your next order. Use code TRYNEW",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g005",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 180,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "AX-AIRTEL",
+          "text": "Dear Customer, your Airtel Postpaid bill of Rs.799.00 for 98XXXXXX21 is due on 29-Oct-26. Pay now via Airtel Thanks app: https://i.airtel.in/pay to avoid late fee.",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "AX-AIRTEL",
+              "text": "Dear Customer, your Airtel Postpaid bill of Rs.799.00 for 98XXXXXX21 is due on 29-Oct-26. Pay now via Airtel Thanks app: https://i.airtel.in/pay to avoid late fee.",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 2,
+        "notification": {
+          "app": "com.spotify.music",
+          "appLabel": "Spotify",
+          "category": "transport",
+          "title": "Kesariya",
+          "text": "Arijit Singh · Brahmastra",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": true,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 20,
+        "notification": {
+          "app": "com.flipkart.android",
+          "appLabel": "Flipkart",
+          "category": "promo",
+          "title": "Big Diwali Sale is LIVE 🪔",
+          "text": "Up to 80% off on electronics. Ends tonight!",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g006",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 8,
+        "notification": {
+          "app": "in.swiggy.android",
+          "appLabel": "Swiggy",
+          "category": "promo",
+          "title": "Midweek cravings? 🍔",
+          "text": "Burgers from ₹99 + free delivery on your next order",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 60,
+        "notification": {
+          "app": "in.amazon.mShop.android.shopping",
+          "appLabel": "Amazon Shopping",
+          "category": null,
+          "title": "Shipped: Your order is on its way",
+          "text": "Logitech M331 Silent Plus Wireless Mouse · Arriving Thursday",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 20,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "VM-HDFCBK",
+          "text": "OTP is 482913 for txn of INR 1,499.00 at AMAZON on HDFC Bank card ending 4521. Valid till 14:32. Do not share OTP for security reasons.",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "VM-HDFCBK",
+              "text": "OTP is 482913 for txn of INR 1,499.00 at AMAZON on HDFC Bank card ending 4521. Valid till 14:32. Do not share OTP for security reasons.",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "d",
+        "minutesBeforeUnlock": 90,
+        "notification": {
+          "app": "com.google.android.youtube",
+          "appLabel": "YouTube",
+          "category": "recommendation",
+          "title": "Mrwhosetheboss",
+          "text": "New video: I tested every foldable phone of 2026",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "none",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g007",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 2,
+        "notification": {
+          "app": "com.google.android.calendar",
+          "appLabel": "Calendar",
+          "category": "event",
+          "title": "Project review – Prof. Mehta",
+          "text": "2:30 – 3:00 PM · Room 412, Dept. of CSE",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 5,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "CSE 2027 🎓",
+          "text": "Ankit: nice",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Ankit",
+              "text": "is the canteen open today?",
+              "minutesAgo": 3
+            },
+            {
+              "sender": "Simran",
+              "text": "yes till 4",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Ankit",
+              "text": "nice",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "CSE 2027 🎓",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g008",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 70,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Mom",
+          "text": "Free ho toh call karna, Diwali ki shopping ka discuss karna hai",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Mom",
+              "text": "Khana khaya?",
+              "minutesAgo": 5
+            },
+            {
+              "sender": "Mom",
+              "text": "Free ho toh call karna, Diwali ki shopping ka discuss karna hai",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Savla Parivar 🙏",
+          "text": "Hetal Masi: 🙏🙏",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Bhavesh Kaka",
+              "text": "Good morning 🌸 Have a blessed day 🙏",
+              "minutesAgo": 4
+            },
+            {
+              "sender": "Hetal Masi",
+              "text": "🙏🙏",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "Savla Parivar 🙏",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g009",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 45,
+        "notification": {
+          "app": "com.google.android.gm",
+          "appLabel": "Gmail",
+          "category": "email",
+          "title": "Prof. Anjali Mehta",
+          "text": "Re: Thesis draft – chapter 3",
+          "bigText": "Re: Thesis draft – chapter 3\nHi Pranav, thanks for the draft. The methods section still needs the revised baseline numbers. Can you send me the updated chapter 3 by Thursday evening? Best, Anjali",
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 20,
+        "notification": {
+          "app": "com.google.android.gm",
+          "appLabel": "Gmail",
+          "category": "email",
+          "title": "Medium Daily Digest",
+          "text": "How I built a second brain in Notion",
+          "bigText": "How I built a second brain in Notion\nStories for Pranav Savla · 7 min read · Plus: The quiet death of the side project",
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g010",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 120,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Dadi",
+          "text": "टिकट हो गई हो तो बता देना, पापा लेने आएंगे",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Dadi",
+              "text": "बेटा, दिवाली पर कब आ रहे हो?",
+              "minutesAgo": 3
+            },
+            {
+              "sender": "Dadi",
+              "text": "टिकट हो गई हो तो बता देना, पापा लेने आएंगे",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 15,
+        "notification": {
+          "app": "net.one97.paytm",
+          "appLabel": "Paytm",
+          "category": "promo",
+          "title": "₹100 cashback is waiting! 🎁",
+          "text": "Pay your electricity bill with Paytm UPI and win up to ₹100 cashback.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g011",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "only an acknowledgement waiting from Rahul",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 15,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Rahul",
+          "text": "ok cool 👍",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": null,
+              "text": "sent you the slides on mail",
+              "minutesAgo": 3,
+              "fromUser": true
+            },
+            {
+              "sender": "Rahul",
+              "text": "ok cool 👍",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 40,
+        "notification": {
+          "app": "com.instagram.android",
+          "appLabel": "Instagram",
+          "category": "social",
+          "title": "Instagram",
+          "text": "Suggested for you: see new reels from foodiesofmumbai",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "none",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g012",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "fresh laughter vs an older missed call from Papa",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 2,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Kabir",
+          "text": "lol",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Kabir",
+              "text": "😂😂 that meme",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Kabir",
+              "text": "lol",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 50,
+        "notification": {
+          "app": "com.google.android.dialer",
+          "appLabel": "Phone",
+          "category": "missed_call",
+          "title": "Missed call",
+          "text": "Papa",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Papa",
+              "text": "Missed call",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "b",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g013",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Flat 4B 🏠",
+          "text": "Siddharth: @Pranav is mahine ka bijli bill tera turn hai, ₹2,340. Kal last date hai, aaj pay kar dena pls",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Siddharth",
+              "text": "kisne doodh ka packet bahar chhoda tha 😤",
+              "minutesAgo": 25
+            },
+            {
+              "sender": "Yash",
+              "text": "not me",
+              "minutesAgo": 20
+            },
+            {
+              "sender": "Siddharth",
+              "text": "@Pranav is mahine ka bijli bill tera turn hai, ₹2,340. Kal last date hai, aaj pay kar dena pls",
+              "minutesAgo": 0,
+              "mentionsYou": true
+            }
+          ],
+          "isGroup": true,
+          "groupName": "Flat 4B 🏠",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 12,
+        "notification": {
+          "app": "in.swiggy.android",
+          "appLabel": "Swiggy",
+          "category": "promo",
+          "title": "Groceries in 10 minutes ⚡",
+          "text": "Instamart: fresh fruits & veggies at up to 40% off",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g014",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 240,
+        "notification": {
+          "app": "com.phonepe.app",
+          "appLabel": "PhonePe",
+          "category": null,
+          "title": "Payment request from Rohan Shah",
+          "text": "₹1,250 · Goa wala petrol ka hissa · Pay now",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "com.rapido.passenger",
+          "appLabel": "Rapido",
+          "category": "promo",
+          "title": "Beat the traffic 🏍️",
+          "text": "Bike taxi rides starting at ₹29. Book now!",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g015",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 20,
+        "notification": {
+          "app": "com.Slack",
+          "appLabel": "Slack",
+          "category": "msg",
+          "title": "Neha Kapoor",
+          "text": "can you review my PR before standup at 11? it's the auth fix",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Neha Kapoor",
+              "text": "hey!",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Neha Kapoor",
+              "text": "can you review my PR before standup at 11? it's the auth fix",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 10,
+        "notification": {
+          "app": "com.Slack",
+          "appLabel": "Slack",
+          "category": "msg",
+          "title": "#general",
+          "text": "Ankit Rao: lunch is here 🍕 4th floor pantry",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Ankit Rao",
+              "text": "lunch is here 🍕 4th floor pantry",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "#general",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g016",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 1,
+        "notification": {
+          "app": "com.google.android.keep",
+          "appLabel": "Keep Notes",
+          "category": "reminder",
+          "title": "Submit scholarship form",
+          "text": "Upload income certificate + marksheet on the portal",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Ishaan",
+          "text": "haha yeah",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": null,
+              "text": "that movie was so mid",
+              "minutesAgo": 6,
+              "fromUser": true
+            },
+            {
+              "sender": "Ishaan",
+              "text": "haha yeah",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g017",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "group question that doesn't name him",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 10,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Weekend Trek 🏔️",
+          "text": "Riya: need the final count by tomorrow, who else is coming?",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Riya",
+              "text": "Kalsubai on Saturday, who's in?",
+              "minutesAgo": 8
+            },
+            {
+              "sender": "Rahul",
+              "text": "me!",
+              "minutesAgo": 6
+            },
+            {
+              "sender": "Ananya",
+              "text": "maybe, will confirm tonight",
+              "minutesAgo": 2
+            },
+            {
+              "sender": "Riya",
+              "text": "need the final count by tomorrow, who else is coming?",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "Weekend Trek 🏔️",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 25,
+        "notification": {
+          "app": "com.ubercab",
+          "appLabel": "Uber",
+          "category": "promo",
+          "title": "Ride for less this weekend",
+          "text": "Save 25% on your next 3 Uber Go rides.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "none",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g018",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 55,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "Bhaiya",
+          "text": "Bata de, lene aa jaunga",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Bhaiya",
+              "text": "Kal subah station kitne baje pahunchega?",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Bhaiya",
+              "text": "Bata de, lene aa jaunga",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 100,
+        "notification": {
+          "app": "com.olacabs.customer",
+          "appLabel": "Ola",
+          "category": null,
+          "title": "Thanks for riding with Ola",
+          "text": "Ride receipt: ₹214 paid via UPI. Rate your driver Suresh.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g019",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 35,
+        "notification": {
+          "app": "com.microsoft.office.outlook",
+          "appLabel": "Outlook",
+          "category": "email",
+          "title": "Vikram Iyer",
+          "text": "Urgent: NDA signature needed today",
+          "bigText": "Urgent: NDA signature needed today\nHi Pranav, legal can't activate your intern account until the NDA is signed. Could you sign it in DocuSign before 5 PM today? Thanks, Vikram",
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 15,
+        "notification": {
+          "app": "com.microsoft.office.outlook",
+          "appLabel": "Outlook",
+          "category": "email",
+          "title": "Microsoft Teams",
+          "text": "You have 2 missed activities in Teams",
+          "bigText": "You have 2 missed activities in Teams\nHi Pranav, people are trying to reach you in Microsoft Teams. Ankit replied to a conversation in Interns 2026.",
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g020",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 8,
+        "notification": {
+          "app": "com.google.android.dialer",
+          "appLabel": "Phone",
+          "category": "missed_call",
+          "title": "2 missed calls",
+          "text": "Ananya",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Ananya",
+              "text": "Missed call",
+              "minutesAgo": 3
+            },
+            {
+              "sender": "Ananya",
+              "text": "Missed call",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 7,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Ananya",
+          "text": "pick up, it's important",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Ananya",
+              "text": "pick up, it's important",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": [
+        "b"
+      ]
+    }
+  },
+  {
+    "id": "h-g021",
+    "difficulty": "tricky",
+    "language": "hi",
+    "note": "urgent Hindi message older than a fresh casual one",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 40,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Chacha",
+          "text": "जल्दी फ़ोन करो",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Chacha",
+              "text": "पापा की तबीयत अचानक खराब हो गई है, सिटी हॉस्पिटल ले जा रहे हैं।",
+              "minutesAgo": 2
+            },
+            {
+              "sender": "Chacha",
+              "text": "जल्दी फ़ोन करो",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 1,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Kunal",
+          "text": "bro match dekh raha? 😂",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Kunal",
+              "text": "bro match dekh raha? 😂",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g022",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "in.amazon.mShop.android.shopping",
+          "appLabel": "Amazon Shopping",
+          "category": null,
+          "title": "Delivered",
+          "text": "Your package was handed to a resident. Rate your delivery experience.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 45,
+        "notification": {
+          "app": "com.application.zomato",
+          "appLabel": "Zomato",
+          "category": null,
+          "title": "How was your order from Burger King?",
+          "text": "Rate your meal and help others choose better 🍔",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 10,
+        "notification": {
+          "app": "com.flipkart.android",
+          "appLabel": "Flipkart",
+          "category": "promo",
+          "title": "Big Diwali Sale is LIVE 🪔",
+          "text": "Up to 80% off on electronics. Ends tonight!",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "d",
+        "minutesBeforeUnlock": 5,
+        "notification": {
+          "app": "com.instagram.android",
+          "appLabel": "Instagram",
+          "category": "social",
+          "title": "Instagram",
+          "text": "tanvi.k, mehul_23 and 6 others liked your reel.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "none",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g023",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 15,
+        "notification": {
+          "app": "com.google.android.apps.nbu.paisa.user",
+          "appLabel": "Google Pay",
+          "category": null,
+          "title": "Aisha Khan requested ₹320",
+          "text": "Chai + maggi 🍜 · Tap to pay",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 16,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Aisha",
+          "text": "yaar kal ki chai maggi ke paise ka GPay request bheja hai, dekh lena",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Aisha",
+              "text": "yaar kal ki chai maggi ke paise ka GPay request bheja hai, dekh lena",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": [
+        "b"
+      ]
+    }
+  },
+  {
+    "id": "h-g024",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "6-hour-old card bill due tomorrow vs fresh laughter and group chatter",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 360,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "VM-HDFCBK",
+          "text": "Payment of Rs.12,430.00 is due on HDFC Bank Credit Card ending 4521 on 28-OCT-26. Minimum amount due Rs.620.00. Pay now: hdfcbk.io/cc. Ignore if paid.",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "VM-HDFCBK",
+              "text": "Payment of Rs.12,430.00 is due on HDFC Bank Credit Card ending 4521 on 28-OCT-26. Minimum amount due Rs.620.00. Pay now: hdfcbk.io/cc. Ignore if paid.",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 3,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Varun",
+          "text": "hahaha 😂",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Varun",
+              "text": "hahaha 😂",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 9,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Football 5s ⚽",
+          "text": "Arnav: 🔥🔥",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Dhruv",
+              "text": "turf booked for 7",
+              "minutesAgo": 4
+            },
+            {
+              "sender": "Arnav",
+              "text": "🔥🔥",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "Football 5s ⚽",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g025",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "payment receipts only, nothing owed",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 20,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "AX-AIRTEL",
+          "text": "Dear Customer, payment of Rs.799.00 for Airtel Postpaid 98XXXXXX21 has been received on 27-Oct-26. Thank you for choosing Airtel.",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "AX-AIRTEL",
+              "text": "Dear Customer, payment of Rs.799.00 for Airtel Postpaid 98XXXXXX21 has been received on 27-Oct-26. Thank you for choosing Airtel.",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 21,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "VM-HDFCBK",
+          "text": "Rs.799.00 debited from a/c **6614 on 27-10-26 to VPA airtelpostpaid@icici (UPI Ref 629911874521). Not you? Call 18002586161",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "VM-HDFCBK",
+              "text": "Rs.799.00 debited from a/c **6614 on 27-10-26 to VPA airtelpostpaid@icici (UPI Ref 629911874521). Not you? Call 18002586161",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 6,
+        "notification": {
+          "app": "in.swiggy.android",
+          "appLabel": "Swiggy",
+          "category": "promo",
+          "title": "Hungry, Pranav? 🍕",
+          "text": "Flat 60% off on pizzas till 4 PM. Order now!",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "none",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g026",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 25,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Karan TA",
+          "text": "tune upload kiya? tera naam list mein nahi dikh raha",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Karan TA",
+              "text": "Pranav, DSP lab report ka portal 6 baje band ho jayega",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Karan TA",
+              "text": "tune upload kiya? tera naam list mein nahi dikh raha",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 60,
+        "notification": {
+          "app": "com.google.android.youtube",
+          "appLabel": "YouTube",
+          "category": "recommendation",
+          "title": "Kurzgesagt – In a Nutshell",
+          "text": "New video: What happens if you fall into a black hole?",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g027",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 18,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Riya",
+          "text": "raat 9 tak group mein daal dena pls",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Riya",
+              "text": "kal ki presentation ke slides tune banaye kya?",
+              "minutesAgo": 2
+            },
+            {
+              "sender": "Riya",
+              "text": "raat 9 tak group mein daal dena pls",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 4,
+        "notification": {
+          "app": "com.instagram.android",
+          "appLabel": "Instagram",
+          "category": "msg",
+          "title": "kabir.sethi",
+          "text": "😂😂😂",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "kabir.sethi",
+              "text": "😂😂😂",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g028",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 25,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Savla Parivar 🙏",
+          "text": "Hetal Masi: Good morning 🌞 Jai Jinendra 🙏",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Hetal Masi",
+              "text": "Good morning 🌞 Jai Jinendra 🙏",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "Savla Parivar 🙏",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 60,
+        "notification": {
+          "app": "com.google.android.apps.tasks",
+          "appLabel": "Tasks",
+          "category": "reminder",
+          "title": "Pay hostel fees – last day",
+          "text": "₹42,500 via ERP portal before 5 PM",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 430,
+        "notification": {
+          "app": "com.samsung.android.dialer",
+          "appLabel": "Phone",
+          "category": "missed_call",
+          "title": "Missed call",
+          "text": "Arjun",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "d",
+        "minutesBeforeUnlock": 432,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Arjun",
+          "text": "you up?",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Arjun",
+              "text": "you up?",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "b",
+      "alsoFine": [
+        "c"
+      ]
+    }
+  },
+  {
+    "id": "h-g029",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "KYC scam text from a mobile number",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 12,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "+91 73849 22106",
+          "text": "Dear Customer, your SBI YONO account will be BLOCKED today. Update your PAN immediately: http://sbi-yono-kyc.in/upd",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "+91 73849 22106",
+              "text": "Dear Customer, your SBI YONO account will be BLOCKED today. Update your PAN immediately: http://sbi-yono-kyc.in/upd",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "com.instagram.android",
+          "appLabel": "Instagram",
+          "category": "social",
+          "title": "Instagram",
+          "text": "Suggested for you: see new reels from mumbaifoodie",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "none",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g030",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "group names him in the text without a mention flag; fresh 👍",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 20,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "College Gang 🤙",
+          "text": "Mehul: Pranav tu aa raha hai na? confirm kar, gaadi book karni hai",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Mehul",
+              "text": "kal Lonavala chal rahe hai, 7 baje Dadar",
+              "minutesAgo": 35
+            },
+            {
+              "sender": "Tanvi",
+              "text": "main aa rahi",
+              "minutesAgo": 30
+            },
+            {
+              "sender": "Mehul",
+              "text": "Pranav tu aa raha hai na? confirm kar, gaadi book karni hai",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "College Gang 🤙",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 2,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Sid",
+          "text": "👍",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Sid",
+              "text": "👍",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g031",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 300,
+        "notification": {
+          "app": "com.venmo",
+          "appLabel": "Venmo",
+          "category": null,
+          "title": "Jake Miller requests $24.00",
+          "text": "🍕 pizza night",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 1,
+        "notification": {
+          "app": "com.spotify.music",
+          "appLabel": "Spotify",
+          "category": "transport",
+          "title": "Blinding Lights",
+          "text": "The Weeknd · After Hours",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": true,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g032",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "com.google.android.gm",
+          "appLabel": "Gmail",
+          "category": "email",
+          "title": "Coursera",
+          "text": "Pranav, ready to finish your course?",
+          "bigText": "Pranav, ready to finish your course?\nYou're 68% through the Machine Learning Specialization. Pick up where you left off: your next video is 9 minutes.",
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 50,
+        "notification": {
+          "app": "com.google.android.gm",
+          "appLabel": "Gmail",
+          "category": "email",
+          "title": "Rhea Fernandes",
+          "text": "Volunteers for Saturday's blood donation camp",
+          "bigText": "Volunteers for Saturday's blood donation camp\nHi Pranav, we're short on volunteers for the camp this Saturday, 9 to 1. Can you make it? Please reply by tonight so I can finalise the list. Thanks! Rhea",
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 80,
+        "notification": {
+          "app": "com.microsoft.office.outlook",
+          "appLabel": "Outlook",
+          "category": "email",
+          "title": "IEEE Spectrum",
+          "text": "This week: chips that think in analog",
+          "bigText": "This week: chips that think in analog\nPlus: why battery prices keep falling. Read the newsletter →",
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "b",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g033",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "emergency in a group that doesn't name him",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 4,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Hostel Wing C",
+          "text": "Omkar: anyone with a car or bike pls come NOW, need to take him to the hospital",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Omkar",
+              "text": "someone fainted near the 3rd floor stairs",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Omkar",
+              "text": "anyone with a car or bike pls come NOW, need to take him to the hospital",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "Hostel Wing C",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 40,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Priya",
+          "text": "did you finish the OS assignment?",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Priya",
+              "text": "did you finish the OS assignment?",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g034",
+    "difficulty": "tricky",
+    "language": "mr",
+    "note": "urgent Marathi message older than fresh chatter",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 35,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Aai",
+          "text": "लवकर फोन कर.",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Aai",
+              "text": "आजीला हॉस्पिटलमध्ये दाखल केलं आहे.",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Aai",
+              "text": "लवकर फोन कर.",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 2,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "CSE 2027 🎓",
+          "text": "Simran: anyone has the OS notes?",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Simran",
+              "text": "anyone has the OS notes?",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "CSE 2027 🎓",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 1,
+        "notification": {
+          "app": "com.instagram.android",
+          "appLabel": "Instagram",
+          "category": "social",
+          "title": "Instagram",
+          "text": "arnav.d liked your comment: \"this is so true 😭\"",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g035",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 5,
+        "notification": {
+          "app": "com.microsoft.todos",
+          "appLabel": "To Do",
+          "category": "reminder",
+          "title": "Renew bus pass",
+          "text": "Today · My Day",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 45,
+        "notification": {
+          "app": "in.amazon.mShop.android.shopping",
+          "appLabel": "Amazon Shopping",
+          "category": "promo",
+          "title": "Great Indian Festival 🎉",
+          "text": "Up to 70% off on headphones. Deals end at midnight.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g036",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 90,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Savla Parivar 🙏",
+          "text": "Fua: Sab log Sunday ko derasar aa rahe ho kya?",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Bhavesh Kaka",
+              "text": "Good morning 🌸 Jai Jinendra 🙏",
+              "minutesAgo": 40
+            },
+            {
+              "sender": "Hetal Masi",
+              "text": "Jai Jinendra 🙏🙏",
+              "minutesAgo": 30
+            },
+            {
+              "sender": "Fua",
+              "text": "Sab log Sunday ko derasar aa rahe ho kya?",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "Savla Parivar 🙏",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 25,
+        "notification": {
+          "app": "net.one97.paytm",
+          "appLabel": "Paytm",
+          "category": "promo",
+          "title": "₹100 cashback is waiting! 🎁",
+          "text": "Pay your electricity bill with Paytm UPI and win up to ₹100 cashback.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 10,
+        "notification": {
+          "app": "com.instagram.android",
+          "appLabel": "Instagram",
+          "category": "social",
+          "title": "Instagram",
+          "text": "riya.desai started following you.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "none",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g037",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 22,
+        "notification": {
+          "app": "com.instagram.android",
+          "appLabel": "Instagram",
+          "category": "msg",
+          "title": "meera.k",
+          "text": "need to know for the guest list by 6",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "meera.k",
+              "text": "are you coming to the gig tonight?",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "meera.k",
+              "text": "need to know for the guest list by 6",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 10,
+        "notification": {
+          "app": "com.instagram.android",
+          "appLabel": "Instagram",
+          "category": "social",
+          "title": "Instagram",
+          "text": "rohan.shah_ liked your story.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g038",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 15,
+        "notification": {
+          "app": "com.google.android.dialer",
+          "appLabel": "Phone",
+          "category": "missed_call",
+          "title": "Missed call",
+          "text": "Dr. Shah Clinic",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Dr. Shah Clinic",
+              "text": "Missed call",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 40,
+        "notification": {
+          "app": "in.swiggy.android",
+          "appLabel": "Swiggy",
+          "category": "promo",
+          "title": "Hungry, Pranav? 🍕",
+          "text": "Flat 60% off on pizzas till 4 PM. Order now!",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g039",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 200,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "Papa",
+          "text": "शाम तक बिजली का बिल भर देना, आज आखिरी तारीख है।",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Papa",
+              "text": "शाम तक बिजली का बिल भर देना, आज आखिरी तारीख है।",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "VM-HDFCBK",
+          "text": "OTP is 771204 for txn of INR 349.00 at SWIGGY on HDFC Bank card ending 4521. Valid till 18:05. Do not share OTP for security reasons.",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "VM-HDFCBK",
+              "text": "OTP is 771204 for txn of INR 349.00 at SWIGGY on HDFC Bank card ending 4521. Valid till 18:05. Do not share OTP for security reasons.",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g040",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "two real loops, either is a fair guess",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 20,
+        "notification": {
+          "app": "com.google.android.gm",
+          "appLabel": "Gmail",
+          "category": "email",
+          "title": "Prof. Vivek Rao",
+          "text": "Friday seminar – please confirm",
+          "bigText": "Friday seminar – please confirm\nHi Pranav, can you confirm that you'll present your project at Friday's seminar? I need to send the schedule out today. Regards, V. Rao",
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 150,
+        "notification": {
+          "app": "com.samsung.android.dialer",
+          "appLabel": "Phone",
+          "category": "missed_call",
+          "title": "Missed call",
+          "text": "Mom",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": [
+        "b"
+      ]
+    }
+  },
+  {
+    "id": "h-g041",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "he already replied from his laptop",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 12,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Neha",
+          "text": "sent! check your mail",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Neha",
+              "text": "can you send the pdf of the notes?",
+              "minutesAgo": 30
+            },
+            {
+              "sender": null,
+              "text": "sent! check your mail",
+              "minutesAgo": 0,
+              "fromUser": true
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 40,
+        "notification": {
+          "app": "com.google.android.youtube",
+          "appLabel": "YouTube",
+          "category": "recommendation",
+          "title": "Kurzgesagt – In a Nutshell",
+          "text": "New video: What happens if you fall into a black hole?",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "none",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g042",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 25,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Rohit",
+          "text": "kal wapas kar dunga, urgent hai",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Rohit",
+              "text": "bhai 500 bhej de na",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Rohit",
+              "text": "kal wapas kar dunga, urgent hai",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 3,
+        "notification": {
+          "app": "net.one97.paytm",
+          "appLabel": "Paytm",
+          "category": "promo",
+          "title": "Get ₹500 cashback 💸",
+          "text": "On your first Paytm Postpaid transaction. T&C apply.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g043",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 50,
+        "notification": {
+          "app": "net.one97.paytm",
+          "appLabel": "Paytm",
+          "category": null,
+          "title": "Kunal Mehta has requested ₹180",
+          "text": "For: auto to Andheri · Tap to pay",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 70,
+        "notification": {
+          "app": "com.rapido.passenger",
+          "appLabel": "Rapido",
+          "category": null,
+          "title": "Ride completed",
+          "text": "You paid ₹62 for your ride with Sunil. Rate your ride.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g044",
+    "difficulty": "everyday",
+    "language": "ta",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Karthik",
+          "text": "உன் part முடிச்சியா? reply பண்ணு",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Karthik",
+              "text": "மச்சான், நாளைக்கு project submission",
+              "minutesAgo": 2
+            },
+            {
+              "sender": "Karthik",
+              "text": "உன் part முடிச்சியா? reply பண்ணு",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 15,
+        "notification": {
+          "app": "in.swiggy.android",
+          "appLabel": "Swiggy",
+          "category": "promo",
+          "title": "Hungry, Pranav? 🍕",
+          "text": "Flat 60% off on pizzas till 4 PM. Order now!",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g045",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "one card statement owes nothing, the other is due",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 60,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "VM-HDFCBK",
+          "text": "HDFC Bank Credit Card XX4521 statement for Oct-26: Total Amount Due Rs.0.00. No payment is required. Thank you for banking with us.",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "VM-HDFCBK",
+              "text": "HDFC Bank Credit Card XX4521 statement for Oct-26: Total Amount Due Rs.0.00. No payment is required. Thank you for banking with us.",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 240,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "AD-ICICIT",
+          "text": "ICICI Bank Credit Card XX7712: Total amount due INR 6,212.40, minimum due INR 310.00, payment due by 30-Oct-26. Pay via iMobile Pay to avoid late charges.",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "AD-ICICIT",
+              "text": "ICICI Bank Credit Card XX7712: Total amount due INR 6,212.40, minimum due INR 310.00, payment due by 30-Oct-26. Pay via iMobile Pay to avoid late charges.",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "in.amazon.mShop.android.shopping",
+          "appLabel": "Amazon Shopping",
+          "category": null,
+          "title": "Delivered",
+          "text": "Your package was left at the front door.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "b",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g046",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 300,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "VM-LICIND",
+          "text": "Dear Customer, premium of Rs.8,450/- for Policy No.9123XXXX is due on 02/11/2026. Pay online at licindia.in or via LIC Pay Direct.",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "VM-LICIND",
+              "text": "Dear Customer, premium of Rs.8,450/- for Policy No.9123XXXX is due on 02/11/2026. Pay online at licindia.in or via LIC Pay Direct.",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 10,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Dhruv",
+          "text": "ok",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": null,
+              "text": "see you at 7 then",
+              "minutesAgo": 5,
+              "fromUser": true
+            },
+            {
+              "sender": "Dhruv",
+              "text": "ok",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g047",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 14,
+        "notification": {
+          "app": "org.telegram.messenger",
+          "appLabel": "Telegram",
+          "category": "msg",
+          "title": "Dev Patel",
+          "text": "4 baje se pehle chahiye, model train karna hai",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Dev Patel",
+              "text": "bhai dataset ka drive link mila?",
+              "minutesAgo": 2
+            },
+            {
+              "sender": "Dev Patel",
+              "text": "4 baje se pehle chahiye, model train karna hai",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 5,
+        "notification": {
+          "app": "org.telegram.messenger",
+          "appLabel": "Telegram",
+          "category": "msg",
+          "title": "Tech News India",
+          "text": "Apple confirms iPhone 18 exports from its Bengaluru plant",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Tech News India",
+              "text": "Apple confirms iPhone 18 exports from its Bengaluru plant",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g048",
+    "difficulty": "everyday",
+    "language": "gu",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 110,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Masi",
+          "text": "ટિકિટ બુક કરવી છે, જલ્દી કહેજે.",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Masi",
+              "text": "પ્રણવ, દિવાળી પર ઘરે આવવાનો છે ને?",
+              "minutesAgo": 2
+            },
+            {
+              "sender": "Masi",
+              "text": "ટિકિટ બુક કરવી છે, જલ્દી કહેજે.",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 40,
+        "notification": {
+          "app": "com.flipkart.android",
+          "appLabel": "Flipkart",
+          "category": "promo",
+          "title": "Big Diwali Sale is LIVE 🪔",
+          "text": "Up to 80% off on electronics. Ends tonight!",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g049",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "summary notification over a bundle of chats",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 6,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "WhatsApp",
+          "text": "6 messages from 3 chats",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": true
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 6,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Football 5s ⚽",
+          "text": "Dhruv: done, 9",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Dhruv",
+              "text": "turf at 8 or 9?",
+              "minutesAgo": 3
+            },
+            {
+              "sender": "Arnav",
+              "text": "9",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Dhruv",
+              "text": "done, 9",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "Football 5s ⚽",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 9,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Zara",
+          "text": "hey, can you cover my shift at the library desk tomorrow 2–5?",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Zara",
+              "text": "hey, can you cover my shift at the library desk tomorrow 2–5?",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "d",
+        "minutesBeforeUnlock": 7,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Ishaan",
+          "text": "😂😂",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Ishaan",
+              "text": "😂😂",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "c",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g050",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "only old chatter and acknowledgements",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 300,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Aditya",
+          "text": "Mehul ka face 😂",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Aditya",
+              "text": "haha kal ka scene sahi tha",
+              "minutesAgo": 2
+            },
+            {
+              "sender": "Aditya",
+              "text": "Mehul ka face 😂",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 200,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Kabir",
+          "text": "chal theek hai",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": null,
+              "text": "kal 11 baje milte",
+              "minutesAgo": 10,
+              "fromUser": true
+            },
+            {
+              "sender": "Kabir",
+              "text": "chal theek hai",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "in.swiggy.android",
+          "appLabel": "Swiggy",
+          "category": "promo",
+          "title": "Hungry, Pranav? 🍕",
+          "text": "Flat 60% off on pizzas till 4 PM. Order now!",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "none",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g051",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 15,
+        "notification": {
+          "app": "com.samsung.android.app.reminder",
+          "appLabel": "Reminder",
+          "category": "reminder",
+          "title": "Call landlord about the water leak",
+          "text": "Today, 6:00 PM",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 3,
+        "notification": {
+          "app": "com.instagram.android",
+          "appLabel": "Instagram",
+          "category": "social",
+          "title": "Instagram",
+          "text": "kabir.sethi and 3 others liked your post.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g052",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "fresh spam missed call vs an older family question",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 2,
+        "notification": {
+          "app": "com.google.android.dialer",
+          "appLabel": "Phone",
+          "category": "missed_call",
+          "title": "Missed call",
+          "text": "Suspected spam caller · +91 140 456 7890",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "+91 140 456 7890",
+              "text": "Missed call",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 40,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Mom",
+          "text": "Bata jaldi, Papa ko bolna hai",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Mom",
+              "text": "Pranav, kal ki train ki ticket confirm hui kya?",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Mom",
+              "text": "Bata jaldi, Papa ko bolna hai",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "b",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g053",
+    "difficulty": "tricky",
+    "language": "hi",
+    "note": "family group names him in Devanagari; fresh 'ok'",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 45,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "परिवार ❤️",
+          "text": "Chacha: प्रणव, तुम छोड़ने जाओगे एयरपोर्ट? बता दो",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Bua",
+              "text": "दादाजी की फ्लाइट कल सुबह 6 बजे की है",
+              "minutesAgo": 20
+            },
+            {
+              "sender": "Chacha",
+              "text": "प्रणव, तुम छोड़ने जाओगे एयरपोर्ट? बता दो",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "परिवार ❤️",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 2,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Varun",
+          "text": "ok",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Varun",
+              "text": "ok",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g054",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 5,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "missed_call",
+          "title": "Nikhil",
+          "text": "Missed voice call",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 3,
+        "notification": {
+          "app": "com.spotify.music",
+          "appLabel": "Spotify",
+          "category": "transport",
+          "title": "Kesariya",
+          "text": "Arijit Singh · Brahmastra",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": true,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g055",
+    "difficulty": "tricky",
+    "language": "es",
+    "note": "urgent Spanish message older than a fresh 'sup'",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 70,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Lucía",
+          "text": "Es urgente, perdí mi pasaporte en el aeropuerto 😰",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Lucía",
+              "text": "Pranav, ¿puedes llamarme cuando veas esto?",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Lucía",
+              "text": "Es urgente, perdí mi pasaporte en el aeropuerto 😰",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 3,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Rahul",
+          "text": "sup",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Rahul",
+              "text": "sup",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g056",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 40,
+        "notification": {
+          "app": "com.google.android.gm",
+          "appLabel": "Gmail",
+          "category": "email",
+          "title": "Meghna Iyer",
+          "text": "Interview slot – please confirm by 6 PM",
+          "bigText": "Interview slot – please confirm by 6 PM\nHi Pranav, we'd like to schedule your technical round with Zeta Labs on Wednesday. Could you confirm whether 11 AM or 3 PM works for you? Please reply by 6 PM today. Best, Meghna (Talent Team)",
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 10,
+        "notification": {
+          "app": "com.google.android.gm",
+          "appLabel": "Gmail",
+          "category": "email",
+          "title": "LinkedIn",
+          "text": "Pranav, 12 new jobs for you",
+          "bigText": "Pranav, 12 new jobs for you\nSoftware Engineer Intern at Razorpay · Backend Intern at CRED · See all jobs",
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g057",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 100,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "Society Secretary",
+          "text": "Kab tak de doge? Bata dena.",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Society Secretary",
+              "text": "Pranav ji, Oct ka maintenance ₹3,500 abhi tak pending hai.",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Society Secretary",
+              "text": "Kab tak de doge? Bata dena.",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 20,
+        "notification": {
+          "app": "com.application.zomato",
+          "appLabel": "Zomato",
+          "category": "promo",
+          "title": "Craving biryani? 🍛",
+          "text": "Get 50% off up to ₹100 on your next order. Use code TRYNEW",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g058",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "only reactions waiting",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 6,
+        "notification": {
+          "app": "com.instagram.android",
+          "appLabel": "Instagram",
+          "category": "msg",
+          "title": "neha_r",
+          "text": "Liked a message",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "neha_r",
+              "text": "Liked a message",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 15,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Rahul",
+          "text": "Reacted 👍 to: \"see you at 7\"",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": null,
+              "text": "see you at 7",
+              "minutesAgo": 2,
+              "fromUser": true
+            },
+            {
+              "sender": "Rahul",
+              "text": "Reacted 👍 to: \"see you at 7\"",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "com.google.android.youtube",
+          "appLabel": "YouTube",
+          "category": "recommendation",
+          "title": "Kurzgesagt – In a Nutshell",
+          "text": "New video: What happens if you fall into a black hole?",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "none",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g059",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "fresh meme vs a 3-hour-old payment request",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 1,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Kabir",
+          "text": "bhai ye reel dekh 😂😂 instagram.com/reel/C9xk2Lp",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Kabir",
+              "text": "bhai ye reel dekh 😂😂 instagram.com/reel/C9xk2Lp",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 180,
+        "notification": {
+          "app": "com.google.android.apps.nbu.paisa.user",
+          "appLabel": "Google Pay",
+          "category": null,
+          "title": "Mihir Joshi requested ₹2,400",
+          "text": "PVR + khana, tera share · Tap to pay",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "b",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g060",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 300,
+        "notification": {
+          "app": "com.google.android.youtube",
+          "appLabel": "YouTube",
+          "category": "recommendation",
+          "title": "Fireship",
+          "text": "New video: 7 databases in 7 minutes (2026 edition)",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 400,
+        "notification": {
+          "app": "in.amazon.mShop.android.shopping",
+          "appLabel": "Amazon Shopping",
+          "category": "promo",
+          "title": "Deal of the Day ⚡",
+          "text": "Kindle Paperwhite at its lowest price. Ends in 6 hours.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 350,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "CSE 2027 🎓",
+          "text": "Ankit: anyone has the new timetable pdf?",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Ankit",
+              "text": "anyone has the new timetable pdf?",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "CSE 2027 🎓",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "d",
+        "minutesBeforeUnlock": 200,
+        "notification": {
+          "app": "com.flipkart.android",
+          "appLabel": "Flipkart",
+          "category": "promo",
+          "title": "Your cart misses you 🛒",
+          "text": "Items in your cart are selling fast. Complete your order now.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "none",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g061",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 400,
+        "notification": {
+          "app": "com.samsung.android.dialer",
+          "appLabel": "Phone",
+          "category": "missed_call",
+          "title": "Missed call",
+          "text": "Papa",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 395,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Papa",
+          "text": "उठते ही फ़ोन करना, ज़रूरी बात है।",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Papa",
+              "text": "उठते ही फ़ोन करना, ज़रूरी बात है।",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 5,
+        "notification": {
+          "app": "in.swiggy.android",
+          "appLabel": "Swiggy",
+          "category": "promo",
+          "title": "Breakfast is served ☕",
+          "text": "Poha, upma & more from ₹49. Order now!",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "d",
+        "minutesBeforeUnlock": 20,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Savla Parivar 🙏",
+          "text": "Bhavesh Kaka: Good morning 🌞🙏",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Bhavesh Kaka",
+              "text": "Good morning 🌞🙏",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "Savla Parivar 🙏",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": [
+        "b"
+      ]
+    }
+  },
+  {
+    "id": "h-g062",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 50,
+        "notification": {
+          "app": "com.microsoft.office.outlook",
+          "appLabel": "Outlook",
+          "category": "email",
+          "title": "Prof. S. Kulkarni",
+          "text": "Re: Lab extension request",
+          "bigText": "Re: Lab extension request\nPranav, please come to my cabin at 3 PM today to discuss the extension. Bring your partial results. – SK",
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "com.microsoft.office.outlook",
+          "appLabel": "Outlook",
+          "category": "email",
+          "title": "University Notices",
+          "text": "Central library closed on 31 Oct",
+          "bigText": "Central library closed on 31 Oct\nThis is an automated message. The central library will remain closed on Saturday, 31 October. Please do not reply.",
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g063",
+    "difficulty": "tricky",
+    "language": "hinglish",
+    "note": "same debt as a group mention and an app request",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 60,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Goa Trip 2026 🌴",
+          "text": "Riya: @Pranav tera share ₹4,200 hai, aaj GPay kar de pls",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Tanvi",
+              "text": "sab ke shares calculate kar diye",
+              "minutesAgo": 3
+            },
+            {
+              "sender": "Riya",
+              "text": "@Pranav tera share ₹4,200 hai, aaj GPay kar de pls",
+              "minutesAgo": 0,
+              "mentionsYou": true
+            }
+          ],
+          "isGroup": true,
+          "groupName": "Goa Trip 2026 🌴",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 59,
+        "notification": {
+          "app": "com.google.android.apps.nbu.paisa.user",
+          "appLabel": "Google Pay",
+          "category": null,
+          "title": "Riya Desai requested ₹4,200",
+          "text": "Goa trip share 🌴 · Tap to pay",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "b",
+      "alsoFine": [
+        "a"
+      ]
+    }
+  },
+  {
+    "id": "h-g064",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 130,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Mr. Desai (Landlord)",
+          "text": "Also the plumber is coming Thursday 11 AM, will someone be home?",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Mr. Desai (Landlord)",
+              "text": "Pranav, November rent ₹18,000 by the 1st please.",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Mr. Desai (Landlord)",
+              "text": "Also the plumber is coming Thursday 11 AM, will someone be home?",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 20,
+        "notification": {
+          "app": "com.instagram.android",
+          "appLabel": "Instagram",
+          "category": "social",
+          "title": "Instagram",
+          "text": "kabir.sethi and 3 others liked your post.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g065",
+    "difficulty": "everyday",
+    "language": "hi",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 80,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Mama",
+          "text": "प्रणव, शाम को फ़ोन करना। ज़रूरी बात करनी है।",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Mama",
+              "text": "प्रणव, शाम को फ़ोन करना। ज़रूरी बात करनी है।",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 15,
+        "notification": {
+          "app": "com.google.android.youtube",
+          "appLabel": "YouTube",
+          "category": "recommendation",
+          "title": "Kurzgesagt – In a Nutshell",
+          "text": "New video: What happens if you fall into a black hole?",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g066",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "FYI email from a person, nothing asked",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 40,
+        "notification": {
+          "app": "com.google.android.gm",
+          "appLabel": "Gmail",
+          "category": "email",
+          "title": "Ananya Rao",
+          "text": "FYI – slides from today's lecture",
+          "bigText": "FYI – slides from today's lecture\nHi all, sharing the slides from today's Compilers lecture for anyone who missed it. No action needed. – Ananya",
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 20,
+        "notification": {
+          "app": "in.amazon.mShop.android.shopping",
+          "appLabel": "Amazon Shopping",
+          "category": null,
+          "title": "Shipped: Your order is on its way",
+          "text": "Prestige electric kettle · Arriving tomorrow",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "c",
+        "minutesBeforeUnlock": 5,
+        "notification": {
+          "app": "in.swiggy.android",
+          "appLabel": "Swiggy",
+          "category": "promo",
+          "title": "Hungry, Pranav? 🍕",
+          "text": "Flat 60% off on pizzas till 4 PM. Order now!",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "none",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g067",
+    "difficulty": "tricky",
+    "language": "en",
+    "note": "business text uses his name and asks for a reply",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 3,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "JM-BAJAJF",
+          "text": "Hi Pranav! You're pre-approved for a personal loan of Rs.2,00,000 at 10.99%. Reply YES to get a call back. T&C apply.",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "JM-BAJAJF",
+              "text": "Hi Pranav! You're pre-approved for a personal loan of Rs.2,00,000 at 10.99%. Reply YES to get a call back. T&C apply.",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 40,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "Arjun",
+          "text": "text me once you're back, it's pouring here",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Arjun",
+              "text": "reached home?",
+              "minutesAgo": 3
+            },
+            {
+              "sender": "Arjun",
+              "text": "text me once you're back, it's pouring here",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "b",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g068",
+    "difficulty": "everyday",
+    "language": "hinglish",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 10,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Zoya",
+          "text": "confirm kar de, main seat rakhungi",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Zoya",
+              "text": "kal 10 baje lab mein milte hai?",
+              "minutesAgo": 1
+            },
+            {
+              "sender": "Zoya",
+              "text": "confirm kar de, main seat rakhungi",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 25,
+        "notification": {
+          "app": "in.swiggy.android",
+          "appLabel": "Swiggy",
+          "category": null,
+          "title": "Your order has been delivered!",
+          "text": "Enjoy your meal from Bikanervala 😋",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g069",
+    "difficulty": "everyday",
+    "language": "en",
+    "note": null,
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 30,
+        "notification": {
+          "app": "com.google.android.apps.tasks",
+          "appLabel": "Tasks",
+          "category": "reminder",
+          "title": "Return library books",
+          "text": "Due today · 2 books",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 12,
+        "notification": {
+          "app": "com.whatsapp",
+          "appLabel": "WhatsApp",
+          "category": "msg",
+          "title": "Football 5s ⚽",
+          "text": "Arnav: who's bringing the ball?",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "Arnav",
+              "text": "who's bringing the ball?",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": true,
+          "groupName": "Football 5s ⚽",
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "a",
+      "alsoFine": []
+    }
+  },
+  {
+    "id": "h-g070",
+    "difficulty": "tricky",
+    "language": "hi",
+    "note": "Hindi electricity-cut scam from a mobile number",
+    "items": [
+      {
+        "id": "a",
+        "minutesBeforeUnlock": 25,
+        "notification": {
+          "app": "com.google.android.apps.messaging",
+          "appLabel": "Messages",
+          "category": "msg",
+          "title": "+91 87654 32109",
+          "text": "प्रिय उपभोक्ता, आपका बिजली कनेक्शन आज रात 9:30 बजे काट दिया जाएगा क्योंकि पिछले महीने का बिल अपडेट नहीं है। तुरंत बिजली अधिकारी से संपर्क करें 9876543210",
+          "bigText": null,
+          "messages": [
+            {
+              "sender": "+91 87654 32109",
+              "text": "प्रिय उपभोक्ता, आपका बिजली कनेक्शन आज रात 9:30 बजे काट दिया जाएगा क्योंकि पिछले महीने का बिल अपडेट नहीं है। तुरंत बिजली अधिकारी से संपर्क करें 9876543210",
+              "minutesAgo": 0
+            }
+          ],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": "You",
+          "hasReplyAction": true,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      },
+      {
+        "id": "b",
+        "minutesBeforeUnlock": 50,
+        "notification": {
+          "app": "net.one97.paytm",
+          "appLabel": "Paytm",
+          "category": "promo",
+          "title": "₹100 cashback is waiting! 🎁",
+          "text": "Pay your electricity bill with Paytm UPI and win up to ₹100 cashback.",
+          "bigText": null,
+          "messages": [],
+          "isGroup": false,
+          "groupName": null,
+          "selfName": null,
+          "hasReplyAction": false,
+          "isOngoing": false,
+          "isGroupSummary": false
+        }
+      }
+    ],
+    "expected": {
+      "chip": "none",
+      "alsoFine": []
+    }
+  }
+]

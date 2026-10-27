@@ -7,4 +7,9 @@
     <instrumentation
         android:name=".SmartReplyBench"
         android:targetPackage="com.sweepiesoftie.earmark.bench" />
+
+    <!-- Times the engine: adb shell am instrument -w com.sweepiesoftie.earmark.bench/.EngineTiming -->
+    <instrumentation
+        android:name=".EngineTiming"
+        android:targetPackage="com.sweepiesoftie.earmark.bench" />
 </manifest>

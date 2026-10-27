@@ -15,21 +15,21 @@
     "id": "m003",
     "message": "lmk when ur free",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Let me check",
+      "Not sure",
       "Okay",
       "Sure",
       "Will do",
-      "Will reply soon"
+      "Will tell you soon"
     ]
   },
   {
     "id": "m005",
     "message": "haan wo bhi theek hai, aur tu kab free hai?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Ek min, check karna padega",
+      "Pata nahi",
+      "Thodi der mein bolte hain"
     ]
   },
   {
@@ -48,36 +48,36 @@
     "id": "m007",
     "message": "pls mera form bhar de, link group pe hai",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
     "id": "m008",
     "message": "main ghar pahuch gaya",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?"
     ]
   },
   {
     "id": "m009",
     "message": "bhai accident ho gaya, andheri station ke paas hu, aa sakta hai?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Ek min, check karna padega",
+      "Haan",
+      "Nahi"
     ]
   },
   {
     "id": "m010",
     "message": "जल्दी फ़ोन करो",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "5 मिनट दो",
+      "अभी कॉल करते हैं",
+      "अभी बात नहीं हो सकती"
     ]
   },
   {
@@ -96,9 +96,9 @@
     "id": "m013",
     "message": "bhai jaldi reply kar, form aaj 12 baje tak hi bhar sakte hain",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
@@ -117,11 +117,11 @@
     "id": "m016",
     "message": "no rush, but can u send the ppt sometime this week",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "Okay",
+      "Okay, will do",
       "Sure",
-      "Will reply soon",
       "Yeah"
     ]
   },
@@ -165,20 +165,20 @@
     "id": "m022",
     "message": "kahan hai tu??",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Bas 5 min",
+      "Raste mein hoon",
+      "Thodi der mein"
     ]
   },
   {
     "id": "m023",
     "message": "i think i left the stove on, can u check rn pls",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "Okay",
+      "Okay, will do",
       "Sure",
-      "Will reply soon",
       "Yes"
     ]
   },
@@ -210,45 +210,45 @@
     "id": "m026",
     "message": "tu trip pe kahan ja raha hai?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Ek min, check karna padega",
+      "Haan",
+      "Nahi"
     ]
   },
   {
     "id": "m027",
     "message": "urgent nahi hai but kal tak bata dena",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
     "id": "m028",
     "message": "KAHAN HAI TU",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Bas 5 min",
+      "Raste mein hoon",
+      "Thodi der mein"
     ]
   },
   {
     "id": "m029",
     "message": "दिवाली की हार्दिक शुभकामनाएँ 🪔",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "आपको भी!",
+      "धन्यवाद!",
+      "बहुत-बहुत धन्यवाद"
     ]
   },
   {
     "id": "m031",
     "message": "pls pls plsss aaja na party mein",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
@@ -267,21 +267,21 @@
     "id": "m033",
     "message": "पापा की तबियत खराब है, जल्दी घर आओ",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अभी नहीं हो पाएगा",
+      "ठीक है, हो जाएगा",
+      "हो गया"
     ]
   },
   {
     "id": "m035",
     "message": "bro the warden is at our door asking for you, come to the hostel now",
     "replies": [
-      "Can I call you?",
+      "Can't right now",
       "Coming",
-      "Got it",
+      "Done",
       "Okay",
-      "Where?",
-      "Will reply soon"
+      "Okay, will do",
+      "Where?"
     ]
   },
   {
@@ -309,36 +309,36 @@
     "id": "m039",
     "message": "jaldi nahi hai, jab time mile tab notes bhej dena",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
     "id": "m040",
     "message": "कहाँ हो? सब इंतज़ार कर रहे हैं",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "थोड़ी देर में",
+      "बस 5 मिनट",
+      "रास्ते में हूँ"
     ]
   },
   {
     "id": "m042",
     "message": "जेवलास का?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "एक मिनट, देखना पड़ेगा",
+      "नहीं",
+      "हाँ"
     ]
   },
   {
     "id": "m043",
     "message": "mummy ki tabiyat kharab hai, ghar aaja jaldi",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
@@ -347,10 +347,10 @@
     "replies": [
       "I don't know",
       "Let me check",
-      "No",
       "No idea",
+      "Not sure",
       "Not sure yet",
-      "Yes"
+      "Will tell you soon"
     ]
   },
   {
@@ -371,9 +371,9 @@
     "replies": [
       "Haha",
       "Hahaha",
-      "Let me check",
-      "No",
-      "Yes",
+      "Not great",
+      "Tell you later",
+      "Went well!",
       "lol"
     ]
   },
@@ -405,11 +405,11 @@
     "id": "m050",
     "message": "your turn to pick the movie 😏",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "No",
       "Okay",
-      "Will reply soon",
+      "Okay, will do",
       "😏"
     ]
   },
@@ -417,12 +417,12 @@
     "id": "m051",
     "message": "send the pics from yesterday pls",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "No",
       "Okay",
-      "Sure",
-      "Will reply soon"
+      "Okay, will do",
+      "Sure"
     ]
   },
   {
@@ -450,9 +450,9 @@
     "id": "m054",
     "message": "boss ne aaj phir se overtime karwaya, thak gaya yaar",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?"
     ]
   },
   {
@@ -471,12 +471,12 @@
     "id": "m056",
     "message": "need ur help rn, laptop crashed 10 min before the presentation",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "Oh",
       "Okay",
-      "Sure",
-      "Will reply soon"
+      "Okay, will do",
+      "Sure"
     ]
   },
   {
@@ -496,17 +496,17 @@
       "I know",
       "I'm not sure",
       "Let me check",
-      "No",
-      "Yes"
+      "Not sure",
+      "Will tell you soon"
     ]
   },
   {
     "id": "m059",
     "message": "உடனே கால் பண்ணு, அவசரம்",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Can't right now",
+      "Done",
+      "Okay, will do"
     ]
   },
   {
@@ -525,9 +525,9 @@
     "id": "m061",
     "message": "नोट्स भेज देना प्लीज़",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अभी नहीं हो पाएगा",
+      "ठीक है, हो जाएगा",
+      "हो गया"
     ]
   },
   {
@@ -543,36 +543,36 @@
     "id": "m064",
     "message": "chabi tere paas hai kya? main bahar khada hu",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Ek min, check karna padega",
+      "Haan",
+      "Nahi"
     ]
   },
   {
     "id": "m067",
     "message": "कल की क्लास रद्द हो गई",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अच्छा",
+      "कॉल करूँ?",
+      "बाद में बात करते हैं"
     ]
   },
   {
     "id": "m068",
     "message": "kal emergency thi isliye call nahi kar paya, ab sab theek hai",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?"
     ]
   },
   {
     "id": "m071",
     "message": "જલ્દી ફોન કર, મમ્મી ની તબિયત ખરાબ છે",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Can't right now",
+      "Done",
+      "Okay, will do"
     ]
   },
   {
@@ -592,19 +592,19 @@
     "message": "kitne paise hue dinner ke?",
     "replies": [
       "Let me check",
-      "No",
-      "Yes"
+      "Not sure",
+      "Will tell you soon"
     ]
   },
   {
     "id": "m074",
     "message": "class has started where r u, sir is taking attendance",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "5 min away",
       "No",
       "Okay",
-      "Will reply soon",
+      "On my way",
+      "Will call you",
       "Yes"
     ]
   },
@@ -612,18 +612,18 @@
     "id": "m075",
     "message": "mummy bol rahi hai aate waqt doodh leke aana",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
     "id": "m077",
     "message": "उसने पूछा 'क्या तुम आ रहे हो?' और फिर खुद ही नहीं आया",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "एक मिनट, देखना पड़ेगा",
+      "नहीं",
+      "हाँ"
     ]
   },
   {
@@ -642,21 +642,21 @@
     "id": "m080",
     "message": "bhai कल का plan क्या है?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "एक मिनट, देखना पड़ेगा",
+      "थोड़ी देर में बताते हैं",
+      "पता नहीं"
     ]
   },
   {
     "id": "m081",
     "message": "pay me back for the pizza when u can, it was 340",
     "replies": [
-      "Can I call you?",
-      "Got it",
       "I did",
       "I know",
+      "Let me check",
+      "Not sure",
       "Okay",
-      "Will reply soon"
+      "Will tell you soon"
     ]
   },
   {
@@ -686,9 +686,9 @@
     "id": "m084",
     "message": "कब आ रहे हो घर?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "एक मिनट, देखना पड़ेगा",
+      "थोड़ी देर में बताते हैं",
+      "पता नहीं"
     ]
   },
   {
@@ -704,27 +704,27 @@
     "id": "m086",
     "message": "trip ki photos bhej na",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Ek min, check karna padega",
+      "Haan",
+      "Nahi"
     ]
   },
   {
     "id": "m087",
     "message": "bhai jaldi call kar",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "5 min do",
+      "Abhi baat nahi ho sakti, text karo",
+      "Calling now"
     ]
   },
   {
     "id": "m088",
     "message": "kya kar raha hai",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
@@ -740,11 +740,11 @@
     "id": "m092",
     "message": "CALL ME",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Calling you now",
+      "Can't talk, text me?",
+      "Give me 5 min",
       "No",
       "Okay",
-      "Will reply soon",
       "Yes"
     ]
   },
@@ -752,11 +752,11 @@
     "id": "m093",
     "message": "lost my wallet at the station, can u gpay me 300 for the auto pls",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "Okay",
+      "Okay, will do",
       "Sure",
-      "Will reply soon",
       "Yes"
     ]
   },
@@ -764,11 +764,11 @@
     "id": "m094",
     "message": "not urgent but can u check if my parcel came",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "Okay",
+      "Okay, will do",
       "Sure",
-      "Will reply soon",
       "Yes"
     ]
   },
@@ -776,9 +776,9 @@
     "id": "m095",
     "message": "दादी को अस्पताल ले जा रहे हैं",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अच्छा",
+      "कॉल करूँ?",
+      "बाद में बात करते हैं"
     ]
   },
   {
@@ -806,27 +806,27 @@
     "id": "m099",
     "message": "haha sem pressa, me manda as fotos quando puder",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Can't right now",
+      "Done",
+      "Okay, will do"
     ]
   },
   {
     "id": "m101",
     "message": "जल्दी 1000 रुपये भेज दो, फंस गया हूँ",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अभी नहीं हो पाएगा",
+      "ठीक है, हो जाएगा",
+      "हो गया"
     ]
   },
   {
     "id": "m102",
     "message": "कल कॉलेज जाना है क्या?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "एक मिनट, देखना पड़ेगा",
+      "नहीं",
+      "हाँ"
     ]
   },
   {
@@ -845,9 +845,9 @@
     "id": "m104",
     "message": "कौन करता है ऐसा? 🙄",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "एक मिनट, देखना पड़ेगा",
+      "थोड़ी देर में बताते हैं",
+      "पता नहीं"
     ]
   },
   {
@@ -867,8 +867,9 @@
     "message": "which bus goes to campus from dadar",
     "replies": [
       "Let me check",
-      "No",
+      "Not sure",
       "Okay",
+      "Will tell you soon",
       "Yeah",
       "Yes"
     ]
@@ -877,20 +878,20 @@
     "id": "m107",
     "message": "तुरंत घर आ जाओ, चाबी तुम्हारे पास है और मैं बाहर खड़ी हूँ",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अभी नहीं हो पाएगा",
+      "ठीक है, हो जाएगा",
+      "हो गया"
     ]
   },
   {
     "id": "m108",
     "message": "pls call back its about nani",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "No",
       "Okay",
-      "Will reply soon",
+      "Okay, will do",
       "Yes"
     ]
   },
@@ -898,11 +899,11 @@
     "id": "m110",
     "message": "someone hit my scooty, I'm ok but shaking. can u come",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "Okay",
+      "Okay, will do",
       "Sure",
-      "Will reply soon",
       "Yes"
     ]
   },
@@ -910,11 +911,11 @@
     "id": "m111",
     "message": "📷 Photo",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "No",
       "Okay",
-      "Will reply soon",
+      "Okay, will do",
       "😊"
     ]
   },
@@ -933,9 +934,9 @@
     "id": "m113",
     "message": "bhai assignment ho gaya kya",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Ek min, check karna padega",
+      "Haan",
+      "Nahi"
     ]
   },
   {
@@ -943,18 +944,18 @@
     "message": "ok par kab?",
     "replies": [
       "Let me check",
-      "No",
-      "Yes"
+      "Not sure",
+      "Will tell you soon"
     ]
   },
   {
     "id": "m116",
     "message": "water is leaking from the ceiling in our room, come back asap",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "Okay",
-      "Will reply soon",
+      "Okay, will do",
       "😞",
       "😟"
     ]
@@ -963,9 +964,9 @@
     "id": "m118",
     "message": "cab wala wait kar raha hai, neeche aa jaldi",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
@@ -981,36 +982,36 @@
     "id": "m120",
     "message": "kal 6 baje sab station pe milenge",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?"
     ]
   },
   {
     "id": "m121",
     "message": "aaj college aa raha hai kya",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Ek min, check karna padega",
+      "Haan",
+      "Nahi"
     ]
   },
   {
     "id": "m123",
     "message": "रविवार को क्या कर रहे हो?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "एक मिनट, देखना पड़ेगा",
+      "थोड़ी देर में बताते हैं",
+      "पता नहीं"
     ]
   },
   {
     "id": "m124",
     "message": "weekend ka kya plan hai",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Ek min, check karna padega",
+      "Pata nahi",
+      "Thodi der mein bolte hain"
     ]
   },
   {
@@ -1020,8 +1021,8 @@
       "Haha",
       "I know",
       "Let me check",
-      "No",
-      "Yes",
+      "Not sure",
+      "Will tell you soon",
       "😟"
     ]
   },
@@ -1038,9 +1039,9 @@
     "id": "m127",
     "message": "kya hi bolu ab 🤦",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Can't right now",
+      "Done",
+      "Okay, will do"
     ]
   },
   {
@@ -1057,27 +1058,27 @@
     "id": "m130",
     "message": "building mein aag lagi thi!! sab bahar aa gaye, koi hurt nahi hua, tension mat le",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?"
     ]
   },
   {
     "id": "m131",
     "message": "ek kaam kar, mera parcel watchman se le lena",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
     "id": "m132",
     "message": "आते समय मेरे लिए एक किताब ले आना",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अभी नहीं हो पाएगा",
+      "ठीक है, हो जाएगा",
+      "हो गया"
     ]
   },
   {
@@ -1093,11 +1094,11 @@
     "id": "m134",
     "message": "call me when u reach, no hurry",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Let me check",
+      "Not sure",
       "Okay",
       "Sure",
-      "Will reply soon",
+      "Will tell you soon",
       "Yes"
     ]
   },
@@ -1105,9 +1106,9 @@
     "id": "m135",
     "message": "bhai tu theek hai na? subah se phone band aa raha hai",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Ek min, check karna padega",
+      "Haan",
+      "Nahi"
     ]
   },
   {
@@ -1136,9 +1137,9 @@
     "id": "m140",
     "message": "भाई कल का plan क्या है? reply कर",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "एक मिनट, देखना पड़ेगा",
+      "थोड़ी देर में बताते हैं",
+      "पता नहीं"
     ]
   },
   {
@@ -1157,11 +1158,11 @@
     "id": "m142",
     "message": "bro exam hall mein aaja 5 min bache hai",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Abhi nahi ho payega",
+      "Done",
       "Haha",
       "Okay",
-      "Will reply soon",
+      "Theek hai, ho jayega",
       "😟"
     ]
   },
@@ -1169,21 +1170,21 @@
     "id": "m143",
     "message": "ठीक है, पर कब?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "एक मिनट, देखना पड़ेगा",
+      "थोड़ी देर में बताते हैं",
+      "पता नहीं"
     ]
   },
   {
     "id": "m144",
     "message": "we're boarding in 10 min where are you",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "5 min away",
       "Here",
       "I'm here",
       "Okay",
-      "Will reply soon"
+      "On my way",
+      "Will call you"
     ]
   },
   {
@@ -1193,18 +1194,19 @@
       "Great!",
       "It was good",
       "It went well",
-      "Let me check",
-      "No",
-      "Yes"
+      "Not great",
+      "Tell you later",
+      "Went well!"
     ]
   },
   {
     "id": "m148",
     "message": "Pranav where are you? the client call started 5 min ago",
     "replies": [
-      "Let me check",
-      "No",
+      "5 min away",
       "Okay",
+      "On my way",
+      "Will call you",
       "Yes",
       "😞"
     ]
@@ -1213,9 +1215,9 @@
     "id": "m149",
     "message": "koi jaldi nahi, aaram se call karna",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
@@ -1232,20 +1234,20 @@
     "id": "m151",
     "message": "jaldi aa, lecture shuru ho gaya aur attendance le rahe hain",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
     "id": "m152",
     "message": "call me asap",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Calling you now",
+      "Can't talk, text me?",
+      "Give me 5 min",
       "Okay",
       "Will do",
-      "Will reply soon",
       "Yes"
     ]
   },
@@ -1263,11 +1265,11 @@
     "id": "m154",
     "message": "bro pick up its urgent",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Calling you now",
+      "Can't talk, text me?",
+      "Give me 5 min",
       "No",
       "Okay",
-      "Will reply soon",
       "Yes"
     ]
   },
@@ -1275,9 +1277,9 @@
     "id": "m155",
     "message": "kal milte hain? kitne baje?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Ek min, check karna padega",
+      "Pata nahi",
+      "Thodi der mein bolte hain"
     ]
   },
   {
@@ -1342,9 +1344,9 @@
     "id": "m165",
     "message": "शाम को फ़ोन करना",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "5 मिनट दो",
+      "अभी कॉल करते हैं",
+      "अभी बात नहीं हो सकती"
     ]
   },
   {
@@ -1363,29 +1365,29 @@
     "id": "m168",
     "message": "acha sun, kal ka sab sorted hai, tickets book ho gaye, cab bhi 7 baje aayegi, aur mummy ne khana bhi pack kar diya. bas tu apna aadhar card yaad se le aana",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
     "id": "m169",
     "message": "ruk, abhi ghar se mat nikalna, bahar bahut paani bhar gaya hai. nikalne se pehle call kar",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "5 min do",
+      "Abhi baat nahi ho sakti, text karo",
+      "Calling now"
     ]
   },
   {
     "id": "m170",
     "message": "plssss come for the party it'll be fun",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "I know",
       "Okay",
-      "Will reply soon",
+      "Okay, will do",
       "😊"
     ]
   },
@@ -1396,18 +1398,17 @@
       "I don't know",
       "I'm not sure",
       "Let me check",
-      "No",
       "Not sure",
-      "Yes"
+      "Will tell you soon"
     ]
   },
   {
     "id": "m172",
     "message": "कल इमरजेंसी थी इसलिए फ़ोन नहीं उठा पाया, अब सब ठीक है",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अच्छा",
+      "कॉल करूँ?",
+      "बाद में बात करते हैं"
     ]
   },
   {
@@ -1444,23 +1445,23 @@
     "id": "m177",
     "message": "sooo... did you talk to her or not 👀",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "I did",
       "No",
       "Nope",
-      "Will reply soon"
+      "Okay, will do"
     ]
   },
   {
     "id": "m178",
     "message": "plsssss reply",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "No",
       "Okay",
-      "Will reply soon",
+      "Okay, will do",
       "Yes"
     ]
   },
@@ -1481,8 +1482,8 @@
     "message": "why am i like this 😭",
     "replies": [
       "Let me check",
-      "No",
-      "Yes",
+      "Not sure",
+      "Will tell you soon",
       "😊",
       "😞",
       "😟"
@@ -1492,39 +1493,39 @@
     "id": "m182",
     "message": "I need you to call me. Now.",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Calling you now",
+      "Can't talk, text me?",
+      "Give me 5 min",
       "No",
       "Okay",
-      "Why?",
-      "Will reply soon"
+      "Why?"
     ]
   },
   {
     "id": "m183",
     "message": "mujhe 200 wapas kar dena jab time mile",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
     "id": "m184",
     "message": "भैया फ़ोन उठाओ, ज़रूरी बात है",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "5 मिनट दो",
+      "अभी कॉल करते हैं",
+      "अभी बात नहीं हो सकती"
     ]
   },
   {
     "id": "m185",
     "message": "agar time mile toh mera resume dekh lena, warna koi baat nahi",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
@@ -1543,71 +1544,70 @@
     "id": "m187",
     "message": "खाना खाया?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "एक मिनट, देखना पड़ेगा",
+      "नहीं",
+      "हाँ"
     ]
   },
   {
     "id": "m188",
     "message": "plssss reply kar de yaar",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
     "id": "m189",
     "message": "ok wait what time is the train",
     "replies": [
-      "Can I call you?",
-      "Got it",
       "I don't know",
       "I'm not sure",
+      "Let me check",
+      "Not sure",
       "Okay",
-      "Will reply soon"
+      "Will tell you soon"
     ]
   },
   {
     "id": "m190",
     "message": "papa hospital mein hai",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?"
     ]
   },
   {
     "id": "m191",
     "message": "notes bhej de pls",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Can't right now",
+      "Done",
+      "Okay, will do"
     ]
   },
   {
     "id": "m192",
     "message": "pls fill the form i sent on the group, takes 2 min",
     "replies": [
-      "Can I call you?",
+      "Can't right now",
       "Done",
-      "Got it",
       "Okay",
-      "Sent",
-      "Will reply soon"
+      "Okay, will do",
+      "Sent"
     ]
   },
   {
     "id": "m193",
     "message": "my phone is at 2%, I'm stuck at andheri station, can you come get me",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "Okay",
+      "Okay, will do",
       "Sure",
-      "Will reply soon",
       "Yes"
     ]
   },
@@ -1615,12 +1615,12 @@
     "id": "m194",
     "message": "pick up ur phone",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Calling you now",
+      "Can't talk, text me?",
+      "Give me 5 min",
       "I did",
       "No",
-      "Okay",
-      "Will reply soon"
+      "Okay"
     ]
   },
   {
@@ -1637,11 +1637,11 @@
     "id": "m198",
     "message": "HAPPY BIRTHDAY PRANAVVVV 🎉🎉🎂",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Same to you!",
       "Thank you",
+      "Thank you!",
       "Thanks",
-      "Will reply soon",
+      "Thanks a lot!",
       "😊"
     ]
   },
@@ -1658,38 +1658,37 @@
     "id": "m201",
     "message": "भाई जल्दी call कर, urgent है",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अभी नहीं हो पाएगा",
+      "ठीक है, हो जाएगा",
+      "हो गया"
     ]
   },
   {
     "id": "m202",
     "message": "लवकर फोन कर, महत्वाचं आहे",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "5 मिनट दो",
+      "अभी कॉल करते हैं",
+      "अभी बात नहीं हो सकती"
     ]
   },
   {
     "id": "m203",
     "message": "train chhut jayegi, kahan pahucha?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "5 min away",
+      "On my way",
+      "Will call you"
     ]
   },
   {
     "id": "m204",
     "message": "URGENT: reply by 6 today or ur seat in the workshop goes to the waitlist",
     "replies": [
-      "Can I call you?",
+      "Can't right now",
       "Done",
-      "Got it",
       "Okay",
-      "Will reply soon",
+      "Okay, will do",
       "Yes"
     ]
   },
@@ -1723,9 +1722,9 @@
     "replies": [
       "Haha",
       "Let me check",
-      "No",
+      "Not sure",
       "Nothing",
-      "Yes",
+      "Will tell you soon",
       "lol"
     ]
   },
@@ -1745,18 +1744,18 @@
     "id": "m211",
     "message": "ठीक है 👍 वैसे टिकट बुक हुए?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "एक मिनट, देखना पड़ेगा",
+      "नहीं",
+      "हाँ"
     ]
   },
   {
     "id": "m212",
     "message": "theek hai par paise kab dega?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Ek min, check karna padega",
+      "Pata nahi",
+      "Thodi der mein bolte hain"
     ]
   },
   {
@@ -1784,29 +1783,29 @@
     "id": "m215",
     "message": "sun na, ek baat puchni thi",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Can't right now",
+      "Done",
+      "Okay, will do"
     ]
   },
   {
     "id": "m216",
     "message": "मी घरी पोहोचलो",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अच्छा",
+      "कॉल करूँ?",
+      "बाद में बात करते हैं"
     ]
   },
   {
     "id": "m217",
     "message": "bro which charger do u use for ur laptop",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Let me check",
       "No",
+      "Not sure",
       "Why?",
-      "Will reply soon",
+      "Will tell you soon",
       "Yes"
     ]
   },
@@ -1814,12 +1813,12 @@
     "id": "m219",
     "message": "if u get a chance at some point next week could u maybe look at my code, totally fine if not",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "Okay",
+      "Okay, will do",
       "Sure",
-      "Will do",
-      "Will reply soon"
+      "Will do"
     ]
   },
   {
@@ -1827,11 +1826,11 @@
     "message": "can you look at my resume when you get a chance",
     "replies": [
       "Let me check",
-      "No",
+      "Not sure",
       "Of course",
       "Sure",
-      "Yeah",
-      "Yes"
+      "Will tell you soon",
+      "Yeah"
     ]
   },
   {
@@ -1840,7 +1839,8 @@
     "replies": [
       "I know",
       "Let me check",
-      "No",
+      "Not sure",
+      "Will tell you soon",
       "Yeah",
       "Yes"
     ]
@@ -1849,30 +1849,30 @@
     "id": "m222",
     "message": "WHERE ARE YOU",
     "replies": [
+      "5 min away",
       "Here",
       "I'm here",
-      "Let me check",
-      "No",
       "Okay",
-      "Yes"
+      "On my way",
+      "Will call you"
     ]
   },
   {
     "id": "m223",
     "message": "kidhar hai? sab wait kar rahe hain",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Bas 5 min",
+      "Raste mein hoon",
+      "Thodi der mein"
     ]
   },
   {
     "id": "m224",
     "message": "bhai wifi ka password kya hai",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Ek min, check karna padega",
+      "Pata nahi",
+      "Thodi der mein bolte hain"
     ]
   },
   {
@@ -1891,9 +1891,9 @@
     "id": "m226",
     "message": "kab aa raha hai ghar",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Ek min, check karna padega",
+      "Pata nahi",
+      "Thodi der mein bolte hain"
     ]
   },
   {
@@ -1912,27 +1912,27 @@
     "id": "m228",
     "message": "ghar pe sab theek?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Ek min, check karna padega",
+      "Haan",
+      "Nahi"
     ]
   },
   {
     "id": "m229",
     "message": "आज बहुत बारिश हो रही है",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अच्छा",
+      "कॉल करूँ?",
+      "बाद में बात करते हैं"
     ]
   },
   {
     "id": "m230",
     "message": "bhai result aa gaya, pass ho gaya 🎉",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?"
     ]
   },
   {
@@ -1941,30 +1941,29 @@
     "replies": [
       "I don't know",
       "Let me check",
-      "No",
       "Not sure",
       "Why?",
-      "Yes"
+      "Will tell you soon"
     ]
   },
   {
     "id": "m234",
     "message": "तुम ट्रिप पर कहाँ जा रहे हो?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "एक मिनट, देखना पड़ेगा",
+      "नहीं",
+      "हाँ"
     ]
   },
   {
     "id": "m235",
     "message": "mom fell in the bathroom, can u come home now",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "No",
       "Okay",
-      "Will reply soon",
+      "Okay, will do",
       "Yes"
     ]
   },
@@ -1972,9 +1971,9 @@
     "id": "m236",
     "message": "bas 10 min mein aa raha hu",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?"
     ]
   },
   {
@@ -2005,18 +2004,18 @@
     "id": "m239",
     "message": "তাড়াতাড়ি ফোন কর, খুব জরুরি",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Can't right now",
+      "Done",
+      "Okay, will do"
     ]
   },
   {
     "id": "m240",
     "message": "kuch nahi bas aise hi",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?"
     ]
   },
   {
@@ -2046,9 +2045,9 @@
     "id": "m246",
     "message": "कोई जल्दी नहीं है, जब समय मिले तब बता देना",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अभी नहीं हो पाएगा",
+      "ठीक है, हो जाएगा",
+      "हो गया"
     ]
   },
   {
@@ -2079,36 +2078,36 @@
     "id": "m249",
     "message": "yaar aaj ka din bahut bekaar tha, pehle bus miss hui, phir boss ne daanta, phir baarish mein pura bheeg gaya. bas ab so raha hu",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?"
     ]
   },
   {
     "id": "m250",
     "message": "phone utha yaar urgent hai",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "5 min do",
+      "Abhi baat nahi ho sakti, text karo",
+      "Calling now"
     ]
   },
   {
     "id": "m251",
     "message": "haan haan bahut help ki tune 🙃",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?"
     ]
   },
   {
     "id": "m252",
     "message": "जल्दी आओ!!! केक खत्म होने वाला है 😂",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अभी नहीं हो पाएगा",
+      "ठीक है, हो जाएगा",
+      "हो गया"
     ]
   },
   {
@@ -2126,9 +2125,8 @@
     "replies": [
       "Any time",
       "Let me check",
-      "No",
       "Not sure",
-      "Yes",
+      "Will tell you soon",
       "You're welcome!"
     ]
   },
@@ -2145,19 +2143,19 @@
     "id": "m257",
     "message": "परीक्षा कैसी गई?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "अच्छा गया!",
+      "ठीक-ठाक",
+      "बाद में बात करते हैं"
     ]
   },
   {
     "id": "m258",
     "message": "kal ka lecture cancel ho gaya",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?",
       "Okay",
-      "Will reply soon",
       "😞",
       "😟"
     ]
@@ -2166,11 +2164,11 @@
     "id": "m259",
     "message": "happy birthday!! 🎉 party when?",
     "replies": [
-      "Let me check",
-      "No",
+      "Same to you!",
+      "Thank you!",
       "Thanks",
+      "Thanks a lot!",
       "Thanks!",
-      "Yes",
       "😊"
     ]
   },
@@ -2178,27 +2176,27 @@
     "id": "m260",
     "message": "usne poocha 'tu aa raha hai kya?' aur phir khud hi nahi aaya 😂",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Ek min, check karna padega",
+      "Haan",
+      "Nahi"
     ]
   },
   {
     "id": "m261",
     "message": "bhai abhi ke abhi neeche aa, surprise hai 😁",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
     "id": "m262",
     "message": "kaisa hai bhai? bahut din ho gaye",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Baad mein baat karte hain",
+      "Badhiya, tum batao?",
+      "Sab theek!"
     ]
   },
   {
@@ -2226,9 +2224,9 @@
     "id": "m265",
     "message": "bhai 500 bhej de abhi, wallet ghar pe bhool gaya",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Abhi nahi ho payega",
+      "Done",
+      "Theek hai, ho jayega"
     ]
   },
   {
@@ -2255,9 +2253,9 @@
     "id": "m271",
     "message": "bhai tera charger mil sakta hai kal?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Ek min, check karna padega",
+      "Haan",
+      "Nahi"
     ]
   },
   {
@@ -2267,9 +2265,9 @@
       "I don't know",
       "I'm not sure",
       "Let me check",
-      "No",
       "No idea",
-      "Yes"
+      "Not sure",
+      "Will tell you soon"
     ]
   },
   {
@@ -2285,18 +2283,18 @@
     "id": "m275",
     "message": "result aaya kya tera?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Ek min, check karna padega",
+      "Pata nahi",
+      "Thodi der mein bolte hain"
     ]
   },
   {
     "id": "m276",
     "message": "bhai ppt ki last slide tu bana dega?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Ek min, check karna padega",
+      "Haan",
+      "Nahi"
     ]
   },
   {
@@ -2313,9 +2311,9 @@
     "id": "m278",
     "message": "aaj bahut garmi hai yaar",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?"
     ]
   },
   {
@@ -2334,29 +2332,29 @@
     "id": "m280",
     "message": "turant call karo, bahut zaroori hai",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "5 min do",
+      "Abhi baat nahi ho sakti, text karo",
+      "Calling now"
     ]
   },
   {
     "id": "m281",
     "message": "llámame ya, es urgente",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Can't right now",
+      "Done",
+      "Okay, will do"
     ]
   },
   {
     "id": "m282",
     "message": "cab is here, come down fast",
     "replies": [
-      "Can I call you?",
+      "Can't right now",
       "Coming",
-      "Got it",
+      "Done",
       "Okay",
-      "Will reply soon",
+      "Okay, will do",
       "Yes"
     ]
   },
@@ -2364,12 +2362,11 @@
     "id": "m284",
     "message": "plz share ur notes for chap 4",
     "replies": [
-      "Can I call you?",
+      "Can't right now",
       "Done",
-      "Got it",
       "Okay",
-      "Sure",
-      "Will reply soon"
+      "Okay, will do",
+      "Sure"
     ]
   },
   {
@@ -2388,12 +2385,12 @@
     "id": "m288",
     "message": "where are you??",
     "replies": [
+      "5 min away",
       "Here",
       "I'm here",
-      "Let me check",
-      "No",
       "Okay",
-      "Yes"
+      "On my way",
+      "Will call you"
     ]
   },
   {
@@ -2412,36 +2409,36 @@
     "id": "m290",
     "message": "mujhe kya pata tha ki woh aisa karega? chhod, jaane de",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "Ek min, check karna padega",
+      "Pata nahi",
+      "Thodi der mein bolte hain"
     ]
   },
   {
     "id": "m291",
     "message": "बेटा, दवाई ले ली?",
     "replies": [
-      "Let me check",
-      "No",
-      "Yes"
+      "एक मिनट, देखना पड़ेगा",
+      "नहीं",
+      "हाँ"
     ]
   },
   {
     "id": "m292",
     "message": "घाई नाही, वेळ मिळाल्यावर नोट्स पाठव",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अभी नहीं हो पाएगा",
+      "ठीक है, हो जाएगा",
+      "हो गया"
     ]
   },
   {
     "id": "m293",
     "message": "kaun karta hai aisa yaar 🙄",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Ek min, check karna padega",
+      "Pata nahi",
+      "Thodi der mein bolte hain"
     ]
   },
   {
@@ -2466,11 +2463,11 @@
     "id": "m296",
     "message": "don't forget to bring the charger tmrw",
     "replies": [
-      "Can I call you?",
-      "Got it",
+      "Can't right now",
+      "Done",
       "I know",
       "Okay",
-      "Will reply soon",
+      "Okay, will do",
       "Yeah"
     ]
   },
@@ -2478,18 +2475,18 @@
     "id": "m297",
     "message": "मैं घर पहुँच गया",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "अच्छा",
+      "कॉल करूँ?",
+      "बाद में बात करते हैं"
     ]
   },
   {
     "id": "m299",
     "message": "nani gir gayi, hum hospital ja rahe hain",
     "replies": [
-      "Can I call you?",
-      "Got it",
-      "Will reply soon"
+      "Accha",
+      "Baad mein baat karte hain",
+      "Call karoon?"
     ]
   }
 ]
