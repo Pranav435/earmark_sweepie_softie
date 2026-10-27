@@ -86,3 +86,13 @@ Start: Tue Oct 27 11:27:46 IST 2026 (budget 3 h, feature freeze 2:30 → 13:57, 
     - Leaving the chat closed the loop.
     - Opening the chat from the notification after ✓ showed the strip.
   - 50 :core tests green (5 new); lint 0 errors.
+- 15:12 v0.1.3, after a code review of v0.1.2. All 15 findings fixed:
+  - Reply strip: it now names who the replies go to ("To Rahul"; TalkBack reads "Send to Rahul: …"). A cleared notification doesn't say which chat is open, and the strip stays while you move between chats in the app (ADR 0019).
+  - Chat open: when the app clears the guessed notification before the foreground poll has seen it, the loop waits 3 s for the app to come to the front instead of closing. Leaving the chat app after a hand-back ends the hand-back (`Phase.Left`), so a later clear elsewhere closes the loop. A new message after the chat opened shows its notification again, so the loop is no longer in the chat-open state. Opening the chat yourself hides the chip and pill. A group summary's children take the summary's removal reason.
+  - Listener: a removal forgets only the way back it saw, so a re-post under the same key keeps its own. Late Smart Reply results don't show for a closed loop. Way backs are cleared on reconnect. Revoking notification access stops `KeepAliveService`, and opening Earmark no longer re-posts "Earmark is on".
+  - The setup script grants the battery exemption before notification access.
+  - On the emulator, release build:
+    - Chip, YouTube, pill, Do it now: the strip read "To Rahul" with 3 replies, and the node tree showed "Send to Rahul: …" on each. A reply sent and the loop closed as done.
+    - Pill over YouTube, then the demo chat opened directly: the log showed the clear before the chat came to the front, then "chat opened". The pill hid and the strip showed. Home closed the loop.
+  - 55 :core tests green (5 new); lint 0 errors.
+  - dist/earmark-v0.1.3.apk (versionCode 4), signed with the Sweepie Softie key, installs over v0.1.2. No INTERNET permission.
