@@ -18,9 +18,9 @@ class DebugLog(private val capacity: Int = 400) {
         _lines.update { (it + line).takeLast(capacity) }
     }
 
-    fun error(where: String, e: Throwable) = add("$where failed: ${e.javaClass.simpleName}")
+    fun error(where: String, e: Throwable): Unit = add("$where failed: ${e.javaClass.simpleName}")
 
-    fun clear() = _lines.update { emptyList() }
+    fun clear(): Unit = _lines.update { emptyList() }
 
     private companion object {
         const val TAG = "Earmark"

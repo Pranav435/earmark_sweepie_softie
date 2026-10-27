@@ -146,6 +146,7 @@ class EarmarkListener : NotificationListenerService() {
         s.overlay.unlockedAtMillis = now
         log.add("unlock")
         s.watcher.start()
+        graph.appScope.launch { graph.store.trim(System.currentTimeMillis()) }
         s.scope.launch {
             val events = withContext(Dispatchers.IO) { s.calendar.soon() }
             if (events != null) dispatch(Event.CalendarSoon(events))
@@ -180,6 +181,7 @@ class EarmarkListener : NotificationListenerService() {
             is Effect.SuggestReplies -> s.suggester.suggest(effect.notificationKey) { replies -> s.overlay.showStrip(effect.loopId, replies) }
             is Effect.SendReply ->
                 if (s.handBack.reply(effect.notificationKey, effect.text)) dispatch(Event.ReplySent(effect.loopId)) else s.overlay.hide(Overlay.ReplyStrip)
+            is Effect.Forget -> s.reader.forget(effect.notificationKey)
             is Effect.RecordLoop -> graph.appScope.launch { graph.store.record(effect.entry) }
             is Effect.RecordKind -> graph.appScope.launch { graph.store.record(effect.kind, effect.stat) }
             is Effect.RecordContact -> graph.appScope.launch { graph.store.record(effect.conversation, effect.stat) }

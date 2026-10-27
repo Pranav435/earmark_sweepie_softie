@@ -5,6 +5,7 @@ import android.content.Context
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import androidx.core.app.NotificationCompat
+import androidx.core.content.edit
 import com.sweepiesoftie.earmark.DebugLog
 import com.sweepiesoftie.earmark.core.Message
 import com.sweepiesoftie.earmark.core.RemovalReason
@@ -23,7 +24,7 @@ class NotificationReader(context: Context, private val wayBacks: WayBackRegistry
     private val salt: String = run {
         val prefs = context.getSharedPreferences("install", Context.MODE_PRIVATE)
         prefs.getString(SALT, null) ?: ByteArray(16).also { SecureRandom().nextBytes(it) }.toHex().also {
-            prefs.edit().putString(SALT, it).apply()
+            prefs.edit { putString(SALT, it) }
         }
     }
 
@@ -38,7 +39,7 @@ class NotificationReader(context: Context, private val wayBacks: WayBackRegistry
     fun isNavigation(sbn: StatusBarNotification): Boolean =
         sbn.isOngoing && sbn.notification.category == Notification.CATEGORY_NAVIGATION
 
-    fun forget(key: String) = wayBacks.remove(key)
+    fun forget(key: String): Unit = wayBacks.remove(key)
 
     private fun build(sbn: StatusBarNotification): Signal {
         val n = sbn.notification

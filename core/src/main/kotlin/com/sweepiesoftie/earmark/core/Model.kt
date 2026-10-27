@@ -109,7 +109,7 @@ public data class Settings(
     val rideApp: String? = null,
 )
 
-public data class KindStat(val confirms: Int = 0, val ignores: Int = 0, val ignoreStreak: Int = 0) {
+public data class KindStat(val holds: Int = 0, val ignores: Int = 0, val ignoreStreak: Int = 0) {
     val muted: Boolean get() = ignoreStreak >= MUTE_AFTER_IGNORES
 
     public companion object {
@@ -183,6 +183,8 @@ public sealed interface Effect {
     public data class OpenWayBack(val loopId: LoopId, val route: Route) : Effect
     public data class SuggestReplies(val loopId: LoopId, val notificationKey: String) : Effect
     public data class SendReply(val loopId: LoopId, val notificationKey: String, val text: String) : Effect
+    /** Drop the notification's intents and message text from adapter memory (ADR 0004). */
+    public data class Forget(val notificationKey: String) : Effect
     public data class RecordLoop(val entry: LoopEntry) : Effect
     public data class RecordKind(val kind: LoopKind, val stat: KindStat) : Effect
     public data class RecordContact(val conversation: String, val stat: ContactStat) : Effect

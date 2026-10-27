@@ -33,5 +33,5 @@ class ReplySuggester(private val wayBacks: WayBackRegistry, private val log: Deb
         }
     }
 
-    fun close() = client.close()
+    fun close(): Unit = client.close()
 }

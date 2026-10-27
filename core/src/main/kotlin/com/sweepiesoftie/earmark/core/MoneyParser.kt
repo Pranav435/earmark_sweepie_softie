@@ -1,16 +1,23 @@
 package com.sweepiesoftie.earmark.core
 
 import java.math.BigDecimal
-import java.math.RoundingMode
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.Locale
 
 /** An amount as written in a notification, kept as shown so "$12.00" stays "$12.00". */
 public data class Money(val symbol: String, val amount: BigDecimal) {
-    /** "$12.00" */
-    val full: String get() = symbol + amount.setScale(2, RoundingMode.HALF_UP).toPlainString()
+    /** "$12.00", "$1,284.50" */
+    val full: String get() = symbol + DecimalFormat("#,##0.00", SYMBOLS).format(amount)
 
     /** "$12", or "$12.50" when there are cents. */
     val short: String
-        get() = if (amount.stripTrailingZeros().scale() <= 0) symbol + amount.setScale(0, RoundingMode.HALF_UP).toPlainString() else full
+        get() = if (amount.stripTrailingZeros().scale() <= 0) symbol + DecimalFormat("#,##0", SYMBOLS).format(amount) else full
+
+    private companion object {
+        // Amounts are shown the way the requesting app wrote them, which is overwhelmingly comma-grouped.
+        val SYMBOLS: DecimalFormatSymbols = DecimalFormatSymbols.getInstance(Locale.US)
+    }
 }
 
 /**

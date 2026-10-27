@@ -1,5 +1,6 @@
 package com.sweepiesoftie.earmark
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.sweepiesoftie.earmark.core.Event
 import com.sweepiesoftie.earmark.demo.DemoChats
@@ -12,7 +13,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableSharedFlow
 
-/** Every long-lived object, wired by hand (ADR 0008). The activity and the listener share one process and this graph. */
+/**
+ * Every long-lived object, wired by hand (ADR 0008). The activity and the listener share one process and this graph.
+ * It only ever holds the application context, which lives as long as the process, so the static reference can't leak.
+ */
+@SuppressLint("StaticFieldLeak")
 object AppGraph {
     lateinit var context: Context
         private set

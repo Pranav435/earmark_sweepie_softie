@@ -94,4 +94,11 @@ class ClassifierTest {
     fun `a paid receipt is evidence, not a new request`() {
         assertEquals(Classification.Paid("com.venmo"), Classifier.classify(note("com.venmo", "Venmo", "You paid Aisha Khan \$12.00"), Fixtures.settings))
     }
+
+    @Test
+    fun `questions and clock times in any script count as due`() {
+        assertEquals(1.0, open(Fixtures.rahul(now, "can you send the slides before the 4:30 sync?")).due, 1e-9)
+        assertEquals(0.5, open(Fixtures.rahul(now, "هل أنت متاح؟")).due, 1e-9)
+        assertEquals(0.5, open(Fixtures.rahul(now, "今日来られる？")).due, 1e-9)
+    }
 }

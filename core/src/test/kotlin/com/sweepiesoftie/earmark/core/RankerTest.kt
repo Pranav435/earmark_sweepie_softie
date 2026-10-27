@@ -27,9 +27,9 @@ class RankerTest {
     }
 
     @Test
-    fun `history is the confirm rate for the kind`() {
-        // (3 + 1) / (3 + 1 + 2) = 0.6667 with one smoothing confirm and ignore, so no history reads 0.5
-        val stats = Stats(kinds = mapOf(LoopKind.Reply to KindStat(confirms = 3, ignores = 1)))
+    fun `history is the hold rate for the kind`() {
+        // (3 + 1) / (3 + 1 + 2) = 0.6667 with one smoothing hold and ignore, so no history reads 0.5
+        val stats = Stats(kinds = mapOf(LoopKind.Reply to KindStat(holds = 3, ignores = 1)))
         assertEquals(0.6667, Ranker.score(reply(at(16, 11)), at(16, 12), stats).history, 0.0005)
         assertEquals(0.5, Ranker.score(reply(at(16, 11)), at(16, 12), Stats()).history, 1e-9)
     }

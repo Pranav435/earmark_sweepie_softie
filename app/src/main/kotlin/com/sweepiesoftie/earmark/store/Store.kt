@@ -16,9 +16,11 @@ import com.sweepiesoftie.earmark.core.LoopEntry
 import com.sweepiesoftie.earmark.core.LoopKind
 import com.sweepiesoftie.earmark.core.Outcome
 import com.sweepiesoftie.earmark.core.Stats
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import java.security.MessageDigest
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
@@ -41,7 +43,7 @@ data class LoopRow(
 data class ContactRow(@PrimaryKey val conversation: String, val replies: Int, val medianReplyMinutes: Double)
 
 @Entity(tableName = "kind_stats")
-data class KindRow(@PrimaryKey val kind: String, val confirms: Int, val ignores: Int, val ignoreStreak: Int)
+data class KindRow(@PrimaryKey val kind: String, val holds: Int, val ignores: Int, val ignoreStreak: Int)
 
 @Entity(tableName = "alarm_seen")
 data class AlarmRow(@PrimaryKey val date: String, val minuteOfDay: Int)
@@ -89,12 +91,14 @@ class Store(context: Context, private val log: DebugLog) {
         .map { rows -> rows.filter { it.ignoreStreak >= KindStat.MUTE_AFTER_IGNORES }.mapNotNull { kindOf(it.kind) } }
         .catch { log.error("Store.mutedKinds", it); emit(emptyList()) }
 
-    suspend fun record(entry: LoopEntry) = guard("record loop") {
+    suspend fun record(entry: LoopEntry): Unit? = guard("record loop") {
         dao.upsertLoop(
             LoopRow(
-                loopId = entry.loopId.value,
+                // Loop ids can carry a notification tag such as a phone number, so only a hash is stored.
+                loopId = hashId(entry.loopId.value),
                 kind = entry.kind.name,
-                label = entry.label,
+                // A late update must not bring back a label the 24-hour trim already cleared.
+                label = entry.label.takeIf { System.currentTimeMillis() - entry.openedAt.toEpochMilli() < DAY_MILLIS },
                 openedAt = entry.openedAt.toEpochMilli(),
                 guessedAt = entry.guessedAt?.toEpochMilli(),
                 closedAt = entry.closedAt?.toEpochMilli(),
@@ -104,34 +108,34 @@ class Store(context: Context, private val log: DebugLog) {
         )
     }
 
-    suspend fun record(kind: LoopKind, stat: KindStat) = guard("record kind") {
-        dao.upsertKind(KindRow(kind.name, stat.confirms, stat.ignores, stat.ignoreStreak))
+    suspend fun record(kind: LoopKind, stat: KindStat): Unit? = guard("record kind") {
+        dao.upsertKind(KindRow(kind.name, stat.holds, stat.ignores, stat.ignoreStreak))
     }
 
-    suspend fun record(conversation: String, stat: ContactStat) = guard("record contact") {
+    suspend fun record(conversation: String, stat: ContactStat): Unit? = guard("record contact") {
         dao.upsertContact(ContactRow(conversation, stat.replies, stat.medianReplyMinutes))
     }
 
-    suspend fun recordAlarm(time: LocalTime, on: LocalDate) = guard("record alarm") {
+    suspend fun recordAlarm(time: LocalTime, on: LocalDate): Unit? = guard("record alarm") {
         dao.upsertAlarm(AlarmRow(on.toString(), time.hour * 60 + time.minute))
     }
 
     /** Labels older than 24 h become kind + time; rows older than a week go. */
-    suspend fun trim(nowMillis: Long) = guard("trim") {
+    suspend fun trim(nowMillis: Long): Unit? = guard("trim") {
         dao.trimLabels(nowMillis - DAY_MILLIS)
         dao.deleteLoopsBefore(nowMillis - 7 * DAY_MILLIS)
     }
 
     suspend fun stats(): Stats = guard("load stats") {
         Stats(
-            kinds = dao.kinds().mapNotNull { row -> kindOf(row.kind)?.let { it to KindStat(row.confirms, row.ignores, row.ignoreStreak) } }.toMap(),
+            kinds = dao.kinds().mapNotNull { row -> kindOf(row.kind)?.let { it to KindStat(row.holds, row.ignores, row.ignoreStreak) } }.toMap(),
             contacts = dao.contacts().associate { it.conversation to ContactStat(it.replies, it.medianReplyMinutes) },
             weeknightAlarms = dao.recentAlarms().map { LocalTime.of(it.minuteOfDay / 60, it.minuteOfDay % 60) },
         )
     } ?: Stats()
 
     /** Demo mode: five weeknights of a 6:30 alarm, so the Bedtime story has a routine to find. */
-    suspend fun seedAlarmHistory(zone: ZoneId) = guard("seed alarms") {
+    suspend fun seedAlarmHistory(zone: ZoneId): Unit? = guard("seed alarms") {
         var day = LocalDate.now(zone)
         var seeded = 0
         while (seeded < 5) {
@@ -145,6 +149,8 @@ class Store(context: Context, private val log: DebugLog) {
 
     private suspend fun <T> guard(what: String, block: suspend () -> T): T? = try {
         block()
+    } catch (e: CancellationException) {
+        throw e
     } catch (e: Exception) {
         log.error("Store.$what", e)
         null
@@ -152,6 +158,9 @@ class Store(context: Context, private val log: DebugLog) {
 
     companion object {
         const val DAY_MILLIS: Long = 24 * 60 * 60 * 1000L
+
+        fun hashId(id: String): String =
+            MessageDigest.getInstance("SHA-256").digest(id.toByteArray()).joinToString("") { "%02x".format(it) }.take(24)
 
         fun kindOf(name: String): LoopKind? = LoopKind.entries.firstOrNull { it.name == name }
 

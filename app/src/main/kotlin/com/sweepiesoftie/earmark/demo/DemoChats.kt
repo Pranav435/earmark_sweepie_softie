@@ -22,7 +22,7 @@ class DemoChats {
         )
     }
 
-    fun add(line: ChatLine) = _rahul.update { it + line }
+    fun add(line: ChatLine): Unit = _rahul.update { it + line }
 
     fun setAishaPaid(paid: Boolean) {
         _aishaPaid.value = paid

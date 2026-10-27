@@ -27,13 +27,13 @@ class SettingsStore(context: Context) {
     private val _state = MutableStateFlow(read())
     val state: StateFlow<UserSettings> = _state
 
-    fun setDemoMode(on: Boolean) = edit { it.copy(demoMode = on) }
+    fun setDemoMode(on: Boolean): Unit = edit { it.copy(demoMode = on) }
 
-    fun setPaused(on: Boolean) = edit { it.copy(paused = on) }
+    fun setPaused(on: Boolean): Unit = edit { it.copy(paused = on) }
 
-    fun setDriftSeconds(seconds: Int) = edit { it.copy(driftSeconds = seconds) }
+    fun setDriftSeconds(seconds: Int): Unit = edit { it.copy(driftSeconds = seconds) }
 
-    fun setFeed(packageName: String, on: Boolean) = edit {
+    fun setFeed(packageName: String, on: Boolean): Unit = edit {
         if (on) it.copy(feedsOn = it.feedsOn + packageName, feedsOff = it.feedsOff - packageName)
         else it.copy(feedsOn = it.feedsOn - packageName, feedsOff = it.feedsOff + packageName)
     }

@@ -6,10 +6,10 @@ import android.app.RemoteInput
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock
+import androidx.core.net.toUri
 import com.sweepiesoftie.earmark.DebugLog
 import com.sweepiesoftie.earmark.core.Route
 
@@ -35,7 +35,7 @@ class HandBack(private val context: Context, private val wayBacks: WayBackRegist
                     .putExtra(AlarmClock.EXTRA_MINUTES, route.time.minute)
                     .putExtra(AlarmClock.EXTRA_SKIP_UI, false),
             )
-            is Route.OpenUri -> start(Intent(Intent.ACTION_VIEW, Uri.parse(route.uri)))
+            is Route.OpenUri -> start(Intent(Intent.ACTION_VIEW, route.uri.toUri()))
         }
     }
 

@@ -7,11 +7,11 @@
     <string name="overlay_chip_keep">Yes, keep this one</string>
     <string name="overlay_chip_not_this">Not this</string>
     <string name="overlay_open">Open it now</string>
-    <string name="overlay_pill_pane">Earmark reminder</string>
+    <string name="overlay_pill_pane">Earmark pill</string>
     <string name="overlay_pill_label">You came here to</string>
     <string name="overlay_pill_not_now">Not now</string>
-    <string name="overlay_strip_pane">Reply suggestions</string>
-    <string name="overlay_strip_close">Close reply suggestions</string>
+    <string name="overlay_strip_pane">Reply strip</string>
+    <string name="overlay_strip_close">Close the reply strip</string>
     <string name="overlay_strip_send">Send: %1$s</string>
 
     <!-- Recap -->
@@ -34,7 +34,7 @@
     <string name="recap_state_open">still open</string>
     <string name="recap_state_dismissed">dismissed</string>
     <string name="recap_state_expired">expired</string>
-    <string name="recap_paused">Earmark is paused. It won\'t guess or remind until you resume.</string>
+    <string name="recap_paused">Earmark is paused. It won\'t show chips or pills until you resume.</string>
     <string name="recap_resume">Resume</string>
     <string name="recap_missing">Earmark is missing a permission, so it can\'t guess yet.</string>
     <string name="recap_fix">Fix it</string>
@@ -69,11 +69,11 @@
     <!-- Settings -->
     <string name="settings_title">Settings</string>
     <string name="settings_pause">Pause Earmark</string>
-    <string name="settings_pause_body">No guesses and no reminders until you turn this off.</string>
+    <string name="settings_pause_body">No chips and no pills until you turn this off.</string>
     <string name="settings_demo">Demo mode</string>
     <string name="settings_demo_body">Sample notifications and a 10-second drift timer, so every story runs on any phone.</string>
     <string name="settings_drift">Drift timer</string>
-    <string name="settings_drift_body">How long a feed app can be in front before Earmark offers to hand your task back.</string>
+    <string name="settings_drift_body">How long a feed app can be in front before Earmark offers to hand the loop back.</string>
     <string name="settings_drift_demo">Demo mode uses 10 seconds.</string>
     <string name="settings_seconds">%1$d s</string>
     <string name="settings_minutes">%1$d min</string>
@@ -88,7 +88,7 @@
 
     <!-- Debug log -->
     <string name="log_title">Decision log</string>
-    <string name="log_body">Why each chip or reminder was or wasn\'t shown. No message text is ever written here.</string>
+    <string name="log_body">Why each chip or pill was or wasn\'t shown. No message text is ever written here.</string>
     <string name="log_empty">Nothing yet. Lock and unlock the phone to see a decision.</string>
     <string name="log_clear">Clear</string>
 
@@ -100,9 +100,9 @@
     <string name="onboarding_usage">Usage access</string>
     <string name="onboarding_usage_body">To know which app is in front, only while the screen is on.</string>
     <string name="onboarding_overlay">Display over other apps</string>
-    <string name="onboarding_overlay_body">To show the guess and the reminder on top of any app.</string>
+    <string name="onboarding_overlay_body">To show the chip and the pill on top of any app.</string>
     <string name="onboarding_calendar">Calendar (optional)</string>
-    <string name="onboarding_calendar_body">For reminders to leave or join an event.</string>
+    <string name="onboarding_calendar_body">For Leave-by loops: when to set off for an event or join a call.</string>
     <string name="onboarding_post">Notifications (demo mode only)</string>
     <string name="onboarding_post_body">Lets demo mode post sample messages.</string>
     <string name="onboarding_allow">Allow</string>

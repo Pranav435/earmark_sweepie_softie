@@ -18,10 +18,10 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private var foreground: Visit? = null
     private val bookedAt = HashMap<String, Instant>()
 
-    private data class Visit(val packageName: String, val appLabel: String, val since: Instant)
+    /** Routine and Leave-by loops are rebuilt from the clock and calendar, so remember which already closed. */
+    private val closedSituations = HashSet<LoopId>()
 
-    /** Open loops, newest first, for the debug screen. Read on the engine thread only. */
-    public val openLoops: List<Loop> get() = book.all.map { it.loop }.sortedByDescending { it.updatedAt }
+    private data class Visit(val packageName: String, val appLabel: String, val since: Instant)
 
     public fun handle(event: Event, now: Instant): List<Effect> = when (event) {
         is Event.NotificationPosted -> onPosted(event.signal, now)
@@ -39,15 +39,20 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         is Event.PillTapped -> onPillTapped(event.loopId)
         is Event.PillDismissed -> onPillDismissed(event.loopId)
         is Event.ReplyChosen -> onReplyChosen(event)
-        is Event.ReplySent -> close(event.loopId, Outcome.Done, now, "reply sent")
-        is Event.KindUnmuted -> setKind(event.kind, KindStat(confirms = kindStat(event.kind).confirms, ignores = kindStat(event.kind).ignores))
+        is Event.ReplySent -> close(event.loopId, Outcome.Done, now, "reply sent", replied = true)
+        is Event.KindUnmuted -> setKind(event.kind, KindStat(holds = kindStat(event.kind).holds, ignores = kindStat(event.kind).ignores))
         is Event.SettingsChanged -> {
             this.settings = event.settings
             copy = Copy(event.settings)
             listOf(Effect.Log("settings: drift after ${event.settings.driftAfter.seconds}s, demo ${event.settings.demoMode}, paused ${event.settings.paused}, ${event.settings.feedApps.size} feed apps"))
         }
         is Event.StatsLoaded -> {
-            stats = event.stats
+            // Counts the engine already holds are newer than any snapshot still being written to Room.
+            stats = Stats(
+                kinds = event.stats.kinds + stats.kinds,
+                contacts = event.stats.contacts + stats.contacts,
+                weeknightAlarms = event.stats.weeknightAlarms,
+            )
             emptyList()
         }
         Event.Tick -> expire(now) + stepDrift(DriftInput.Tick, now)
@@ -61,14 +66,14 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
                 listOf(Effect.Log("${if (isNew) "opened" else "updated"} ${result.loop.id.value} (${result.loop.kind}, due %.2f) from ${signal.packageName}".format(result.loop.due)))
             }
             is Classification.Replied ->
-                book.byConversation(result.conversation)?.let { close(it.loop.id, Outcome.Done, now, "you replied in ${signal.packageName}") }
-                    ?: listOf(Effect.Log("skip ${signal.packageName}: last message is yours"))
+                book.byConversation(result.conversation)?.let { close(it.loop.id, Outcome.Done, now, "you replied in ${signal.packageName}", replied = true) }
+                    ?: listOf(Effect.Log("skip ${signal.packageName}: last message is yours"), Effect.Forget(signal.key))
             is Classification.Booked -> {
                 bookedAt[result.packageName] = now
                 closeWhere(now, "booked in ${result.packageName}") { CloseRules.closedByBooking(it, result.packageName) }
             }
             is Classification.Paid -> closeWhere(now, "paid in ${result.packageName}") { CloseRules.closedByPayment(it, result.packageName) }
-            is Classification.Skip -> listOf(Effect.Log("skip ${signal.packageName}: ${result.reason}"))
+            is Classification.Skip -> listOf(Effect.Log("skip ${signal.packageName}: ${result.reason}"), Effect.Forget(signal.key))
         }
 
     private fun onRemoved(event: Event.NotificationRemoved, now: Instant): List<Effect> {
@@ -87,7 +92,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
 
         val carry = book.all.filter { it.carryOver }.maxByOrNull { it.loop.updatedAt }
         if (carry != null) {
-            book.update(carry.loop.id) { it.copy(carryOver = false, guessedAt = it.guessedAt ?: now) }
+            book.update(carry.loop.id) { it.copy(carryOver = false, guessedAt = now) }
             val score = Ranker.score(carry.loop, now, stats)
             drift = DriftMachine.guess(drift, carry.loop.id, carry.loop.packageName)
             effects += Effect.Log("unlock: carry-over chip for ${carry.loop.id.value}, score $score")
@@ -105,7 +110,8 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         if (score.total <= Ranker.CHIP_THRESHOLD) {
             return effects + Effect.Log("unlock: no chip, best ${tracked.loop.id.value} scored $score, needs > ${Ranker.CHIP_THRESHOLD}")
         }
-        val guessed = book.update(tracked.loop.id) { it.copy(guessedAt = it.guessedAt ?: now) }!!
+        // The latest guess time, so a loop guessed again today shows on today's recap.
+        val guessed = book.update(tracked.loop.id) { it.copy(guessedAt = now) }!!
         drift = DriftMachine.guess(drift, tracked.loop.id, tracked.loop.packageName)
         effects += Effect.Log("unlock: chip for ${tracked.loop.id.value}, score $score of ${candidates.size} open")
         effects += Effect.ShowChip(copy.chip(tracked.loop, score.total, now))
@@ -159,13 +165,10 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         if (drift.phase != Phase.Idle || settings.paused || kindStat(LoopKind.Flow).muted) {
             return listOf(Effect.Log("opened ${tracked.loop.id.value} (Flow)"))
         }
-        // You were just there, so no chip: the flow quietly becomes this session's guess.
-        val adopted = book.update(tracked.loop.id) { it.copy(guessedAt = now) }!!
+        // You were just there, so no chip: the flow quietly becomes this session's guess. It only
+        // counts as a thing on the recap once its pill shows.
         drift = DriftMachine.guess(drift, tracked.loop.id, tracked.loop.packageName)
-        return listOf(
-            Effect.Log("opened ${tracked.loop.id.value} (Flow) and made it the guess"),
-            Effect.RecordLoop(entry(adopted, outcome = null, closedAt = null)),
-        )
+        return listOf(Effect.Log("opened ${tracked.loop.id.value} (Flow) and made it the guess"))
     }
 
     private fun stepDrift(input: DriftInput, now: Instant): List<Effect> {
@@ -181,9 +184,10 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val effects = mutableListOf<Effect>()
         step.reason?.let { effects += Effect.Log("drift ${guess?.loop?.id?.value}: $it") }
         if (step.showPill && guess != null) {
-            book.update(guess.loop.id) { it.copy(pillShown = true) }
+            val shown = book.update(guess.loop.id) { it.copy(pillShown = true, guessedAt = it.guessedAt ?: now) }!!
             effects += Effect.HideOverlay(Overlay.Chip)
             effects += Effect.ShowPill(copy.pill(guess.loop))
+            if (guess.guessedAt == null) effects += Effect.RecordLoop(entry(shown, outcome = null, closedAt = null))
         }
         return effects
     }
@@ -207,7 +211,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun openSituations(now: Instant): List<Effect> {
         val loops = Situations.leaveBy(calendar, now, settings) +
             listOfNotNull(Situations.routine(now, settings, nextAlarm, stats.weeknightAlarms))
-        return loops.mapNotNull { loop ->
+        return loops.filter { it.id !in closedSituations }.mapNotNull { loop ->
             if (book[loop.id] != null) {
                 book.open(loop)
                 null
@@ -222,7 +226,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val tracked = book[id] ?: return emptyList()
         val stat = kindStat(tracked.loop.kind)
         return listOf(Effect.HideOverlay(Overlay.Chip), Effect.ShowDot, Effect.Log("chip held: ${id.value}")) +
-            setKind(tracked.loop.kind, stat.copy(confirms = stat.confirms + 1, ignoreStreak = 0))
+            setKind(tracked.loop.kind, stat.copy(holds = stat.holds + 1, ignoreStreak = 0))
     }
 
     private fun onChipDismissed(id: LoopId): List<Effect> {
@@ -246,7 +250,10 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val carried = tracked.pillShown
         book.update(id) { it.copy(handedBack = it.handedBack || carried) }
         drift = drift.copy(phase = Phase.HandedBack)
-        return handBack(tracked, "chip") + Effect.HideOverlay(Overlay.Chip)
+        val stat = kindStat(tracked.loop.kind)
+        // Acting on a chip says "yes, this one" as clearly as ✓ does.
+        return handBack(tracked, "chip") + Effect.HideOverlay(Overlay.Chip) +
+            setKind(tracked.loop.kind, stat.copy(holds = stat.holds + 1, ignoreStreak = 0))
     }
 
     private fun onPillTapped(id: LoopId): List<Effect> {
@@ -279,17 +286,18 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun closeWhere(now: Instant, why: String, predicate: (Loop) -> Boolean): List<Effect> =
         book.all.filter { predicate(it.loop) }.map { it.loop.id }.flatMap { close(it, Outcome.Done, now, why) }
 
-    private fun close(id: LoopId, outcome: Outcome, now: Instant, why: String): List<Effect> {
+    /** [replied] is true only when you answered, so a tap on the notification doesn't count as a reply. */
+    private fun close(id: LoopId, outcome: Outcome, now: Instant, why: String, replied: Boolean = false): List<Effect> {
         val tracked = book.remove(id) ?: return emptyList()
+        if (tracked.loop.kind == LoopKind.Routine || tracked.loop.kind == LoopKind.LeaveBy) closedSituations += id
         val effects = mutableListOf<Effect>(Effect.Log("closed ${id.value}: $outcome, $why"))
         if (tracked.guessedAt != null) effects += Effect.RecordLoop(entry(tracked, outcome, now))
         val conversation = tracked.loop.conversation
-        if (tracked.loop.kind == LoopKind.Reply && outcome == Outcome.Done && conversation != null) {
-            effects += recordReply(conversation, Duration.between(tracked.loop.updatedAt, now))
-        }
+        if (replied && conversation != null) effects += recordReply(conversation, Duration.between(tracked.loop.updatedAt, now))
+        tracked.loop.notificationKey?.let { effects += Effect.Forget(it) }
         if (drift.loopId == id) {
             drift = DriftMachine.end(drift)
-            effects += listOf(Effect.HideOverlay(Overlay.Pill), Effect.HideOverlay(Overlay.ReplyStrip), Effect.HideOverlay(Overlay.Dot))
+            effects += Overlay.entries.map { Effect.HideOverlay(it) }
         }
         return effects
     }

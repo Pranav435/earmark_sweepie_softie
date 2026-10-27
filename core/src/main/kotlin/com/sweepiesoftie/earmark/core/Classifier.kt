@@ -21,7 +21,7 @@ internal object Classifier {
     private val oneTimeCode = Regex("""(?i)\b(otp|one[- ]time|verification|security code|passcode|login code|your code|code is)\b""")
     private val codeDigits = Regex("""\b\d{4,8}\b""")
     private val timeWords = Regex(
-        """(?i)\b(at \d{1,2}(:\d{2})?|\d{1,2}(:\d{2})?\s?(am|pm)|tonight|today|tomorrow|now|asap|soon|this (morning|afternoon|evening)|in \d+ ?(min|mins|minutes|hours?|h))\b""",
+        """(?i)\b(at \d{1,2}(:\d{2})?|\d{1,2}:\d{2}|\d{1,2}(:\d{2})?\s?(am|pm)|tonight|today|tomorrow|now|asap|soon|this (morning|afternoon|evening)|in \d+ ?(min|mins|minutes|hours?|h))\b""",
     )
     private val requested = Regex("""(?i)\b(requested|requests|requesting|request(s|ed)? (for|of)|asked you for|is asking for|sent you a request)\b""")
     private val requester = Regex("""(?i)^(.+?)\s+(?:has\s+)?(?:requested|requests|is requesting|sent you a request|asked you for|is asking for)""")
@@ -63,7 +63,7 @@ internal object Classifier {
                 kind = LoopKind.Reply,
                 task = "Reply to $who",
                 who = who,
-                detail = "“$text”",
+                detail = "“${clamp(text)}”",
                 packageName = signal.packageName,
                 conversation = conversation,
                 notificationKey = signal.key,
@@ -90,7 +90,7 @@ internal object Classifier {
             .firstOrNull { MoneyParser.find(it) == null && !boilerplate.matches(it.trim()) && it != signal.appLabel }
         return Classification.Open(
             Loop(
-                id = LoopId("payment:${signal.key}"),
+                id = LoopId("payment:${signal.conversationKey ?: signal.key}"),
                 kind = LoopKind.Payment,
                 task = "Pay $who back ${money.short}",
                 who = who,
@@ -112,5 +112,18 @@ internal object Classifier {
 
     /** Half for a question, half for a time word: "free at 5?" is fully due. */
     private fun replyDue(text: String): Double =
-        (if (text.contains('?')) 0.5 else 0.0) + (if (timeWords.containsMatchIn(text)) 0.5 else 0.0)
+        (if (text.any { it in QUESTION_MARKS }) 0.5 else 0.0) + (if (timeWords.containsMatchIn(text)) 0.5 else 0.0)
+
+    /** Latin, Arabic and full-width question marks. */
+    private const val QUESTION_MARKS = "?؟？"
+
+    /** Keeps the chip's age visible: long messages are cut at a word near 80 characters. */
+    private fun clamp(text: String): String {
+        if (text.codePointCount(0, text.length) <= MAX_QUOTE) return text
+        val cut = text.offsetByCodePoints(0, MAX_QUOTE)
+        val space = text.lastIndexOf(' ', cut).takeIf { it > cut / 2 } ?: cut
+        return text.substring(0, space).trimEnd(' ', ',', '.') + "…"
+    }
+
+    private const val MAX_QUOTE = 80
 }

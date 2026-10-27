@@ -46,10 +46,10 @@ internal object Ranker {
         return if (stat.medianReplyMinutes <= 30.0) often else often * 0.75
     }
 
-    /** Confirm rate with one smoothing confirm and ignore, so a kind with no history scores 0.5. */
+    /** Confirm rate with one smoothing hold and ignore, so a kind with no history scores 0.5. */
     private fun history(stat: KindStat?): Double {
-        val confirms = stat?.confirms ?: 0
+        val holds = stat?.holds ?: 0
         val ignores = stat?.ignores ?: 0
-        return (confirms + 1.0) / (confirms + ignores + 2.0)
+        return (holds + 1.0) / (holds + ignores + 2.0)
     }
 }
