@@ -12,6 +12,7 @@ coroutines = "1.11.0"
 room = "2.8.5"
 smartReply = "17.0.4"
 junit = "4.13.2"
+gson = "2.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -31,6 +32,7 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 mlkit-smart-reply = { group = "com.google.mlkit", name = "smart-reply", version.ref = "smartReply" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

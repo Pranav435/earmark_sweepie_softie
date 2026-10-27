@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "earmark"
-include(":core", ":app")
+include(":core", ":app", ":bench")

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application android:label="Earmark bench" />
+
+    <!-- Instruments itself: adb shell am instrument -w com.sweepiesoftie.earmark.bench/.SmartReplyBench -->
+    <instrumentation
+        android:name=".SmartReplyBench"
+        android:targetPackage="com.sweepiesoftie.earmark.bench" />
+</manifest>

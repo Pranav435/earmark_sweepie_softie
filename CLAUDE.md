@@ -8,6 +8,7 @@ Functional core, imperative shell. `:core` is pure Kotlin and owns every product
 export JAVA_HOME=/opt/homebrew/opt/openjdk@21        # JDK 21 is not on PATH
 ./gradlew :core:test                                   # fast loop: all product logic lives here
 ./gradlew :core:test :app:assembleRelease lint         # ship gate: tests, minified APK, lint 0 errors
+./gradlew :core:benchmark                              # accuracy on labelled cases; compare benchmark/results/results.json
 ```
 
 The release APK lands in `app/build/outputs/apk/release/`. Copy it to `dist/earmark-v<versionName>.apk`, which is committed so testers can download it from GitHub, and `git rm` the previous one. Then check that `aapt2 dump permissions` shows no `INTERNET`, and that `apksigner verify --print-certs` shows the Sweepie Softie key. Bump `versionCode` for every release so it installs as an update, and update the APK name in README.md and `scripts/setup-phone.sh`.
