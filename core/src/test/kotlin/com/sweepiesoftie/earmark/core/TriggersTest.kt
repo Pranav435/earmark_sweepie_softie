@@ -79,10 +79,19 @@ class TriggersTest {
         with(Script(settings(kyc.copy(watch = Watch.AnyNotification, words = emptyList())))) {
             assertTrue(at(at(10, 0), Event.NotificationPosted(hdfc(at(10, 0), "Your statement is ready"))).any { it is Effect.RecordLoop })
             assertTrue(at(at(10, 1), Event.NotificationPosted(hdfc(at(10, 1), "Your OTP is 482913. Do not share it.", key = "otp"))).none { it is Effect.RecordLoop })
+            assertTrue(at(at(10, 2), Event.NotificationPosted(hdfc(at(10, 2), "482913 is your verification code", key = "code"))).none { it is Effect.RecordLoop })
             val ongoing = hdfc(at(10, 2), "Uploading documents", key = "up").copy(isOngoing = true)
             assertTrue(at(at(10, 2), Event.NotificationPosted(ongoing)).none { it is Effect.RecordLoop })
             assertEquals(1, engine.openLoops)
         }
+
+    @Test
+    fun `a year or an amount beside the word verification isn't a one-time code`() = with(Script(settings(kyc))) {
+        val posted = at(at(10, 0), Event.NotificationPosted(hdfc(at(10, 0), "Complete your KYC verification by 31-10-2026")))
+        assertEquals("Check HDFC Bank", posted.one<Effect.RecordLoop>().entry.label)
+        assertTrue(Classifier.quotesOneTimeCode("Your verification code is 4829."))
+        assertFalse(Classifier.quotesOneTimeCode("KYC verification fee of Rs. 4999 is due"))
+    }
 
     @Test
     fun `a message Earmark already reads as a reply stays a reply, and is owed for hours`() {
@@ -158,11 +167,29 @@ class TriggersTest {
     }
 
     @Test
-    fun `a pay trigger on a screen keeps the amount it showed`() = with(Script(settings(proceed.copy(kind = LoopKind.Payment)))) {
+    fun `a pay trigger on a screen keeps no amount it read, since its task is stored`() = with(Script(settings(proceed.copy(kind = LoopKind.Payment)))) {
         at(at(16, 0), Event.Unlocked)
         at(at(16, 0, 2), Event.ForegroundChanged(irctc, "IRCTC"))
         at(at(16, 0, 30), Event.ScreenRead(irctc, "Total ₹1,240\nProceed to Pay"))
-        assertEquals("Pay ₹1,240 in IRCTC", at(at(16, 1), Event.ForegroundChanged(launcher, "Home")).one<Effect.RecordLoop>().entry.label)
+        assertEquals("Pay in IRCTC", at(at(16, 1), Event.ForegroundChanged(launcher, "Home")).one<Effect.RecordLoop>().entry.label)
+    }
+
+    @Test
+    fun `a quick look at a screen without the words isn't finishing, but seeing them go is`() = with(Script(settings(proceed))) {
+        at(at(16, 0), Event.Unlocked)
+        at(at(16, 0, 2), Event.ForegroundChanged(irctc, "IRCTC"))
+        at(at(16, 0, 30), Event.ScreenRead(irctc, "Proceed to Pay"))
+        at(at(16, 1), Event.ForegroundChanged(launcher, "Home"))
+
+        at(at(16, 2), Event.ForegroundChanged(irctc, "IRCTC"))
+        at(at(16, 2, 1), Event.ScreenRead(irctc, "Session expired. Log in again"))
+        assertTrue("a login screen for 2 s", at(at(16, 2, 2), Event.ForegroundChanged(launcher, "Home")).none { it is Effect.RecordLoop })
+        assertEquals(1, engine.openLoops)
+
+        at(at(16, 3), Event.ForegroundChanged(irctc, "IRCTC"))
+        at(at(16, 3, 1), Event.ScreenRead(irctc, "Proceed to Pay"))
+        at(at(16, 3, 4), Event.ScreenRead(irctc, "Booking confirmed"))
+        assertEquals(Outcome.Done, at(at(16, 3, 6), Event.ForegroundChanged(launcher, "Home")).one<Effect.RecordLoop>().entry.outcome)
     }
 
     @Test

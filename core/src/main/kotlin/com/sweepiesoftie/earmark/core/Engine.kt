@@ -49,8 +49,11 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     /** [interrupted] is set when a pill showed during the visit, so it isn't learned as a usual visit. */
     private data class Visit(val packageName: String, val appLabel: String, val since: Instant, val interrupted: Boolean = false)
 
-    /** Each showing screen trigger's id with the word it found, and an amount the screen showed, for a Pay. Never the screen's text. */
-    private data class Screen(val at: Instant, val words: Map<String, String>, val amount: Money?)
+    /**
+     * Each showing screen trigger's id with the word it found, and every trigger whose words showed at some point in
+     * this visit. Never the screen's text, nor an amount it showed.
+     */
+    private data class Screen(val at: Instant, val words: Map<String, String>, val seen: Set<String>)
 
     /** How many loops are open, for the home screen. Read it on the engine's thread, like [handle]. */
     public val openLoops: Int get() = book.all.size
@@ -476,16 +479,16 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val triggers = settings.triggers.filter { it.on && it.watch == Watch.ScreenWords && it.packageName == event.packageName }
         if (triggers.isEmpty()) return emptyList()
         val words = triggers.mapNotNull { trigger -> Triggers.match(trigger.words, event.text)?.let { trigger.id to it } }.toMap()
-        val before = onScreen[event.packageName]?.words.orEmpty()
-        val screen = Screen(now, words, MoneyParser.find(event.text).takeIf { words.isNotEmpty() })
+        val before = onScreen[event.packageName]
+        val screen = Screen(now, words, before?.seen.orEmpty() + words.keys)
         onScreen[event.packageName] = screen
-        val showing = triggers.filter { it.id in words && it.id !in before }
+        val showing = triggers.filter { it.id in words && before?.words?.containsKey(it.id) != true }
         if (showing.isEmpty()) return emptyList()
         val effects = showing.flatMap { seen(it, now) }.toMutableList()
         effects += Effect.Log("screen of ${event.packageName}: words of ${showing.joinToString { "trigger ${it.id}" }} showing")
         ignoredBy(event.packageName, screen)?.let { return effects + Effect.Log("trigger ${it.id} ignores it, so nothing opens") }
         showing.filter { !it.ignore && it.timing == ScreenTiming.AsSoonAsShown }
-            .forEach { effects += openMade(Triggers.fromScreen(it, words.getValue(it.id), now, screen.amount), now, arrive = true) }
+            .forEach { effects += openMade(Triggers.fromScreen(it, words.getValue(it.id), now), now, arrive = true) }
         return effects
     }
 
@@ -493,22 +496,25 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun screenOf(visit: Visit): Screen? = onScreen[visit.packageName]?.takeIf { !it.at.isBefore(visit.since.minus(lateSwitch)) }
 
     /**
-     * Leaving an app with screen triggers (ADR 0038): a loop whose words are gone was dealt with, and a trigger whose
+     * Leaving an app with screen triggers (ADR 0038): a loop whose words showed and then went, or that stayed away
+     * through a visit of 20 s or more, was dealt with. A quick look at a loading or login screen isn't. A trigger whose
      * words still show fires now, unless an Ignore's words show too. A visit screen reading didn't see changes nothing.
      */
     private fun leftScreen(visit: Visit, now: Instant): List<Effect> {
         val screen = screenOf(visit)
         onScreen -= visit.packageName
         if (screen == null) return emptyList()
+        val stayed = Duration.between(visit.since, now) >= Triggers.visit
         val effects = mutableListOf<Effect>()
         book.all.filter { tracked ->
             val trigger = tracked.loop.trigger
-            trigger != null && trigger.made && trigger.watch == Watch.ScreenWords && tracked.loop.packageName == visit.packageName && trigger.id !in screen.words
+            trigger != null && trigger.made && trigger.watch == Watch.ScreenWords && tracked.loop.packageName == visit.packageName &&
+                trigger.id !in screen.words && (trigger.id in screen.seen || stayed)
         }.map { it.loop.id }.forEach { effects += close(it, Outcome.Done, now, "left ${visit.packageName} without its words on screen") }
         ignoredBy(visit.packageName, screen)?.let { return effects }
         settings.triggers
             .filter { it.on && !it.ignore && it.watch == Watch.ScreenWords && it.timing == ScreenTiming.OnLeaving && it.packageName == visit.packageName && it.id in screen.words }
-            .forEach { effects += openMade(Triggers.fromScreen(it, screen.words.getValue(it.id), now, screen.amount), now, arrive = true) }
+            .forEach { effects += openMade(Triggers.fromScreen(it, screen.words.getValue(it.id), now), now, arrive = true) }
         return effects
     }
 

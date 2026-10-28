@@ -25,6 +25,11 @@ internal object Classifier {
 
     private val oneTimeCode = Regex("""(?i)\b(otp|one[- ]time|verification|security code|passcode|login code|your code|code is)\b""")
     private val codeDigits = Regex("""\b\d{4,8}\b""")
+    private const val CODE_WORD = """\b(otp|one[- ]time|verification|security code|passcode|login code|your code|code is)\b"""
+
+    /** 4–8 digits on their own, not part of a date, a time or an amount. */
+    private const val CODE = """(?<![\d/.,:₹\$-]|(?:rs|inr)\.?\s?)\b\d{4,8}\b(?![/.,:-]\d)"""
+    private val codeBeside = Regex("""(?i)$CODE_WORD[^\n]{0,40}?$CODE|$CODE[^\n]{0,40}?$CODE_WORD""")
     private val timeWords = Regex(
         """(?i)\b(at \d{1,2}(:\d{2})?|\d{1,2}:\d{2}|\d{1,2}(:\d{2})?\s?(am|pm)|tonight|today|tomorrow|now|asap|soon|this (morning|afternoon|evening)|in \d+ ?(min|mins|minutes|hours?|h))\b""",
     )
@@ -447,6 +452,12 @@ internal object Classifier {
     fun hasTimeWord(text: String): Boolean = timeWords.containsMatchIn(text)
 
     fun isOneTimeCode(text: String): Boolean = oneTimeCode.containsMatchIn(text) && codeDigits.containsMatchIn(text)
+
+    /**
+     * Stricter, for custom triggers: the word for a code beside its digits, on one line. The year or amount in "KYC
+     * verification due by 31-10-2026" isn't one, so a trigger on "KYC" still fires.
+     */
+    fun quotesOneTimeCode(text: String): Boolean = codeBeside.containsMatchIn(text)
 
     /** Latin, Arabic and full-width question marks. */
     private const val QUESTION_MARKS = "?؟？"

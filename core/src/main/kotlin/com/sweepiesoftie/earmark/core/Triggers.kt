@@ -89,7 +89,7 @@ internal object Triggers {
     fun hits(signal: Signal, triggers: List<Trigger>): List<Hit> {
         if (signal.isOngoing || signal.isGroupSummary || signal.isOwn) return emptyList()
         val text = text(signal)
-        if (Classifier.isOneTimeCode(text)) return emptyList()
+        if (Classifier.quotesOneTimeCode(text)) return emptyList()
         return triggers.filter { it.on && it.packageName == signal.packageName }.mapNotNull { trigger ->
             when (trigger.watch) {
                 Watch.AnyNotification -> Hit(trigger, null)
@@ -131,10 +131,10 @@ internal object Triggers {
 
     /**
      * A screen trigger's loop, one at a time: it closes when you leave the app without its words showing. It quotes
-     * the trigger's own word, never the screen; [amount] is one the screen showed, for a Pay.
+     * the trigger's own word and never the screen, so a Pay says no amount: its task is kept for the recap.
      */
-    fun fromScreen(trigger: Trigger, word: String, at: Instant, amount: Money?): Loop =
-        loop(trigger, id = trigger.id, who = trigger.appLabel, words = "“$word”", at = at, route = Route.LaunchApp(trigger.packageName), amount = amount)
+    fun fromScreen(trigger: Trigger, word: String, at: Instant): Loop =
+        loop(trigger, id = trigger.id, who = trigger.appLabel, words = "“$word”", at = at, route = Route.LaunchApp(trigger.packageName))
 
     /** A time trigger's loop for [day], from its time until midnight; the note says when you wanted to open it. */
     fun fromTime(trigger: Trigger, day: LocalDate, zone: ZoneId): Loop {
