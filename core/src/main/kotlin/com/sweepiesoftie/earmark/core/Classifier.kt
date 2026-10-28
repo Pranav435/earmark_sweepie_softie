@@ -27,8 +27,8 @@ internal object Classifier {
     private val codeDigits = Regex("""\b\d{4,8}\b""")
     private const val CODE_WORD = """\b(otp|one[- ]time|verification|security code|passcode|login code|your code|code is)\b"""
 
-    /** 4–8 digits on their own, not part of a date, a time or an amount. */
-    private const val CODE = """(?<![\d/.,:₹\$-]|(?:rs|inr)\.?\s?)\b\d{4,8}\b(?![/.,:-]\d)"""
+    /** 4–8 digits on their own, not part of a date or an amount. "G-482913" and "OTP:482913" are codes; "31-10-2026" isn't. */
+    private const val CODE = """(?<![₹\$]\s?|(?:rs|inr)\.?\s?|\d[/.,-])\b\d{4,8}\b(?![/.,-]\d)"""
     private val codeBeside = Regex("""(?i)$CODE_WORD[^\n]{0,40}?$CODE|$CODE[^\n]{0,40}?$CODE_WORD""")
     private val timeWords = Regex(
         """(?i)\b(at \d{1,2}(:\d{2})?|\d{1,2}:\d{2}|\d{1,2}(:\d{2})?\s?(am|pm)|tonight|today|tomorrow|now|asap|soon|this (morning|afternoon|evening)|in \d+ ?(min|mins|minutes|hours?|h))\b""",

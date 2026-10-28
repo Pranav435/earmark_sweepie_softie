@@ -90,6 +90,10 @@ class TriggersTest {
         val posted = at(at(10, 0), Event.NotificationPosted(hdfc(at(10, 0), "Complete your KYC verification by 31-10-2026")))
         assertEquals("Check HDFC Bank", posted.one<Effect.RecordLoop>().entry.label)
         assertTrue(Classifier.quotesOneTimeCode("Your verification code is 4829."))
+        assertTrue(Classifier.quotesOneTimeCode("G-482913 is your Google verification code."))
+        assertTrue(Classifier.quotesOneTimeCode("OTP:482913 for login"))
+        assertFalse(Classifier.quotesOneTimeCode("Verification due on 2026-10-31"))
+        assertFalse(Classifier.quotesOneTimeCode("Verification: pay ₹ 4999 by Friday"))
         assertFalse(Classifier.quotesOneTimeCode("KYC verification fee of Rs. 4999 is due"))
     }
 

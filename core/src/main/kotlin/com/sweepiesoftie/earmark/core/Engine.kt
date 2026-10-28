@@ -256,7 +256,14 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         val replaceable = drift.phase == Phase.Idle || drift.phase == Phase.Left || (watching && drift.origin != Origin.Unlock) || urgentOver
         if (!replaceable) return listOf(Effect.Log("$id came in during use; ${drift.loopId?.value} stays the guess (${drift.phase})"))
         if (book[loop.id]?.ignored == true) return listOf(Effect.Log("$id came in during use; its chip was swiped this session"))
-        if (muted(loop)) return listOf(Effect.Log("$id came in during use; ${if (loop.kind.withPeople) "its chat" else loop.kind} is muted"))
+        if (muted(loop)) {
+            val what = when {
+                loop.trigger?.made == true -> "trigger ${loop.trigger.id}"
+                loop.kind.withPeople -> "its chat"
+                else -> loop.kind
+            }
+            return listOf(Effect.Log("$id came in during use; $what is muted"))
+        }
         val score = Ranker.score(loop, now, stats, unseen = true)
         if (score.total <= Ranker.CHIP_THRESHOLD) {
             return listOf(Effect.Log("$id came in during use; scored $score, needs > ${Ranker.CHIP_THRESHOLD}"))
