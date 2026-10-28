@@ -319,6 +319,85 @@ class TriggersTest {
     }
 
     @Test
+    fun `a match before the stored stats arrive keeps the trigger's mute`() {
+        val stored = Stats(triggers = mapOf("t1" to TriggerStat(at(9, 0), ignoreStreak = 3)))
+        with(Script(settings(kyc))) {
+            // After a restart the listener replays the shade before Room's stats have loaded.
+            at(at(10, 0), Event.NotificationPosted(hdfc(at(10, 0), "KYC pending")))
+            val loaded = at(at(10, 0, 1), Event.StatsLoaded(stored))
+            assertEquals("written again with its streak", TriggerStat(at(10, 0), ignoreStreak = 3), loaded.one<Effect.RecordTrigger>().stat)
+            assertTrue("still muted", at(at(10, 1), Event.Unlocked).none { it is Effect.ShowChip })
+        }
+        with(Script(settings(kyc))) {
+            at(at(10, 0), Event.TriggerUnmuted("t1"))
+            val loaded = at(at(10, 0, 1), Event.StatsLoaded(stored))
+            assertEquals("an unmute before then stands, with its last match", TriggerStat(at(9, 0), ignoreStreak = 0), loaded.one<Effect.RecordTrigger>().stat)
+        }
+    }
+
+    @Test
+    fun `a chat a trigger marked owed stays owed when they write again without the words`() {
+        val parcel = Trigger("t10", Fixtures.CHATS, "WhatsApp", Watch.NotificationWords, words = listOf("parcel"))
+        with(Script(settings(parcel))) {
+            at(at(9, 0), Event.Unlocked)
+            at(at(9, 1), Event.ScreenOff)
+            at(at(9, 5), Event.NotificationPosted(Fixtures.priya(at(9, 5), "the parcel came for you")))
+            at(at(9, 6), Event.NotificationPosted(Fixtures.priya(at(9, 6), "on my way home")))
+            assertEquals(LoopKind.Reply, at(at(10, 36), Event.Unlocked).one<Effect.ShowChip>().chip.kind)
+        }
+    }
+
+    @Test
+    fun `an ignore doesn't hide that something was paid`() {
+        val offers = Trigger("t11", Fixtures.SMS, "Messages", Watch.NotificationWords, words = listOf("offer"), ignore = true)
+        with(Script(settings(offers))) {
+            at(at(10, 0), Event.NotificationPosted(Fixtures.airtel(at(10, 0))))
+            assertEquals(1, engine.openLoops)
+            val paid = at(at(10, 5), Event.NotificationPosted(Fixtures.airtel(at(10, 5), "Rs 499 paid to Airtel. Get a cashback offer on your next recharge")))
+            assertEquals(Outcome.Done, paid.one<Effect.RecordLoop>().entry.outcome)
+            assertEquals(0, engine.openLoops)
+        }
+    }
+
+    @Test
+    fun `a phrase that runs from the title into the text quotes the notification, not a time`() =
+        with(Script(settings(kyc.copy(words = listOf("KYC due"))))) {
+            at(at(10, 0), Event.NotificationPosted(hdfc(at(10, 0), "due by Friday").copy(title = "KYC")))
+            assertEquals("“due by Friday”", engine.waiting(at(10, 1)).single().note.words)
+        }
+
+    @Test
+    fun `a reply trigger's loop closes when you reply, from an app that gives no conversation`() {
+        val parcel = Trigger("t12", Fixtures.SMS, "Messages", Watch.NotificationWords, words = listOf("parcel"), kind = LoopKind.Reply)
+        fun courier(at: Instant, text: String, fromUser: Boolean = false): Signal = Signal(
+            key = "0|${Fixtures.SMS}|8|bludrt|10200",
+            packageName = Fixtures.SMS,
+            appLabel = "Messages",
+            postedAt = at,
+            title = "AX-BLUDRT",
+            text = text,
+            messages = listOf(Message(if (fromUser) null else "AX-BLUDRT", text, at, fromUser = fromUser)),
+            category = "msg",
+        )
+        with(Script(settings(parcel))) {
+            at(at(10, 0), Event.NotificationPosted(courier(at(10, 0), "Your parcel is at the front desk")))
+            assertEquals(1, engine.openLoops)
+            at(at(10, 5), Event.NotificationPosted(courier(at(10, 5), "Thanks, I'll collect it at 6", fromUser = true)))
+            assertEquals(0, engine.openLoops)
+        }
+    }
+
+    @Test
+    fun `a trigger's loop teaches nothing about its app`() = with(timed(streak.copy(kind = LoopKind.Reply))) {
+        val chip = at(at(21, 30), Event.Unlocked).one<Effect.ShowChip>().chip
+        at(at(21, 30, 2), Event.ChipActed(chip.loopId))
+        at(at(21, 30, 4), Event.ForegroundChanged(duolingo, "Duolingo"))
+        val closed = at(at(21, 31), Event.ForegroundChanged(launcher, "Home"))
+        assertEquals(Outcome.Done, closed.one<Effect.RecordLoop>().entry.outcome)
+        assertTrue(closed.none { it is Effect.RecordApp })
+    }
+
+    @Test
     fun `a get back to trigger is its own, so the tile still holds an app`() =
         with(Script(settings(kyc.copy(kind = LoopKind.Own)))) {
             at(at(10, 0), Event.NotificationPosted(hdfc(at(10, 0), "KYC pending")))

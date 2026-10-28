@@ -103,10 +103,14 @@ internal object Triggers {
     private fun text(signal: Signal): String =
         listOfNotNull(signal.title, signal.text, signal.bigText, signal.messages.lastOrNull()?.text).joinToString("\n")
 
-    /** A notification trigger's loop: one per notification, closed when it goes, with its tap as the way back. */
+    /**
+     * A notification trigger's loop: one per notification, closed when it goes, with its tap as the way back. It quotes
+     * the part that says the word, or its newest words when a phrase ran from one part into the next.
+     */
     fun fromNotification(trigger: Trigger, signal: Signal, word: String?): Loop {
         val last = signal.messages.lastOrNull()
-        val said = listOfNotNull(last?.text, signal.bigText, signal.text, signal.title).firstOrNull { word == null || match(listOf(word), it) != null }
+        val parts = listOfNotNull(last?.text, signal.bigText, signal.text, signal.title).filter { it.isNotBlank() }
+        val said = parts.firstOrNull { word == null || match(listOf(word), it) != null } ?: parts.firstOrNull()
         val sender = (last?.sender ?: signal.title)?.removePrefix("~")?.trim()?.takeIf { it.isNotEmpty() }
         return loop(
             trigger,
@@ -118,7 +122,8 @@ internal object Triggers {
             amount = said?.let(MoneyParser::find),
         ).copy(
             notificationKey = signal.key,
-            conversation = signal.conversationKey.takeIf { trigger.kind.withPeople },
+            // Keyed as the classifier keys a chat, so your reply in it closes the loop.
+            conversation = (signal.conversationKey ?: signal.key).takeIf { trigger.kind.withPeople },
             canReply = trigger.kind == LoopKind.Reply && signal.hasReplyAction,
             updatedAt = last?.at ?: signal.postedAt,
         )

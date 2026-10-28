@@ -63,7 +63,7 @@ internal class Copy(private val settings: Settings) {
      */
     private fun triggered(loop: Loop): Note {
         val person = loop.kind.withPeople && loop.notificationKey != null
-        val words = loop.detail ?: "You wanted to open it by ${time(loop.openedAt)}"
+        val words = loop.detail ?: "You wanted to open it by ${time(loop.openedAt)}".takeIf { loop.trigger?.watch == Watch.NotOpenedBy }
         return Note(loop.who ?: loop.task, words, verb(loop), person, loop.packageName, faceKey = loop.notificationKey.takeIf { person })
     }
 

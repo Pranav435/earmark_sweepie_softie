@@ -16,7 +16,6 @@ import com.sweepiesoftie.earmark.core.Overlay
 import com.sweepiesoftie.earmark.core.Settings
 import com.sweepiesoftie.earmark.core.Watch
 import com.sweepiesoftie.earmark.overlay.OverlayHost
-import com.sweepiesoftie.earmark.store.UserSettings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExecutorCoroutineDispatcher
@@ -95,7 +94,7 @@ class EarmarkListener : NotificationListenerService() {
             dispatch(Event.StatsLoaded(graph.store.stats()))
             graph.store.trim(System.currentTimeMillis())
         }
-        seedVisits(s, graph.settings.state.value)
+        seedVisits(s, timedApps(s.settings))
         // Loads the weights off the main thread, before the first message needs them.
         s.scope.launch(s.engineDispatcher) { log.add(if (s.engine.messageModel) "message model loaded" else "message model missing; word lists only") }
         s.scope.launch {
@@ -103,7 +102,8 @@ class EarmarkListener : NotificationListenerService() {
                 val timed = timedApps(s.settings)
                 s.settings = withContext(Dispatchers.IO) { s.withCard(graph.apps.engineSettings(user)) }
                 dispatch(Event.SettingsChanged(s.settings))
-                if (timedApps(s.settings) != timed) seedVisits(s, user)
+                val nowTimed = timedApps(s.settings)
+                if (nowTimed != timed) seedVisits(s, nowTimed)
             }
         }
         s.scope.launch { graph.uiEvents.collect { dispatch(it) } }
@@ -177,8 +177,7 @@ class EarmarkListener : NotificationListenerService() {
      * Time triggers need to know whether you were in their app earlier today, before this listener started, and wait
      * until they do (ADR 0038). Without usage access the history is empty, and there are no foreground polls either.
      */
-    private fun seedVisits(s: Session, user: UserSettings) {
-        val apps = user.triggers.filter { it.on && it.watch == Watch.NotOpenedBy }.map { it.packageName }.toSet()
+    private fun seedVisits(s: Session, apps: Set<String>) {
         if (apps.isEmpty()) return
         s.scope.launch {
             val midnight = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()

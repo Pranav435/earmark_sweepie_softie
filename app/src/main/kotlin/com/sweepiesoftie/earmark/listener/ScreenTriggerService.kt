@@ -7,6 +7,7 @@ import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import com.sweepiesoftie.earmark.AppGraph
 import com.sweepiesoftie.earmark.core.Event
+import com.sweepiesoftie.earmark.core.Trigger
 import com.sweepiesoftie.earmark.core.Watch
 
 /**
@@ -18,6 +19,8 @@ class ScreenTriggerService : AccessibilityService() {
     private val handler = Handler(Looper.getMainLooper())
     private var pending: String? = null
     private val read = Runnable { readNow() }
+    private var watchedFrom: List<Trigger>? = null
+    private var watchedApps: Set<String> = emptySet()
 
     override fun onServiceConnected() {
         AppGraph.init(this)
@@ -43,8 +46,15 @@ class ScreenTriggerService : AccessibilityService() {
         super.onDestroy()
     }
 
-    private fun watched(): Set<String> =
-        AppGraph.settings.state.value.triggers.filter { it.on && it.watch == Watch.ScreenWords }.map { it.packageName }.toSet()
+    /** The apps with a screen trigger on, worked out again only when the triggers change: every app's events come here. */
+    private fun watched(): Set<String> {
+        val triggers = AppGraph.settings.state.value.triggers
+        if (triggers !== watchedFrom) {
+            watchedFrom = triggers
+            watchedApps = triggers.filter { it.on && it.watch == Watch.ScreenWords }.map { it.packageName }.toSet()
+        }
+        return watchedApps
+    }
 
     private fun readNow() {
         val packageName = pending ?: return
@@ -58,7 +68,13 @@ class ScreenTriggerService : AccessibilityService() {
         // A keyboard or the shade can be the active window while the app's own events still arrive.
         if (root.packageName?.toString() != packageName) return
         val text = StringBuilder()
-        collect(root, text, intArrayOf(MAX_NODES))
+        try {
+            collect(root, text, intArrayOf(MAX_NODES))
+        } catch (e: RuntimeException) {
+            // On the main thread the listener and the overlays share, so a failed read is skipped, never thrown.
+            AppGraph.debugLog.error("read the screen", e)
+            return
+        }
         AppGraph.uiEvents.tryEmit(Event.ScreenRead(packageName, text.toString()))
     }
 

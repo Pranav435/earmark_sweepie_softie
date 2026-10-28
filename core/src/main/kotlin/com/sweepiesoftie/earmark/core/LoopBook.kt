@@ -20,7 +20,10 @@ internal data class Tracked(
     val clearedAt: Instant? = null,
 )
 
-/** The open loops. Opening a loop with an existing id updates its evidence but keeps its history. */
+/**
+ * The open loops. Opening a loop with an existing id updates its evidence but keeps its history, including the
+ * custom trigger that marked it owed: a chat that writes again without the trigger's words still owes it (ADR 0038).
+ */
 internal class LoopBook {
     private val loops = LinkedHashMap<LoopId, Tracked>()
 
@@ -29,7 +32,7 @@ internal class LoopBook {
     operator fun get(id: LoopId?): Tracked? = id?.let { loops[it] }
 
     fun open(loop: Loop): Tracked {
-        val tracked = loops[loop.id]?.copy(loop = loop.copy(openedAt = loops.getValue(loop.id).loop.openedAt, started = loops.getValue(loop.id).loop.started))
+        val tracked = loops[loop.id]?.let { it.copy(loop = loop.copy(openedAt = it.loop.openedAt, started = it.loop.started, trigger = loop.trigger ?: it.loop.trigger)) }
             ?: Tracked(loop)
         loops[loop.id] = tracked
         return tracked

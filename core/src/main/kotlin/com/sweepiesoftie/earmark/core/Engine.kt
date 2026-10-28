@@ -43,6 +43,9 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     /** Apps whose usage history from before this engine started has arrived; their time triggers wait for it. */
     private val historyOf = HashSet<String>()
 
+    /** Triggers whose "not this" streak this engine changed, so its count is newer than Room's (ADR 0038). */
+    private val streaked = HashSet<String>()
+
     /** [interrupted] is set when a pill showed during the visit, so it isn't learned as a usual visit. */
     private data class Visit(val packageName: String, val appLabel: String, val since: Instant, val interrupted: Boolean = false)
 
@@ -103,7 +106,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         is Event.ReplySent -> close(event.loopId, Outcome.Done, now, "reply sent", replied = true)
         is Event.KindUnmuted -> setKind(event.kind, KindStat(holds = kindStat(event.kind).holds, ignores = kindStat(event.kind).ignores))
         Event.ChatsUnmuted -> onChatsUnmuted()
-        is Event.TriggerUnmuted -> setTrigger(event.id, triggerStat(event.id).copy(ignoreStreak = 0)) + Effect.Log("trigger ${event.id} unmuted")
+        is Event.TriggerUnmuted -> setStreak(event.id, triggerStat(event.id).copy(ignoreStreak = 0)) + Effect.Log("trigger ${event.id} unmuted")
         is Event.ScreenRead -> onScreenRead(event, now)
         is Event.AppVisits -> {
             historyOf += event.apps
@@ -128,14 +131,15 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         }
         is Event.StatsLoaded -> {
             // Counts the engine already holds are newer than any snapshot still being written to Room.
+            val (triggers, rewritten) = loadTriggers(event.stats.triggers)
             stats = Stats(
                 kinds = event.stats.kinds + stats.kinds,
                 contacts = event.stats.contacts + stats.contacts,
                 weeknightAlarms = event.stats.weeknightAlarms,
                 apps = event.stats.apps + stats.apps,
-                triggers = event.stats.triggers + stats.triggers,
+                triggers = triggers,
             )
-            emptyList()
+            rewritten
         }
         Event.Tick -> {
             inUse = true
@@ -146,12 +150,16 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     /**
      * Custom triggers read a notification as well as Earmark (ADR 0038). An Ignore beats everything. An earmark trigger
      * marks a loop Earmark opens anyway as owed, and makes its own loop from one Earmark would skip. A reply you sent,
-     * a booking or a payment shows something was dealt with, so it stays evidence and is never a trigger's loop.
+     * a booking or a payment shows something was dealt with, so it stays evidence, even past an Ignore, and is never a
+     * trigger's loop.
      */
     private fun onPosted(signal: Signal, now: Instant): List<Effect> {
         val hits = Triggers.hits(signal, settings.triggers)
-        hits.firstOrNull { it.trigger.ignore }?.let { return seen(it.trigger, now) + skip(signal, "ignored by trigger ${it.trigger.id}") }
         val result = Classifier.classify(signal, settings, stats)
+        if (result is Classification.Replied || result is Classification.Booked || result is Classification.Paid) {
+            return hits.firstOrNull()?.let { seen(it.trigger, now) }.orEmpty() + onClassified(signal, result, now)
+        }
+        hits.firstOrNull { it.trigger.ignore }?.let { return seen(it.trigger, now) + skip(signal, "ignored by trigger ${it.trigger.id}") }
         val hit = hits.firstOrNull() ?: return onClassified(signal, result, now)
         val marked = when (result) {
             is Classification.Open ->
@@ -690,7 +698,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         loop.trigger?.takeIf { it.made }?.let { trigger ->
             val next = triggerStat(trigger.id).let { it.copy(ignoreStreak = it.ignoreStreak + 1) }
             val muted = if (next.muted) "; trigger ${trigger.id} muted after ${next.ignoreStreak} in a row" else ""
-            return setTrigger(trigger.id, next) + Effect.Log("chip dismissed: ${loop.id.value}$muted")
+            return setStreak(trigger.id, next) + Effect.Log("chip dismissed: ${loop.id.value}$muted")
         }
         val kind = kindStat(loop.kind)
         val conversation = loop.conversation?.takeIf { loop.kind.withPeople }
@@ -710,7 +718,7 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun confirm(loop: Loop): List<Effect> {
         loop.trigger?.takeIf { it.made }?.let { trigger ->
             val stat = triggerStat(trigger.id)
-            return if (stat.ignoreStreak > 0) setTrigger(trigger.id, stat.copy(ignoreStreak = 0)) else emptyList()
+            return if (stat.ignoreStreak > 0) setStreak(trigger.id, stat.copy(ignoreStreak = 0)) else emptyList()
         }
         val kind = kindStat(loop.kind)
         val effects = setKind(loop.kind, kind.copy(holds = kind.holds + 1, ignoreStreak = 0)).toMutableList()
@@ -843,7 +851,8 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
         if (isListed(tracked)) effects += Effect.RecordLoop(entry(tracked, outcome, now))
         val conversation = tracked.loop.conversation
         if (replied && conversation != null) effects += recordReply(conversation, Duration.between(tracked.loop.updatedAt, now))
-        if (tracked.loop.kind.withPeople) effects += learnApp(tracked.loop, outcome, now)
+        // A trigger's loop is what you asked to watch, not how you deal with people in its app (ADR 0027, 0038).
+        if (tracked.loop.kind.withPeople && tracked.loop.trigger?.made != true) effects += learnApp(tracked.loop, outcome, now)
         tracked.loop.notificationKey?.let { effects += Effect.Forget(it) }
         if (drift.loopId == id) {
             val back = drift.resume?.takeIf { book[it.loopId] != null }
@@ -921,6 +930,31 @@ public class Engine(settings: Settings, stats: Stats = Stats()) {
     private fun setTrigger(id: String, stat: TriggerStat): List<Effect> {
         stats = stats.copy(triggers = stats.triggers + (id to stat))
         return listOf(Effect.RecordTrigger(id, stat))
+    }
+
+    /** A change to a trigger's "not this" streak, which then wins over Room's when the stats load. */
+    private fun setStreak(id: String, stat: TriggerStat): List<Effect> {
+        streaked += id
+        return setTrigger(id, stat)
+    }
+
+    /**
+     * Room's trigger stats under the ones this engine holds (ADR 0038). A match seen before they arrived, as when the
+     * listener replays the shade after a restart, started from an empty stat: it keeps the stored streak, so a muted
+     * trigger stays muted, and the later of the two last matches. Those are written again.
+     */
+    private fun loadTriggers(stored: Map<String, TriggerStat>): Pair<Map<String, TriggerStat>, List<Effect>> {
+        val rewritten = mutableListOf<Effect>()
+        val held = stats.triggers.mapValues { (id, mine) ->
+            val saved = stored[id] ?: return@mapValues mine
+            val stat = TriggerStat(
+                lastMatched = listOfNotNull(mine.lastMatched, saved.lastMatched).maxOrNull(),
+                ignoreStreak = if (id in streaked) mine.ignoreStreak else saved.ignoreStreak,
+            )
+            if (stat != mine) rewritten += Effect.RecordTrigger(id, stat)
+            stat
+        }
+        return (stored + held) to rewritten
     }
 
     private fun setKind(kind: LoopKind, stat: KindStat): List<Effect> {

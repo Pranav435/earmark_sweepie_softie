@@ -11,7 +11,7 @@ The APK is `dist/earmark-v0.1.19.apk` in this repository. On GitHub, open that f
 - **From a computer:** connect the phone with USB debugging on, then run `adb install -r dist/earmark-v0.1.19.apk`.
 - **On the phone:** copy the file to the phone, open it from Files, and allow installs from that app when Android asks.
 
-`scripts/setup-phone.sh` installs the APK and grants every permission that adb can grant, in one go. Then `scripts/check-pill.sh`, with the phone unlocked, checks the whole path on the phone in about 30 seconds: it posts a test message, opens Instagram or YouTube, and checks that the pill is shown and actually drawn. It leaves a "Reply to Test" row on today's list.
+`scripts/setup-phone.sh` installs the APK and grants every permission that adb can grant, in one go. Then `scripts/check-pill.sh`, with the phone unlocked, checks the whole path on the phone in about 30 seconds: it posts a test message, opens Instagram or YouTube, and checks that the pill is shown and its window laid out. It can't tell whether anything is visible in it, so after an overlay change also take a screenshot. It leaves a "Reply to Test" row on today's list.
 
 ### If the install is blocked
 
@@ -44,7 +44,7 @@ Earmark's first screen lists each permission with a button. It checks them again
 | Your name (optional) | Reads only your own contact card, so a group message that says your name counts. Your other contacts are never read | Allow | `adb shell pm grant com.sweepiesoftie.earmark android.permission.READ_CONTACTS` |
 | Battery: unrestricted | So the phone doesn't pause Earmark while other apps are in front. Samsung phones need it | Allow | `adb shell dumpsys deviceidle whitelist +com.sweepiesoftie.earmark` |
 | Notifications (optional) | Shows the "Earmark is on" notification, and lets demo mode post its sample messages | Allow | `adb shell pm grant com.sweepiesoftie.earmark android.permission.POST_NOTIFICATIONS` |
-| Screen reading (optional) | Only for custom triggers that watch an app's screen. Not part of setup: turn it on from Settings › Advanced | Accessibility › Downloaded apps › Earmark screen triggers › On | `adb shell settings put secure enabled_accessibility_services com.sweepiesoftie.earmark/com.sweepiesoftie.earmark.listener.ScreenTriggerService`. This replaces every other service, TalkBack included, so on a phone that uses TalkBack, turn it on by hand |
+| Screen reading (optional) | Only for custom triggers that watch an app's screen. Not part of setup: turn it on from Settings › Advanced | Accessibility › Downloaded apps › Earmark screen triggers › On | `adb shell settings put secure enabled_accessibility_services com.sweepiesoftie.earmark/com.sweepiesoftie.earmark.listener.ScreenTriggerService`, then `adb shell settings put secure accessibility_enabled 1`. This replaces every other service, TalkBack included, so on a phone that uses TalkBack, turn it on by hand |
 
 If a permission is missing, Earmark keeps running and does less. The Log screen (top right of the home screen) says which part is idle and why. Its **Copy** button copies the whole log, which never contains message text, so you can paste it into a bug report.
 
